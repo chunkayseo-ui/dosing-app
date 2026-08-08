@@ -60,7 +60,22 @@
   .chip.active{background:var(--teal-deep); border-color:var(--teal-deep); color:#fff;}
   .readout{background:var(--readout-bg); border-radius:18px; padding:20px 18px 18px; color:#fff; position:relative; overflow:hidden;}
   .readout::before{content:""; position:absolute; inset:0; background:radial-gradient(120% 100% at 0% 0%, rgba(127,231,196,0.08), transparent 60%);}
-  .readout-head{display:flex; justify-content:space-between; align-items:center; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#8FB3B3; margin-bottom:14px; position:relative;}
+  .readout-title{
+    display:flex; justify-content:space-between; align-items:baseline;
+    position:relative; margin-bottom:10px;
+  }
+  .readout-title #readoutPool{
+    font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#fff;
+  }
+  .readout-title #readoutDate{
+    font-size:12px; color:#B7D6D6; font-weight:600;
+  }
+  .readout-head{
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#8FB3B3;
+    margin-bottom:14px; position:relative;
+    padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.12);
+  }
   .readout-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; position:relative;}
   .dose-label{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#8FB3B3; margin-bottom:4px;}
   .dose-value{font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:26px; line-height:1.1;}
@@ -116,6 +131,10 @@
   </div>
 
   <div class="readout">
+    <div class="readout-title">
+      <span id="readoutPool">—</span>
+      <span id="readoutDate">—</span>
+    </div>
     <div class="readout-head">
       <span id="readoutSchedule">Weekday</span>
       <span id="readoutCoords">—</span>
@@ -263,6 +282,8 @@ function renderChips(){
 
 function renderReadout(){
   const table = currentTable();
+  document.getElementById('readoutPool').textContent = OUTLETS[state.outlet].name;
+  document.getElementById('readoutDate').textContent = new Date().toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
   if (state.fc === null || !table.fc.includes(state.fc)) state.fc = null;
   if (state.ph === null || !table.ph.includes(state.ph)) state.ph = null;
   if (state.fc === null || state.ph === null) {
@@ -278,7 +299,7 @@ function renderReadout(){
       <div class="dose-block"><div class="dose-label">Chlorine</div><div class="dose-value cl">${fmtAmt(dose.cl, dose.clUnit)}</div></div>
       <div class="dose-block"><div class="dose-label">Acid</div><div class="dose-value acid">${fmtAmt(dose.acid, dose.acidUnit)}</div></div>
     </div>
-    <div class="readout-foot">${OUTLETS[state.outlet].name} · ${state.schedule === 'weekday' ? 'Mon–Fri' : 'Weekend'}</div>
+    <div class="readout-foot">${state.schedule === 'weekday' ? 'Weekday (Mon–Fri)' : 'Weekend'} dosing</div>
   `;
 }
 
