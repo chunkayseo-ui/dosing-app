@@ -57,7 +57,10 @@
   .auto-note{font-size:11.5px; color:var(--ink-soft); margin-top:8px;}
   .chips{display:flex; flex-wrap:wrap; gap:8px;}
   .chip{border:1.5px solid var(--border); background:var(--bg); color:var(--ink); font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:14.5px; padding:10px 14px; border-radius:10px; cursor:pointer; min-width:56px; text-align:center;}
+  .chip.neg{border-color:rgba(193,84,61,0.3); background:rgba(193,84,61,0.07); color:var(--warn);}
+  .chip.pos{border-color:rgba(14,124,134,0.3); background:rgba(14,124,134,0.07); color:var(--teal-deep);}
   .chip.active{background:var(--teal-deep); border-color:var(--teal-deep); color:#fff;}
+  .chip.neg.active{background:var(--warn); border-color:var(--warn); color:#fff;}
   .readout{background:var(--readout-bg); border-radius:18px; padding:20px 18px 18px; color:#fff; position:relative; overflow:hidden;}
   .readout::before{content:""; position:absolute; inset:0; background:radial-gradient(120% 100% at 0% 0%, rgba(127,231,196,0.08), transparent 60%);}
   .readout-title{
@@ -265,7 +268,10 @@ function renderChips(){
   fcChipsEl.innerHTML = '';
   table.fc.forEach(v => {
     const c = document.createElement('button');
-    c.className = 'chip' + (state.fc === v ? ' active' : '');
+    let cls = 'chip';
+    if (v < 0) cls += ' neg'; else if (v > 0) cls += ' pos';
+    if (state.fc === v) cls += ' active';
+    c.className = cls;
     c.textContent = fmtFc(v);
     c.onclick = () => { state.fc = v; if (tg) tg.HapticFeedback.impactOccurred('light'); render(); };
     fcChipsEl.appendChild(c);
