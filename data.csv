@@ -1,0 +1,1535 @@
+outlet,name,schedule,fc,ph,chlorine,chlorine_unit,acid,acid_unit
+WWW,WWW,weekday,-2.0,7.2,3.0,kg,1.0,l
+WWW,WWW,weekday,-2.0,7.4,3.0,kg,1.5,l
+WWW,WWW,weekday,-2.0,7.6,3.0,kg,2.0,l
+WWW,WWW,weekday,-2.0,7.8,3.0,kg,3.0,l
+WWW,WWW,weekday,-2.0,8.0,3.0,kg,4.0,l
+WWW,WWW,weekday,-1.5,7.2,3.0,kg,1.0,l
+WWW,WWW,weekday,-1.5,7.4,3.0,kg,1.5,l
+WWW,WWW,weekday,-1.5,7.6,3.0,kg,2.0,l
+WWW,WWW,weekday,-1.5,7.8,3.0,kg,3.0,l
+WWW,WWW,weekday,-1.5,8.0,3.0,kg,4.0,l
+WWW,WWW,weekday,-1.0,7.2,3.0,kg,1.0,l
+WWW,WWW,weekday,-1.0,7.4,3.0,kg,1.5,l
+WWW,WWW,weekday,-1.0,7.6,3.0,kg,2.0,l
+WWW,WWW,weekday,-1.0,7.8,3.0,kg,3.0,l
+WWW,WWW,weekday,-1.0,8.0,3.0,kg,4.0,l
+WWW,WWW,weekday,-0.5,7.2,2.5,kg,1.0,l
+WWW,WWW,weekday,-0.5,7.4,2.5,kg,1.5,l
+WWW,WWW,weekday,-0.5,7.6,2.5,kg,2.0,l
+WWW,WWW,weekday,-0.5,7.8,2.5,kg,3.0,l
+WWW,WWW,weekday,-0.5,8.0,2.5,kg,4.0,l
+WWW,WWW,weekday,0.0,7.2,2.3,kg,1.0,l
+WWW,WWW,weekday,0.0,7.4,2.3,kg,1.5,l
+WWW,WWW,weekday,0.0,7.6,2.3,kg,3.0,l
+WWW,WWW,weekday,0.0,7.8,2.3,kg,3.5,l
+WWW,WWW,weekday,0.0,8.0,2.3,kg,4.0,l
+WWW,WWW,weekday,0.5,7.2,2.3,kg,1.0,l
+WWW,WWW,weekday,0.5,7.4,2.3,kg,1.5,l
+WWW,WWW,weekday,0.5,7.6,2.3,kg,3.0,l
+WWW,WWW,weekday,0.5,7.8,2.3,kg,3.5,l
+WWW,WWW,weekday,0.5,8.0,2.3,kg,4.0,l
+WWW,WWW,weekday,1.0,7.2,1.8,kg,1.0,l
+WWW,WWW,weekday,1.0,7.4,1.8,kg,1.5,l
+WWW,WWW,weekday,1.0,7.6,1.8,kg,2.0,l
+WWW,WWW,weekday,1.0,7.8,1.8,kg,3.0,l
+WWW,WWW,weekday,1.0,8.0,1.8,kg,4.0,l
+WWW,WWW,weekday,1.5,7.2,1.8,kg,1.0,l
+WWW,WWW,weekday,1.5,7.4,1.8,kg,1.5,l
+WWW,WWW,weekday,1.5,7.6,1.8,kg,2.0,l
+WWW,WWW,weekday,1.5,7.8,1.8,kg,3.0,l
+WWW,WWW,weekday,1.5,8.0,1.8,kg,4.0,l
+WWW,WWW,weekday,2.0,7.2,1.3,kg,1.0,l
+WWW,WWW,weekday,2.0,7.4,1.3,kg,1.5,l
+WWW,WWW,weekday,2.0,7.6,1.3,kg,2.0,l
+WWW,WWW,weekday,2.0,7.8,1.3,kg,3.0,l
+WWW,WWW,weekday,2.0,8.0,1.3,kg,4.0,l
+WWW,WWW,weekday,2.5,7.2,1.3,kg,1.0,l
+WWW,WWW,weekday,2.5,7.4,1.3,kg,1.5,l
+WWW,WWW,weekday,2.5,7.6,1.3,kg,2.0,l
+WWW,WWW,weekday,2.5,7.8,1.3,kg,3.0,l
+WWW,WWW,weekday,2.5,8.0,1.3,kg,4.0,l
+WWW,WWW,weekend,-2.0,7.2,3.0,kg,1.0,l
+WWW,WWW,weekend,-2.0,7.4,3.0,kg,1.5,l
+WWW,WWW,weekend,-2.0,7.6,3.0,kg,2.0,l
+WWW,WWW,weekend,-2.0,7.8,3.0,kg,3.0,l
+WWW,WWW,weekend,-2.0,8.0,3.0,kg,4.0,l
+WWW,WWW,weekend,-1.5,7.2,3.0,kg,1.0,l
+WWW,WWW,weekend,-1.5,7.4,3.0,kg,1.5,l
+WWW,WWW,weekend,-1.5,7.6,3.0,kg,2.0,l
+WWW,WWW,weekend,-1.5,7.8,3.0,kg,3.0,l
+WWW,WWW,weekend,-1.5,8.0,3.0,kg,4.0,l
+WWW,WWW,weekend,-1.0,7.2,3.0,kg,1.0,l
+WWW,WWW,weekend,-1.0,7.4,3.0,kg,1.5,l
+WWW,WWW,weekend,-1.0,7.6,3.0,kg,2.0,l
+WWW,WWW,weekend,-1.0,7.8,3.0,kg,3.0,l
+WWW,WWW,weekend,-1.0,8.0,3.0,kg,4.0,l
+WWW,WWW,weekend,-0.5,7.2,2.5,kg,1.0,l
+WWW,WWW,weekend,-0.5,7.4,2.5,kg,1.5,l
+WWW,WWW,weekend,-0.5,7.6,2.5,kg,2.0,l
+WWW,WWW,weekend,-0.5,7.8,2.5,kg,3.0,l
+WWW,WWW,weekend,-0.5,8.0,2.5,kg,4.0,l
+WWW,WWW,weekend,0.0,7.2,2.5,kg,1.0,l
+WWW,WWW,weekend,0.0,7.4,2.5,kg,1.5,l
+WWW,WWW,weekend,0.0,7.6,2.5,kg,2.0,l
+WWW,WWW,weekend,0.0,7.8,2.5,kg,3.0,l
+WWW,WWW,weekend,0.0,8.0,2.5,kg,4.0,l
+WWW,WWW,weekend,0.5,7.2,2.3,kg,1.0,l
+WWW,WWW,weekend,0.5,7.4,2.3,kg,1.5,l
+WWW,WWW,weekend,0.5,7.6,2.3,kg,2.0,l
+WWW,WWW,weekend,0.5,7.8,2.3,kg,3.0,l
+WWW,WWW,weekend,0.5,8.0,2.3,kg,4.0,l
+WWW,WWW,weekend,1.0,7.2,1.8,kg,1.0,l
+WWW,WWW,weekend,1.0,7.4,1.8,kg,1.5,l
+WWW,WWW,weekend,1.0,7.6,1.8,kg,2.0,l
+WWW,WWW,weekend,1.0,7.8,1.8,kg,3.0,l
+WWW,WWW,weekend,1.0,8.0,1.8,kg,4.0,l
+WWW,WWW,weekend,1.5,7.2,1.8,kg,1.0,l
+WWW,WWW,weekend,1.5,7.4,1.8,kg,1.5,l
+WWW,WWW,weekend,1.5,7.6,1.8,kg,2.0,l
+WWW,WWW,weekend,1.5,7.8,1.8,kg,3.0,l
+WWW,WWW,weekend,1.5,8.0,1.8,kg,4.0,l
+WWW,WWW,weekend,2.0,7.2,1.3,kg,1.0,l
+WWW,WWW,weekend,2.0,7.4,1.3,kg,1.5,l
+WWW,WWW,weekend,2.0,7.6,1.3,kg,2.0,l
+WWW,WWW,weekend,2.0,7.8,1.3,kg,3.0,l
+WWW,WWW,weekend,2.0,8.0,1.3,kg,4.0,l
+WWW,WWW,weekend,2.5,7.2,1.3,kg,1.0,l
+WWW,WWW,weekend,2.5,7.4,1.3,kg,1.5,l
+WWW,WWW,weekend,2.5,7.6,1.3,kg,2.0,l
+WWW,WWW,weekend,2.5,7.8,1.3,kg,3.0,l
+WWW,WWW,weekend,2.5,8.0,1.3,kg,4.0,l
+WWW,WWW,weekend,3.0,7.2,800.0,g,500.0,ml
+WWW,WWW,weekend,3.0,7.4,800.0,g,1.0,l
+WWW,WWW,weekend,3.0,7.6,800.0,g,1.5,l
+WWW,WWW,weekend,3.0,7.8,800.0,g,3.0,l
+WWW,WWW,weekend,3.0,8.0,800.0,g,4.0,l
+WWW,WWW,weekend,3.5,7.2,0.0,g,0.0,ml
+WWW,WWW,weekend,3.5,7.4,0.0,g,1.0,l
+WWW,WWW,weekend,3.5,7.6,0.0,g,2.0,l
+WWW,WWW,weekend,3.5,7.8,0.0,g,3.0,l
+WWW,WWW,weekend,3.5,8.0,0.0,g,3.5,l
+WWW,WWW,weekend,4.0,7.2,0.0,g,0.0,ml
+WWW,WWW,weekend,4.0,7.4,0.0,g,1.0,l
+WWW,WWW,weekend,4.0,7.6,0.0,g,2.0,l
+WWW,WWW,weekend,4.0,7.8,0.0,g,3.0,l
+WWW,WWW,weekend,4.0,8.0,0.0,g,3.5,l
+JEIP1,JEIP 1,weekday,-2.0,7.2,800.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,-2.0,7.4,800.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,-2.0,7.6,800.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,-2.0,7.8,800.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,-2.0,8.0,800.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,-1.5,7.2,800.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,-1.5,7.4,800.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,-1.5,7.6,800.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,-1.5,7.8,800.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,-1.5,8.0,800.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,-1.0,7.2,800.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,-1.0,7.4,800.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,-1.0,7.6,800.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,-1.0,7.8,800.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,-1.0,8.0,800.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,-0.5,7.2,800.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,-0.5,7.4,800.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,-0.5,7.6,800.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,-0.5,7.8,800.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,-0.5,8.0,800.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,0.0,7.2,500.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,0.0,7.4,500.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,0.0,7.6,500.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,0.0,7.8,500.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,0.0,8.0,500.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,0.5,7.2,400.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,0.5,7.4,400.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,0.5,7.6,400.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,0.5,7.8,400.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,0.5,8.0,400.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,1.0,7.2,300.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,1.0,7.4,300.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,1.0,7.6,300.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,1.0,7.8,300.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,1.0,8.0,300.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,1.5,7.2,200.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,1.5,7.4,200.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,1.5,7.6,200.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,1.5,7.8,200.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,1.5,8.0,200.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,2.0,7.2,100.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,2.0,7.4,100.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,2.0,7.6,100.0,g,0.0,ml
+JEIP1,JEIP 1,weekday,2.0,7.8,100.0,g,500.0,ml
+JEIP1,JEIP 1,weekday,2.0,8.0,100.0,g,500.0,ml
+JEIP1,JEIP 1,weekend,-2.0,7.2,1.0,kg,0.0,ml
+JEIP1,JEIP 1,weekend,-2.0,7.4,1.2,kg,500.0,ml
+JEIP1,JEIP 1,weekend,-2.0,7.6,1.2,kg,500.0,ml
+JEIP1,JEIP 1,weekend,-2.0,7.8,1.2,kg,1.5,l
+JEIP1,JEIP 1,weekend,-2.0,8.0,1.2,kg,1.5,l
+JEIP1,JEIP 1,weekend,-1.5,7.2,1.0,kg,0.0,ml
+JEIP1,JEIP 1,weekend,-1.5,7.4,1.2,kg,500.0,ml
+JEIP1,JEIP 1,weekend,-1.5,7.6,1.2,kg,500.0,ml
+JEIP1,JEIP 1,weekend,-1.5,7.8,1.2,kg,1.5,l
+JEIP1,JEIP 1,weekend,-1.5,8.0,1.2,kg,1.5,l
+JEIP1,JEIP 1,weekend,-1.0,7.2,1.0,kg,0.0,ml
+JEIP1,JEIP 1,weekend,-1.0,7.4,1.2,kg,500.0,ml
+JEIP1,JEIP 1,weekend,-1.0,7.6,1.2,kg,500.0,ml
+JEIP1,JEIP 1,weekend,-1.0,7.8,1.2,kg,1.5,l
+JEIP1,JEIP 1,weekend,-1.0,8.0,1.2,kg,1.5,l
+JEIP1,JEIP 1,weekend,-0.5,7.2,1.0,kg,0.0,ml
+JEIP1,JEIP 1,weekend,-0.5,7.4,1.2,kg,500.0,ml
+JEIP1,JEIP 1,weekend,-0.5,7.6,1.2,kg,500.0,ml
+JEIP1,JEIP 1,weekend,-0.5,7.8,1.2,kg,1.5,l
+JEIP1,JEIP 1,weekend,-0.5,8.0,1.2,kg,1.5,l
+JEIP1,JEIP 1,weekend,0.0,7.2,1.0,kg,0.0,ml
+JEIP1,JEIP 1,weekend,0.0,7.4,1.0,kg,0.0,ml
+JEIP1,JEIP 1,weekend,0.0,7.6,1.0,kg,500.0,ml
+JEIP1,JEIP 1,weekend,0.0,7.8,1.0,kg,1.0,l
+JEIP1,JEIP 1,weekend,0.0,8.0,1.0,kg,1.0,l
+JEIP1,JEIP 1,weekend,0.5,7.2,800.0,g,0.0,ml
+JEIP1,JEIP 1,weekend,0.5,7.4,800.0,g,0.0,ml
+JEIP1,JEIP 1,weekend,0.5,7.6,800.0,g,500.0,ml
+JEIP1,JEIP 1,weekend,0.5,7.8,800.0,g,1.0,l
+JEIP1,JEIP 1,weekend,0.5,8.0,800.0,g,1.0,l
+JEIP1,JEIP 1,weekend,1.0,7.2,800.0,g,0.0,ml
+JEIP1,JEIP 1,weekend,1.0,7.4,800.0,g,0.0,ml
+JEIP1,JEIP 1,weekend,1.0,7.6,800.0,g,500.0,ml
+JEIP1,JEIP 1,weekend,1.0,7.8,800.0,g,1.0,l
+JEIP1,JEIP 1,weekend,1.0,8.0,800.0,g,1.0,l
+JEIP1,JEIP 1,weekend,1.5,7.2,500.0,g,0.0,ml
+JEIP1,JEIP 1,weekend,1.5,7.4,500.0,g,0.0,ml
+JEIP1,JEIP 1,weekend,1.5,7.6,500.0,g,500.0,ml
+JEIP1,JEIP 1,weekend,1.5,7.8,500.0,g,1.0,l
+JEIP1,JEIP 1,weekend,1.5,8.0,500.0,g,1.0,l
+JEIP1,JEIP 1,weekend,2.0,7.2,500.0,g,0.0,ml
+JEIP1,JEIP 1,weekend,2.0,7.4,500.0,g,0.0,ml
+JEIP1,JEIP 1,weekend,2.0,7.6,500.0,g,500.0,ml
+JEIP1,JEIP 1,weekend,2.0,7.8,500.0,g,1.0,l
+JEIP1,JEIP 1,weekend,2.0,8.0,500.0,g,1.0,l
+JEIP1,JEIP 1,weekend,2.5,7.2,0.0,g,0.0,ml
+JEIP1,JEIP 1,weekend,2.5,7.4,0.0,g,0.0,ml
+JEIP1,JEIP 1,weekend,2.5,7.6,0.0,g,500.0,ml
+JEIP1,JEIP 1,weekend,2.5,7.8,0.0,g,500.0,ml
+JEIP1,JEIP 1,weekend,2.5,8.0,0.0,g,500.0,ml
+JEIP1,JEIP 1,weekend,3.0,7.2,0.0,g,0.0,ml
+JEIP1,JEIP 1,weekend,3.0,7.4,0.0,g,0.0,ml
+JEIP1,JEIP 1,weekend,3.0,7.6,0.0,g,200.0,ml
+JEIP1,JEIP 1,weekend,3.0,7.8,0.0,g,500.0,ml
+JEIP1,JEIP 1,weekend,3.0,8.0,0.0,g,500.0,ml
+JEIP1,JEIP 1,weekend,3.5,7.2,0.0,g,0.0,ml
+JEIP1,JEIP 1,weekend,3.5,7.4,0.0,g,0.0,ml
+JEIP1,JEIP 1,weekend,3.5,7.6,0.0,g,200.0,ml
+JEIP1,JEIP 1,weekend,3.5,7.8,0.0,g,500.0,ml
+JEIP1,JEIP 1,weekend,3.5,8.0,0.0,g,500.0,ml
+JEIP1,JEIP 1,weekend,4.0,7.2,0.0,g,0.0,ml
+JEIP1,JEIP 1,weekend,4.0,7.4,0.0,g,0.0,ml
+JEIP1,JEIP 1,weekend,4.0,7.6,0.0,g,200.0,ml
+JEIP1,JEIP 1,weekend,4.0,7.8,0.0,g,500.0,ml
+JEIP1,JEIP 1,weekend,4.0,8.0,0.0,g,500.0,ml
+JEIP2,JEIP 2,weekday,-2.0,7.2,450.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,-2.0,7.4,450.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,-2.0,7.6,450.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-2.0,7.8,450.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-2.0,8.0,450.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-1.5,7.2,450.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,-1.5,7.4,450.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,-1.5,7.6,450.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-1.5,7.8,450.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-1.5,8.0,450.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-1.0,7.2,450.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,-1.0,7.4,450.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,-1.0,7.6,450.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-1.0,7.8,450.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-1.0,8.0,450.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-0.5,7.2,400.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,-0.5,7.4,400.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,-0.5,7.6,400.0,g,200.0,ml
+JEIP2,JEIP 2,weekday,-0.5,7.8,400.0,g,300.0,ml
+JEIP2,JEIP 2,weekday,-0.5,8.0,400.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,0.0,7.2,300.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,0.0,7.4,300.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,0.0,7.6,300.0,g,200.0,ml
+JEIP2,JEIP 2,weekday,0.0,7.8,300.0,g,300.0,ml
+JEIP2,JEIP 2,weekday,0.0,8.0,300.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,0.5,7.2,300.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,0.5,7.4,300.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,0.5,7.6,300.0,g,200.0,ml
+JEIP2,JEIP 2,weekday,0.5,7.8,300.0,g,300.0,ml
+JEIP2,JEIP 2,weekday,0.5,8.0,300.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,1.0,7.2,200.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,1.0,7.4,200.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,1.0,7.6,200.0,g,200.0,ml
+JEIP2,JEIP 2,weekday,1.0,7.8,200.0,g,300.0,ml
+JEIP2,JEIP 2,weekday,1.0,8.0,200.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,1.5,7.2,200.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,1.5,7.4,200.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,1.5,7.6,200.0,g,200.0,ml
+JEIP2,JEIP 2,weekday,1.5,7.8,200.0,g,300.0,ml
+JEIP2,JEIP 2,weekday,1.5,8.0,200.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,2.0,7.2,100.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,2.0,7.4,100.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,2.0,7.6,100.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,2.0,7.8,100.0,g,300.0,ml
+JEIP2,JEIP 2,weekday,2.0,8.0,100.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,2.5,7.2,100.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,2.5,7.4,100.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,2.5,7.6,100.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,2.5,7.8,100.0,g,300.0,ml
+JEIP2,JEIP 2,weekday,2.5,8.0,100.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,3.0,7.2,0.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,3.0,7.4,0.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,3.0,7.6,0.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,3.0,7.8,0.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,3.0,8.0,0.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-2.0,7.2,550.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-2.0,7.4,550.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-2.0,7.6,550.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,-2.0,7.8,550.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,-2.0,8.0,550.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,-1.5,7.2,550.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-1.5,7.4,550.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-1.5,7.6,550.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,-1.5,7.8,550.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,-1.5,8.0,550.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,-1.0,7.2,550.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-1.0,7.4,550.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-1.0,7.6,550.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,-1.0,7.8,550.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,-1.0,8.0,550.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,-0.5,7.2,500.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-0.5,7.4,500.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-0.5,7.6,500.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,-0.5,7.8,500.0,g,300.0,ml
+JEIP2,JEIP 2,weekend,-0.5,8.0,500.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,0.0,7.2,500.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,0.0,7.4,500.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,0.0,7.6,500.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,0.0,7.8,500.0,g,300.0,ml
+JEIP2,JEIP 2,weekend,0.0,8.0,500.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,0.5,7.2,450.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,0.5,7.4,450.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,0.5,7.6,450.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,0.5,7.8,450.0,g,300.0,ml
+JEIP2,JEIP 2,weekend,0.5,8.0,450.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,1.0,7.2,400.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,1.0,7.4,400.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,1.0,7.6,400.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,1.0,7.8,400.0,g,300.0,ml
+JEIP2,JEIP 2,weekend,1.0,8.0,400.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,1.5,7.2,300.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,1.5,7.4,300.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,1.5,7.6,300.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,1.5,7.8,300.0,g,300.0,ml
+JEIP2,JEIP 2,weekend,1.5,8.0,300.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,2.0,7.2,200.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,2.0,7.4,200.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,2.0,7.6,200.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,2.0,7.8,200.0,g,300.0,ml
+JEIP2,JEIP 2,weekend,2.0,8.0,200.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,2.5,7.2,0.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,2.5,7.4,0.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,2.5,7.6,0.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,2.5,7.8,0.0,g,250.0,ml
+JEIP2,JEIP 2,weekend,2.5,8.0,0.0,g,250.0,ml
+JEIP2,JEIP 2,weekend,3.0,7.2,0.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,3.0,7.4,0.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,3.0,7.6,0.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,3.0,7.8,0.0,g,250.0,ml
+JEIP2,JEIP 2,weekend,3.0,8.0,0.0,g,250.0,ml
+JEIP2,JEIP 2,weekend,3.5,7.2,0.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,3.5,7.4,0.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,3.5,7.6,0.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,3.5,7.8,0.0,g,250.0,ml
+JEIP2,JEIP 2,weekend,3.5,8.0,0.0,g,250.0,ml
+JEIP2,JEIP 2,weekend,4.0,7.2,0.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,4.0,7.4,0.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,4.0,7.6,0.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,4.0,7.8,0.0,g,250.0,ml
+JEIP2,JEIP 2,weekend,4.0,8.0,0.0,g,250.0,ml
+JEOP1,JEOP 1,weekday,-2.0,7.2,3.0,kg,1.0,l
+JEOP1,JEOP 1,weekday,-2.0,7.4,3.0,kg,1.5,l
+JEOP1,JEOP 1,weekday,-2.0,7.6,3.0,kg,2.0,l
+JEOP1,JEOP 1,weekday,-2.0,7.8,3.0,kg,3.0,l
+JEOP1,JEOP 1,weekday,-2.0,8.0,3.0,kg,4.0,l
+JEOP1,JEOP 1,weekday,-1.5,7.2,3.0,kg,1.0,l
+JEOP1,JEOP 1,weekday,-1.5,7.4,3.0,kg,1.5,l
+JEOP1,JEOP 1,weekday,-1.5,7.6,3.0,kg,2.0,l
+JEOP1,JEOP 1,weekday,-1.5,7.8,3.0,kg,3.0,l
+JEOP1,JEOP 1,weekday,-1.5,8.0,3.0,kg,4.0,l
+JEOP1,JEOP 1,weekday,-1.0,7.2,3.0,kg,1.0,l
+JEOP1,JEOP 1,weekday,-1.0,7.4,3.0,kg,1.5,l
+JEOP1,JEOP 1,weekday,-1.0,7.6,3.0,kg,2.0,l
+JEOP1,JEOP 1,weekday,-1.0,7.8,3.0,kg,3.0,l
+JEOP1,JEOP 1,weekday,-1.0,8.0,3.0,kg,4.0,l
+JEOP1,JEOP 1,weekday,-0.5,7.2,2.5,kg,1.0,l
+JEOP1,JEOP 1,weekday,-0.5,7.4,2.5,kg,1.5,l
+JEOP1,JEOP 1,weekday,-0.5,7.6,2.5,kg,2.0,l
+JEOP1,JEOP 1,weekday,-0.5,7.8,2.5,kg,3.0,l
+JEOP1,JEOP 1,weekday,-0.5,8.0,2.5,kg,4.0,l
+JEOP1,JEOP 1,weekday,0.0,7.2,2.0,kg,1.0,l
+JEOP1,JEOP 1,weekday,0.0,7.4,2.0,kg,1.5,l
+JEOP1,JEOP 1,weekday,0.0,7.6,2.0,kg,2.0,l
+JEOP1,JEOP 1,weekday,0.0,7.8,2.0,kg,3.0,l
+JEOP1,JEOP 1,weekday,0.0,8.0,2.0,kg,4.0,l
+JEOP1,JEOP 1,weekday,0.5,7.2,2.0,kg,1.0,l
+JEOP1,JEOP 1,weekday,0.5,7.4,2.0,kg,1.5,l
+JEOP1,JEOP 1,weekday,0.5,7.6,2.0,kg,2.0,l
+JEOP1,JEOP 1,weekday,0.5,7.8,2.0,kg,3.0,l
+JEOP1,JEOP 1,weekday,0.5,8.0,2.0,kg,4.0,l
+JEOP1,JEOP 1,weekday,1.0,7.2,1.5,kg,1.0,l
+JEOP1,JEOP 1,weekday,1.0,7.4,1.5,kg,1.5,l
+JEOP1,JEOP 1,weekday,1.0,7.6,1.5,kg,2.0,l
+JEOP1,JEOP 1,weekday,1.0,7.8,1.5,kg,3.0,l
+JEOP1,JEOP 1,weekday,1.0,8.0,1.5,kg,4.0,l
+JEOP1,JEOP 1,weekday,1.5,7.2,1.3,kg,1.0,l
+JEOP1,JEOP 1,weekday,1.5,7.4,1.3,kg,1.5,l
+JEOP1,JEOP 1,weekday,1.5,7.6,1.3,kg,2.0,l
+JEOP1,JEOP 1,weekday,1.5,7.8,1.3,kg,3.0,l
+JEOP1,JEOP 1,weekday,1.5,8.0,1.3,kg,4.0,l
+JEOP1,JEOP 1,weekday,2.0,7.2,1.3,kg,1.0,l
+JEOP1,JEOP 1,weekday,2.0,7.4,1.3,kg,1.5,l
+JEOP1,JEOP 1,weekday,2.0,7.6,1.3,kg,2.0,l
+JEOP1,JEOP 1,weekday,2.0,7.8,1.3,kg,3.0,l
+JEOP1,JEOP 1,weekday,2.0,8.0,1.3,kg,4.0,l
+JEOP1,JEOP 1,weekday,2.5,7.2,600.0,g,500.0,ml
+JEOP1,JEOP 1,weekday,2.5,7.4,600.0,g,1.0,l
+JEOP1,JEOP 1,weekday,2.5,7.6,600.0,g,1.5,l
+JEOP1,JEOP 1,weekday,2.5,7.8,600.0,g,3.0,l
+JEOP1,JEOP 1,weekday,2.5,8.0,600.0,g,4.0,l
+JEOP1,JEOP 1,weekday,3.0,7.2,0.0,g,0.0,ml
+JEOP1,JEOP 1,weekday,3.0,7.4,0.0,g,0.0,ml
+JEOP1,JEOP 1,weekday,3.0,7.6,0.0,g,0.0,ml
+JEOP1,JEOP 1,weekday,3.0,7.8,0.0,g,1.0,l
+JEOP1,JEOP 1,weekday,3.0,8.0,0.0,g,2.0,l
+JEOP1,JEOP 1,weekend,-2.0,7.2,3.0,kg,1.0,l
+JEOP1,JEOP 1,weekend,-2.0,7.4,3.0,kg,1.5,l
+JEOP1,JEOP 1,weekend,-2.0,7.6,3.0,kg,2.0,l
+JEOP1,JEOP 1,weekend,-2.0,7.8,3.0,kg,3.0,l
+JEOP1,JEOP 1,weekend,-2.0,8.0,3.0,kg,4.0,l
+JEOP1,JEOP 1,weekend,-1.5,7.2,3.0,kg,1.0,l
+JEOP1,JEOP 1,weekend,-1.5,7.4,3.0,kg,1.5,l
+JEOP1,JEOP 1,weekend,-1.5,7.6,3.0,kg,2.0,l
+JEOP1,JEOP 1,weekend,-1.5,7.8,3.0,kg,3.0,l
+JEOP1,JEOP 1,weekend,-1.5,8.0,3.0,kg,4.0,l
+JEOP1,JEOP 1,weekend,-1.0,7.2,3.0,kg,1.0,l
+JEOP1,JEOP 1,weekend,-1.0,7.4,3.0,kg,1.5,l
+JEOP1,JEOP 1,weekend,-1.0,7.6,3.0,kg,2.0,l
+JEOP1,JEOP 1,weekend,-1.0,7.8,3.0,kg,3.0,l
+JEOP1,JEOP 1,weekend,-1.0,8.0,3.0,kg,4.0,l
+JEOP1,JEOP 1,weekend,-0.5,7.2,2.5,kg,1.0,l
+JEOP1,JEOP 1,weekend,-0.5,7.4,2.5,kg,1.5,l
+JEOP1,JEOP 1,weekend,-0.5,7.6,2.5,kg,2.0,l
+JEOP1,JEOP 1,weekend,-0.5,7.8,2.5,kg,3.0,l
+JEOP1,JEOP 1,weekend,-0.5,8.0,2.5,kg,4.0,l
+JEOP1,JEOP 1,weekend,0.0,7.2,2.3,kg,1.0,l
+JEOP1,JEOP 1,weekend,0.0,7.4,2.3,kg,1.5,l
+JEOP1,JEOP 1,weekend,0.0,7.6,2.3,kg,2.0,l
+JEOP1,JEOP 1,weekend,0.0,7.8,2.3,kg,3.0,l
+JEOP1,JEOP 1,weekend,0.0,8.0,2.3,kg,4.0,l
+JEOP1,JEOP 1,weekend,0.5,7.2,2.3,kg,1.0,l
+JEOP1,JEOP 1,weekend,0.5,7.4,2.3,kg,1.5,l
+JEOP1,JEOP 1,weekend,0.5,7.6,2.3,kg,2.0,l
+JEOP1,JEOP 1,weekend,0.5,7.8,2.3,kg,3.0,l
+JEOP1,JEOP 1,weekend,0.5,8.0,2.3,kg,4.0,l
+JEOP1,JEOP 1,weekend,1.0,7.2,1.8,kg,1.0,l
+JEOP1,JEOP 1,weekend,1.0,7.4,1.8,kg,1.5,l
+JEOP1,JEOP 1,weekend,1.0,7.6,1.8,kg,2.0,l
+JEOP1,JEOP 1,weekend,1.0,7.8,1.8,kg,3.0,l
+JEOP1,JEOP 1,weekend,1.0,8.0,1.8,kg,4.0,l
+JEOP1,JEOP 1,weekend,1.5,7.2,1.8,kg,1.0,l
+JEOP1,JEOP 1,weekend,1.5,7.4,1.8,kg,1.5,l
+JEOP1,JEOP 1,weekend,1.5,7.6,1.8,kg,2.0,l
+JEOP1,JEOP 1,weekend,1.5,7.8,1.8,kg,3.0,l
+JEOP1,JEOP 1,weekend,1.5,8.0,1.8,kg,4.0,l
+JEOP1,JEOP 1,weekend,2.0,7.2,1.3,kg,1.0,l
+JEOP1,JEOP 1,weekend,2.0,7.4,1.3,kg,1.5,l
+JEOP1,JEOP 1,weekend,2.0,7.6,1.3,kg,2.0,l
+JEOP1,JEOP 1,weekend,2.0,7.8,1.3,kg,3.0,l
+JEOP1,JEOP 1,weekend,2.0,8.0,1.3,kg,4.0,l
+JEOP1,JEOP 1,weekend,2.5,7.2,1.3,kg,1.0,l
+JEOP1,JEOP 1,weekend,2.5,7.4,1.3,kg,1.5,l
+JEOP1,JEOP 1,weekend,2.5,7.6,1.3,kg,2.0,l
+JEOP1,JEOP 1,weekend,2.5,7.8,1.3,kg,3.0,l
+JEOP1,JEOP 1,weekend,2.5,8.0,1.3,kg,4.0,l
+JEOP1,JEOP 1,weekend,3.0,7.2,800.0,g,500.0,ml
+JEOP1,JEOP 1,weekend,3.0,7.4,800.0,g,1.0,l
+JEOP1,JEOP 1,weekend,3.0,7.6,800.0,g,1.5,l
+JEOP1,JEOP 1,weekend,3.0,7.8,800.0,g,3.0,l
+JEOP1,JEOP 1,weekend,3.0,8.0,800.0,g,4.0,l
+JEOP1,JEOP 1,weekend,3.5,7.2,0.0,g,0.0,ml
+JEOP1,JEOP 1,weekend,3.5,7.4,0.0,g,1.0,l
+JEOP1,JEOP 1,weekend,3.5,7.6,0.0,g,2.0,l
+JEOP1,JEOP 1,weekend,3.5,7.8,0.0,g,3.0,l
+JEOP1,JEOP 1,weekend,3.5,8.0,0.0,g,3.5,l
+JEOP1,JEOP 1,weekend,4.0,7.2,0.0,g,0.0,ml
+JEOP1,JEOP 1,weekend,4.0,7.4,0.0,g,1.0,l
+JEOP1,JEOP 1,weekend,4.0,7.6,0.0,g,2.0,l
+JEOP1,JEOP 1,weekend,4.0,7.8,0.0,g,3.0,l
+JEOP1,JEOP 1,weekend,4.0,8.0,0.0,g,3.5,l
+JEOP2,JEOP 2,weekday,-2.0,7.2,1.0,kg,0.0,ml
+JEOP2,JEOP 2,weekday,-2.0,7.4,1.0,kg,0.0,ml
+JEOP2,JEOP 2,weekday,-2.0,7.6,1.0,kg,1.5,l
+JEOP2,JEOP 2,weekday,-2.0,7.8,1.0,kg,3.0,l
+JEOP2,JEOP 2,weekday,-2.0,8.0,1.0,kg,3.0,l
+JEOP2,JEOP 2,weekday,-1.5,7.2,1.0,kg,0.0,ml
+JEOP2,JEOP 2,weekday,-1.5,7.4,1.0,kg,0.0,ml
+JEOP2,JEOP 2,weekday,-1.5,7.6,1.0,kg,1.5,l
+JEOP2,JEOP 2,weekday,-1.5,7.8,1.0,kg,3.0,l
+JEOP2,JEOP 2,weekday,-1.5,8.0,1.0,kg,3.0,l
+JEOP2,JEOP 2,weekday,-1.0,7.2,1.0,kg,0.0,ml
+JEOP2,JEOP 2,weekday,-1.0,7.4,1.0,kg,0.0,ml
+JEOP2,JEOP 2,weekday,-1.0,7.6,1.0,kg,1.5,l
+JEOP2,JEOP 2,weekday,-1.0,7.8,1.0,kg,3.0,l
+JEOP2,JEOP 2,weekday,-1.0,8.0,1.0,kg,3.0,l
+JEOP2,JEOP 2,weekday,-0.5,7.2,1.0,kg,0.0,ml
+JEOP2,JEOP 2,weekday,-0.5,7.4,1.0,kg,0.0,ml
+JEOP2,JEOP 2,weekday,-0.5,7.6,1.0,kg,1.5,l
+JEOP2,JEOP 2,weekday,-0.5,7.8,1.0,kg,3.0,l
+JEOP2,JEOP 2,weekday,-0.5,8.0,1.0,kg,3.0,l
+JEOP2,JEOP 2,weekday,0.0,7.2,1.0,kg,0.0,ml
+JEOP2,JEOP 2,weekday,0.0,7.4,1.0,kg,0.0,ml
+JEOP2,JEOP 2,weekday,0.0,7.6,1.0,kg,1.5,l
+JEOP2,JEOP 2,weekday,0.0,7.8,1.0,kg,3.0,l
+JEOP2,JEOP 2,weekday,0.0,8.0,1.0,kg,3.0,l
+JEOP2,JEOP 2,weekday,0.5,7.2,800.0,g,0.0,ml
+JEOP2,JEOP 2,weekday,0.5,7.4,800.0,g,0.0,ml
+JEOP2,JEOP 2,weekday,0.5,7.6,800.0,g,1.5,l
+JEOP2,JEOP 2,weekday,0.5,7.8,800.0,g,3.0,l
+JEOP2,JEOP 2,weekday,0.5,8.0,800.0,g,3.0,l
+JEOP2,JEOP 2,weekday,1.0,7.2,500.0,g,0.0,ml
+JEOP2,JEOP 2,weekday,1.0,7.4,500.0,g,0.0,ml
+JEOP2,JEOP 2,weekday,1.0,7.6,500.0,g,1.5,l
+JEOP2,JEOP 2,weekday,1.0,7.8,500.0,g,3.0,l
+JEOP2,JEOP 2,weekday,1.0,8.0,500.0,g,3.0,l
+JEOP2,JEOP 2,weekday,1.5,7.2,300.0,g,0.0,ml
+JEOP2,JEOP 2,weekday,1.5,7.4,300.0,g,0.0,ml
+JEOP2,JEOP 2,weekday,1.5,7.6,300.0,g,1.5,l
+JEOP2,JEOP 2,weekday,1.5,7.8,500.0,g,3.0,l
+JEOP2,JEOP 2,weekday,1.5,8.0,500.0,g,3.0,l
+JEOP2,JEOP 2,weekday,2.0,7.2,200.0,g,0.0,ml
+JEOP2,JEOP 2,weekday,2.0,7.4,200.0,g,0.0,ml
+JEOP2,JEOP 2,weekday,2.0,7.6,200.0,g,1.5,l
+JEOP2,JEOP 2,weekday,2.0,7.8,200.0,g,3.0,l
+JEOP2,JEOP 2,weekday,2.0,8.0,200.0,g,3.0,l
+JEOP2,JEOP 2,weekday,2.5,7.2,200.0,g,0.0,ml
+JEOP2,JEOP 2,weekday,2.5,7.4,200.0,g,0.0,ml
+JEOP2,JEOP 2,weekday,2.5,7.6,200.0,g,1.5,l
+JEOP2,JEOP 2,weekday,2.5,7.8,200.0,g,3.0,l
+JEOP2,JEOP 2,weekday,2.5,8.0,200.0,g,3.0,l
+JEOP2,JEOP 2,weekday,3.0,7.2,0.0,g,0.0,ml
+JEOP2,JEOP 2,weekday,3.0,7.4,0.0,g,0.0,ml
+JEOP2,JEOP 2,weekday,3.0,7.6,0.0,g,0.0,ml
+JEOP2,JEOP 2,weekday,3.0,7.8,0.0,g,500.0,ml
+JEOP2,JEOP 2,weekday,3.0,8.0,0.0,g,1.0,l
+JEOP2,JEOP 2,weekend,-2.0,7.2,1.0,kg,0.0,ml
+JEOP2,JEOP 2,weekend,-2.0,7.4,1.0,kg,1.0,l
+JEOP2,JEOP 2,weekend,-2.0,7.6,1.0,kg,2.0,l
+JEOP2,JEOP 2,weekend,-2.0,7.8,1.0,kg,2.0,l
+JEOP2,JEOP 2,weekend,-2.0,8.0,1.0,kg,2.0,l
+JEOP2,JEOP 2,weekend,-1.5,7.2,1.0,kg,0.0,ml
+JEOP2,JEOP 2,weekend,-1.5,7.4,1.0,kg,1.0,l
+JEOP2,JEOP 2,weekend,-1.5,7.6,1.0,kg,2.0,l
+JEOP2,JEOP 2,weekend,-1.5,7.8,1.0,kg,2.0,l
+JEOP2,JEOP 2,weekend,-1.5,8.0,1.0,kg,2.0,l
+JEOP2,JEOP 2,weekend,-1.0,7.2,1.0,kg,0.0,ml
+JEOP2,JEOP 2,weekend,-1.0,7.4,1.0,kg,1.0,l
+JEOP2,JEOP 2,weekend,-1.0,7.6,1.0,kg,2.0,l
+JEOP2,JEOP 2,weekend,-1.0,7.8,1.0,kg,2.0,l
+JEOP2,JEOP 2,weekend,-1.0,8.0,1.0,kg,2.0,l
+JEOP2,JEOP 2,weekend,-0.5,7.2,1.0,kg,0.0,ml
+JEOP2,JEOP 2,weekend,-0.5,7.4,1.0,kg,1.0,l
+JEOP2,JEOP 2,weekend,-0.5,7.6,1.0,kg,2.0,l
+JEOP2,JEOP 2,weekend,-0.5,7.8,1.0,kg,2.0,l
+JEOP2,JEOP 2,weekend,-0.5,8.0,1.0,kg,2.0,l
+JEOP2,JEOP 2,weekend,0.0,7.2,1.0,kg,0.0,ml
+JEOP2,JEOP 2,weekend,0.0,7.4,1.0,kg,1.0,l
+JEOP2,JEOP 2,weekend,0.0,7.6,1.0,kg,1.5,l
+JEOP2,JEOP 2,weekend,0.0,7.8,1.0,kg,3.0,l
+JEOP2,JEOP 2,weekend,0.0,8.0,1.0,kg,3.0,l
+JEOP2,JEOP 2,weekend,0.5,7.2,1.0,kg,0.0,ml
+JEOP2,JEOP 2,weekend,0.5,7.4,1.0,kg,1.0,l
+JEOP2,JEOP 2,weekend,0.5,7.6,1.0,kg,1.5,l
+JEOP2,JEOP 2,weekend,0.5,7.8,1.0,kg,3.0,l
+JEOP2,JEOP 2,weekend,0.5,8.0,1.0,kg,3.0,l
+JEOP2,JEOP 2,weekend,1.0,7.2,500.0,g,0.0,ml
+JEOP2,JEOP 2,weekend,1.0,7.4,500.0,g,500.0,ml
+JEOP2,JEOP 2,weekend,1.0,7.6,500.0,g,1.5,l
+JEOP2,JEOP 2,weekend,1.0,7.8,800.0,g,3.0,l
+JEOP2,JEOP 2,weekend,1.0,8.0,800.0,g,3.0,l
+JEOP2,JEOP 2,weekend,1.5,7.2,300.0,g,0.0,ml
+JEOP2,JEOP 2,weekend,1.5,7.4,300.0,g,500.0,ml
+JEOP2,JEOP 2,weekend,1.5,7.6,300.0,g,1.5,l
+JEOP2,JEOP 2,weekend,1.5,7.8,300.0,g,3.0,l
+JEOP2,JEOP 2,weekend,1.5,8.0,300.0,g,3.0,l
+JEOP2,JEOP 2,weekend,2.0,7.2,200.0,g,0.0,ml
+JEOP2,JEOP 2,weekend,2.0,7.4,200.0,g,500.0,ml
+JEOP2,JEOP 2,weekend,2.0,7.6,200.0,g,1.5,l
+JEOP2,JEOP 2,weekend,2.0,7.8,200.0,g,3.0,l
+JEOP2,JEOP 2,weekend,2.0,8.0,200.0,g,3.0,l
+JEOP2,JEOP 2,weekend,2.5,7.2,0.0,g,0.0,ml
+JEOP2,JEOP 2,weekend,2.5,7.4,0.0,g,0.0,ml
+JEOP2,JEOP 2,weekend,2.5,7.6,0.0,g,1.0,l
+JEOP2,JEOP 2,weekend,2.5,7.8,0.0,g,2.0,l
+JEOP2,JEOP 2,weekend,2.5,8.0,0.0,g,2.0,l
+JEOP2,JEOP 2,weekend,3.0,7.2,0.0,g,0.0,ml
+JEOP2,JEOP 2,weekend,3.0,7.4,0.0,g,0.0,ml
+JEOP2,JEOP 2,weekend,3.0,7.6,0.0,g,1.0,l
+JEOP2,JEOP 2,weekend,3.0,7.8,0.0,g,2.0,l
+JEOP2,JEOP 2,weekend,3.0,8.0,0.0,g,2.0,l
+JEOP2,JEOP 2,weekend,3.5,7.2,0.0,g,0.0,ml
+JEOP2,JEOP 2,weekend,3.5,7.4,0.0,g,0.0,ml
+JEOP2,JEOP 2,weekend,3.5,7.6,0.0,g,1.0,l
+JEOP2,JEOP 2,weekend,3.5,7.8,0.0,g,2.0,l
+JEOP2,JEOP 2,weekend,3.5,8.0,0.0,g,2.0,l
+JEOP2,JEOP 2,weekend,4.0,7.2,0.0,g,0.0,ml
+JEOP2,JEOP 2,weekend,4.0,7.4,0.0,g,0.0,ml
+JEOP2,JEOP 2,weekend,4.0,7.6,0.0,g,1.0,l
+JEOP2,JEOP 2,weekend,4.0,7.8,0.0,g,2.0,l
+JEOP2,JEOP 2,weekend,4.0,8.0,0.0,g,2.0,l
+Tengah,Tengah,weekday,-2.0,7.2,1.2,kg,300.0,ml
+Tengah,Tengah,weekday,-2.0,7.4,1.2,kg,300.0,ml
+Tengah,Tengah,weekday,-2.0,7.6,1.2,kg,300.0,ml
+Tengah,Tengah,weekday,-2.0,7.8,1.2,kg,500.0,ml
+Tengah,Tengah,weekday,-2.0,8.0,1.2,kg,500.0,ml
+Tengah,Tengah,weekday,-1.5,7.2,1.2,kg,300.0,ml
+Tengah,Tengah,weekday,-1.5,7.4,1.2,kg,300.0,ml
+Tengah,Tengah,weekday,-1.5,7.6,1.2,kg,300.0,ml
+Tengah,Tengah,weekday,-1.5,7.8,1.2,kg,500.0,ml
+Tengah,Tengah,weekday,-1.5,8.0,1.2,kg,500.0,ml
+Tengah,Tengah,weekday,-1.0,7.2,1.2,kg,300.0,ml
+Tengah,Tengah,weekday,-1.0,7.4,1.2,kg,300.0,ml
+Tengah,Tengah,weekday,-1.0,7.6,1.2,kg,300.0,ml
+Tengah,Tengah,weekday,-1.0,7.8,1.2,kg,500.0,ml
+Tengah,Tengah,weekday,-1.0,8.0,1.2,kg,500.0,ml
+Tengah,Tengah,weekday,-0.5,7.2,1.2,kg,300.0,ml
+Tengah,Tengah,weekday,-0.5,7.4,1.2,kg,300.0,ml
+Tengah,Tengah,weekday,-0.5,7.6,1.2,kg,300.0,ml
+Tengah,Tengah,weekday,-0.5,7.8,1.2,kg,500.0,ml
+Tengah,Tengah,weekday,-0.5,8.0,1.2,kg,500.0,ml
+Tengah,Tengah,weekday,0.0,7.2,1.2,kg,0.0,ml
+Tengah,Tengah,weekday,0.0,7.4,1.2,kg,0.0,ml
+Tengah,Tengah,weekday,0.0,7.6,1.2,kg,300.0,ml
+Tengah,Tengah,weekday,0.0,7.8,1.2,kg,500.0,ml
+Tengah,Tengah,weekday,0.0,8.0,1.2,kg,500.0,ml
+Tengah,Tengah,weekday,0.5,7.2,1.2,kg,0.0,ml
+Tengah,Tengah,weekday,0.5,7.4,1.2,kg,0.0,ml
+Tengah,Tengah,weekday,0.5,7.6,1.2,kg,300.0,ml
+Tengah,Tengah,weekday,0.5,7.8,1.2,kg,500.0,ml
+Tengah,Tengah,weekday,0.5,8.0,1.2,kg,500.0,ml
+Tengah,Tengah,weekday,1.0,7.2,1.0,kg,0.0,ml
+Tengah,Tengah,weekday,1.0,7.4,1.0,kg,0.0,ml
+Tengah,Tengah,weekday,1.0,7.6,1.0,kg,200.0,ml
+Tengah,Tengah,weekday,1.0,7.8,1.0,kg,300.0,ml
+Tengah,Tengah,weekday,1.0,8.0,1.0,kg,400.0,ml
+Tengah,Tengah,weekday,1.5,7.2,500.0,g,0.0,ml
+Tengah,Tengah,weekday,1.5,7.4,500.0,g,0.0,ml
+Tengah,Tengah,weekday,1.5,7.6,500.0,g,200.0,ml
+Tengah,Tengah,weekday,1.5,7.8,500.0,g,300.0,ml
+Tengah,Tengah,weekday,1.5,8.0,500.0,g,400.0,ml
+Tengah,Tengah,weekday,2.0,7.2,500.0,g,0.0,ml
+Tengah,Tengah,weekday,2.0,7.4,150.0,g,0.0,ml
+Tengah,Tengah,weekday,2.0,7.6,500.0,g,200.0,ml
+Tengah,Tengah,weekday,2.0,7.8,500.0,g,300.0,ml
+Tengah,Tengah,weekday,2.0,8.0,500.0,g,400.0,ml
+Tengah,Tengah,weekday,2.5,7.2,250.0,g,0.0,ml
+Tengah,Tengah,weekday,2.5,7.4,250.0,g,0.0,ml
+Tengah,Tengah,weekday,2.5,7.6,250.0,g,200.0,ml
+Tengah,Tengah,weekday,2.5,7.8,250.0,g,300.0,ml
+Tengah,Tengah,weekday,2.5,8.0,250.0,g,400.0,ml
+Tengah,Tengah,weekday,3.0,7.2,0.0,g,0.0,ml
+Tengah,Tengah,weekday,3.0,7.4,0.0,g,0.0,ml
+Tengah,Tengah,weekday,3.0,7.6,0.0,g,0.0,ml
+Tengah,Tengah,weekday,3.0,7.8,0.0,g,0.0,ml
+Tengah,Tengah,weekday,3.0,8.0,0.0,g,250.0,ml
+Tengah,Tengah,weekend,-2.0,7.2,1.5,kg,300.0,ml
+Tengah,Tengah,weekend,-2.0,7.4,1.5,kg,300.0,ml
+Tengah,Tengah,weekend,-2.0,7.6,1.5,kg,500.0,ml
+Tengah,Tengah,weekend,-2.0,7.8,1.5,kg,500.0,ml
+Tengah,Tengah,weekend,-2.0,8.0,1.5,kg,1.0,l
+Tengah,Tengah,weekend,-1.5,7.2,1.5,kg,300.0,ml
+Tengah,Tengah,weekend,-1.5,7.4,1.5,kg,300.0,ml
+Tengah,Tengah,weekend,-1.5,7.6,1.5,kg,500.0,ml
+Tengah,Tengah,weekend,-1.5,7.8,1.5,kg,500.0,ml
+Tengah,Tengah,weekend,-1.5,8.0,1.5,kg,1.0,l
+Tengah,Tengah,weekend,-1.0,7.2,1.5,kg,300.0,ml
+Tengah,Tengah,weekend,-1.0,7.4,1.5,kg,300.0,ml
+Tengah,Tengah,weekend,-1.0,7.6,1.5,kg,500.0,ml
+Tengah,Tengah,weekend,-1.0,7.8,1.5,kg,500.0,ml
+Tengah,Tengah,weekend,-1.0,8.0,1.5,kg,1.0,l
+Tengah,Tengah,weekend,-0.5,7.2,1.5,kg,300.0,ml
+Tengah,Tengah,weekend,-0.5,7.4,1.5,kg,300.0,ml
+Tengah,Tengah,weekend,-0.5,7.6,1.5,kg,500.0,ml
+Tengah,Tengah,weekend,-0.5,7.8,1.5,kg,500.0,ml
+Tengah,Tengah,weekend,-0.5,8.0,1.5,kg,1.0,l
+Tengah,Tengah,weekend,0.0,7.2,1.5,kg,0.0,ml
+Tengah,Tengah,weekend,0.0,7.4,1.5,kg,300.0,ml
+Tengah,Tengah,weekend,0.0,7.6,1.5,kg,300.0,ml
+Tengah,Tengah,weekend,0.0,7.8,1.5,kg,500.0,ml
+Tengah,Tengah,weekend,0.0,8.0,1.5,kg,500.0,ml
+Tengah,Tengah,weekend,0.5,7.2,1.3,kg,0.0,ml
+Tengah,Tengah,weekend,0.5,7.4,1.3,kg,300.0,ml
+Tengah,Tengah,weekend,0.5,7.6,1.3,kg,300.0,ml
+Tengah,Tengah,weekend,0.5,7.8,1.3,kg,500.0,ml
+Tengah,Tengah,weekend,0.5,8.0,1.3,kg,500.0,ml
+Tengah,Tengah,weekend,1.0,7.2,1.3,kg,0.0,ml
+Tengah,Tengah,weekend,1.0,7.4,1.3,kg,300.0,ml
+Tengah,Tengah,weekend,1.0,7.6,1.3,kg,300.0,ml
+Tengah,Tengah,weekend,1.0,7.8,1.3,kg,500.0,ml
+Tengah,Tengah,weekend,1.0,8.0,1.3,kg,500.0,ml
+Tengah,Tengah,weekend,1.5,7.2,1.0,kg,0.0,ml
+Tengah,Tengah,weekend,1.5,7.4,1.0,kg,0.0,ml
+Tengah,Tengah,weekend,1.5,7.6,1.0,kg,300.0,ml
+Tengah,Tengah,weekend,1.5,7.8,1.0,kg,500.0,ml
+Tengah,Tengah,weekend,1.5,8.0,1.0,kg,500.0,ml
+Tengah,Tengah,weekend,2.0,7.2,700.0,g,0.0,ml
+Tengah,Tengah,weekend,2.0,7.4,700.0,g,0.0,ml
+Tengah,Tengah,weekend,2.0,7.6,700.0,g,300.0,ml
+Tengah,Tengah,weekend,2.0,7.8,700.0,g,500.0,ml
+Tengah,Tengah,weekend,2.0,8.0,700.0,g,500.0,ml
+Tengah,Tengah,weekend,2.5,7.2,200.0,g,0.0,ml
+Tengah,Tengah,weekend,2.5,7.4,200.0,g,0.0,ml
+Tengah,Tengah,weekend,2.5,7.6,200.0,g,0.0,ml
+Tengah,Tengah,weekend,2.5,7.8,200.0,g,400.0,ml
+Tengah,Tengah,weekend,2.5,8.0,200.0,g,400.0,ml
+Tengah,Tengah,weekend,3.0,7.2,0.0,g,0.0,ml
+Tengah,Tengah,weekend,3.0,7.4,0.0,g,0.0,ml
+Tengah,Tengah,weekend,3.0,7.6,0.0,g,0.0,ml
+Tengah,Tengah,weekend,3.0,7.8,0.0,g,400.0,ml
+Tengah,Tengah,weekend,3.0,8.0,0.0,g,400.0,ml
+Tengah,Tengah,weekend,3.5,7.2,0.0,g,0.0,ml
+Tengah,Tengah,weekend,3.5,7.4,0.0,g,0.0,ml
+Tengah,Tengah,weekend,3.5,7.6,0.0,g,0.0,ml
+Tengah,Tengah,weekend,3.5,7.8,0.0,g,400.0,ml
+Tengah,Tengah,weekend,3.5,8.0,0.0,g,400.0,ml
+Tengah,Tengah,weekend,4.0,7.2,0.0,g,0.0,ml
+Tengah,Tengah,weekend,4.0,7.4,0.0,g,0.0,ml
+Tengah,Tengah,weekend,4.0,7.6,0.0,g,0.0,ml
+Tengah,Tengah,weekend,4.0,7.8,0.0,g,400.0,ml
+Tengah,Tengah,weekend,4.0,8.0,0.0,g,400.0,ml
+HS,HS,weekday,-2.0,7.2,1.3,kg,0.0,ml
+HS,HS,weekday,-2.0,7.4,1.3,kg,1.0,l
+HS,HS,weekday,-2.0,7.6,1.3,kg,2.5,l
+HS,HS,weekday,-2.0,7.8,1.3,kg,3.0,l
+HS,HS,weekday,-2.0,8.0,1.3,kg,3.0,l
+HS,HS,weekday,-1.5,7.2,1.3,kg,0.0,ml
+HS,HS,weekday,-1.5,7.4,1.3,kg,1.0,l
+HS,HS,weekday,-1.5,7.6,1.3,kg,2.5,l
+HS,HS,weekday,-1.5,7.8,1.3,kg,3.0,l
+HS,HS,weekday,-1.5,8.0,1.3,kg,3.0,l
+HS,HS,weekday,-1.0,7.2,1.3,kg,0.0,ml
+HS,HS,weekday,-1.0,7.4,1.3,kg,1.0,l
+HS,HS,weekday,-1.0,7.6,1.3,kg,2.5,l
+HS,HS,weekday,-1.0,7.8,1.3,kg,3.0,l
+HS,HS,weekday,-1.0,8.0,1.3,kg,3.0,l
+HS,HS,weekday,-0.5,7.2,1.3,kg,0.0,ml
+HS,HS,weekday,-0.5,7.4,1.3,kg,1.0,l
+HS,HS,weekday,-0.5,7.6,1.3,kg,2.5,l
+HS,HS,weekday,-0.5,7.8,1.3,kg,3.0,l
+HS,HS,weekday,-0.5,8.0,1.3,kg,3.0,l
+HS,HS,weekday,0.0,7.2,1.2,kg,0.0,ml
+HS,HS,weekday,0.0,7.4,1.2,kg,1.0,l
+HS,HS,weekday,0.0,7.6,1.2,kg,2.5,l
+HS,HS,weekday,0.0,7.8,1.2,kg,3.0,l
+HS,HS,weekday,0.0,8.0,1.2,kg,3.0,l
+HS,HS,weekday,0.5,7.2,1.0,kg,0.0,ml
+HS,HS,weekday,0.5,7.4,1.0,kg,1.0,l
+HS,HS,weekday,0.5,7.6,1.0,kg,2.0,l
+HS,HS,weekday,0.5,7.8,1.0,kg,3.0,l
+HS,HS,weekday,0.5,8.0,1.0,kg,3.0,l
+HS,HS,weekday,1.0,7.2,1.0,kg,0.0,ml
+HS,HS,weekday,1.0,7.4,1.0,kg,1.0,l
+HS,HS,weekday,1.0,7.6,1.0,kg,2.0,l
+HS,HS,weekday,1.0,7.8,1.0,kg,3.0,l
+HS,HS,weekday,1.0,8.0,1.0,kg,3.0,l
+HS,HS,weekday,1.5,7.2,800.0,g,0.0,ml
+HS,HS,weekday,1.5,7.4,800.0,g,1.0,l
+HS,HS,weekday,1.5,7.6,800.0,g,1.5,l
+HS,HS,weekday,1.5,7.8,800.0,g,3.0,l
+HS,HS,weekday,1.5,8.0,800.0,g,3.0,l
+HS,HS,weekday,2.0,7.2,600.0,g,0.0,ml
+HS,HS,weekday,2.0,7.4,600.0,g,1.0,l
+HS,HS,weekday,2.0,7.6,600.0,g,1.5,l
+HS,HS,weekday,2.0,7.8,600.0,g,3.0,l
+HS,HS,weekday,2.0,8.0,600.0,g,3.0,l
+HS,HS,weekday,2.5,7.2,300.0,g,0.0,ml
+HS,HS,weekday,2.5,7.4,300.0,g,1.0,l
+HS,HS,weekday,2.5,7.6,300.0,g,1.0,l
+HS,HS,weekday,2.5,7.8,300.0,g,3.0,l
+HS,HS,weekday,2.5,8.0,300.0,g,3.0,l
+HS,HS,weekday,3.0,7.2,0.0,g,0.0,ml
+HS,HS,weekday,3.0,7.4,0.0,g,0.0,ml
+HS,HS,weekday,3.0,7.6,0.0,g,0.0,ml
+HS,HS,weekday,3.0,7.8,0.0,g,0.0,ml
+HS,HS,weekday,3.0,8.0,0.0,g,0.0,ml
+HS,HS,weekend,-2.0,7.2,1.8,kg,500.0,ml
+HS,HS,weekend,-2.0,7.4,1.8,kg,1.0,l
+HS,HS,weekend,-2.0,7.6,1.8,kg,2.5,l
+HS,HS,weekend,-2.0,7.8,1.8,kg,3.0,l
+HS,HS,weekend,-2.0,8.0,1.8,kg,3.0,l
+HS,HS,weekend,-1.5,7.2,1.8,kg,500.0,ml
+HS,HS,weekend,-1.5,7.4,1.8,kg,1.0,l
+HS,HS,weekend,-1.5,7.6,1.8,kg,2.5,l
+HS,HS,weekend,-1.5,7.8,1.8,kg,3.0,l
+HS,HS,weekend,-1.5,8.0,1.8,kg,3.0,l
+HS,HS,weekend,-1.0,7.2,1.8,kg,500.0,ml
+HS,HS,weekend,-1.0,7.4,1.8,kg,1.0,l
+HS,HS,weekend,-1.0,7.6,1.8,kg,2.5,l
+HS,HS,weekend,-1.0,7.8,1.8,kg,3.0,l
+HS,HS,weekend,-1.0,8.0,1.8,kg,3.0,l
+HS,HS,weekend,-0.5,7.2,1.8,kg,500.0,ml
+HS,HS,weekend,-0.5,7.4,1.8,kg,1.0,l
+HS,HS,weekend,-0.5,7.6,1.8,kg,2.5,l
+HS,HS,weekend,-0.5,7.8,1.8,kg,3.0,l
+HS,HS,weekend,-0.5,8.0,1.8,kg,3.0,l
+HS,HS,weekend,0.0,7.2,1.5,kg,500.0,ml
+HS,HS,weekend,0.0,7.4,1.5,kg,1.0,l
+HS,HS,weekend,0.0,7.6,1.5,kg,2.5,l
+HS,HS,weekend,0.0,7.8,1.5,kg,3.0,l
+HS,HS,weekend,0.0,8.0,1.5,kg,3.0,l
+HS,HS,weekend,0.5,7.2,1.25,kg,500.0,ml
+HS,HS,weekend,0.5,7.4,1.25,kg,1.0,l
+HS,HS,weekend,0.5,7.6,1.25,kg,2.5,l
+HS,HS,weekend,0.5,7.8,1.25,kg,3.0,l
+HS,HS,weekend,0.5,8.0,1.25,kg,3.0,l
+HS,HS,weekend,1.0,7.2,1.25,kg,500.0,ml
+HS,HS,weekend,1.0,7.4,1.25,kg,1.0,l
+HS,HS,weekend,1.0,7.6,1.25,kg,2.5,l
+HS,HS,weekend,1.0,7.8,1.25,kg,3.0,l
+HS,HS,weekend,1.0,8.0,1.25,kg,3.0,l
+HS,HS,weekend,1.5,7.2,1.0,kg,500.0,ml
+HS,HS,weekend,1.5,7.4,1.0,kg,1.0,l
+HS,HS,weekend,1.5,7.6,1.0,kg,2.0,l
+HS,HS,weekend,1.5,7.8,1.0,kg,3.0,l
+HS,HS,weekend,1.5,8.0,1.0,kg,3.0,l
+HS,HS,weekend,2.0,7.2,1.0,kg,500.0,ml
+HS,HS,weekend,2.0,7.4,1.0,kg,1.0,l
+HS,HS,weekend,2.0,7.6,1.0,kg,2.0,l
+HS,HS,weekend,2.0,7.8,1.0,kg,3.0,l
+HS,HS,weekend,2.0,8.0,1.0,kg,3.0,l
+HS,HS,weekend,2.5,7.2,500.0,g,500.0,ml
+HS,HS,weekend,2.5,7.4,500.0,g,1.0,l
+HS,HS,weekend,2.5,7.6,500.0,g,1.5,l
+HS,HS,weekend,2.5,7.8,500.0,g,3.0,l
+HS,HS,weekend,2.5,8.0,500.0,g,3.0,l
+HS,HS,weekend,3.0,7.2,0.0,g,0.0,ml
+HS,HS,weekend,3.0,7.4,0.0,g,500.0,ml
+HS,HS,weekend,3.0,7.6,0.0,g,1.5,l
+HS,HS,weekend,3.0,7.8,0.0,g,2.0,l
+HS,HS,weekend,3.0,8.0,0.0,g,3.0,l
+HS,HS,weekend,3.5,7.2,0.0,g,0.0,ml
+HS,HS,weekend,3.5,7.4,0.0,g,500.0,ml
+HS,HS,weekend,3.5,7.6,0.0,g,1.5,l
+HS,HS,weekend,3.5,7.8,0.0,g,2.0,l
+HS,HS,weekend,3.5,8.0,0.0,g,3.0,l
+HS,HS,weekend,4.0,7.2,0.0,g,0.0,ml
+HS,HS,weekend,4.0,7.4,0.0,g,500.0,ml
+HS,HS,weekend,4.0,7.6,0.0,g,1.5,l
+HS,HS,weekend,4.0,7.8,0.0,g,2.0,l
+HS,HS,weekend,4.0,8.0,0.0,g,3.0,l
+TPY,TPY,weekday,-2.0,7.2,200.0,g,0.0,ml
+TPY,TPY,weekday,-2.0,7.4,200.0,g,0.0,ml
+TPY,TPY,weekday,-2.0,7.6,200.0,g,0.0,ml
+TPY,TPY,weekday,-2.0,7.8,200.0,g,300.0,ml
+TPY,TPY,weekday,-2.0,8.0,400.0,g,300.0,ml
+TPY,TPY,weekday,-1.5,7.2,400.0,g,0.0,ml
+TPY,TPY,weekday,-1.5,7.4,400.0,g,0.0,ml
+TPY,TPY,weekday,-1.5,7.6,400.0,g,0.0,ml
+TPY,TPY,weekday,-1.5,7.8,400.0,g,300.0,ml
+TPY,TPY,weekday,-1.5,8.0,400.0,g,300.0,ml
+TPY,TPY,weekday,-1.0,7.2,400.0,g,0.0,ml
+TPY,TPY,weekday,-1.0,7.4,400.0,g,0.0,ml
+TPY,TPY,weekday,-1.0,7.6,400.0,g,0.0,ml
+TPY,TPY,weekday,-1.0,7.8,400.0,g,300.0,ml
+TPY,TPY,weekday,-1.0,8.0,400.0,g,300.0,ml
+TPY,TPY,weekday,-0.5,7.2,400.0,g,0.0,ml
+TPY,TPY,weekday,-0.5,7.4,400.0,g,0.0,ml
+TPY,TPY,weekday,-0.5,7.6,400.0,g,0.0,ml
+TPY,TPY,weekday,-0.5,7.8,400.0,g,300.0,ml
+TPY,TPY,weekday,-0.5,8.0,400.0,g,300.0,ml
+TPY,TPY,weekday,0.0,7.2,200.0,g,0.0,ml
+TPY,TPY,weekday,0.0,7.4,200.0,g,0.0,ml
+TPY,TPY,weekday,0.0,7.6,200.0,g,0.0,ml
+TPY,TPY,weekday,0.0,7.8,200.0,g,300.0,ml
+TPY,TPY,weekday,0.0,8.0,200.0,g,300.0,ml
+TPY,TPY,weekday,0.5,7.2,200.0,g,0.0,ml
+TPY,TPY,weekday,0.5,7.4,200.0,g,0.0,ml
+TPY,TPY,weekday,0.5,7.6,200.0,g,0.0,ml
+TPY,TPY,weekday,0.5,7.8,200.0,g,300.0,ml
+TPY,TPY,weekday,0.5,8.0,200.0,g,300.0,ml
+TPY,TPY,weekday,1.0,7.2,100.0,g,0.0,ml
+TPY,TPY,weekday,1.0,7.4,100.0,g,0.0,ml
+TPY,TPY,weekday,1.0,7.6,100.0,g,0.0,ml
+TPY,TPY,weekday,1.0,7.8,100.0,g,300.0,ml
+TPY,TPY,weekday,1.0,8.0,100.0,g,300.0,ml
+TPY,TPY,weekday,1.5,7.2,0.0,g,0.0,ml
+TPY,TPY,weekday,1.5,7.4,0.0,g,0.0,ml
+TPY,TPY,weekday,1.5,7.6,0.0,g,0.0,ml
+TPY,TPY,weekday,1.5,7.8,0.0,g,300.0,ml
+TPY,TPY,weekday,1.5,8.0,0.0,g,300.0,ml
+TPY,TPY,weekday,2.0,7.2,0.0,g,0.0,ml
+TPY,TPY,weekday,2.0,7.4,0.0,g,0.0,ml
+TPY,TPY,weekday,2.0,7.6,0.0,g,0.0,ml
+TPY,TPY,weekday,2.0,7.8,0.0,g,300.0,ml
+TPY,TPY,weekday,2.0,8.0,0.0,g,300.0,ml
+TPY,TPY,weekday,2.5,7.2,0.0,g,0.0,ml
+TPY,TPY,weekday,2.5,7.4,0.0,g,0.0,ml
+TPY,TPY,weekday,2.5,7.6,0.0,g,0.0,ml
+TPY,TPY,weekday,2.5,7.8,0.0,g,300.0,ml
+TPY,TPY,weekday,2.5,8.0,0.0,g,300.0,ml
+TPY,TPY,weekday,3.0,7.2,0.0,g,0.0,ml
+TPY,TPY,weekday,3.0,7.4,0.0,g,0.0,ml
+TPY,TPY,weekday,3.0,7.6,0.0,g,0.0,ml
+TPY,TPY,weekday,3.0,7.8,0.0,g,300.0,ml
+TPY,TPY,weekday,3.0,8.0,0.0,g,300.0,ml
+TPY,TPY,weekend,-2.0,7.2,600.0,g,0.0,ml
+TPY,TPY,weekend,-2.0,7.4,600.0,g,0.0,ml
+TPY,TPY,weekend,-2.0,7.6,600.0,g,300.0,ml
+TPY,TPY,weekend,-2.0,7.8,600.0,g,300.0,ml
+TPY,TPY,weekend,-2.0,8.0,600.0,g,300.0,ml
+TPY,TPY,weekend,-1.5,7.2,600.0,g,0.0,ml
+TPY,TPY,weekend,-1.5,7.4,600.0,g,0.0,ml
+TPY,TPY,weekend,-1.5,7.6,600.0,g,300.0,ml
+TPY,TPY,weekend,-1.5,7.8,600.0,g,300.0,ml
+TPY,TPY,weekend,-1.5,8.0,600.0,g,300.0,ml
+TPY,TPY,weekend,-1.0,7.2,600.0,g,0.0,ml
+TPY,TPY,weekend,-1.0,7.4,600.0,g,0.0,ml
+TPY,TPY,weekend,-1.0,7.6,600.0,g,300.0,ml
+TPY,TPY,weekend,-1.0,7.8,600.0,g,300.0,ml
+TPY,TPY,weekend,-1.0,8.0,600.0,g,300.0,ml
+TPY,TPY,weekend,-0.5,7.2,600.0,g,0.0,ml
+TPY,TPY,weekend,-0.5,7.4,600.0,g,0.0,ml
+TPY,TPY,weekend,-0.5,7.6,600.0,g,300.0,ml
+TPY,TPY,weekend,-0.5,7.8,600.0,g,300.0,ml
+TPY,TPY,weekend,-0.5,8.0,600.0,g,300.0,ml
+TPY,TPY,weekend,0.0,7.2,400.0,g,0.0,ml
+TPY,TPY,weekend,0.0,7.4,400.0,g,0.0,ml
+TPY,TPY,weekend,0.0,7.6,400.0,g,0.0,ml
+TPY,TPY,weekend,0.0,7.8,400.0,g,300.0,ml
+TPY,TPY,weekend,0.0,8.0,400.0,g,300.0,ml
+TPY,TPY,weekend,0.5,7.2,400.0,g,0.0,ml
+TPY,TPY,weekend,0.5,7.4,400.0,g,0.0,ml
+TPY,TPY,weekend,0.5,7.6,400.0,g,0.0,ml
+TPY,TPY,weekend,0.5,7.8,400.0,g,300.0,ml
+TPY,TPY,weekend,0.5,8.0,400.0,g,300.0,ml
+TPY,TPY,weekend,1.0,7.2,300.0,g,0.0,ml
+TPY,TPY,weekend,1.0,7.4,300.0,g,0.0,ml
+TPY,TPY,weekend,1.0,7.6,300.0,g,0.0,ml
+TPY,TPY,weekend,1.0,7.8,300.0,g,300.0,ml
+TPY,TPY,weekend,1.0,8.0,300.0,g,300.0,ml
+TPY,TPY,weekend,1.5,7.2,150.0,g,0.0,ml
+TPY,TPY,weekend,1.5,7.4,150.0,g,0.0,ml
+TPY,TPY,weekend,1.5,7.6,150.0,g,0.0,ml
+TPY,TPY,weekend,1.5,7.8,150.0,g,300.0,ml
+TPY,TPY,weekend,1.5,8.0,150.0,g,300.0,ml
+TPY,TPY,weekend,2.0,7.2,50.0,g,0.0,ml
+TPY,TPY,weekend,2.0,7.4,50.0,g,0.0,ml
+TPY,TPY,weekend,2.0,7.6,50.0,g,0.0,ml
+TPY,TPY,weekend,2.0,7.8,50.0,g,300.0,ml
+TPY,TPY,weekend,2.0,8.0,50.0,g,300.0,ml
+TPY,TPY,weekend,2.5,7.2,0.0,g,0.0,ml
+TPY,TPY,weekend,2.5,7.4,0.0,g,0.0,ml
+TPY,TPY,weekend,2.5,7.6,0.0,g,0.0,ml
+TPY,TPY,weekend,2.5,7.8,0.0,g,300.0,ml
+TPY,TPY,weekend,2.5,8.0,0.0,g,300.0,ml
+TPY,TPY,weekend,3.0,7.2,0.0,g,0.0,ml
+TPY,TPY,weekend,3.0,7.4,0.0,g,0.0,ml
+TPY,TPY,weekend,3.0,7.6,0.0,g,0.0,ml
+TPY,TPY,weekend,3.0,7.8,0.0,g,300.0,ml
+TPY,TPY,weekend,3.0,8.0,0.0,g,300.0,ml
+TPY,TPY,weekend,3.5,7.2,0.0,g,0.0,ml
+TPY,TPY,weekend,3.5,7.4,0.0,g,0.0,ml
+TPY,TPY,weekend,3.5,7.6,0.0,g,0.0,ml
+TPY,TPY,weekend,3.5,7.8,0.0,g,300.0,ml
+TPY,TPY,weekend,3.5,8.0,0.0,g,300.0,ml
+TPY,TPY,weekend,4.0,7.2,0.0,g,0.0,ml
+TPY,TPY,weekend,4.0,7.4,0.0,g,0.0,ml
+TPY,TPY,weekend,4.0,7.6,0.0,g,0.0,ml
+TPY,TPY,weekend,4.0,7.8,0.0,g,300.0,ml
+TPY,TPY,weekend,4.0,8.0,0.0,g,300.0,ml
+DR,DR,weekday,-2.0,7.2,600.0,g,250.0,ml
+DR,DR,weekday,-2.0,7.4,600.0,g,250.0,ml
+DR,DR,weekday,-2.0,7.6,600.0,g,500.0,ml
+DR,DR,weekday,-2.0,7.8,600.0,g,600.0,ml
+DR,DR,weekday,-2.0,8.0,600.0,g,600.0,ml
+DR,DR,weekday,-1.5,7.2,600.0,g,250.0,ml
+DR,DR,weekday,-1.5,7.4,600.0,g,250.0,ml
+DR,DR,weekday,-1.5,7.6,600.0,g,500.0,ml
+DR,DR,weekday,-1.5,7.8,600.0,g,600.0,ml
+DR,DR,weekday,-1.5,8.0,600.0,g,600.0,ml
+DR,DR,weekday,-1.0,7.2,600.0,g,250.0,ml
+DR,DR,weekday,-1.0,7.4,600.0,g,250.0,ml
+DR,DR,weekday,-1.0,7.6,600.0,g,500.0,ml
+DR,DR,weekday,-1.0,7.8,600.0,g,600.0,ml
+DR,DR,weekday,-1.0,8.0,600.0,g,600.0,ml
+DR,DR,weekday,-0.5,7.2,500.0,g,250.0,ml
+DR,DR,weekday,-0.5,7.4,500.0,g,250.0,ml
+DR,DR,weekday,-0.5,7.6,500.0,g,500.0,ml
+DR,DR,weekday,-0.5,7.8,500.0,g,600.0,ml
+DR,DR,weekday,-0.5,8.0,500.0,g,600.0,ml
+DR,DR,weekday,0.0,7.2,400.0,g,0.0,ml
+DR,DR,weekday,0.0,7.4,400.0,g,0.0,ml
+DR,DR,weekday,0.0,7.6,400.0,g,250.0,ml
+DR,DR,weekday,0.0,7.8,400.0,g,500.0,ml
+DR,DR,weekday,0.0,8.0,400.0,g,500.0,ml
+DR,DR,weekday,0.5,7.2,400.0,g,0.0,ml
+DR,DR,weekday,0.5,7.4,400.0,g,0.0,ml
+DR,DR,weekday,0.5,7.6,400.0,g,250.0,ml
+DR,DR,weekday,0.5,7.8,400.0,g,500.0,ml
+DR,DR,weekday,0.5,8.0,400.0,g,500.0,ml
+DR,DR,weekday,1.0,7.2,300.0,g,0.0,ml
+DR,DR,weekday,1.0,7.4,300.0,g,0.0,ml
+DR,DR,weekday,1.0,7.6,300.0,g,250.0,ml
+DR,DR,weekday,1.0,7.8,300.0,g,500.0,ml
+DR,DR,weekday,1.0,8.0,300.0,g,500.0,ml
+DR,DR,weekday,1.5,7.2,300.0,g,0.0,ml
+DR,DR,weekday,1.5,7.4,300.0,g,0.0,ml
+DR,DR,weekday,1.5,7.6,300.0,g,250.0,ml
+DR,DR,weekday,1.5,7.8,300.0,g,500.0,ml
+DR,DR,weekday,1.5,8.0,300.0,g,500.0,ml
+DR,DR,weekday,2.0,7.2,200.0,g,0.0,ml
+DR,DR,weekday,2.0,7.4,200.0,g,0.0,ml
+DR,DR,weekday,2.0,7.6,200.0,g,250.0,ml
+DR,DR,weekday,2.0,7.8,200.0,g,500.0,ml
+DR,DR,weekday,2.0,8.0,200.0,g,500.0,ml
+DR,DR,weekday,2.5,7.2,0.0,g,0.0,ml
+DR,DR,weekday,2.5,7.4,0.0,g,0.0,ml
+DR,DR,weekday,2.5,7.6,0.0,g,0.0,ml
+DR,DR,weekday,2.5,7.8,0.0,g,0.0,ml
+DR,DR,weekday,2.5,8.0,0.0,g,500.0,ml
+DR,DR,weekday,3.0,7.2,0.0,g,0.0,ml
+DR,DR,weekday,3.0,7.4,0.0,g,0.0,ml
+DR,DR,weekday,3.0,7.6,0.0,g,0.0,ml
+DR,DR,weekday,3.0,7.8,0.0,g,0.0,ml
+DR,DR,weekday,3.0,8.0,0.0,g,500.0,ml
+DR,DR,weekend,-2.0,7.2,600.0,g,250.0,ml
+DR,DR,weekend,-2.0,7.4,600.0,g,250.0,ml
+DR,DR,weekend,-2.0,7.6,600.0,g,500.0,ml
+DR,DR,weekend,-2.0,7.8,600.0,g,600.0,ml
+DR,DR,weekend,-2.0,8.0,600.0,g,600.0,ml
+DR,DR,weekend,-1.5,7.2,600.0,g,250.0,ml
+DR,DR,weekend,-1.5,7.4,600.0,g,250.0,ml
+DR,DR,weekend,-1.5,7.6,600.0,g,500.0,ml
+DR,DR,weekend,-1.5,7.8,600.0,g,600.0,ml
+DR,DR,weekend,-1.5,8.0,600.0,g,600.0,ml
+DR,DR,weekend,-1.0,7.2,600.0,g,250.0,ml
+DR,DR,weekend,-1.0,7.4,600.0,g,250.0,ml
+DR,DR,weekend,-1.0,7.6,600.0,g,500.0,ml
+DR,DR,weekend,-1.0,7.8,600.0,g,600.0,ml
+DR,DR,weekend,-1.0,8.0,600.0,g,600.0,ml
+DR,DR,weekend,-0.5,7.2,700.0,g,0.0,ml
+DR,DR,weekend,-0.5,7.4,700.0,g,250.0,ml
+DR,DR,weekend,-0.5,7.6,700.0,g,500.0,ml
+DR,DR,weekend,-0.5,7.8,700.0,g,500.0,ml
+DR,DR,weekend,-0.5,8.0,700.0,g,500.0,ml
+DR,DR,weekend,0.0,7.2,500.0,g,0.0,ml
+DR,DR,weekend,0.0,7.4,500.0,g,0.0,ml
+DR,DR,weekend,0.0,7.6,500.0,g,250.0,ml
+DR,DR,weekend,0.0,7.8,500.0,g,500.0,ml
+DR,DR,weekend,0.0,8.0,500.0,g,500.0,ml
+DR,DR,weekend,0.5,7.2,500.0,g,0.0,ml
+DR,DR,weekend,0.5,7.4,500.0,g,0.0,ml
+DR,DR,weekend,0.5,7.6,500.0,g,250.0,ml
+DR,DR,weekend,0.5,7.8,500.0,g,500.0,ml
+DR,DR,weekend,0.5,8.0,500.0,g,500.0,ml
+DR,DR,weekend,1.0,7.2,400.0,g,0.0,ml
+DR,DR,weekend,1.0,7.4,400.0,g,0.0,ml
+DR,DR,weekend,1.0,7.6,400.0,g,250.0,ml
+DR,DR,weekend,1.0,7.8,400.0,g,500.0,ml
+DR,DR,weekend,1.0,8.0,400.0,g,500.0,ml
+DR,DR,weekend,1.5,7.2,300.0,g,0.0,ml
+DR,DR,weekend,1.5,7.4,300.0,g,0.0,ml
+DR,DR,weekend,1.5,7.6,300.0,g,250.0,ml
+DR,DR,weekend,1.5,7.8,300.0,g,500.0,ml
+DR,DR,weekend,1.5,8.0,300.0,g,500.0,ml
+DR,DR,weekend,2.0,7.2,200.0,g,0.0,ml
+DR,DR,weekend,2.0,7.4,200.0,g,0.0,ml
+DR,DR,weekend,2.0,7.6,200.0,g,250.0,ml
+DR,DR,weekend,2.0,7.8,200.0,g,500.0,ml
+DR,DR,weekend,2.0,8.0,200.0,g,500.0,ml
+DR,DR,weekend,2.5,7.2,200.0,g,0.0,ml
+DR,DR,weekend,2.5,7.4,200.0,g,0.0,ml
+DR,DR,weekend,2.5,7.6,200.0,g,250.0,ml
+DR,DR,weekend,2.5,7.8,200.0,g,500.0,ml
+DR,DR,weekend,2.5,8.0,200.0,g,500.0,ml
+Lentor,Lentor,weekday,-2.0,7.2,600.0,g,0.0,ml
+Lentor,Lentor,weekday,-2.0,7.4,600.0,g,0.0,ml
+Lentor,Lentor,weekday,-2.0,7.6,600.0,g,350.0,ml
+Lentor,Lentor,weekday,-2.0,7.8,600.0,g,500.0,ml
+Lentor,Lentor,weekday,-2.0,8.0,600.0,g,500.0,ml
+Lentor,Lentor,weekday,-1.5,7.2,600.0,g,0.0,ml
+Lentor,Lentor,weekday,-1.5,7.4,600.0,g,0.0,ml
+Lentor,Lentor,weekday,-1.5,7.6,600.0,g,350.0,ml
+Lentor,Lentor,weekday,-1.5,7.8,600.0,g,500.0,ml
+Lentor,Lentor,weekday,-1.5,8.0,600.0,g,500.0,ml
+Lentor,Lentor,weekday,-1.0,7.2,600.0,g,0.0,ml
+Lentor,Lentor,weekday,-1.0,7.4,600.0,g,0.0,ml
+Lentor,Lentor,weekday,-1.0,7.6,600.0,g,350.0,ml
+Lentor,Lentor,weekday,-1.0,7.8,600.0,g,500.0,ml
+Lentor,Lentor,weekday,-1.0,8.0,600.0,g,500.0,ml
+Lentor,Lentor,weekday,-0.5,7.2,600.0,g,0.0,ml
+Lentor,Lentor,weekday,-0.5,7.4,600.0,g,0.0,ml
+Lentor,Lentor,weekday,-0.5,7.6,600.0,g,350.0,ml
+Lentor,Lentor,weekday,-0.5,7.8,600.0,g,500.0,ml
+Lentor,Lentor,weekday,-0.5,8.0,600.0,g,500.0,ml
+Lentor,Lentor,weekday,0.0,7.2,500.0,g,0.0,ml
+Lentor,Lentor,weekday,0.0,7.4,500.0,g,0.0,ml
+Lentor,Lentor,weekday,0.0,7.6,500.0,g,350.0,ml
+Lentor,Lentor,weekday,0.0,7.8,500.0,g,500.0,ml
+Lentor,Lentor,weekday,0.0,8.0,500.0,g,500.0,ml
+Lentor,Lentor,weekday,0.5,7.2,500.0,g,0.0,ml
+Lentor,Lentor,weekday,0.5,7.4,500.0,g,0.0,ml
+Lentor,Lentor,weekday,0.5,7.6,500.0,g,350.0,ml
+Lentor,Lentor,weekday,0.5,7.8,500.0,g,500.0,ml
+Lentor,Lentor,weekday,0.5,8.0,500.0,g,500.0,ml
+Lentor,Lentor,weekday,1.0,7.2,300.0,g,0.0,ml
+Lentor,Lentor,weekday,1.0,7.4,300.0,g,0.0,ml
+Lentor,Lentor,weekday,1.0,7.6,300.0,g,350.0,ml
+Lentor,Lentor,weekday,1.0,7.8,300.0,g,500.0,ml
+Lentor,Lentor,weekday,1.0,8.0,300.0,g,500.0,ml
+Lentor,Lentor,weekday,1.5,7.2,200.0,g,0.0,ml
+Lentor,Lentor,weekday,1.5,7.4,200.0,g,0.0,ml
+Lentor,Lentor,weekday,1.5,7.6,200.0,g,350.0,ml
+Lentor,Lentor,weekday,1.5,7.8,200.0,g,500.0,ml
+Lentor,Lentor,weekday,1.5,8.0,200.0,g,500.0,ml
+Lentor,Lentor,weekday,2.0,7.2,0.0,g,0.0,ml
+Lentor,Lentor,weekday,2.0,7.4,0.0,g,0.0,ml
+Lentor,Lentor,weekday,2.0,7.6,0.0,g,350.0,ml
+Lentor,Lentor,weekday,2.0,7.8,0.0,g,500.0,ml
+Lentor,Lentor,weekday,2.0,8.0,0.0,g,500.0,ml
+Lentor,Lentor,weekday,2.5,7.2,0.0,g,0.0,ml
+Lentor,Lentor,weekday,2.5,7.4,0.0,g,0.0,ml
+Lentor,Lentor,weekday,2.5,7.6,0.0,g,350.0,ml
+Lentor,Lentor,weekday,2.5,7.8,0.0,g,500.0,ml
+Lentor,Lentor,weekday,2.5,8.0,0.0,g,500.0,ml
+Lentor,Lentor,weekday,3.0,7.2,0.0,g,0.0,ml
+Lentor,Lentor,weekday,3.0,7.4,0.0,g,0.0,ml
+Lentor,Lentor,weekday,3.0,7.6,0.0,g,350.0,ml
+Lentor,Lentor,weekday,3.0,7.8,0.0,g,500.0,ml
+Lentor,Lentor,weekday,3.0,8.0,0.0,g,500.0,ml
+Lentor,Lentor,weekend,-2.0,7.2,800.0,g,0.0,ml
+Lentor,Lentor,weekend,-2.0,7.4,800.0,g,0.0,ml
+Lentor,Lentor,weekend,-2.0,7.6,800.0,g,350.0,ml
+Lentor,Lentor,weekend,-2.0,7.8,800.0,g,500.0,ml
+Lentor,Lentor,weekend,-2.0,8.0,800.0,g,500.0,ml
+Lentor,Lentor,weekend,-1.5,7.2,800.0,g,0.0,ml
+Lentor,Lentor,weekend,-1.5,7.4,800.0,g,0.0,ml
+Lentor,Lentor,weekend,-1.5,7.6,800.0,g,350.0,ml
+Lentor,Lentor,weekend,-1.5,7.8,800.0,g,500.0,ml
+Lentor,Lentor,weekend,-1.5,8.0,800.0,g,500.0,ml
+Lentor,Lentor,weekend,-1.0,7.2,800.0,g,0.0,ml
+Lentor,Lentor,weekend,-1.0,7.4,800.0,g,0.0,ml
+Lentor,Lentor,weekend,-1.0,7.6,800.0,g,350.0,ml
+Lentor,Lentor,weekend,-1.0,7.8,800.0,g,500.0,ml
+Lentor,Lentor,weekend,-1.0,8.0,800.0,g,500.0,ml
+Lentor,Lentor,weekend,-0.5,7.2,800.0,g,0.0,ml
+Lentor,Lentor,weekend,-0.5,7.4,800.0,g,0.0,ml
+Lentor,Lentor,weekend,-0.5,7.6,800.0,g,350.0,ml
+Lentor,Lentor,weekend,-0.5,7.8,800.0,g,500.0,ml
+Lentor,Lentor,weekend,-0.5,8.0,800.0,g,500.0,ml
+Lentor,Lentor,weekend,0.0,7.2,600.0,g,0.0,ml
+Lentor,Lentor,weekend,0.0,7.4,600.0,g,0.0,ml
+Lentor,Lentor,weekend,0.0,7.6,600.0,g,350.0,ml
+Lentor,Lentor,weekend,0.0,7.8,600.0,g,500.0,ml
+Lentor,Lentor,weekend,0.0,8.0,600.0,g,500.0,ml
+Lentor,Lentor,weekend,0.5,7.2,600.0,g,0.0,ml
+Lentor,Lentor,weekend,0.5,7.4,600.0,g,0.0,ml
+Lentor,Lentor,weekend,0.5,7.6,600.0,g,350.0,ml
+Lentor,Lentor,weekend,0.5,7.8,600.0,g,500.0,ml
+Lentor,Lentor,weekend,0.5,8.0,600.0,g,500.0,ml
+Lentor,Lentor,weekend,1.0,7.2,500.0,g,0.0,ml
+Lentor,Lentor,weekend,1.0,7.4,500.0,g,0.0,ml
+Lentor,Lentor,weekend,1.0,7.6,500.0,g,350.0,ml
+Lentor,Lentor,weekend,1.0,7.8,500.0,g,500.0,ml
+Lentor,Lentor,weekend,1.0,8.0,500.0,g,500.0,ml
+Lentor,Lentor,weekend,1.5,7.2,300.0,g,0.0,ml
+Lentor,Lentor,weekend,1.5,7.4,300.0,g,0.0,ml
+Lentor,Lentor,weekend,1.5,7.6,300.0,g,350.0,ml
+Lentor,Lentor,weekend,1.5,7.8,300.0,g,500.0,ml
+Lentor,Lentor,weekend,1.5,8.0,300.0,g,500.0,ml
+Lentor,Lentor,weekend,2.0,7.2,200.0,g,0.0,ml
+Lentor,Lentor,weekend,2.0,7.4,200.0,g,0.0,ml
+Lentor,Lentor,weekend,2.0,7.6,200.0,g,350.0,ml
+Lentor,Lentor,weekend,2.0,7.8,200.0,g,500.0,ml
+Lentor,Lentor,weekend,2.0,8.0,200.0,g,500.0,ml
+Lentor,Lentor,weekend,2.5,7.2,0.0,g,0.0,ml
+Lentor,Lentor,weekend,2.5,7.4,0.0,g,0.0,ml
+Lentor,Lentor,weekend,2.5,7.6,0.0,g,350.0,ml
+Lentor,Lentor,weekend,2.5,7.8,0.0,g,500.0,ml
+Lentor,Lentor,weekend,2.5,8.0,0.0,g,500.0,ml
+Lentor,Lentor,weekend,3.0,7.2,0.0,g,0.0,ml
+Lentor,Lentor,weekend,3.0,7.4,0.0,g,0.0,ml
+Lentor,Lentor,weekend,3.0,7.6,0.0,g,350.0,ml
+Lentor,Lentor,weekend,3.0,7.8,0.0,g,500.0,ml
+Lentor,Lentor,weekend,3.0,8.0,0.0,g,500.0,ml
+Lentor,Lentor,weekend,3.5,7.2,0.0,g,0.0,ml
+Lentor,Lentor,weekend,3.5,7.4,0.0,g,0.0,ml
+Lentor,Lentor,weekend,3.5,7.6,0.0,g,350.0,ml
+Lentor,Lentor,weekend,3.5,7.8,0.0,g,500.0,ml
+Lentor,Lentor,weekend,3.5,8.0,0.0,g,500.0,ml
+Lentor,Lentor,weekend,4.0,7.2,0.0,g,0.0,ml
+Lentor,Lentor,weekend,4.0,7.4,0.0,g,0.0,ml
+Lentor,Lentor,weekend,4.0,7.6,0.0,g,350.0,ml
+Lentor,Lentor,weekend,4.0,7.8,0.0,g,500.0,ml
+Lentor,Lentor,weekend,4.0,8.0,0.0,g,500.0,ml
+BK,BK,weekday,-2.0,7.2,800.0,g,250.0,ml
+BK,BK,weekday,-2.0,7.4,800.0,g,250.0,ml
+BK,BK,weekday,-2.0,7.6,800.0,g,500.0,ml
+BK,BK,weekday,-2.0,7.8,800.0,g,500.0,ml
+BK,BK,weekday,-2.0,8.0,800.0,g,1.0,l
+BK,BK,weekday,-1.5,7.2,800.0,g,250.0,ml
+BK,BK,weekday,-1.5,7.4,800.0,g,250.0,ml
+BK,BK,weekday,-1.5,7.6,800.0,g,500.0,ml
+BK,BK,weekday,-1.5,7.8,800.0,g,500.0,ml
+BK,BK,weekday,-1.5,8.0,800.0,g,1.0,l
+BK,BK,weekday,-1.0,7.2,800.0,g,250.0,ml
+BK,BK,weekday,-1.0,7.4,800.0,g,250.0,ml
+BK,BK,weekday,-1.0,7.6,800.0,g,500.0,ml
+BK,BK,weekday,-1.0,7.8,800.0,g,500.0,ml
+BK,BK,weekday,-1.0,8.0,800.0,g,1.0,l
+BK,BK,weekday,-0.5,7.2,800.0,g,250.0,ml
+BK,BK,weekday,-0.5,7.4,800.0,g,250.0,ml
+BK,BK,weekday,-0.5,7.6,800.0,g,500.0,ml
+BK,BK,weekday,-0.5,7.8,800.0,g,500.0,ml
+BK,BK,weekday,-0.5,8.0,800.0,g,1.0,l
+BK,BK,weekday,0.0,7.2,800.0,g,250.0,ml
+BK,BK,weekday,0.0,7.4,800.0,g,250.0,ml
+BK,BK,weekday,0.0,7.6,800.0,g,500.0,ml
+BK,BK,weekday,0.0,7.8,800.0,g,500.0,ml
+BK,BK,weekday,0.0,8.0,800.0,g,1.0,l
+BK,BK,weekday,0.5,7.2,700.0,g,250.0,ml
+BK,BK,weekday,0.5,7.4,700.0,g,250.0,ml
+BK,BK,weekday,0.5,7.6,700.0,g,250.0,ml
+BK,BK,weekday,0.5,7.8,700.0,g,500.0,ml
+BK,BK,weekday,0.5,8.0,700.0,g,1.0,l
+BK,BK,weekday,1.0,7.2,600.0,g,200.0,ml
+BK,BK,weekday,1.0,7.4,600.0,g,200.0,ml
+BK,BK,weekday,1.0,7.6,600.0,g,250.0,ml
+BK,BK,weekday,1.0,7.8,600.0,g,500.0,ml
+BK,BK,weekday,1.0,8.0,600.0,g,1.0,l
+BK,BK,weekday,1.5,7.2,500.0,g,200.0,ml
+BK,BK,weekday,1.5,7.4,500.0,g,200.0,ml
+BK,BK,weekday,1.5,7.6,500.0,g,250.0,ml
+BK,BK,weekday,1.5,7.8,500.0,g,500.0,ml
+BK,BK,weekday,1.5,8.0,500.0,g,1.0,l
+BK,BK,weekday,2.0,7.2,500.0,g,200.0,ml
+BK,BK,weekday,2.0,7.4,500.0,g,200.0,ml
+BK,BK,weekday,2.0,7.6,500.0,g,250.0,ml
+BK,BK,weekday,2.0,7.8,500.0,g,500.0,ml
+BK,BK,weekday,2.0,8.0,500.0,g,1.0,l
+BK,BK,weekday,2.5,7.2,500.0,g,200.0,ml
+BK,BK,weekday,2.5,7.4,500.0,g,200.0,ml
+BK,BK,weekday,2.5,7.6,500.0,g,250.0,ml
+BK,BK,weekday,2.5,7.8,500.0,g,500.0,ml
+BK,BK,weekday,2.5,8.0,500.0,g,1.0,l
+BK,BK,weekday,3.0,7.2,0.0,g,0.0,ml
+BK,BK,weekday,3.0,7.4,0.0,g,0.0,ml
+BK,BK,weekday,3.0,7.6,0.0,g,0.0,ml
+BK,BK,weekday,3.0,7.8,0.0,g,0.0,ml
+BK,BK,weekday,3.0,8.0,0.0,g,1.0,l
+BK,BK,weekend,-2.0,7.2,1.2,kg,250.0,ml
+BK,BK,weekend,-2.0,7.4,1.2,kg,250.0,ml
+BK,BK,weekend,-2.0,7.6,1.2,kg,500.0,ml
+BK,BK,weekend,-2.0,7.8,1.2,kg,500.0,ml
+BK,BK,weekend,-2.0,8.0,1.2,kg,1.0,l
+BK,BK,weekend,-1.5,7.2,1.2,kg,250.0,ml
+BK,BK,weekend,-1.5,7.4,1.2,kg,250.0,ml
+BK,BK,weekend,-1.5,7.6,1.2,kg,500.0,ml
+BK,BK,weekend,-1.5,7.8,1.2,kg,500.0,ml
+BK,BK,weekend,-1.5,8.0,1.2,kg,1.0,l
+BK,BK,weekend,-1.0,7.2,1.2,kg,250.0,ml
+BK,BK,weekend,-1.0,7.4,1.2,kg,250.0,ml
+BK,BK,weekend,-1.0,7.6,1.2,kg,500.0,ml
+BK,BK,weekend,-1.0,7.8,1.2,kg,500.0,ml
+BK,BK,weekend,-1.0,8.0,1.2,kg,1.0,l
+BK,BK,weekend,-0.5,7.2,1.2,kg,250.0,ml
+BK,BK,weekend,-0.5,7.4,1.2,kg,250.0,ml
+BK,BK,weekend,-0.5,7.6,1.2,kg,500.0,ml
+BK,BK,weekend,-0.5,7.8,1.2,kg,500.0,ml
+BK,BK,weekend,-0.5,8.0,1.2,kg,1.0,l
+BK,BK,weekend,0.0,7.2,1.4,kg,250.0,ml
+BK,BK,weekend,0.0,7.4,1.4,kg,250.0,ml
+BK,BK,weekend,0.0,7.6,1.4,kg,500.0,ml
+BK,BK,weekend,0.0,7.8,1.4,kg,500.0,ml
+BK,BK,weekend,0.0,8.0,1.4,kg,1.0,l
+BK,BK,weekend,0.5,7.2,1.4,kg,250.0,ml
+BK,BK,weekend,0.5,7.4,1.4,kg,250.0,ml
+BK,BK,weekend,0.5,7.6,1.4,kg,500.0,ml
+BK,BK,weekend,0.5,7.8,1.4,kg,500.0,ml
+BK,BK,weekend,0.5,8.0,1.4,kg,1.0,l
+BK,BK,weekend,1.0,7.2,1.2,kg,250.0,ml
+BK,BK,weekend,1.0,7.4,1.2,kg,250.0,ml
+BK,BK,weekend,1.0,7.6,1.2,kg,250.0,ml
+BK,BK,weekend,1.0,7.8,1.2,kg,250.0,ml
+BK,BK,weekend,1.0,8.0,1.2,kg,1.0,l
+BK,BK,weekend,1.5,7.2,900.0,g,200.0,ml
+BK,BK,weekend,1.5,7.4,900.0,g,200.0,ml
+BK,BK,weekend,1.5,7.6,900.0,g,250.0,ml
+BK,BK,weekend,1.5,7.8,900.0,g,500.0,ml
+BK,BK,weekend,1.5,8.0,900.0,g,1.0,l
+BK,BK,weekend,2.0,7.2,800.0,g,200.0,ml
+BK,BK,weekend,2.0,7.4,800.0,g,200.0,ml
+BK,BK,weekend,2.0,7.6,800.0,g,250.0,ml
+BK,BK,weekend,2.0,7.8,800.0,g,500.0,ml
+BK,BK,weekend,2.0,8.0,800.0,g,1.0,l
+BK,BK,weekend,2.5,7.2,600.0,g,200.0,ml
+BK,BK,weekend,2.5,7.4,600.0,g,200.0,ml
+BK,BK,weekend,2.5,7.6,600.0,g,250.0,ml
+BK,BK,weekend,2.5,7.8,600.0,g,500.0,ml
+BK,BK,weekend,2.5,8.0,600.0,g,1.0,l
+BK,BK,weekend,3.0,7.2,0.0,g,0.0,ml
+BK,BK,weekend,3.0,7.4,0.0,g,0.0,ml
+BK,BK,weekend,3.0,7.6,0.0,g,250.0,ml
+BK,BK,weekend,3.0,7.8,0.0,g,500.0,ml
+BK,BK,weekend,3.0,8.0,0.0,g,1.0,l
+BK,BK,weekend,3.5,7.2,0.0,g,0.0,ml
+BK,BK,weekend,3.5,7.4,0.0,g,0.0,ml
+BK,BK,weekend,3.5,7.6,0.0,g,250.0,ml
+BK,BK,weekend,3.5,7.8,0.0,g,500.0,ml
+BK,BK,weekend,3.5,8.0,0.0,g,1.0,l
+BK,BK,weekend,4.0,7.2,0.0,g,0.0,ml
+BK,BK,weekend,4.0,7.4,0.0,g,0.0,ml
+BK,BK,weekend,4.0,7.6,0.0,g,250.0,ml
+BK,BK,weekend,4.0,7.8,0.0,g,500.0,ml
+BK,BK,weekend,4.0,8.0,0.0,g,1.0,l
+HB,HB,weekday,-2.0,7.2,3.0,kg,1.0,l
+HB,HB,weekday,-2.0,7.4,3.0,kg,1.5,l
+HB,HB,weekday,-2.0,7.6,3.0,kg,2.0,l
+HB,HB,weekday,-2.0,7.8,3.0,kg,3.0,l
+HB,HB,weekday,-2.0,8.0,3.0,kg,4.0,l
+HB,HB,weekday,-1.5,7.2,3.0,kg,1.0,l
+HB,HB,weekday,-1.5,7.4,3.0,kg,1.5,l
+HB,HB,weekday,-1.5,7.6,3.0,kg,2.0,l
+HB,HB,weekday,-1.5,7.8,3.0,kg,3.0,l
+HB,HB,weekday,-1.5,8.0,3.0,kg,4.0,l
+HB,HB,weekday,-1.0,7.2,3.0,kg,1.0,l
+HB,HB,weekday,-1.0,7.4,3.0,kg,1.5,l
+HB,HB,weekday,-1.0,7.6,3.0,kg,2.0,l
+HB,HB,weekday,-1.0,7.8,3.0,kg,3.0,l
+HB,HB,weekday,-1.0,8.0,3.0,kg,4.0,l
+HB,HB,weekday,-0.5,7.2,2.5,kg,1.0,l
+HB,HB,weekday,-0.5,7.4,2.5,kg,1.5,l
+HB,HB,weekday,-0.5,7.6,2.5,kg,2.0,l
+HB,HB,weekday,-0.5,7.8,2.5,kg,3.0,l
+HB,HB,weekday,-0.5,8.0,2.5,kg,4.0,l
+HB,HB,weekday,0.0,7.2,2.3,kg,1.0,l
+HB,HB,weekday,0.0,7.4,2.3,kg,2.0,l
+HB,HB,weekday,0.0,7.6,2.3,kg,3.0,l
+HB,HB,weekday,0.0,7.8,2.3,kg,3.5,l
+HB,HB,weekday,0.0,8.0,2.3,kg,5.0,l
+HB,HB,weekday,0.5,7.2,2.3,kg,1.0,l
+HB,HB,weekday,0.5,7.4,2.3,kg,2.0,l
+HB,HB,weekday,0.5,7.6,2.3,kg,3.0,l
+HB,HB,weekday,0.5,7.8,2.3,kg,3.5,l
+HB,HB,weekday,0.5,8.0,2.3,kg,5.0,l
+HB,HB,weekday,1.0,7.2,1.8,kg,1.0,l
+HB,HB,weekday,1.0,7.4,1.8,kg,2.0,l
+HB,HB,weekday,1.0,7.6,1.8,kg,3.0,l
+HB,HB,weekday,1.0,7.8,1.8,kg,3.5,l
+HB,HB,weekday,1.0,8.0,1.8,kg,4.0,l
+HB,HB,weekday,1.5,7.2,1.3,kg,1.0,l
+HB,HB,weekday,1.5,7.4,1.3,kg,1.5,l
+HB,HB,weekday,1.5,7.6,1.3,kg,2.0,l
+HB,HB,weekday,1.5,7.8,1.3,kg,3.0,l
+HB,HB,weekday,1.5,8.0,1.3,kg,4.0,l
+HB,HB,weekday,2.0,7.2,1.2,kg,1.0,l
+HB,HB,weekday,2.0,7.4,1.2,kg,1.5,l
+HB,HB,weekday,2.0,7.6,1.2,kg,2.0,l
+HB,HB,weekday,2.0,7.8,1.2,kg,3.0,l
+HB,HB,weekday,2.0,8.0,1.2,kg,4.0,l
+HB,HB,weekday,2.5,7.2,800.0,g,1.0,l
+HB,HB,weekday,2.5,7.4,800.0,g,1.5,l
+HB,HB,weekday,2.5,7.6,800.0,g,2.0,l
+HB,HB,weekday,2.5,7.8,800.0,g,3.0,l
+HB,HB,weekday,2.5,8.0,800.0,g,4.0,l
+HB,HB,weekday,2.5,7.2,800.0,g,1.0,l
+HB,HB,weekday,2.5,7.4,800.0,g,1.5,l
+HB,HB,weekday,2.5,7.6,800.0,g,2.0,l
+HB,HB,weekday,2.5,7.8,800.0,g,3.0,l
+HB,HB,weekday,2.5,8.0,800.0,g,4.0,l
+HB,HB,weekday,3.0,7.2,0.0,g,0.0,ml
+HB,HB,weekday,3.0,7.4,0.0,g,0.0,ml
+HB,HB,weekday,3.0,7.6,0.0,g,0.0,ml
+HB,HB,weekday,3.0,7.8,0.0,g,0.0,ml
+HB,HB,weekday,3.0,8.0,0.0,g,1.0,l
+HB,HB,weekend,-2.0,7.2,3.0,kg,1.0,l
+HB,HB,weekend,-2.0,7.4,3.0,kg,1.5,l
+HB,HB,weekend,-2.0,7.6,3.0,kg,2.0,l
+HB,HB,weekend,-2.0,7.8,3.0,kg,3.0,l
+HB,HB,weekend,-2.0,8.0,3.0,kg,4.0,l
+HB,HB,weekend,-1.5,7.2,3.0,kg,1.0,l
+HB,HB,weekend,-1.5,7.4,3.0,kg,1.5,l
+HB,HB,weekend,-1.5,7.6,3.0,kg,2.0,l
+HB,HB,weekend,-1.5,7.8,3.0,kg,3.0,l
+HB,HB,weekend,-1.5,8.0,3.0,kg,4.0,l
+HB,HB,weekend,-1.0,7.2,3.0,kg,1.0,l
+HB,HB,weekend,-1.0,7.4,3.0,kg,1.5,l
+HB,HB,weekend,-1.0,7.6,3.0,kg,2.0,l
+HB,HB,weekend,-1.0,7.8,3.0,kg,3.0,l
+HB,HB,weekend,-1.0,8.0,3.0,kg,4.0,l
+HB,HB,weekend,-0.5,7.2,2.5,kg,1.0,l
+HB,HB,weekend,-0.5,7.4,2.5,kg,1.5,l
+HB,HB,weekend,-0.5,7.6,2.5,kg,2.0,l
+HB,HB,weekend,-0.5,7.8,2.5,kg,3.0,l
+HB,HB,weekend,-0.5,8.0,2.5,kg,4.0,l
+HB,HB,weekend,0.0,7.2,2.5,kg,1.0,l
+HB,HB,weekend,0.0,7.4,2.5,kg,2.0,l
+HB,HB,weekend,0.0,7.6,2.5,kg,3.0,l
+HB,HB,weekend,0.0,7.8,2.5,kg,3.5,l
+HB,HB,weekend,0.0,8.0,2.5,kg,5.0,l
+HB,HB,weekend,0.5,7.2,2.5,kg,1.0,l
+HB,HB,weekend,0.5,7.4,2.5,kg,2.0,l
+HB,HB,weekend,0.5,7.6,2.5,kg,3.0,l
+HB,HB,weekend,0.5,7.8,2.5,kg,3.5,l
+HB,HB,weekend,0.5,8.0,2.5,kg,5.0,l
+HB,HB,weekend,1.0,7.2,2.3,kg,1.0,l
+HB,HB,weekend,1.0,7.4,2.3,kg,2.0,l
+HB,HB,weekend,1.0,7.6,2.3,kg,3.0,l
+HB,HB,weekend,1.0,7.8,2.3,kg,3.5,l
+HB,HB,weekend,1.0,8.0,2.3,kg,4.0,l
+HB,HB,weekend,1.5,7.2,1.5,kg,1.0,l
+HB,HB,weekend,1.5,7.4,1.5,kg,1.5,l
+HB,HB,weekend,1.5,7.6,1.5,kg,2.0,l
+HB,HB,weekend,1.5,7.8,1.5,kg,3.0,l
+HB,HB,weekend,1.5,8.0,1.5,kg,4.0,l
+HB,HB,weekend,2.0,7.2,1.2,kg,1.0,l
+HB,HB,weekend,2.0,7.4,1.2,kg,1.5,l
+HB,HB,weekend,2.0,7.6,1.2,kg,2.0,l
+HB,HB,weekend,2.0,7.8,1.2,kg,3.0,l
+HB,HB,weekend,2.0,8.0,1.2,kg,4.0,l
+HB,HB,weekend,2.5,7.2,800.0,g,1.0,l
+HB,HB,weekend,2.5,7.4,800.0,g,1.5,l
+HB,HB,weekend,2.5,7.6,800.0,g,2.0,l
+HB,HB,weekend,2.5,7.8,800.0,g,3.0,l
+HB,HB,weekend,2.5,8.0,800.0,g,4.0,l
+HB,HB,weekend,3.0,7.2,800.0,g,1.0,l
+HB,HB,weekend,3.0,7.4,800.0,g,1.5,l
+HB,HB,weekend,3.0,7.6,800.0,g,2.0,l
+HB,HB,weekend,3.0,7.8,800.0,g,3.0,l
+HB,HB,weekend,3.0,8.0,800.0,g,4.0,l
+HB,HB,weekend,3.5,7.2,0.0,g,0.0,ml
+HB,HB,weekend,3.5,7.4,0.0,g,1.0,l
+HB,HB,weekend,3.5,7.6,0.0,g,2.0,l
+HB,HB,weekend,3.5,7.8,0.0,g,3.0,l
+HB,HB,weekend,3.5,8.0,0.0,g,4.0,l
+HB,HB,weekend,4.0,7.2,0.0,g,0.0,ml
+HB,HB,weekend,4.0,7.4,0.0,g,1.0,l
+HB,HB,weekend,4.0,7.6,0.0,g,2.0,l
+HB,HB,weekend,4.0,7.8,0.0,g,3.0,l
+HB,HB,weekend,4.0,8.0,0.0,g,4.0,l
+CC,CC,weekday,-2.0,7.2,1.3,kg,0.0,ml
+CC,CC,weekday,-2.0,7.4,1.3,kg,500.0,ml
+CC,CC,weekday,-2.0,7.6,1.3,kg,500.0,ml
+CC,CC,weekday,-2.0,7.8,1.3,kg,1.5,l
+CC,CC,weekday,-2.0,8.0,1.3,kg,2.0,l
+CC,CC,weekday,-1.5,7.2,1.3,kg,0.0,ml
+CC,CC,weekday,-1.5,7.4,1.3,kg,500.0,ml
+CC,CC,weekday,-1.5,7.6,1.3,kg,500.0,ml
+CC,CC,weekday,-1.5,7.8,1.3,kg,1.5,l
+CC,CC,weekday,-1.5,8.0,1.3,kg,2.0,l
+CC,CC,weekday,-1.0,7.2,1.3,kg,0.0,ml
+CC,CC,weekday,-1.0,7.4,1.3,kg,500.0,ml
+CC,CC,weekday,-1.0,7.6,1.3,kg,500.0,ml
+CC,CC,weekday,-1.0,7.8,1.3,kg,1.5,l
+CC,CC,weekday,-1.0,8.0,1.3,kg,2.0,l
+CC,CC,weekday,-0.5,7.2,1.3,kg,0.0,ml
+CC,CC,weekday,-0.5,7.4,1.3,kg,500.0,ml
+CC,CC,weekday,-0.5,7.6,1.3,kg,500.0,ml
+CC,CC,weekday,-0.5,7.8,1.3,kg,1.5,l
+CC,CC,weekday,-0.5,8.0,1.3,kg,2.0,l
+CC,CC,weekday,0.0,7.2,1.3,kg,0.0,ml
+CC,CC,weekday,0.0,7.4,1.3,kg,500.0,ml
+CC,CC,weekday,0.0,7.6,1.3,kg,500.0,ml
+CC,CC,weekday,0.0,7.8,1.3,kg,1.5,l
+CC,CC,weekday,0.0,8.0,1.3,kg,2.0,l
+CC,CC,weekday,0.5,7.2,1.3,kg,0.0,ml
+CC,CC,weekday,0.5,7.4,1.3,kg,500.0,ml
+CC,CC,weekday,0.5,7.6,1.3,kg,500.0,ml
+CC,CC,weekday,0.5,7.8,1.3,kg,1.5,l
+CC,CC,weekday,0.5,8.0,1.3,kg,2.0,l
+CC,CC,weekday,1.0,7.2,800.0,g,0.0,ml
+CC,CC,weekday,1.0,7.4,800.0,g,500.0,ml
+CC,CC,weekday,1.0,7.6,800.0,g,500.0,ml
+CC,CC,weekday,1.0,7.8,800.0,g,1.5,l
+CC,CC,weekday,1.0,8.0,800.0,g,2.0,l
+CC,CC,weekday,1.5,7.2,800.0,g,0.0,ml
+CC,CC,weekday,1.5,7.4,800.0,g,500.0,ml
+CC,CC,weekday,1.5,7.6,800.0,g,500.0,ml
+CC,CC,weekday,1.5,7.8,800.0,g,1.5,l
+CC,CC,weekday,1.5,8.0,800.0,g,2.0,l
+CC,CC,weekday,2.0,7.2,800.0,g,0.0,ml
+CC,CC,weekday,2.0,7.4,800.0,g,500.0,ml
+CC,CC,weekday,2.0,7.6,800.0,g,500.0,ml
+CC,CC,weekday,2.0,7.8,800.0,g,1.5,l
+CC,CC,weekday,2.0,8.0,800.0,g,2.0,l
+CC,CC,weekday,2.5,7.2,600.0,g,0.0,ml
+CC,CC,weekday,2.5,7.4,600.0,g,0.0,ml
+CC,CC,weekday,2.5,7.6,600.0,g,500.0,ml
+CC,CC,weekday,2.5,7.8,600.0,g,1.5,l
+CC,CC,weekday,2.5,8.0,600.0,g,2.0,l
+CC,CC,weekday,3.0,7.2,0.0,g,0.0,ml
+CC,CC,weekday,3.0,7.4,0.0,g,0.0,ml
+CC,CC,weekday,3.0,7.6,0.0,g,0.0,ml
+CC,CC,weekday,3.0,7.8,0.0,g,1.0,l
+CC,CC,weekday,3.0,8.0,0.0,g,1.0,l
+CC,CC,weekend,-2.0,7.2,1.5,kg,0.0,ml
+CC,CC,weekend,-2.0,7.4,1.5,kg,1.0,l
+CC,CC,weekend,-2.0,7.6,1.5,kg,1.5,l
+CC,CC,weekend,-2.0,7.8,1.5,kg,1.5,l
+CC,CC,weekend,-2.0,8.0,1.5,kg,2.0,l
+CC,CC,weekend,-1.5,7.2,1.5,kg,0.0,ml
+CC,CC,weekend,-1.5,7.4,1.5,kg,1.0,l
+CC,CC,weekend,-1.5,7.6,1.5,kg,1.5,l
+CC,CC,weekend,-1.5,7.8,1.5,kg,1.5,l
+CC,CC,weekend,-1.5,8.0,1.5,kg,2.0,l
+CC,CC,weekend,-1.0,7.2,1.5,kg,0.0,ml
+CC,CC,weekend,-1.0,7.4,1.5,kg,1.0,l
+CC,CC,weekend,-1.0,7.6,1.5,kg,1.5,l
+CC,CC,weekend,-1.0,7.8,1.5,kg,1.5,l
+CC,CC,weekend,-1.0,8.0,1.5,kg,2.0,l
+CC,CC,weekend,-0.5,7.2,1.5,kg,0.0,ml
+CC,CC,weekend,-0.5,7.4,1.5,kg,1.0,l
+CC,CC,weekend,-0.5,7.6,1.5,kg,1.5,l
+CC,CC,weekend,-0.5,7.8,1.5,kg,1.5,l
+CC,CC,weekend,-0.5,8.0,1.5,kg,2.0,l
+CC,CC,weekend,0.0,7.2,1.5,kg,0.0,ml
+CC,CC,weekend,0.0,7.4,1.5,kg,1.0,l
+CC,CC,weekend,0.0,7.6,1.5,kg,1.5,l
+CC,CC,weekend,0.0,7.8,1.5,kg,1.5,l
+CC,CC,weekend,0.0,8.0,1.5,kg,2.0,l
+CC,CC,weekend,0.5,7.2,1.5,kg,0.0,ml
+CC,CC,weekend,0.5,7.4,1.5,kg,1.0,l
+CC,CC,weekend,0.5,7.6,1.5,kg,1.5,l
+CC,CC,weekend,0.5,7.8,1.5,kg,1.5,l
+CC,CC,weekend,0.5,8.0,1.5,kg,2.0,l
+CC,CC,weekend,1.0,7.2,1.0,kg,0.0,ml
+CC,CC,weekend,1.0,7.4,1.0,kg,1.0,l
+CC,CC,weekend,1.0,7.6,1.0,kg,1.0,l
+CC,CC,weekend,1.0,7.8,1.0,kg,1.5,l
+CC,CC,weekend,1.0,8.0,1.0,kg,2.0,l
+CC,CC,weekend,1.5,7.2,1.0,kg,0.0,ml
+CC,CC,weekend,1.5,7.4,1.0,kg,1.0,l
+CC,CC,weekend,1.5,7.6,1.0,kg,1.0,l
+CC,CC,weekend,1.5,7.8,1.0,kg,1.5,l
+CC,CC,weekend,1.5,8.0,1.0,kg,2.0,l
+CC,CC,weekend,2.0,7.2,800.0,g,0.0,ml
+CC,CC,weekend,2.0,7.4,800.0,g,500.0,ml
+CC,CC,weekend,2.0,7.6,800.0,g,1.0,l
+CC,CC,weekend,2.0,7.8,800.0,g,1.5,l
+CC,CC,weekend,2.0,8.0,800.0,g,2.0,l
+CC,CC,weekend,2.5,7.2,800.0,g,0.0,ml
+CC,CC,weekend,2.5,7.4,800.0,g,500.0,ml
+CC,CC,weekend,2.5,7.6,800.0,g,1.0,l
+CC,CC,weekend,2.5,7.8,800.0,g,1.5,l
+CC,CC,weekend,2.5,8.0,800.0,g,2.0,l
+CC,CC,weekend,3.0,7.2,600.0,g,0.0,ml
+CC,CC,weekend,3.0,7.4,600.0,g,500.0,ml
+CC,CC,weekend,3.0,7.6,600.0,g,1.0,l
+CC,CC,weekend,3.0,7.8,600.0,g,1.5,l
+CC,CC,weekend,3.0,8.0,600.0,g,2.0,l
+CC,CC,weekend,3.5,7.2,0.0,g,0.0,ml
+CC,CC,weekend,3.5,7.6,0.0,g,1.0,l
+CC,CC,weekend,3.5,7.8,0.0,g,1.5,l
+CC,CC,weekend,3.5,8.0,0.0,g,2.0,l
+CC,CC,weekend,4.0,7.2,0.0,g,0.0,ml
+CC,CC,weekend,4.0,7.4,0.0,g,500.0,ml
+CC,CC,weekend,4.0,7.6,0.0,g,1.0,l
+CC,CC,weekend,4.0,7.8,0.0,g,1.5,l
+CC,CC,weekend,4.0,8.0,0.0,g,2.0,l
