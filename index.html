@@ -304,6 +304,17 @@ function renderReadout(){
 }
 
 function render(){
+  if (!state.outlet) {
+    outletName.textContent = 'Select a pool';
+    document.getElementById('readoutPool').textContent = '—';
+    document.getElementById('readoutDate').textContent = '—';
+    readoutSchedule.textContent = '—';
+    readoutCoords.textContent = '—';
+    readoutBody.innerHTML = '<div class="empty">Select a swimming pool to begin</div>';
+    fcChipsEl.innerHTML = '';
+    phChipsEl.innerHTML = '';
+    return;
+  }
   const o = OUTLETS[state.outlet];
   outletName.textContent = o.name;
   if (!o[state.schedule]) state.schedule = o.weekday ? 'weekday' : 'weekend';
@@ -327,14 +338,19 @@ async function loadData(){
     const outlets = buildOutlets(rows);
     if (Object.keys(outlets).length === 0) throw new Error('no outlets parsed');
     OUTLETS = outlets;
-    if (!state.outlet || !OUTLETS[state.outlet]) state.outlet = Object.keys(OUTLETS)[0];
     outletSelect.innerHTML = '';
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = 'Select a pool…';
+    placeholder.disabled = true;
+    if (!state.outlet || !OUTLETS[state.outlet]) placeholder.selected = true;
+    outletSelect.appendChild(placeholder);
     Object.keys(OUTLETS).forEach(key => {
       const opt = document.createElement('option');
       opt.value = key; opt.textContent = OUTLETS[key].name;
       outletSelect.appendChild(opt);
     });
-    outletSelect.value = state.outlet;
+    if (state.outlet && OUTLETS[state.outlet]) outletSelect.value = state.outlet;
     setSyncStatus('ok', 'Data loaded');
     render();
   } catch(e){
