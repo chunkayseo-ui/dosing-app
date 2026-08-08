@@ -251,7 +251,7 @@ function setSyncStatus(kind, text){
   document.getElementById('syncText').textContent = text;
 }
 
-function fmtFc(v){ return (v > 0 ? '+' : '') + v; }
+function fmtFc(v){ return String(v); }
 function currentTable(){ const o = OUTLETS[state.outlet]; return o[state.schedule] || o.weekday || o.weekend; }
 
 function renderScheduleToggle(){
