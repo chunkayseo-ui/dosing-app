@@ -87,6 +87,17 @@
   .readout-foot{margin-top:16px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.12); font-size:12px; color:#8FB3B3; position:relative;}
   .empty{text-align:center; color:var(--ink-soft); font-size:13.5px; padding:18px 8px;}
   .note{font-size:12px; color:var(--ink-soft); line-height:1.5; padding:0 4px; margin-top:2px;}
+
+  .holiday-banner{
+    display:none;
+    align-items:flex-start; gap:10px;
+    background:#FDF0E7; border:1.5px solid #F0C7A0;
+    border-radius:14px; padding:12px 14px; margin-bottom:14px;
+  }
+  .holiday-banner.show{display:flex;}
+  .holiday-icon{font-size:18px; line-height:1; flex:none; margin-top:1px;}
+  .holiday-text{font-size:13px; color:#7A4A1F; line-height:1.4;}
+  .holiday-text b{font-weight:700;}
 </style>
 </head>
 <body>
@@ -107,6 +118,11 @@
     <span class="sync-dot loading" id="syncDot"></span>
     <span id="syncText">Loading data…</span>
     <button class="refresh-btn" id="refreshBtn">Refresh</button>
+  </div>
+
+  <div class="holiday-banner" id="holidayBanner">
+    <span class="holiday-icon">📢</span>
+    <span class="holiday-text" id="holidayText"></span>
   </div>
 
   <div class="card">
@@ -364,7 +380,39 @@ async function loadData(){
   }
 }
 
+function toISODate(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+async function checkHoliday(){
+  try {
+    const res = await fetch('./holidays.csv?_=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    const rows = parseCSV(text);
+    const map = {};
+    for (let i = 1; i < rows.length; i++){
+      const r = rows[i];
+      if (!r || !r[0]) continue;
+      map[r[0].trim()] = (r[1] || 'Public Holiday').trim();
+    }
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const key = toISODate(tomorrow);
+    if (map[key]){
+      const dayLabel = tomorrow.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+      document.getElementById('holidayText').innerHTML =
+        `Tomorrow (<b>${dayLabel}</b>) is <b>${map[key]}</b> — all outlets closed.`;
+      document.getElementById('holidayBanner').classList.add('show');
+    }
+  } catch(e){ /* silently skip if holidays.csv missing */ }
+}
+
 loadData();
+checkHoliday();
 </script>
 </body>
 </html>
