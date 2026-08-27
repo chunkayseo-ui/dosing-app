@@ -305,7 +305,7 @@ function renderChips(){
 function renderReadout(){
   const table = currentTable();
   document.getElementById('readoutPool').textContent = OUTLETS[state.outlet].name;
-  document.getElementById('readoutDate').textContent = new Date().toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }) + ', ' + new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('readoutDate').textContent = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' }) + ', ' + new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
   if (state.fc === null || !table.fc.includes(state.fc)) state.fc = null;
   if (state.ph === null || !table.ph.includes(state.ph)) state.ph = null;
   if (state.fc === null || state.ph === null) {
