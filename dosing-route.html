@@ -1,4 +1,5 @@
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dosing route maps</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -98,12 +99,37 @@
   .footnote{max-width:960px;margin:0 auto;font-size:13px;color:var(--ink-60)}
 
   @media (max-width:720px){
-    body{padding:16px 12px 40px}
-    .masthead h1{font-size:32px}
+    body{padding:12px 8px 32px}
+    .masthead{padding:18px 18px 16px}
+    .masthead h1{font-size:30px}
+    .legend{padding:14px 16px;gap:12px 18px}
     .body{grid-template-columns:1fr}
-    .side{border-left:0;border-top:1px solid var(--rule)}
-    .plan{padding:14px 12px 4px}
+    .side{border-left:0;border-top:1px solid var(--rule);padding:14px 16px 18px}
+    .plan{padding:10px 2px 2px}
+    .card-head{padding:12px 16px}
+    .card-head h3{font-size:24px}
+    .card-head .kind{margin-left:0;flex-basis:100%}
+    dl{grid-template-columns:1fr;gap:0}
+    dt{padding-top:10px}
+    dd{padding-bottom:2px}
+    .tap{display:block}
   }
+
+  .tap{display:none;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-30);text-align:center;padding:2px 0 8px}
+  .plan{cursor:zoom-in}
+
+  .viewer{position:fixed;inset:0;background:#0F2430;z-index:99;display:none;flex-direction:column}
+  .viewer.on{display:flex}
+  .viewer-bar{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#fff}
+  .viewer-title{font-family:"Barlow Condensed",sans-serif;font-size:20px;font-weight:600;
+    text-transform:uppercase;letter-spacing:.05em;margin-right:auto}
+  .viewer-bar button{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase;color:#0F2430;background:#fff;border:0;border-radius:3px;padding:8px 12px}
+  .viewer-stage{flex:1;display:flex;align-items:center;justify-content:center;padding:6px;overflow:auto}
+  .viewer-stage svg{background:#fff;border-radius:4px;width:100%;height:auto;max-height:100%}
+  .viewer.rot .viewer-stage{overflow:hidden}
+  .viewer.rot .viewer-stage svg{width:calc(100vh - 70px);max-height:none;transform:rotate(90deg)}
 
   @media print{
     @page{size:A4 portrait;margin:11mm}
@@ -111,7 +137,7 @@
     .masthead,.legend{break-inside:avoid}
     .card{break-inside:avoid;break-after:page;margin-bottom:0;border:1px solid var(--rule)}
     .card:last-of-type{break-after:auto}
-    .footnote,.noprint{display:none}
+    .footnote,.noprint,.tap,.viewer{display:none}
   }
 </style>
 
@@ -274,6 +300,7 @@
           </g>
           <text x="180" y="280" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="15" font-weight="600" fill="#0F2430">END</text>
         </svg>
+        <p class="tap">Tap to enlarge</p>
       </div>
 
       <div class="side">
@@ -372,6 +399,7 @@
           </g>
           <text x="180" y="280" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="15" font-weight="600" fill="#0F2430">END</text>
         </svg>
+        <p class="tap">Tap to enlarge</p>
       </div>
 
       <div class="side">
@@ -459,6 +487,7 @@
           </g>
           <text x="208" y="274" font-family="IBM Plex Mono,monospace" font-size="15" font-weight="600" fill="#0F2430">END</text>
         </svg>
+        <p class="tap">Tap to enlarge</p>
       </div>
 
       <div class="side">
@@ -548,6 +577,7 @@
           </g>
           <text x="228" y="450" font-family="IBM Plex Mono,monospace" font-size="15" font-weight="600" fill="#0F2430">END</text>
         </svg>
+        <p class="tap">Tap to enlarge</p>
       </div>
 
       <div class="side">
@@ -699,6 +729,7 @@
           <text x="441" y="263" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
           <text x="470" y="262" text-anchor="start" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">WATER SAMPLE</text>
         </svg>
+        <p class="tap">Tap to enlarge</p>
       </div>
 
       <div class="side">
@@ -805,6 +836,7 @@
           <text x="327" y="438" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
           <text x="313" y="400" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">WATER SAMPLE</text>
         </svg>
+        <p class="tap">Tap to enlarge</p>
       </div>
 
       <div class="side">
@@ -921,6 +953,7 @@
           <text x="180" y="434" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
           <text x="200" y="433" text-anchor="start" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">WATER SAMPLE</text>
         </svg>
+        <p class="tap">Tap to enlarge</p>
       </div>
 
       <div class="side">
@@ -1028,6 +1061,7 @@
           <text x="165" y="355" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
           <text x="186" y="354" text-anchor="start" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">WATER SAMPLE</text>
         </svg>
+        <p class="tap">Tap to enlarge</p>
       </div>
 
       <div class="side">
@@ -1125,6 +1159,7 @@
           </g>
           <text x="396" y="235" font-family="IBM Plex Mono,monospace" font-size="14" font-weight="600" fill="#0F2430">END</text>
         </svg>
+        <p class="tap">Tap to enlarge</p>
       </div>
 
       <div class="side">
@@ -1227,6 +1262,7 @@
           <text x="385" y="454" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
           <text x="355" y="453" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">WATER SAMPLE</text>
         </svg>
+        <p class="tap">Tap to enlarge</p>
       </div>
 
       <div class="side">
@@ -1334,6 +1370,7 @@
           <text x="482" y="256" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
           <text x="455" y="285" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">WATER SAMPLE</text>
         </svg>
+        <p class="tap">Tap to enlarge</p>
       </div>
 
       <div class="side">
@@ -1429,6 +1466,7 @@
           <text x="466" y="164" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
           <text x="436" y="163" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">WATER SAMPLE</text>
         </svg>
+        <p class="tap">Tap to enlarge</p>
       </div>
 
       <div class="side">
@@ -1450,5 +1488,36 @@
   </div>
 
 </div>
+
+<div class="viewer" id="viewer">
+  <div class="viewer-bar">
+    <span class="viewer-title"></span>
+    <button type="button" id="rot">Rotate</button>
+    <button type="button" id="cls">Close</button>
+  </div>
+  <div class="viewer-stage" id="stage"></div>
+</div>
+
+<script>
+(function(){
+  var v=document.getElementById('viewer'), stage=document.getElementById('stage'),
+      title=v.querySelector('.viewer-title');
+  document.querySelectorAll('.plan').forEach(function(plan){
+    plan.addEventListener('click',function(){
+      var svg=plan.querySelector('svg'); if(!svg) return;
+      var card=plan.closest('.card');
+      title.textContent=card?card.querySelector('h3').textContent:'';
+      stage.innerHTML='';
+      stage.appendChild(svg.cloneNode(true));
+      v.classList.remove('rot'); v.classList.add('on');
+      document.body.style.overflow='hidden';
+    });
+  });
+  document.getElementById('rot').addEventListener('click',function(){v.classList.toggle('rot');});
+  document.getElementById('cls').addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+  function close(){v.classList.remove('on','rot');stage.innerHTML='';document.body.style.overflow='';}
+})();
+</script>
 
 <p class="footnote noprint">Print at A4 portrait &mdash; each pool lands on its own page. Laminate one card per pool and keep it with the dosing kit.</p>
