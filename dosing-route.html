@@ -92,16 +92,8 @@
   dt{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
      text-transform:uppercase;color:var(--ink-30);padding-top:3px}
   dd{margin:0;font-weight:500}
-  .fill{border-bottom:1px dotted var(--ink-30);min-height:1.35em;display:block}
   .note{font-size:13px;color:var(--ink-60);margin:18px 0 0;padding-top:12px;border-top:1px solid var(--rule)}
 
-  .signoff{display:flex;gap:22px;flex-wrap:wrap;padding:12px 22px 16px;border-top:1px solid var(--rule)}
-  .signoff div{flex:1 1 150px}
-  .signoff span{
-    font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--ink-30);display:block;margin-bottom:16px;
-  }
-  .signoff i{display:block;border-bottom:1px solid var(--ink-30)}
 
   .footnote{max-width:960px;margin:0 auto;font-size:13px;color:var(--ink-60)}
 
@@ -170,6 +162,21 @@
     </div>
 
     <div class="lg">
+      <svg width="30" height="26" aria-hidden="true"><rect x="2" y="2" width="26" height="22" fill="#4BAFE0"/><rect x="11" y="6" width="8" height="14" rx="2" fill="#0F2430" stroke="#fff" stroke-width="1.5"/></svg>
+      <div><b>Dark block</b><span>Pillar standing in the pool.</span></div>
+    </div>
+
+    <div class="lg">
+      <svg width="30" height="26" aria-hidden="true"><rect x="2" y="2" width="26" height="22" fill="#4BAFE0"/><circle cx="15" cy="13" r="9" fill="#fff" stroke="#0F2430" stroke-width="2"/><text x="15" y="17" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" fill="#0F2430">WS</text></svg>
+      <div><b>WS circle</b><span>Where to collect the water sample for testing.</span></div>
+    </div>
+
+    <div class="lg">
+      <svg width="30" height="26" aria-hidden="true"><line x1="4" y1="20" x2="4" y2="6" stroke="#2F6B4F" stroke-width="5" stroke-linecap="square"/><line x1="4" y1="6" x2="26" y2="6" stroke="#2F6B4F" stroke-width="5" stroke-linecap="square"/></svg>
+      <div><b>Green line</b><span>High wall. You cannot see or pour over it.</span></div>
+    </div>
+
+    <div class="lg">
       <svg width="30" height="26" aria-hidden="true"><defs><pattern id="warn-lg" width="9" height="9" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="9" height="9" fill="#F7CFCB"/><line x1="0" y1="0" x2="0" y2="9" stroke="#E2382C" stroke-width="3"/></pattern></defs><rect x="2" y="5" width="26" height="16" fill="url(#warn-lg)" stroke="#E2382C" stroke-width="1.5"/></svg>
       <div><b>Red hatching</b><span>Deck too narrow to walk. Route skips it.</span></div>
     </div>
@@ -230,6 +237,9 @@
           <line x1="239" y1="245" x2="239" y2="259" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="248" y1="245" x2="248" y2="259" stroke="#0F2430" stroke-width="2.5"/>
           <text x="262" y="257" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600" letter-spacing=".5" fill="#fff">LADDER</text>
+          <circle cx="239" cy="360" r="13" fill="#ffffff" stroke="#0F2430" stroke-width="2.5"/>
+          <text x="239" y="365" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
+          <text x="258" y="365" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" letter-spacing=".5" fill="#fff">WATER SAMPLE FOR TEST</text>
 
 
           <path d="M202 240 L202 70 Q202 62 210 62 L430 62 Q438 62 438 70 L438 450 Q438 458 430 458 L210 458 Q202 458 202 450 L202 268"
@@ -244,9 +254,10 @@
           <circle cx="202" cy="240" r="13" fill="#E2382C"/>
           <circle cx="202" cy="240" r="4.6" fill="#fff"/>
 
-                    <rect x="180" y="480" width="42" height="30" rx="2" fill="#F2D8BB" stroke="#C88C55" stroke-width="2"/>
-          <line x1="195" y1="482" x2="195" y2="508" stroke="#C88C55" stroke-width="2"/>
-          <line x1="210" y1="482" x2="210" y2="508" stroke="#C88C55" stroke-width="2"/>
+                    <rect x="180" y="480" width="42" height="30" rx="2" fill="#E9B47F"/>
+          <rect x="180" y="480" width="42" height="30" rx="2" fill="url(#hatch-a)"/>
+          <rect x="180" y="480" width="42" height="30" rx="2" fill="none" stroke="#C88C55" stroke-width="2"/>
+          <text x="201" y="472" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600" letter-spacing="1" fill="#0F2430">DECKING</text>
                     <rect x="222" y="480" width="76" height="30" rx="2" fill="#F2D8BB" stroke="#C88C55" stroke-width="2"/>
           <line x1="237" y1="482" x2="237" y2="508" stroke="#C88C55" stroke-width="2"/>
           <line x1="252" y1="482" x2="252" y2="508" stroke="#C88C55" stroke-width="2"/>
@@ -274,22 +285,11 @@
           <dt>Laps</dt><dd>1 &mdash; full loop</dd>
           <dt>End</dt><dd>Back at the start</dd>
           <dt>Watch for</dt><dd>Ladder at the start, 2 dividers, ledge at each end</dd>
-        </dl>
-
-        <h4>Fill in on site</h4>
-        <dl>
-          <dt>Landmark<br>at start</dt><dd><span class="fill"></span></dd>
-          <dt>Chemical</dt><dd><span class="fill"></span></dd>
-          <dt>Quantity</dt><dd><span class="fill"></span></dd>
+          <dt>Water test</dt><dd>Collect the sample at the WS point on the left wall</dd>
         </dl>
 
         <p class="note">Step past the ladder before you resume pouring &mdash; chemical corrodes the metal. At the two ledge ends, pour past the ledge edge so the dose reaches deeper water.</p>
       </div>
-    </div>
-    <div class="signoff">
-      <div><span>Date</span><i></i></div>
-      <div><span>Time started</span><i></i></div>
-      <div><span>Technician</span><i></i></div>
     </div>
   </div>
 
@@ -332,6 +332,9 @@
           <line x1="240" y1="246" x2="240" y2="260" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="248" y1="246" x2="248" y2="260" stroke="#0F2430" stroke-width="2.5"/>
           <text x="264" y="258" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600" letter-spacing=".5" fill="#fff">LADDER</text>
+          <circle cx="239" cy="395" r="13" fill="#ffffff" stroke="#0F2430" stroke-width="2.5"/>
+          <text x="239" y="400" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
+          <text x="258" y="400" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" letter-spacing=".5" fill="#fff">WATER SAMPLE FOR TEST</text>
 
           <path d="M202 240 L202 70 Q202 62 210 62 L430 62 Q438 62 438 70 L438 450 Q438 458 430 458 L210 458 Q202 458 202 450 L202 268"
                 fill="none" stroke="#E2382C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -380,22 +383,11 @@
           <dt>Laps</dt><dd>1 &mdash; full loop</dd>
           <dt>End</dt><dd>Back at the start</dd>
           <dt>Watch for</dt><dd>Ladder at the start, 2 pool dividers</dd>
-        </dl>
-
-        <h4>Fill in on site</h4>
-        <dl>
-          <dt>Landmark<br>at start</dt><dd><span class="fill"></span></dd>
-          <dt>Chemical</dt><dd><span class="fill"></span></dd>
-          <dt>Quantity</dt><dd><span class="fill"></span></dd>
+          <dt>Water test</dt><dd>Collect the sample at the WS point on the left wall</dd>
         </dl>
 
         <p class="note">Steady pace the whole way round. Step past the ladder before you resume pouring &mdash; chemical corrodes the metal.</p>
       </div>
-    </div>
-    <div class="signoff">
-      <div><span>Date</span><i></i></div>
-      <div><span>Time started</span><i></i></div>
-      <div><span>Technician</span><i></i></div>
     </div>
   </div>
 
@@ -429,6 +421,10 @@
           <line x1="359" y1="82" x2="359" y2="438" stroke="#0F2430" stroke-width="5" stroke-linecap="round"/>
           <text x="291" y="76" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" letter-spacing="1" fill="#0F2430">DIVIDER</text>
           <text x="359" y="76" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" letter-spacing="1" fill="#0F2430">DIVIDER</text>
+          <circle cx="240" cy="222" r="13" fill="#ffffff" stroke="#0F2430" stroke-width="2.5"/>
+          <text x="240" y="227" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
+          <text x="252" y="258" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600" letter-spacing=".5" fill="#fff">WATER</text>
+          <text x="252" y="271" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600" letter-spacing=".5" fill="#fff">SAMPLE</text>
 
 
           <path d="M202 240 L202 70 Q202 62 210 62 L430 62 Q438 62 438 70 L438 450 Q438 458 430 458 L210 458 Q202 458 202 450 L202 268"
@@ -473,23 +469,12 @@
           <dt>Face</dt><dd>Up the long side, clockwise</dd>
           <dt>Laps</dt><dd>1 &mdash; full loop</dd>
           <dt>End</dt><dd>Back at the start</dd>
-          <dt>Watch for</dt><dd>Ladder at the start, 2 pool dividers</dd>
-        </dl>
-
-        <h4>Fill in on site</h4>
-        <dl>
-          <dt>Landmark<br>at start</dt><dd><span class="fill"></span></dd>
-          <dt>Chemical</dt><dd><span class="fill"></span></dd>
-          <dt>Quantity</dt><dd><span class="fill"></span></dd>
+          <dt>Watch for</dt><dd>Two pool dividers running lengthways</dd>
+          <dt>Water test</dt><dd>Collect the sample at the WS point on the left wall</dd>
         </dl>
 
         <p class="note">Start dosing as soon as you step off the stairs. Outdoor pool &mdash; check the wind and stay upwind as you pour.</p>
       </div>
-    </div>
-    <div class="signoff">
-      <div><span>Date</span><i></i></div>
-      <div><span>Time started</span><i></i></div>
-      <div><span>Technician</span><i></i></div>
     </div>
   </div>
 
@@ -524,6 +509,10 @@
           <line x1="358" y1="82" x2="358" y2="438" stroke="#0F2430" stroke-width="5" stroke-linecap="round"/>
           <text x="281" y="76" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" letter-spacing="1" fill="#0F2430">DIVIDER</text>
           <text x="358" y="76" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" letter-spacing="1" fill="#0F2430">DIVIDER</text>
+          <circle cx="240" cy="405" r="13" fill="#ffffff" stroke="#0F2430" stroke-width="2.5"/>
+          <text x="240" y="410" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
+          <text x="252" y="364" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600" letter-spacing=".5" fill="#fff">WATER</text>
+          <text x="252" y="377" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600" letter-spacing=".5" fill="#fff">SAMPLE</text>
 
           <rect x="124" y="46" width="56" height="30" rx="2" fill="#F2D8BB" stroke="#C88C55" stroke-width="2"/>
           <line x1="139" y1="48" x2="139" y2="74" stroke="#C88C55" stroke-width="2"/>
@@ -570,22 +559,11 @@
           <dt>Laps</dt><dd>1 &mdash; full loop</dd>
           <dt>End</dt><dd>Just below the start</dd>
           <dt>Watch for</dt><dd>Two pool dividers running lengthways</dd>
-        </dl>
-
-        <h4>Fill in on site</h4>
-        <dl>
-          <dt>Landmark<br>at start</dt><dd><span class="fill"></span></dd>
-          <dt>Chemical</dt><dd><span class="fill"></span></dd>
-          <dt>Quantity</dt><dd><span class="fill"></span></dd>
+          <dt>Water test</dt><dd>Collect the sample at the WS point on the left wall</dd>
         </dl>
 
         <p class="note">Outdoor pool &mdash; check the wind and stay upwind as you pour. Keep a steady pace the whole way round.</p>
       </div>
-    </div>
-    <div class="signoff">
-      <div><span>Date</span><i></i></div>
-      <div><span>Time started</span><i></i></div>
-      <div><span>Technician</span><i></i></div>
     </div>
   </div>
 
@@ -712,6 +690,14 @@
             <path d="M0 6 L0 -10 L18 -10 L18 -1 L0 -1" fill="#0F2430" stroke="#0F2430" stroke-width="3" stroke-linejoin="round"/>
           </g>
           <text x="648" y="70" font-family="IBM Plex Mono,monospace" font-size="14" font-weight="600" fill="#0F2430">END 2</text>
+        
+          <circle cx="300" cy="430" r="13" fill="#ffffff" stroke="#0F2430" stroke-width="2.5"/>
+          <text x="300" y="435" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
+          <text x="282" y="400" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">WATER</text>
+          <text x="282" y="412" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">SAMPLE</text>
+          <circle cx="441" cy="258" r="13" fill="#ffffff" stroke="#0F2430" stroke-width="2.5"/>
+          <text x="441" y="263" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
+          <text x="470" y="262" text-anchor="start" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">WATER SAMPLE</text>
         </svg>
       </div>
 
@@ -725,22 +711,11 @@
           <dt>Laps</dt><dd>1 per pool</dd>
           <dt>Watch for</dt><dd>Ladder, 2 dividers and 2 shallow ledges in each pool</dd>
           <dt>Small deck</dt><dd>Pool 2 left side, at the ladder &mdash; not on the route</dd>
-        </dl>
-
-        <h4>Fill in on site</h4>
-        <dl>
-          <dt>Pool 1<br>chemical</dt><dd><span class="fill"></span></dd>
-          <dt>Pool 2<br>chemical</dt><dd><span class="fill"></span></dd>
-          <dt>Quantity</dt><dd><span class="fill"></span></dd>
+          <dt>Water test</dt><dd>Collect a sample at the WS point in each pool</dd>
         </dl>
 
         <p class="note">Red hatched decks are too narrow to walk &mdash; do not step on them. Finish pool 1 before moving, and pour nothing on the grey walking leg.</p>
       </div>
-    </div>
-    <div class="signoff">
-      <div><span>Date</span><i></i></div>
-      <div><span>Time started</span><i></i></div>
-      <div><span>Technician</span><i></i></div>
     </div>
   </div>
 
@@ -825,6 +800,10 @@
             <path d="M0 6 L0 -10 L18 -10 L18 -1 L0 -1" fill="#0F2430" stroke="#0F2430" stroke-width="3" stroke-linejoin="round"/>
           </g>
           <text x="470" y="476" font-family="IBM Plex Mono,monospace" font-size="15" font-weight="600" fill="#0F2430">END</text>
+        
+          <circle cx="327" cy="433" r="13" fill="#ffffff" stroke="#0F2430" stroke-width="2.5"/>
+          <text x="327" y="438" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
+          <text x="313" y="400" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">WATER SAMPLE</text>
         </svg>
       </div>
 
@@ -838,22 +817,11 @@
           <dt>Laps</dt><dd>1 &mdash; full loop, all four sides</dd>
           <dt>End</dt><dd>Right beside the start</dd>
           <dt>Watch for</dt><dd>Shallow ledge on the left, 4 pool dividers</dd>
-        </dl>
-
-        <h4>Fill in on site</h4>
-        <dl>
-          <dt>Landmark<br>at start</dt><dd><span class="fill"></span></dd>
-          <dt>Chemical</dt><dd><span class="fill"></span></dd>
-          <dt>Quantity</dt><dd><span class="fill"></span></dd>
+          <dt>Water test</dt><dd>Collect the sample at the WS point</dd>
         </dl>
 
         <p class="note">The ledge side is shallow. Pour past the ledge edge so the dose reaches deeper water.</p>
       </div>
-    </div>
-    <div class="signoff">
-      <div><span>Date</span><i></i></div>
-      <div><span>Time started</span><i></i></div>
-      <div><span>Technician</span><i></i></div>
     </div>
   </div>
 
@@ -944,6 +912,14 @@
             <path d="M0 6 L0 -10 L18 -10 L18 -1 L0 -1" fill="#0F2430" stroke="#0F2430" stroke-width="3" stroke-linejoin="round"/>
           </g>
           <text x="156" y="468" font-family="IBM Plex Mono,monospace" font-size="15" font-weight="600" fill="#0F2430">END</text>
+        
+          <circle cx="417" cy="168" r="13" fill="#ffffff" stroke="#0F2430" stroke-width="2.5"/>
+          <text x="417" y="173" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
+          <text x="400" y="198" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">WATER</text>
+          <text x="400" y="210" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">SAMPLE</text>
+          <circle cx="180" cy="429" r="13" fill="#ffffff" stroke="#0F2430" stroke-width="2.5"/>
+          <text x="180" y="434" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
+          <text x="200" y="433" text-anchor="start" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">WATER SAMPLE</text>
         </svg>
       </div>
 
@@ -957,22 +933,11 @@
           <dt>Laps</dt><dd>1 &mdash; right and bottom sides only</dd>
           <dt>End</dt><dd>Bottom left, at the second staircase</dd>
           <dt>Watch for</dt><dd>Ladder in the top arm</dd>
-        </dl>
-
-        <h4>Fill in on site</h4>
-        <dl>
-          <dt>Landmark<br>at start</dt><dd><span class="fill"></span></dd>
-          <dt>Chemical</dt><dd><span class="fill"></span></dd>
-          <dt>Quantity</dt><dd><span class="fill"></span></dd>
+          <dt>Water test</dt><dd>Collect a sample at each WS point</dd>
         </dl>
 
         <p class="note">The top and left decks are too narrow to walk &mdash; do not step on them. Only the right side and the bottom are dosed.</p>
       </div>
-    </div>
-    <div class="signoff">
-      <div><span>Date</span><i></i></div>
-      <div><span>Time started</span><i></i></div>
-      <div><span>Technician</span><i></i></div>
     </div>
   </div>
 
@@ -1058,6 +1023,10 @@
             <path d="M0 6 L0 -10 L18 -10 L18 -1 L0 -1" fill="#0F2430" stroke="#0F2430" stroke-width="3" stroke-linejoin="round"/>
           </g>
           <text x="586" y="406" font-family="IBM Plex Mono,monospace" font-size="15" font-weight="600" fill="#0F2430">END</text>
+        
+          <circle cx="165" cy="350" r="13" fill="#ffffff" stroke="#0F2430" stroke-width="2.5"/>
+          <text x="165" y="355" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
+          <text x="186" y="354" text-anchor="start" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">WATER SAMPLE</text>
         </svg>
       </div>
 
@@ -1070,22 +1039,11 @@
           <dt>Laps</dt><dd>1 &mdash; left and bottom sides only</dd>
           <dt>End</dt><dd>Bottom right corner</dd>
           <dt>Watch for</dt><dd>Ladder top left, 2 pillars standing in the pool</dd>
-        </dl>
-
-        <h4>Fill in on site</h4>
-        <dl>
-          <dt>Landmark<br>at start</dt><dd><span class="fill"></span></dd>
-          <dt>Chemical</dt><dd><span class="fill"></span></dd>
-          <dt>Quantity</dt><dd><span class="fill"></span></dd>
+          <dt>Water test</dt><dd>Collect the sample at the WS point</dd>
         </dl>
 
         <p class="note">The top and right decks are too narrow to walk &mdash; do not step on them. The two pillars break up the water, so keep the pour steady all the way along.</p>
       </div>
-    </div>
-    <div class="signoff">
-      <div><span>Date</span><i></i></div>
-      <div><span>Time started</span><i></i></div>
-      <div><span>Technician</span><i></i></div>
     </div>
   </div>
 
@@ -1181,20 +1139,8 @@
           <dt>Watch for</dt><dd>Two ladders, 4 pool dividers</dd>
         </dl>
 
-        <h4>Fill in on site</h4>
-        <dl>
-          <dt>Landmark<br>at start</dt><dd><span class="fill"></span></dd>
-          <dt>Chemical</dt><dd><span class="fill"></span></dd>
-          <dt>Quantity</dt><dd><span class="fill"></span></dd>
-        </dl>
-
         <p class="note">The route turns at the inner corner &mdash; follow the line round rather than cutting across. Step past each ladder before you resume pouring.</p>
       </div>
-    </div>
-    <div class="signoff">
-      <div><span>Date</span><i></i></div>
-      <div><span>Time started</span><i></i></div>
-      <div><span>Technician</span><i></i></div>
     </div>
   </div>
 
@@ -1276,6 +1222,10 @@
             <path d="M0 6 L0 -10 L18 -10 L18 -1 L0 -1" fill="#0F2430" stroke="#0F2430" stroke-width="3" stroke-linejoin="round"/>
           </g>
           <text x="439" y="136" font-family="IBM Plex Mono,monospace" font-size="14" font-weight="600" fill="#0F2430">END</text>
+        
+          <circle cx="385" cy="449" r="13" fill="#ffffff" stroke="#0F2430" stroke-width="2.5"/>
+          <text x="385" y="454" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
+          <text x="355" y="453" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">WATER SAMPLE</text>
         </svg>
       </div>
 
@@ -1289,22 +1239,213 @@
           <dt>End</dt><dd>Top of the right side</dd>
           <dt>Leaving</dt><dd>Walk back down the right side to the lower stairs</dd>
           <dt>Watch for</dt><dd>Ladder on the left wall, 2 pool dividers</dd>
-        </dl>
-
-        <h4>Fill in on site</h4>
-        <dl>
-          <dt>Landmark<br>at start</dt><dd><span class="fill"></span></dd>
-          <dt>Chemical</dt><dd><span class="fill"></span></dd>
-          <dt>Quantity</dt><dd><span class="fill"></span></dd>
+          <dt>Water test</dt><dd>Collect the sample at the WS point</dd>
         </dl>
 
         <p class="note">The top deck is too narrow to walk &mdash; do not step on it. Step past the ladder before you resume pouring.</p>
       </div>
     </div>
-    <div class="signoff">
-      <div><span>Date</span><i></i></div>
-      <div><span>Time started</span><i></i></div>
-      <div><span>Technician</span><i></i></div>
+  </div>
+
+
+  <!-- ================= CC ================= -->
+  <div class="card">
+    <div class="card-head">
+      <span class="code">CC</span>
+      <h3>Bedok (Chai Chee) &mdash; Main pool</h3>
+      <span class="kind">1 lap &middot; full loop</span>
+    </div>
+    <div class="body">
+      <div class="plan">
+        <svg viewBox="0 20 640 640" role="img" aria-label="Dosing route for Bedok Chai Chee: one full lap around the pool starting at the bottom staircase">
+          <defs>
+            <pattern id="hatch-k" width="10" height="10" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+              <line x1="0" y1="0" x2="0" y2="10" stroke="#C88C55" stroke-width="1" opacity=".45"/>
+            </pattern>
+            <pattern id="tile-k" width="22" height="22" patternUnits="userSpaceOnUse">
+              <rect width="22" height="22" fill="#4BAFE0"/>
+              <path d="M22 0 L22 22 M0 22 L22 22" stroke="#2E8CBE" stroke-width="1" opacity=".35"/>
+            </pattern>
+            <g id="ch-k"><path d="M-8 6 L0 -6 L8 6" fill="none" stroke="#E2382C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+          </defs>
+
+          <path d="M124 46 L347 46 L347 184 L538 184 L538 620 L400 620 L400 590 L346 590 L346 620 L124 620 Z" fill="#E9B47F"/>
+          <path d="M124 46 L347 46 L347 184 L538 184 L538 620 L400 620 L400 590 L346 590 L346 620 L124 620 Z" fill="url(#hatch-k)"/>
+          <path d="M124 46 L347 46 L347 184 L538 184 L538 620 L400 620 L400 590 L346 590 L346 620 L124 620 Z" fill="none" stroke="#C88C55" stroke-width="2"/>
+          <path d="M164 86 L331 86 L331 224 L498 224 L498 550 L164 550 Z" fill="url(#tile-k)" stroke="#2E8CBE" stroke-width="2.5"/>
+
+          <rect x="317" y="86" width="14" height="138" fill="#B9DFF2"/>
+          <rect x="317" y="224" width="47" height="326" fill="#B9DFF2"/>
+          <line x1="317" y1="86" x2="317" y2="550" stroke="#2E8CBE" stroke-width="2" stroke-dasharray="6 4"/>
+          <line x1="364" y1="224" x2="364" y2="550" stroke="#2E8CBE" stroke-width="2" stroke-dasharray="6 4"/>
+          <text x="341" y="400" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" letter-spacing="1" fill="#1d6b96" transform="rotate(-90 341 400)">WIDE SHALLOW LEDGE</text>
+          <text x="324" y="155" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing="1" fill="#1d6b96" transform="rotate(-90 324 155)">NARROW LEDGE</text>
+
+          <line x1="164" y1="224" x2="317" y2="224" stroke="#0F2430" stroke-width="5" stroke-linecap="round"/>
+          <line x1="164" y1="343" x2="317" y2="343" stroke="#0F2430" stroke-width="5" stroke-linecap="round"/>
+          <line x1="164" y1="456" x2="317" y2="456" stroke="#0F2430" stroke-width="5" stroke-linecap="round"/>
+          <line x1="364" y1="343" x2="498" y2="343" stroke="#0F2430" stroke-width="5" stroke-linecap="round"/>
+          <line x1="364" y1="456" x2="498" y2="456" stroke="#0F2430" stroke-width="5" stroke-linecap="round"/>
+
+          <rect x="347" y="92" width="58" height="92" rx="2" fill="#F2D8BB" stroke="#C88C55" stroke-width="2"/>
+          <line x1="349" y1="107" x2="403" y2="107" stroke="#C88C55" stroke-width="2"/>
+          <line x1="349" y1="122" x2="403" y2="122" stroke="#C88C55" stroke-width="2"/>
+          <line x1="349" y1="137" x2="403" y2="137" stroke="#C88C55" stroke-width="2"/>
+          <line x1="349" y1="152" x2="403" y2="152" stroke="#C88C55" stroke-width="2"/>
+          <line x1="349" y1="167" x2="403" y2="167" stroke="#C88C55" stroke-width="2"/>
+          <text x="415" y="132" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600" letter-spacing=".5" fill="#0F2430">STAIRS</text>
+          <text x="415" y="147" font-family="IBM Plex Sans,sans-serif" font-size="12" fill="#546b78">second way on</text>
+
+          <rect x="400" y="590" width="107" height="30" rx="2" fill="#F2D8BB" stroke="#C88C55" stroke-width="2"/>
+          <line x1="415" y1="592" x2="415" y2="618" stroke="#C88C55" stroke-width="2"/>
+          <line x1="430" y1="592" x2="430" y2="618" stroke="#C88C55" stroke-width="2"/>
+          <line x1="445" y1="592" x2="445" y2="618" stroke="#C88C55" stroke-width="2"/>
+          <line x1="460" y1="592" x2="460" y2="618" stroke="#C88C55" stroke-width="2"/>
+          <line x1="475" y1="592" x2="475" y2="618" stroke="#C88C55" stroke-width="2"/>
+          <line x1="490" y1="592" x2="490" y2="618" stroke="#C88C55" stroke-width="2"/>
+          <text x="518" y="609" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600" letter-spacing=".5" fill="#0F2430">STAIRS IN</text>
+
+          <path d="M408 605 L508 605 L508 540" fill="none" stroke="#546b78" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M502 540 L514 540 L508 529 Z" fill="#546b78"/>
+
+          <path d="M518 520 L518 212 Q518 204 510 204 L347 204 Q339 204 339 196 L339 74 Q339 66 331 66 L152 66 Q144 66 144 74 L144 562 Q144 570 152 570 L510 570 Q518 570 518 562 L518 545"
+                fill="none" stroke="#E2382C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <use href="#ch-k" transform="translate(518,400)"/>
+          <use href="#ch-k" transform="translate(518,300)"/>
+          <use href="#ch-k" transform="translate(460,570) rotate(90)"/>
+          <use href="#ch-k" transform="translate(440,204) rotate(-90)"/>
+          <use href="#ch-k" transform="translate(339,140)"/>
+          <use href="#ch-k" transform="translate(260,66) rotate(-90)"/>
+          <use href="#ch-k" transform="translate(144,220) rotate(180)"/>
+          <use href="#ch-k" transform="translate(144,430) rotate(180)"/>
+          <use href="#ch-k" transform="translate(240,570) rotate(90)"/>
+          <use href="#ch-k" transform="translate(370,570) rotate(90)"/>
+
+          <circle cx="518" cy="520" r="13" fill="#E2382C"/>
+          <circle cx="518" cy="520" r="4.6" fill="#fff"/>
+          <text x="546" y="525" font-family="IBM Plex Mono,monospace" font-size="14" font-weight="600" fill="#E2382C">START</text>
+
+          <g transform="translate(518,545)">
+            <path d="M0 6 L0 -10 L18 -10 L18 -1 L0 -1" fill="#0F2430" stroke="#0F2430" stroke-width="3" stroke-linejoin="round"/>
+          </g>
+          <text x="546" y="562" font-family="IBM Plex Mono,monospace" font-size="14" font-weight="600" fill="#0F2430">END</text>
+        
+          <circle cx="482" cy="251" r="13" fill="#ffffff" stroke="#0F2430" stroke-width="2.5"/>
+          <text x="482" y="256" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
+          <text x="455" y="285" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">WATER SAMPLE</text>
+        </svg>
+      </div>
+
+      <div class="side">
+        <h4>Route</h4>
+        <dl>
+          <dt>Access</dt><dd>Stairs at the bottom right &mdash; walk up first</dd>
+          <dt>Start</dt><dd>Right side, at the top of those stairs</dd>
+          <dt>Face</dt><dd>Up the right side, then round the whole pool</dd>
+          <dt>Laps</dt><dd>1 &mdash; full loop</dd>
+          <dt>End</dt><dd>Beside the start</dd>
+          <dt>Watch for</dt><dd>Ledge down the middle &mdash; narrow in the top arm, wide below. 5 dividers</dd>
+          <dt>Water test</dt><dd>Collect the sample at the WS point</dd>
+        </dl>
+
+        <p class="note">The route steps in where the pool narrows &mdash; follow the line round rather than cutting across. The ledge runs down the middle, so pour past its edge where you pass it.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= HB ================= -->
+  <div class="card">
+    <div class="card-head">
+      <span class="code">HB</span>
+      <h3>HOME@Bedok &mdash; Main pool</h3>
+      <span class="kind">L-shaped &middot; 1 pass</span>
+    </div>
+    <div class="body">
+      <div class="plan">
+        <svg viewBox="0 20 640 430" role="img" aria-label="Dosing route for HOME@Bedok: from the deck beside the lower staircase, round the pool and up the inner strip to the end">
+          <defs>
+            <pattern id="hatch-l" width="10" height="10" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+              <line x1="0" y1="0" x2="0" y2="10" stroke="#C88C55" stroke-width="1" opacity=".45"/>
+            </pattern>
+            <pattern id="tile-l" width="22" height="22" patternUnits="userSpaceOnUse">
+              <rect width="22" height="22" fill="#4BAFE0"/>
+              <path d="M22 0 L22 22 M0 22 L22 22" stroke="#2E8CBE" stroke-width="1" opacity=".35"/>
+            </pattern>
+            <g id="ch-l"><path d="M-8 6 L0 -6 L8 6" fill="none" stroke="#E2382C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+          </defs>
+
+          <path d="M70 40 L540 40 L540 265 L228 265 L228 420 L70 420 Z" fill="#E9B47F"/>
+          <path d="M70 40 L540 40 L540 265 L228 265 L228 420 L70 420 Z" fill="url(#hatch-l)"/>
+          <path d="M70 40 L540 40 L540 265 L228 265 L228 420 L70 420 Z" fill="none" stroke="#C88C55" stroke-width="2"/>
+
+          <path d="M92 84 L482 84 L482 229 L300 229 L300 200 L211 200 L211 409 L92 409 Z" fill="url(#tile-l)" stroke="#2E8CBE" stroke-width="2.5"/>
+          <rect x="92" y="84" width="390" height="56" fill="#B9DFF2"/>
+          <line x1="92" y1="140" x2="482" y2="140" stroke="#2E8CBE" stroke-width="2" stroke-dasharray="6 4"/>
+          <text x="240" y="118" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" letter-spacing="1" fill="#1d6b96">SHALLOW LEDGE</text>
+
+          <path d="M228 200 L296 200 L296 229 L249 229 L249 265 L228 265 Z" fill="#ffffff" stroke="#C88C55" stroke-width="1.5"/>
+          <text x="238" y="250" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" font-weight="600" letter-spacing=".5" fill="#546b78" transform="rotate(-90 238 250)">GROUND</text>
+          <path d="M230 200 L300 200 L300 229" fill="none" stroke="#7C3AED" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+          <text x="310" y="216" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" letter-spacing=".5" fill="#fff">HIGH WALL &mdash; NO ACCESS</text>
+
+          <rect x="173" y="97" width="15" height="29" rx="3" fill="#0F2430" stroke="#fff" stroke-width="2"/>
+          <rect x="296" y="97" width="15" height="29" rx="3" fill="#0F2430" stroke="#fff" stroke-width="2"/>
+          <rect x="415" y="97" width="15" height="29" rx="3" fill="#0F2430" stroke="#fff" stroke-width="2"/>
+          <rect x="173" y="247" width="15" height="29" rx="3" fill="#0F2430" stroke="#fff" stroke-width="2"/>
+          <text x="180" y="292" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing="1" fill="#fff">PILLAR</text>
+
+          <rect x="249" y="229" width="51" height="36" rx="2" fill="#F2D8BB" stroke="#C88C55" stroke-width="2"/>
+          <line x1="264" y1="231" x2="264" y2="263" stroke="#C88C55" stroke-width="2"/>
+          <line x1="279" y1="231" x2="279" y2="263" stroke="#C88C55" stroke-width="2"/>
+          <line x1="294" y1="231" x2="294" y2="263" stroke="#C88C55" stroke-width="2"/>
+          <text x="309" y="260" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600" letter-spacing=".5" fill="#0F2430">STAIRS IN</text>
+
+          <path d="M232 247 L327 247" fill="none" stroke="#546b78" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M321 244 L333 244 L327 234 Z" fill="#546b78"/>
+
+          <path d="M327 236 L503 236 Q511 236 511 228 L511 70 Q511 62 503 62 L89 62 Q81 62 81 70 L81 406 Q81 414 89 414 L211 414 Q219 414 219 406 L219 218"
+                fill="none" stroke="#E2382C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <use href="#ch-l" transform="translate(420,236) rotate(90)"/>
+          <use href="#ch-l" transform="translate(511,150)"/>
+          <use href="#ch-l" transform="translate(400,62) rotate(-90)"/>
+          <use href="#ch-l" transform="translate(200,62) rotate(-90)"/>
+          <use href="#ch-l" transform="translate(81,150) rotate(180)"/>
+          <use href="#ch-l" transform="translate(81,320) rotate(180)"/>
+          <use href="#ch-l" transform="translate(150,414) rotate(90)"/>
+          <use href="#ch-l" transform="translate(219,340)"/>
+          <use href="#ch-l" transform="translate(219,256)"/>
+
+          <circle cx="327" cy="236" r="13" fill="#E2382C"/>
+          <circle cx="327" cy="236" r="4.6" fill="#fff"/>
+          <text x="352" y="232" font-family="IBM Plex Mono,monospace" font-size="14" font-weight="600" fill="#E2382C">START</text>
+
+          <g transform="translate(219,218)">
+            <path d="M0 6 L0 -10 L18 -10 L18 -1 L0 -1" fill="#0F2430" stroke="#0F2430" stroke-width="3" stroke-linejoin="round"/>
+          </g>
+          <text x="243" y="222" font-family="IBM Plex Mono,monospace" font-size="14" font-weight="600" fill="#0F2430">END</text>
+        
+          <circle cx="466" cy="159" r="13" fill="#ffffff" stroke="#0F2430" stroke-width="2.5"/>
+          <text x="466" y="164" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" fill="#0F2430">WS</text>
+          <text x="436" y="163" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">WATER SAMPLE</text>
+        </svg>
+      </div>
+
+      <div class="side">
+        <h4>Route</h4>
+        <dl>
+          <dt>Shape</dt><dd>L-shaped pool</dd>
+          <dt>Access</dt><dd>Staircase at the inner corner &mdash; climb left to right</dd>
+          <dt>Start</dt><dd>Deck just right of those stairs</dd>
+          <dt>Face</dt><dd>Right along the inner edge, then round the pool</dd>
+          <dt>Laps</dt><dd>1 &mdash; right, top, left and bottom, then up the inner strip</dd>
+          <dt>End</dt><dd>Inner strip, beside the high wall</dd>
+          <dt>Watch for</dt><dd>Shallow ledge across the top, 4 pillars, high wall at the inner corner</dd>
+          <dt>Water test</dt><dd>Collect the sample at the WS point</dd>
+        </dl>
+
+        <p class="note">The purple high wall at the inner corner is not deck &mdash; nobody walks or pours there, and the white patch behind it is closed off. Pour past the ledge edge along the top so the dose reaches deeper water.</p>
+      </div>
     </div>
   </div>
 
