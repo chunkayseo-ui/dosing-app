@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>Dosing Lookup</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: var(--tg-theme-bg-color, #F1F7F7);
+    --surface: var(--tg-theme-secondary-bg-color, #FFFFFF);
+    --ink: var(--tg-theme-text-color, #0C2B30);
+    --ink-soft: #4C6B70;
+    --teal: #0E7C86;
+    --teal-deep: #0A5259;
+    --amber: #E2933B;
+    --border: #D9EAEA;
+    --readout-bg: #0C2B30;
+    --readout-cl: #7FE7C4;
+    --readout-acid: #FFC97A;
+    --ok: #2FA36B;
+    --warn: #C1543D;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0;}
+  body{
+    background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif;
+    min-height:100vh; padding:16px 16px 40px;
+  }
+  .wrap{max-width:480px; margin:0 auto;}
+  .top{display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:8px; padding:0 2px; gap:12px;}
+  .eyebrow{font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); font-weight:600;}
+  h1{font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700; margin:2px 0 0; letter-spacing:-.01em;}
+  .date-badge{text-align:right; flex:none;}
+  .date-day{font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:700; color:var(--teal-deep);}
+  .date-full{font-size:11px; color:var(--ink-soft); margin-top:1px;}
+  .sync-row{display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-soft); margin-bottom:16px; padding:0 2px;}
+  .sync-dot{width:7px; height:7px; border-radius:50%; background:var(--ink-soft); flex:none;}
+  .sync-dot.ok{background:var(--ok);}
+  .sync-dot.warn{background:var(--warn);}
+  .sync-dot.loading{background:var(--amber); animation:pulse 1s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+  .refresh-btn{margin-left:auto; border:none; background:none; color:var(--teal); font-weight:600; font-size:11.5px; cursor:pointer; padding:2px 4px;}
+  .card{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:16px; margin-bottom:14px;}
+  .label{font-size:12px; font-weight:600; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px;}
+  .card-compact{padding:12px 16px;}
+  .card-compact .label{margin-bottom:8px;}
+  select{
+    width:100%; appearance:none; -webkit-appearance:none;
+    background:var(--surface) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9"><path d="M1 1L7 7L13 1" stroke="%230A5259" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat right 14px center;
+    border:1.5px solid var(--border); border-radius:12px; padding:14px 40px 14px 14px;
+    font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:600; color:var(--ink);
+  }
+  .seg{display:flex; background:var(--bg); border-radius:12px; padding:4px; gap:4px;}
+  .seg button{flex:1; border:none; background:transparent; padding:10px 8px; border-radius:9px; font-family:'Inter',sans-serif; font-weight:600; font-size:13.5px; color:var(--ink-soft); cursor:pointer;}
+  .seg button.active{background:var(--teal); color:#fff;}
+  .auto-note{font-size:11.5px; color:var(--ink-soft); margin-top:8px;}
+  .chips{display:flex; flex-wrap:wrap; gap:6px;}
+  .chip{border:1.5px solid var(--border); background:var(--bg); color:var(--ink); font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:12.5px; padding:6px 9px; border-radius:8px; cursor:pointer; min-width:36px; text-align:center;}
+  .chip.neg{border-color:rgba(193,84,61,0.3); background:rgba(193,84,61,0.07); color:var(--warn);}
+  .chip.pos{border-color:rgba(14,124,134,0.3); background:rgba(14,124,134,0.07); color:var(--teal-deep);}
+  .chip.active{background:var(--teal-deep); border-color:var(--teal-deep); color:#fff;}
+  .chip.neg.active{background:var(--warn); border-color:var(--warn); color:#fff;}
+  .fc-toggle{background:transparent; border-style:dashed; color:var(--ink-soft); font-family:'Inter',sans-serif; font-weight:600; font-size:11.5px;}
+  .readout{background:var(--readout-bg); border-radius:18px; padding:20px 18px 18px; color:#fff; position:relative; overflow:hidden;}
+  .readout::before{content:""; position:absolute; inset:0; background:radial-gradient(120% 100% at 0% 0%, rgba(127,231,196,0.08), transparent 60%);}
+  .readout-title{
+    display:flex; justify-content:space-between; align-items:baseline;
+    position:relative; margin-bottom:10px;
+  }
+  .readout-title #readoutPool{
+    font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#fff;
+  }
+  .readout-title #readoutDate{
+    font-size:12px; color:#B7D6D6; font-weight:600;
+  }
+  .readout-head{
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#8FB3B3;
+    margin-bottom:14px; position:relative;
+    padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.12);
+  }
+  .readout-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; position:relative;}
+  .dose-label{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#8FB3B3; margin-bottom:4px;}
+  .dose-value{font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:26px; line-height:1.1;}
+  .dose-value.cl{color:var(--readout-cl);}
+  .dose-value.acid{color:var(--readout-acid);}
+  .readout-foot{margin-top:16px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.12); font-size:12px; color:#8FB3B3; position:relative;}
+  .route-card iframe{width:100%; border:none; border-radius:12px; display:block;}
+  .route-card .route-empty{font-size:13px; color:var(--ink-soft); padding:8px 2px;}
+
+  .hist-table-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:0 -16px; padding:0 16px;}
+  .hist-scroll-hint{font-size:10.5px; color:var(--ink-soft); margin-bottom:6px;}
+  .hist-table{width:100%; min-width:560px; border-collapse:collapse; font-size:12.5px;}
+  .hist-table th{
+    text-align:center; font-size:10.5px; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--ink-soft); font-weight:600; padding:0 6px 8px; border-bottom:1.5px solid var(--border);
+  }
+  .hist-table td{
+    text-align:center; padding:9px 6px; border-bottom:1px solid var(--border);
+    font-family:'IBM Plex Mono',monospace; font-weight:500; white-space:nowrap;
+  }
+  .hist-table tr:last-child td{border-bottom:none;}
+  .hist-date{font-family:'Inter',sans-serif !important; font-weight:600 !important; color:var(--ink);}
+  .hist-session{color:var(--ink-soft); font-size:10px; display:block; font-family:'Inter',sans-serif;}
+  .hist-flag{color:var(--warn); font-weight:700;}
+  .hist-empty{font-size:13px; color:var(--ink-soft); padding:8px 2px;}
+  .hist-note{font-size:11px; color:var(--ink-soft); margin-top:10px; line-height:1.4;}
+
+  .tc-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .tc-block{background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:12px;}
+  .tc-session{font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; margin-bottom:8px;}
+  .tc-row{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:4px;}
+  .tc-row:last-child{margin-bottom:0;}
+  .tc-key{font-size:11.5px; color:var(--ink-soft);}
+  .tc-val{font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:16px; color:var(--ink);}
+  .tc-val.empty-val{color:var(--ink-soft); font-weight:500; font-size:13px;}
+  .tc-empty{font-size:13px; color:var(--ink-soft); padding:4px 2px;}
+  .empty{text-align:center; color:var(--ink-soft); font-size:13.5px; padding:18px 8px;}
+  .note{font-size:12px; color:var(--ink-soft); line-height:1.5; padding:0 4px; margin-top:2px;}
+
+  .holiday-banner{
+    display:none;
+    align-items:flex-start; gap:10px;
+    background:#FDF0E7; border:1.5px solid #F0C7A0;
+    border-radius:14px; padding:12px 14px; margin-bottom:14px;
+  }
+  .holiday-banner.show{display:flex;}
+  .holiday-icon{font-size:18px; line-height:1; flex:none; margin-top:1px;}
+  .holiday-text{font-size:13px; color:#7A4A1F; line-height:1.4;}
+  .holiday-text b{font-weight:700;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div>
+      <div class="eyebrow">Dosing Lookup</div>
+      <h1 id="outletName">—</h1>
+    </div>
+    <div class="date-badge">
+      <div class="date-day" id="dateDay">—</div>
+      <div class="date-full" id="dateFull">—</div>
+    </div>
+  </div>
+
+  <div class="sync-row">
+    <span class="sync-dot loading" id="syncDot"></span>
+    <span id="syncText">Loading data…</span>
+    <button class="refresh-btn" id="refreshBtn">Refresh</button>
+  </div>
+
+  <div class="holiday-banner" id="holidayBanner">
+    <span class="holiday-icon">📢</span>
+    <span class="holiday-text" id="holidayText"></span>
+  </div>
+
+  <div class="card">
+    <div class="label">Swimming Pool</div>
+    <select id="outletSelect"></select>
+  </div>
+
+  <div class="card">
+    <div class="label">Schedule</div>
+    <div class="seg">
+      <button id="btnWeekday" class="active">Weekday</button>
+      <button id="btnWeekend">Weekend</button>
+    </div>
+    <div class="auto-note" id="autoNote"></div>
+  </div>
+
+  <div class="card" id="todayCheckWrap" style="display:none;">
+    <div class="label">Today's Earlier Readings</div>
+    <div id="todayCheckContent"></div>
+  </div>
+
+  <div class="card card-compact">
+    <div class="label">FC</div>
+    <div class="chips" id="fcChips"></div>
+  </div>
+
+  <div class="card card-compact">
+    <div class="label">PH</div>
+    <div class="chips" id="phChips"></div>
+  </div>
+
+  <div class="readout">
+    <div class="readout-title">
+      <span id="readoutPool">—</span>
+      <span id="readoutDate">—</span>
+    </div>
+    <div class="readout-head">
+      <span id="readoutSchedule">Weekday</span>
+      <span id="readoutCoords">—</span>
+    </div>
+    <div id="readoutBody">
+      <div class="empty">Select FC and PH to see dosing</div>
+    </div>
+  </div>
+
+  <div class="card" id="historyCardWrap" style="display:none;">
+    <div class="label" id="historyLabel">Same-Day History</div>
+    <div id="historyContent"></div>
+  </div>
+
+  <div class="card route-card" id="routeCardWrap" style="display:none;">
+    <div class="label">Dosing Route</div>
+    <div id="routeContent"></div>
+  </div>
+
+  <p class="note">Bicarb / Salt dosing isn't included yet. Dosing numbers load from <code>data.csv</code> in this repo — edit that file to update amounts.</p>
+
+</div>
+
+<script>
+const UNIT_LABEL = { g:'g', kg:'kg', ml:'ml', l:'L' };
+function fmtAmt(v, unit){
+  const trimmed = (v % 1 === 0) ? v.toFixed(0) : String(v);
+  return trimmed + ' ' + (UNIT_LABEL[unit] || unit);
+}
+
+function parseCSV(text){
+  const rows = []; let row = []; let field = ''; let inQuotes = false;
+  for (let i = 0; i < text.length; i++){
+    const c = text[i];
+    if (inQuotes){
+      if (c === '"'){ if (text[i+1] === '"'){ field += '"'; i++; } else inQuotes = false; }
+      else field += c;
+    } else {
+      if (c === '"') inQuotes = true;
+      else if (c === ','){ row.push(field); field = ''; }
+      else if (c === '\r'){ /* skip */ }
+      else if (c === '\n'){ row.push(field); rows.push(row); row = []; field = ''; }
+      else field += c;
+    }
+  }
+  if (field.length || row.length){ row.push(field); rows.push(row); }
+  return rows;
+}
+
+function buildOutlets(rows){
+  const header = rows[0];
+  const idx = {};
+  header.forEach((h, i) => idx[h.trim()] = i);
+  const outlets = {};
+  for (let i = 1; i < rows.length; i++){
+    const r = rows[i];
+    if (!r || r.length < 9 || !r[idx.outlet]) continue;
+    const outletKey = r[idx.outlet].trim();
+    const name = r[idx.name].trim();
+    const sched = r[idx.schedule].trim();
+    const fc = parseFloat(r[idx.fc]);
+    const ph = parseFloat(r[idx.ph]);
+    const cl = parseFloat(r[idx.chlorine]);
+    const clUnit = r[idx.chlorine_unit].trim();
+    const acid = parseFloat(r[idx.acid]);
+    const acidUnit = r[idx.acid_unit].trim();
+    if ([fc, ph, cl, acid].some(v => isNaN(v))) continue;
+
+    if (!outlets[outletKey]) outlets[outletKey] = { name };
+    if (!outlets[outletKey][sched]) outlets[outletKey][sched] = { fc: [], ph: [], grid: {} };
+    const t = outlets[outletKey][sched];
+    if (!t.fc.includes(fc)) t.fc.push(fc);
+    if (!t.ph.includes(ph)) t.ph.push(ph);
+    if (!t.grid[String(fc)]) t.grid[String(fc)] = {};
+    t.grid[String(fc)][ph] = { cl, clUnit, acid, acidUnit };
+  }
+  // sort fc/ph and convert grid to arrays aligned with ph order
+  Object.values(outlets).forEach(outlet => {
+    ['weekday','weekend'].forEach(sched => {
+      const t = outlet[sched];
+      if (!t) return;
+      t.fc.sort((a,b) => a-b);
+      t.ph.sort((a,b) => a-b);
+      const newGrid = {};
+      Object.keys(t.grid).forEach(fcKey => {
+        newGrid[fcKey] = t.ph.map(ph => t.grid[fcKey][ph]);
+      });
+      t.grid = newGrid;
+    });
+  });
+  return outlets;
+}
+
+let OUTLETS = {};
+
+const tg = window.Telegram ? window.Telegram.WebApp : null;
+if (tg) { tg.ready(); tg.expand(); }
+
+let state = { outlet: null, schedule: (new Date().getDay() === 0 || new Date().getDay() === 6) ? 'weekend' : 'weekday', fc: null, ph: null, showNegFc: false };
+
+const outletSelect = document.getElementById('outletSelect');
+const outletName = document.getElementById('outletName');
+const btnWeekday = document.getElementById('btnWeekday');
+const btnWeekend = document.getElementById('btnWeekend');
+const autoNote = document.getElementById('autoNote');
+const fcChipsEl = document.getElementById('fcChips');
+const phChipsEl = document.getElementById('phChips');
+const readoutBody = document.getElementById('readoutBody');
+const readoutSchedule = document.getElementById('readoutSchedule');
+const readoutCoords = document.getElementById('readoutCoords');
+
+const todayName = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+autoNote.textContent = `Auto-detected from today (${todayName}) — tap to override.`;
+
+const todayDate = new Date();
+document.getElementById('dateDay').textContent = todayDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+document.getElementById('dateFull').textContent = todayDate.toLocaleDateString('en-US', { weekday: 'long' }) + ', ' + todayDate.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+
+function setSyncStatus(kind, text){
+  document.getElementById('syncDot').className = 'sync-dot ' + kind;
+  document.getElementById('syncText').textContent = text;
+}
+
+function fmtFc(v){ return String(v); }
+function currentTable(){ const o = OUTLETS[state.outlet]; return o[state.schedule] || o.weekday || o.weekend; }
+
+function renderScheduleToggle(){
+  const o = OUTLETS[state.outlet];
+  btnWeekday.style.display = o.weekday ? '' : 'none';
+  btnWeekend.style.display = o.weekend ? '' : 'none';
+  btnWeekday.classList.toggle('active', state.schedule === 'weekday');
+  btnWeekend.classList.toggle('active', state.schedule === 'weekend');
+  readoutSchedule.textContent = state.schedule === 'weekday' ? 'Weekday' : 'Weekend';
+}
+
+function renderChips(){
+  const table = currentTable();
+  fcChipsEl.innerHTML = '';
+  const hasNeg = table.fc.some(v => v < 0);
+  table.fc.forEach(v => {
+    if (v < 0 && !state.showNegFc && v !== state.fc) return; // hidden unless toggled or already selected
+    const c = document.createElement('button');
+    let cls = 'chip';
+    if (v < 0) cls += ' neg'; else if (v > 0) cls += ' pos';
+    if (state.fc === v) cls += ' active';
+    c.className = cls;
+    c.textContent = fmtFc(v);
+    c.onclick = () => { state.fc = v; if (tg) tg.HapticFeedback.impactOccurred('light'); render(); };
+    fcChipsEl.appendChild(c);
+  });
+  if (hasNeg) {
+    const toggle = document.createElement('button');
+    toggle.className = 'chip fc-toggle';
+    toggle.textContent = state.showNegFc ? 'Hide below 0' : 'Show below 0';
+    toggle.onclick = () => { state.showNegFc = !state.showNegFc; renderChips(); };
+    fcChipsEl.appendChild(toggle);
+  }
+  phChipsEl.innerHTML = '';
+  table.ph.forEach(v => {
+    const c = document.createElement('button');
+    c.className = 'chip' + (state.ph === v ? ' active' : '');
+    c.textContent = v.toFixed(1);
+    c.onclick = () => { state.ph = v; if (tg) tg.HapticFeedback.impactOccurred('light'); render(); };
+    phChipsEl.appendChild(c);
+  });
+}
+
+function renderReadout(){
+  const table = currentTable();
+  document.getElementById('readoutPool').textContent = OUTLETS[state.outlet].name;
+  document.getElementById('readoutDate').textContent = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) + ', ' + new Date().toLocaleDateString('en-US', { weekday: 'long' }) + ', ' + new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  if (state.fc === null || !table.fc.includes(state.fc)) state.fc = null;
+  if (state.ph === null || !table.ph.includes(state.ph)) state.ph = null;
+  if (state.fc === null || state.ph === null) {
+    readoutBody.innerHTML = '<div class="empty">Select FC and PH to see dosing</div>';
+    readoutCoords.textContent = '—';
+    return;
+  }
+  const phIndex = table.ph.indexOf(state.ph);
+  const dose = table.grid[String(state.fc)][phIndex];
+  readoutCoords.textContent = `FC ${fmtFc(state.fc)} · PH ${state.ph.toFixed(1)}`;
+  readoutBody.innerHTML = `
+    <div class="readout-grid">
+      <div class="dose-block"><div class="dose-label">Chlorine</div><div class="dose-value cl">${fmtAmt(dose.cl, dose.clUnit)}</div></div>
+      <div class="dose-block"><div class="dose-label">Acid</div><div class="dose-value acid">${fmtAmt(dose.acid, dose.acidUnit)}</div></div>
+    </div>
+    <div class="readout-foot">${state.schedule === 'weekday' ? 'Weekday (Mon–Fri)' : 'Weekend'} dosing</div>
+  `;
+  renderRouteCard();
+}
+
+function render(){
+  if (!state.outlet) {
+    outletName.textContent = 'Select a pool';
+    document.getElementById('readoutPool').textContent = '—';
+    document.getElementById('readoutDate').textContent = '—';
+    readoutSchedule.textContent = '—';
+    readoutCoords.textContent = '—';
+    readoutBody.innerHTML = '<div class="empty">Select a swimming pool to begin</div>';
+    fcChipsEl.innerHTML = '';
+    phChipsEl.innerHTML = '';
+    document.getElementById('historyCardWrap').style.display = 'none';
+    document.getElementById('todayCheckWrap').style.display = 'none';
+    return;
+  }
+  const o = OUTLETS[state.outlet];
+  outletName.textContent = o.name;
+  if (!o[state.schedule]) state.schedule = o.weekday ? 'weekday' : 'weekend';
+  renderScheduleToggle();
+  renderChips();
+  renderReadout();
+  renderHistoryCard();
+  renderTodayCheck();
+}
+
+outletSelect.onchange = () => { state.outlet = outletSelect.value; state.fc = null; state.ph = null; render(); };
+btnWeekday.onclick = () => { state.schedule = 'weekday'; state.fc = null; state.ph = null; render(); };
+btnWeekend.onclick = () => { state.schedule = 'weekend'; state.fc = null; state.ph = null; render(); };
+document.getElementById('refreshBtn').onclick = () => { loadData(); };
+
+async function loadData(){
+  setSyncStatus('loading', 'Loading data…');
+  try {
+    const res = await fetch('./data.csv?_=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    const rows = parseCSV(text);
+    const outlets = buildOutlets(rows);
+    if (Object.keys(outlets).length === 0) throw new Error('no outlets parsed');
+    OUTLETS = outlets;
+    outletSelect.innerHTML = '';
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = 'Select a pool…';
+    placeholder.disabled = true;
+    if (!state.outlet || !OUTLETS[state.outlet]) placeholder.selected = true;
+    outletSelect.appendChild(placeholder);
+    Object.keys(OUTLETS).forEach(key => {
+      const opt = document.createElement('option');
+      opt.value = key; opt.textContent = OUTLETS[key].name;
+      outletSelect.appendChild(opt);
+    });
+    if (state.outlet && OUTLETS[state.outlet]) outletSelect.value = state.outlet;
+    setSyncStatus('ok', 'Data loaded');
+    render();
+  } catch(e){
+    setSyncStatus('warn', 'Could not load data.csv — check the file exists in this repo');
+  }
+}
+
+function toISODate(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+async function checkHoliday(){
+  try {
+    const res = await fetch('./holidays.csv?_=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    const rows = parseCSV(text);
+    const map = {};
+    for (let i = 1; i < rows.length; i++){
+      const r = rows[i];
+      if (!r || !r[0]) continue;
+      map[r[0].trim()] = (r[1] || 'Public Holiday').trim();
+    }
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const key = toISODate(tomorrow);
+    if (map[key]){
+      const dayLabel = tomorrow.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+      document.getElementById('holidayText').innerHTML =
+        `Tomorrow (<b>${dayLabel}</b>) is <b>${map[key]}</b> — all outlets closed.`;
+      document.getElementById('holidayBanner').classList.add('show');
+    }
+  } catch(e){ /* silently skip if holidays.csv missing */ }
+}
+
+
+// ---------- Dosing route embed ----------
+const ROUTE_CSS = `
+  :root{
+    --ink:#0F2430;
+    --ink-60:#546b78;
+    --ink-30:#9aabb4;
+    --rule:#d7e0e4;
+    --paper:#ffffff;
+    --page:#e4eaed;
+    --deck:#E9B47F;
+    --deck-edge:#C88C55;
+    --water:#4BAFE0;
+    --water-edge:#2E8CBE;
+    --ledge:#2E8CBE;
+    --route:#E2382C;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; padding:28px 20px 60px;
+    background:var(--page);
+    color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    font-size:15px; line-height:1.5;
+  }
+
+  .sheet{max-width:960px;margin:0 auto}
+
+  .masthead{
+    background:var(--ink); color:#fff; border-radius:4px;
+    padding:22px 26px 20px; margin-bottom:20px;
+  }
+  .masthead h1{
+    font-family:"Barlow Condensed",Impact,sans-serif;
+    font-weight:700; font-size:44px; line-height:.95; letter-spacing:.01em;
+    text-transform:uppercase; margin:0;
+  }
+  .masthead p{margin:8px 0 0;color:#b9c9d2;font-size:14px;max-width:64ch}
+  .stamp{
+    display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;
+    letter-spacing:.14em;text-transform:uppercase;color:#7fd0ff;margin-bottom:10px;
+  }
+
+  .legend{
+    background:var(--paper);border-radius:4px;padding:18px 22px;margin-bottom:22px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px 26px;
+  }
+  .legend h2{
+    grid-column:1/-1;margin:0 0 2px;font-family:"Barlow Condensed",sans-serif;
+    font-size:20px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
+  }
+  .lg{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;line-height:1.35}
+  .lg svg{flex:0 0 auto;margin-top:1px}
+  .lg b{display:block;font-weight:600}
+  .lg span{color:var(--ink-60)}
+
+  .card{background:var(--paper);border-radius:4px;overflow:hidden;margin-bottom:22px}
+  .card-head{
+    display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+    padding:14px 22px;border-bottom:3px solid var(--ink);
+  }
+  .code{
+    font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:13px;letter-spacing:.1em;
+    background:var(--ink);color:#fff;padding:5px 10px;border-radius:3px;
+  }
+  .card-head h3{
+    margin:0;font-family:"Barlow Condensed",sans-serif;font-weight:600;
+    font-size:29px;text-transform:uppercase;letter-spacing:.02em;line-height:1;
+  }
+  .card-head .kind{
+    margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:11px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--ink-60);
+  }
+
+  .body{display:grid;grid-template-columns:1.55fr 1fr;gap:0}
+  .plan{padding:16px 10px 8px 18px}
+  .plan svg{width:100%;height:auto;display:block}
+
+  .side{border-left:1px solid var(--rule);padding:18px 22px 20px}
+  .side h4{
+    margin:0 0 10px;font-family:"Barlow Condensed",sans-serif;font-size:16px;
+    text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);font-weight:600;
+  }
+  .side h4+h4{margin-top:22px}
+  dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:7px 12px;font-size:14px}
+  dt{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+     text-transform:uppercase;color:var(--ink-30);padding-top:3px}
+  dd{margin:0;font-weight:500}
+  .note{font-size:13px;color:var(--ink-60);margin:18px 0 0;padding-top:12px;border-top:1px solid var(--rule)}
+
+
+  .footnote{max-width:960px;margin:0 auto;font-size:13px;color:var(--ink-60)}
+
+  @media (max-width:720px){
+    body{padding:12px 8px 32px}
+    .masthead{padding:18px 18px 16px}
+    .masthead h1{font-size:30px}
+    .legend{padding:14px 16px;gap:12px 18px}
+    .body{grid-template-columns:1fr}
+    .side{border-left:0;border-top:1px solid var(--rule);padding:14px 16px 18px}
+    .plan{padding:10px 2px 2px}
+    .card-head{padding:12px 16px}
+    .card-head h3{font-size:24px}
+    .card-head .kind{margin-left:0;flex-basis:100%}
+    dl{grid-template-columns:1fr;gap:0}
+    dt{padding-top:10px}
+    dd{padding-bottom:2px}
+    .tap{display:block}
+  }
+
+  .tap{display:none;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-30);text-align:center;padding:2px 0 8px}
+  .plan{cursor:zoom-in}
+
+  .viewer{position:fixed;inset:0;background:#0F2430;z-index:99;display:none;flex-direction:column}
+  .viewer.on{display:flex}
+  .viewer-bar{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#fff}
+  .viewer-title{font-family:"Barlow Condensed",sans-serif;font-size:20px;font-weight:600;
+    text-transform:uppercase;letter-spacing:.05em;margin-right:auto}
+  .viewer-bar button{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase;color:#0F2430;background:#fff;border:0;border-radius:3px;padding:8px 12px}
+  .viewer-stage{flex:1;display:flex;align-items:center;justify-content:center;padding:6px;overflow:auto}
+  .viewer-stage svg{background:#fff;border-radius:4px;width:100%;height:auto;max-height:100%}
+  .viewer.rot .viewer-stage{overflow:hidden}
+  .viewer.rot .viewer-stage svg{width:calc(100vh - 70px);max-height:none;transform:rotate(90deg)}
+
+  @media print{
+    @page{size:A4 portrait;margin:11mm}
+    body{background:#fff;padding:0}
+    .masthead,.legend{break-inside:avoid}
+    .card{break-inside:avoid;break-after:page;margin-bottom:0;border:1px solid var(--rule)}
+    .card:last-of-type{break-after:auto}
+    .footnote,.noprint,.tap,.viewer{display:none}
+  }
+`;
+const ROUTE_VIEWER_HTML = `<div class="viewer" id="viewer">
+  <div class="viewer-bar">
+    <span class="viewer-title"></span>
+    <button type="button" id="rot">Rotate</button>
+    <button type="button" id="cls">Close</button>
+  </div>
+  <div class="viewer-stage" id="stage"></div>
+</div>`;
+const ROUTE_VIEWER_JS = `
+(function(){
+  var v=document.getElementById('viewer'), stage=document.getElementById('stage'),
+      title=v.querySelector('.viewer-title');
+  document.querySelectorAll('.plan').forEach(function(plan){
+    plan.addEventListener('click',function(){
+      var svg=plan.querySelector('svg'); if(!svg) return;
+      var card=plan.closest('.card');
+      title.textContent=card?card.querySelector('h3').textContent:'';
+      stage.innerHTML='';
+      stage.appendChild(svg.cloneNode(true));
+      v.classList.remove('rot'); v.classList.add('on');
+      document.body.style.overflow='hidden';
+    });
+  });
+  document.getElementById('rot').addEventListener('click',function(){v.classList.toggle('rot');});
+  document.getElementById('cls').addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+  function close(){v.classList.remove('on','rot');stage.innerHTML='';document.body.style.overflow='';}
+})();
+`;
+const ROUTE_FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">';
+
+let routeDoc = null;
+let routeDocPromise = null;
+
+function loadRouteDoc(){
+  if (routeDocPromise) return routeDocPromise;
+  routeDocPromise = fetch('./dosing-route.html').then(res => {
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.text();
+  }).then(text => {
+    routeDoc = new DOMParser().parseFromString(text, 'text/html');
+    return routeDoc;
+  }).catch(() => { routeDoc = false; return null; });
+  return routeDocPromise;
+}
+
+function findRouteCard(outletKey){
+  if (!routeDoc) return null;
+  const cards = routeDoc.querySelectorAll('.card');
+  for (const card of cards) {
+    const codeEl = card.querySelector('.card-head .code');
+    if (codeEl && codeEl.textContent.trim().toUpperCase() === outletKey.toUpperCase()) {
+      return card.outerHTML;
+    }
+  }
+  return null;
+}
+
+async function renderRouteCard(){
+  const wrap = document.getElementById('routeCardWrap');
+  const content = document.getElementById('routeContent');
+  if (!state.outlet) { wrap.style.display = 'none'; return; }
+
+  await loadRouteDoc();
+
+  if (routeDoc === false) {
+    wrap.style.display = 'block';
+    content.innerHTML = '<div class="route-empty">Could not load dosing-route.html — make sure it\'s uploaded to the same repo.</div>';
+    return;
+  }
+
+  const cardHtml = findRouteCard(state.outlet);
+  wrap.style.display = 'block';
+
+  if (!cardHtml) {
+    content.innerHTML = `<div class="route-empty">No dosing route on file yet for ${OUTLETS[state.outlet].name}.</div>`;
+    return;
+  }
+
+  const iframe = document.createElement('iframe');
+  iframe.setAttribute('scrolling', 'no');
+  content.innerHTML = '';
+  content.appendChild(iframe);
+
+  const srcdoc = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">${ROUTE_FONTS}<style>${ROUTE_CSS}
+    body{padding:0; background:transparent;}
+    .card{margin:0;}
+  </style></head><body>${cardHtml}${ROUTE_VIEWER_HTML}<script>${ROUTE_VIEWER_JS}<\/script></body></html>`;
+
+  iframe.srcdoc = srcdoc;
+  iframe.onload = () => {
+    try {
+      const h = iframe.contentDocument.body.scrollHeight;
+      iframe.style.height = (h + 20) + 'px';
+    } catch(e){}
+  };
+}
+
+// ---------- Same-day water test history ----------
+const HISTORY_API_URL = 'https://script.google.com/macros/s/AKfycbwYJLfkw5lwKnjwqmEtuRiREzbahnf2l63YhmX_7jMR9uqM9MpeqoxeVTTVw5rc76eZ6g/exec';
+
+let historyData = null;
+let historyPromise = null;
+
+function loadHistoryData(){
+  if (historyPromise) return historyPromise;
+  historyPromise = fetch(HISTORY_API_URL).then(res => {
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.json();
+  }).then(json => { historyData = json; return json; })
+    .catch(() => { historyData = false; return null; });
+  return historyPromise;
+}
+
+function fmtFcHist(v){
+  if (v === null || v === undefined) return '–';
+  return String(v);
+}
+function fmtPhHist(v){
+  if (v === null || v === undefined) return '–';
+  return v.toFixed(1);
+}
+
+async function renderHistoryCard(){
+  const wrap = document.getElementById('historyCardWrap');
+  const content = document.getElementById('historyContent');
+  const label = document.getElementById('historyLabel');
+  if (!state.outlet) { wrap.style.display = 'none'; return; }
+
+  const today = new Date();
+  const weekdayName = today.toLocaleDateString('en-US', { weekday: 'long' });
+  label.textContent = `Past ${weekdayName}s`;
+  wrap.style.display = 'block';
+  content.innerHTML = '<div class="hist-empty">Loading history…</div>';
+
+  await loadHistoryData();
+
+  if (historyData === false) {
+    content.innerHTML = '<div class="hist-empty">Could not load water test history right now.</div>';
+    return;
+  }
+
+  const records = (historyData[state.outlet] || []).filter(rec => {
+    const d = new Date(rec.date + 'T00:00:00');
+    return d.getDay() === today.getDay();
+  });
+
+  if (records.length === 0) {
+    content.innerHTML = `<div class="hist-empty">No past ${weekdayName} records yet for ${OUTLETS[state.outlet].name}.</div>`;
+    return;
+  }
+
+  const rows = records.map(rec => {
+    const d = new Date(rec.date + 'T00:00:00');
+    const dLabel = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    const fcDrop = (rec.fc.night !== null && rec.fc.afternoon !== null && rec.fc.night > rec.fc.afternoon);
+    const fcNightCell = fcDrop
+      ? `<span class="hist-flag" title="Night FC is higher than afternoon — expected to decrease">${fmtFcHist(rec.fc.night)} \u26A0</span>`
+      : fmtFcHist(rec.fc.night);
+    return `
+      <tr>
+        <td class="hist-date">${dLabel}</td>
+        <td>${fmtFcHist(rec.fc.morning)}<span class="hist-session">AM</span></td>
+        <td>${fmtFcHist(rec.fc.afternoon)}<span class="hist-session">PM</span></td>
+        <td>${fcNightCell}<span class="hist-session">Night</span></td>
+        <td>${fmtPhHist(rec.ph.night)}<span class="hist-session">Night PH</span></td>
+        <td>${rec.dosing.chlorine || '–'}</td>
+        <td>${rec.dosing.acid || '–'}</td>
+        <td>${rec.attended !== null && rec.attended !== undefined ? rec.attended : '–'}</td>
+      </tr>`;
+  }).join('');
+
+  content.innerHTML = `
+    <div class="hist-scroll-hint">Swipe left/right to see all columns →</div>
+    <div class="hist-table-wrap">
+    <table class="hist-table">
+      <thead><tr>
+        <th>Date</th><th>FC AM</th><th>FC PM</th><th>FC Night</th><th>PH Night</th><th>Chlorine</th><th>Acid</th><th>Attended</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    </div>
+    <div class="hist-note">⚠ flags a night FC reading higher than the afternoon one — worth a retest before dosing off it.</div>
+  `;
+}
+
+loadData();
+checkHoliday();
+
+// ---------- Today's earlier readings ----------
+function toISODateLocal(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+function tcValBlock(fc, ph){
+  const hasFc = fc !== null && fc !== undefined;
+  const hasPh = ph !== null && ph !== undefined;
+  return `
+    <div class="tc-row"><span class="tc-key">FC</span><span class="tc-val ${hasFc ? '' : 'empty-val'}">${hasFc ? fc : 'Not logged'}</span></div>
+    <div class="tc-row"><span class="tc-key">PH</span><span class="tc-val ${hasPh ? '' : 'empty-val'}">${hasPh ? ph.toFixed(1) : 'Not logged'}</span></div>
+  `;
+}
+
+async function renderTodayCheck(){
+  const wrap = document.getElementById('todayCheckWrap');
+  const content = document.getElementById('todayCheckContent');
+  if (!state.outlet) { wrap.style.display = 'none'; return; }
+
+  wrap.style.display = 'block';
+  content.innerHTML = '<div class="tc-empty">Loading…</div>';
+
+  await loadHistoryData();
+
+  if (historyData === false) {
+    content.innerHTML = '<div class="tc-empty">Could not load today\'s readings right now.</div>';
+    return;
+  }
+
+  const todayKey = toISODateLocal(new Date());
+  const records = historyData[state.outlet] || [];
+  const rec = records.find(r => r.date === todayKey);
+
+  if (!rec) {
+    content.innerHTML = `<div class="tc-empty">No morning or afternoon reading logged yet today for ${OUTLETS[state.outlet].name}.</div>`;
+    return;
+  }
+
+  content.innerHTML = `
+    <div class="tc-grid">
+      <div class="tc-block">
+        <div class="tc-session">Morning</div>
+        ${tcValBlock(rec.fc.morning, rec.ph.morning)}
+      </div>
+      <div class="tc-block">
+        <div class="tc-session">Afternoon</div>
+        ${tcValBlock(rec.fc.afternoon, rec.ph.afternoon)}
+      </div>
+    </div>
+  `;
+}
+</script>
+</body>
+</html>
