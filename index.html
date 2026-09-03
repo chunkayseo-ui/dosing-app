@@ -89,6 +89,15 @@
   .dose-value.cl{color:var(--readout-cl);}
   .dose-value.acid{color:var(--readout-acid);}
   .readout-foot{margin-top:16px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.12); font-size:12px; color:#8FB3B3; position:relative;}
+  .share-btn{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    width:100%; margin-top:14px; padding:12px;
+    background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
+    border-radius:12px; color:#fff; font-family:'Inter',sans-serif; font-weight:600; font-size:14px;
+    cursor:pointer; position:relative;
+  }
+  .share-btn:active{background:rgba(255,255,255,0.18);}
+  .share-btn svg{flex:none;}
   .route-card iframe{width:100%; border:none; border-radius:12px; display:block;}
   .route-card .route-empty{font-size:13px; color:var(--ink-soft); padding:8px 2px;}
 
@@ -384,7 +393,12 @@ function renderReadout(){
       <div class="dose-block"><div class="dose-label">Acid</div><div class="dose-value acid">${fmtAmt(dose.acid, dose.acidUnit)}</div></div>
     </div>
     <div class="readout-foot">${state.schedule === 'weekday' ? 'Weekday (Mon–Fri)' : 'Weekend'} dosing</div>
+    <button class="share-btn" id="shareResultBtn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+      Share Result
+    </button>
   `;
+  document.getElementById('shareResultBtn').onclick = () => shareResultImage(dose);
 }
 
 function render(){
@@ -857,6 +871,120 @@ async function renderHistoryCard(){
     </div>
     <div class="hist-note">⚠ flags a night FC reading higher than the afternoon one — worth a retest before dosing off it.</div>
   `;
+}
+
+// ---------- Share result as image ----------
+async function shareResultImage(dose){
+  const btn = document.getElementById('shareResultBtn');
+  const originalLabel = btn.innerHTML;
+  btn.innerHTML = 'Preparing…';
+  btn.disabled = true;
+
+  try {
+    const poolName = OUTLETS[state.outlet].name;
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    const dayStr = now.toLocaleDateString('en-US', { weekday: 'long' });
+    const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    const scheduleStr = state.schedule === 'weekday' ? 'Weekday (Mon\u2013Fri)' : 'Weekend';
+    const fcStr = fmtFc(state.fc);
+    const phStr = state.ph.toFixed(1);
+    const clStr = fmtAmt(dose.cl, dose.clUnit);
+    const acidStr = fmtAmt(dose.acid, dose.acidUnit);
+
+    const W = 900, H = 1120, scale = 2;
+    const canvas = document.createElement('canvas');
+    canvas.width = W * scale; canvas.height = H * scale;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(scale, scale);
+
+    const grad = ctx.createLinearGradient(0, 0, 0, H);
+    grad.addColorStop(0, '#123138');
+    grad.addColorStop(1, '#0C2B30');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.fillStyle = 'rgba(127,231,196,0.06)';
+    ctx.beginPath();
+    ctx.arc(0, 0, 420, 0, Math.PI * 2);
+    ctx.fill();
+
+    let y = 90;
+    ctx.fillStyle = '#7FE7C4';
+    ctx.font = '600 26px -apple-system, Helvetica, Arial, sans-serif';
+    ctx.fillText('DOSING RESULT', 60, y);
+
+    y += 64;
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = '700 56px -apple-system, Helvetica, Arial, sans-serif';
+    ctx.fillText(poolName, 60, y);
+
+    y += 48;
+    ctx.fillStyle = '#B7D6D6';
+    ctx.font = '500 26px -apple-system, Helvetica, Arial, sans-serif';
+    ctx.fillText(`${dayStr}, ${dateStr}  \u00b7  ${timeStr}`, 60, y);
+
+    y += 70;
+    ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(60, y); ctx.lineTo(W - 60, y); ctx.stroke();
+
+    y += 60;
+    ctx.fillStyle = '#8FB3B3';
+    ctx.font = '600 22px -apple-system, Helvetica, Arial, sans-serif';
+    ctx.fillText('SCHEDULE', 60, y);
+    ctx.fillText('FC', 400, y);
+    ctx.fillText('PH', 620, y);
+
+    y += 54;
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = '700 34px -apple-system, Helvetica, Arial, sans-serif';
+    ctx.fillText(scheduleStr, 60, y);
+    ctx.fillText(fcStr, 400, y);
+    ctx.fillText(phStr, 620, y);
+
+    y += 80;
+    ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+    ctx.beginPath(); ctx.moveTo(60, y); ctx.lineTo(W - 60, y); ctx.stroke();
+
+    y += 90;
+    ctx.fillStyle = '#8FB3B3';
+    ctx.font = '600 24px -apple-system, Helvetica, Arial, sans-serif';
+    ctx.fillText('CHLORINE', 60, y);
+    ctx.fillText('ACID', 480, y);
+
+    y += 90;
+    ctx.fillStyle = '#7FE7C4';
+    ctx.font = '700 84px -apple-system, Helvetica, Arial, sans-serif';
+    ctx.fillText(clStr, 60, y);
+    ctx.fillStyle = '#FFC97A';
+    ctx.fillText(acidStr, 480, y);
+
+    ctx.fillStyle = '#5C7C7C';
+    ctx.font = '500 20px -apple-system, Helvetica, Arial, sans-serif';
+    ctx.fillText('Dosing Lookup', 60, H - 60);
+
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+    const file = new File([blob], `dosing-${state.outlet}-${toISODateLocal(now)}.png`, { type: 'image/png' });
+
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({ files: [file], title: 'Dosing Result', text: `${poolName} dosing result` });
+    } else {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = file.name;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+      alert('Sharing isn\u2019t supported here \u2014 the image has been downloaded instead. You can attach it to Telegram manually.');
+    }
+  } catch (err) {
+    if (err && err.name !== 'AbortError') {
+      alert('Could not share the image. Please try again.');
+    }
+  } finally {
+    btn.innerHTML = originalLabel;
+    btn.disabled = false;
+  }
 }
 
 loadData();
