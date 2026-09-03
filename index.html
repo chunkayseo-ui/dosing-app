@@ -45,6 +45,8 @@
   .refresh-btn{margin-left:auto; border:none; background:none; color:var(--teal); font-weight:600; font-size:11.5px; cursor:pointer; padding:2px 4px;}
   .card{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:16px; margin-bottom:14px;}
   .label{font-size:12px; font-weight:600; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px;}
+  .card-compact{padding:12px 16px;}
+  .card-compact .label{margin-bottom:8px;}
   select{
     width:100%; appearance:none; -webkit-appearance:none;
     background:var(--surface) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9"><path d="M1 1L7 7L13 1" stroke="%230A5259" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat right 14px center;
@@ -55,12 +57,14 @@
   .seg button{flex:1; border:none; background:transparent; padding:10px 8px; border-radius:9px; font-family:'Inter',sans-serif; font-weight:600; font-size:13.5px; color:var(--ink-soft); cursor:pointer;}
   .seg button.active{background:var(--teal); color:#fff;}
   .auto-note{font-size:11.5px; color:var(--ink-soft); margin-top:8px;}
-  .chips{display:flex; flex-wrap:wrap; gap:8px;}
-  .chip{border:1.5px solid var(--border); background:var(--bg); color:var(--ink); font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:14.5px; padding:10px 14px; border-radius:10px; cursor:pointer; min-width:56px; text-align:center;}
+  .chips{display:flex; flex-wrap:wrap; gap:6px;}
+  .chip{border:1.5px solid var(--border); background:var(--bg); color:var(--ink); font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:12.5px; padding:6px 9px; border-radius:8px; cursor:pointer; min-width:36px; text-align:center;}
   .chip.neg{border-color:rgba(193,84,61,0.3); background:rgba(193,84,61,0.07); color:var(--warn);}
   .chip.pos{border-color:rgba(14,124,134,0.3); background:rgba(14,124,134,0.07); color:var(--teal-deep);}
   .chip.active{background:var(--teal-deep); border-color:var(--teal-deep); color:#fff;}
   .chip.neg.active{background:var(--warn); border-color:var(--warn); color:#fff;}
+  .fc-toggle{background:transparent; border:none; padding:0; color:var(--teal); font-family:'Inter',sans-serif; font-weight:600; font-size:11.5px; cursor:pointer;}
+  .card-head-row{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;}
   .readout{background:var(--readout-bg); border-radius:18px; padding:20px 18px 18px; color:#fff; position:relative; overflow:hidden;}
   .readout::before{content:""; position:absolute; inset:0; background:radial-gradient(120% 100% at 0% 0%, rgba(127,231,196,0.08), transparent 60%);}
   .readout-title{
@@ -85,6 +89,36 @@
   .dose-value.cl{color:var(--readout-cl);}
   .dose-value.acid{color:var(--readout-acid);}
   .readout-foot{margin-top:16px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.12); font-size:12px; color:#8FB3B3; position:relative;}
+  .route-card iframe{width:100%; border:none; border-radius:12px; display:block;}
+  .route-card .route-empty{font-size:13px; color:var(--ink-soft); padding:8px 2px;}
+
+  .hist-table-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:0 -16px; padding:0 16px;}
+  .hist-scroll-hint{font-size:10.5px; color:var(--ink-soft); margin-bottom:6px;}
+  .hist-table{width:100%; min-width:560px; border-collapse:collapse; font-size:12.5px;}
+  .hist-table th{
+    text-align:center; font-size:10.5px; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--ink-soft); font-weight:600; padding:0 6px 8px; border-bottom:1.5px solid var(--border);
+  }
+  .hist-table td{
+    text-align:center; padding:9px 6px; border-bottom:1px solid var(--border);
+    font-family:'IBM Plex Mono',monospace; font-weight:500; white-space:nowrap;
+  }
+  .hist-table tr:last-child td{border-bottom:none;}
+  .hist-date{font-family:'Inter',sans-serif !important; font-weight:600 !important; color:var(--ink);}
+  .hist-session{color:var(--ink-soft); font-size:10px; display:block; font-family:'Inter',sans-serif;}
+  .hist-flag{color:var(--warn); font-weight:700;}
+  .hist-empty{font-size:13px; color:var(--ink-soft); padding:8px 2px;}
+  .hist-note{font-size:11px; color:var(--ink-soft); margin-top:10px; line-height:1.4;}
+
+  .tc-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .tc-block{background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:12px;}
+  .tc-session{font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; margin-bottom:8px;}
+  .tc-row{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:4px;}
+  .tc-row:last-child{margin-bottom:0;}
+  .tc-key{font-size:11.5px; color:var(--ink-soft);}
+  .tc-val{font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:16px; color:var(--ink);}
+  .tc-val.empty-val{color:var(--ink-soft); font-weight:500; font-size:13px;}
+  .tc-empty{font-size:13px; color:var(--ink-soft); padding:4px 2px;}
   .empty{text-align:center; color:var(--ink-soft); font-size:13.5px; padding:18px 8px;}
   .note{font-size:12px; color:var(--ink-soft); line-height:1.5; padding:0 4px; margin-top:2px;}
 
@@ -139,12 +173,20 @@
     <div class="auto-note" id="autoNote"></div>
   </div>
 
-  <div class="card">
-    <div class="label">FC</div>
+  <div class="card" id="todayCheckWrap" style="display:none;">
+    <div class="label">Today's Earlier Readings</div>
+    <div id="todayCheckContent"></div>
+  </div>
+
+  <div class="card card-compact">
+    <div class="card-head-row">
+      <div class="label" style="margin-bottom:0;">FC</div>
+      <button class="fc-toggle" id="fcNegToggle" style="display:none;">Show below 0</button>
+    </div>
     <div class="chips" id="fcChips"></div>
   </div>
 
-  <div class="card">
+  <div class="card card-compact">
     <div class="label">PH</div>
     <div class="chips" id="phChips"></div>
   </div>
@@ -161,6 +203,16 @@
     <div id="readoutBody">
       <div class="empty">Select FC and PH to see dosing</div>
     </div>
+  </div>
+
+  <div class="card" id="historyCardWrap" style="display:none;">
+    <div class="label" id="historyLabel">Same-Day History</div>
+    <div id="historyContent"></div>
+  </div>
+
+  <div class="card route-card" id="routeCardWrap" style="display:none;">
+    <div class="label">Dosing Route</div>
+    <div id="routeContent"></div>
   </div>
 
   <p class="note">Bicarb / Salt dosing isn't included yet. Dosing numbers load from <code>data.csv</code> in this repo — edit that file to update amounts.</p>
@@ -242,7 +294,7 @@ let OUTLETS = {};
 const tg = window.Telegram ? window.Telegram.WebApp : null;
 if (tg) { tg.ready(); tg.expand(); }
 
-let state = { outlet: null, schedule: (new Date().getDay() === 0 || new Date().getDay() === 6) ? 'weekend' : 'weekday', fc: null, ph: null };
+let state = { outlet: null, schedule: (new Date().getDay() === 0 || new Date().getDay() === 6) ? 'weekend' : 'weekday', fc: null, ph: null, showNegFc: false };
 
 const outletSelect = document.getElementById('outletSelect');
 const outletName = document.getElementById('outletName');
@@ -259,8 +311,8 @@ const todayName = new Date().toLocaleDateString('en-US', { weekday: 'long' });
 autoNote.textContent = `Auto-detected from today (${todayName}) — tap to override.`;
 
 const todayDate = new Date();
-document.getElementById('dateDay').textContent = todayDate.toLocaleDateString('en-US', { weekday: 'long' });
-document.getElementById('dateFull').textContent = todayDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+document.getElementById('dateDay').textContent = todayDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+document.getElementById('dateFull').textContent = todayDate.toLocaleDateString('en-US', { weekday: 'long' }) + ', ' + todayDate.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 
 function setSyncStatus(kind, text){
   document.getElementById('syncDot').className = 'sync-dot ' + kind;
@@ -282,7 +334,9 @@ function renderScheduleToggle(){
 function renderChips(){
   const table = currentTable();
   fcChipsEl.innerHTML = '';
+  const hasNeg = table.fc.some(v => v < 0);
   table.fc.forEach(v => {
+    if (v < 0 && !state.showNegFc && v !== state.fc) return; // hidden unless toggled or already selected
     const c = document.createElement('button');
     let cls = 'chip';
     if (v < 0) cls += ' neg'; else if (v > 0) cls += ' pos';
@@ -292,6 +346,14 @@ function renderChips(){
     c.onclick = () => { state.fc = v; if (tg) tg.HapticFeedback.impactOccurred('light'); render(); };
     fcChipsEl.appendChild(c);
   });
+  const negToggle = document.getElementById('fcNegToggle');
+  if (hasNeg) {
+    negToggle.style.display = '';
+    negToggle.textContent = state.showNegFc ? 'Hide below 0' : 'Show below 0';
+    negToggle.onclick = () => { state.showNegFc = !state.showNegFc; renderChips(); };
+  } else {
+    negToggle.style.display = 'none';
+  }
   phChipsEl.innerHTML = '';
   table.ph.forEach(v => {
     const c = document.createElement('button');
@@ -305,7 +367,7 @@ function renderChips(){
 function renderReadout(){
   const table = currentTable();
   document.getElementById('readoutPool').textContent = OUTLETS[state.outlet].name;
-  document.getElementById('readoutDate').textContent = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' }) + ', ' + new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('readoutDate').textContent = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) + ', ' + new Date().toLocaleDateString('en-US', { weekday: 'long' }) + ', ' + new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
   if (state.fc === null || !table.fc.includes(state.fc)) state.fc = null;
   if (state.ph === null || !table.ph.includes(state.ph)) state.ph = null;
   if (state.fc === null || state.ph === null) {
@@ -335,6 +397,9 @@ function render(){
     readoutBody.innerHTML = '<div class="empty">Select a swimming pool to begin</div>';
     fcChipsEl.innerHTML = '';
     phChipsEl.innerHTML = '';
+    document.getElementById('historyCardWrap').style.display = 'none';
+    document.getElementById('todayCheckWrap').style.display = 'none';
+    document.getElementById('routeCardWrap').style.display = 'none';
     return;
   }
   const o = OUTLETS[state.outlet];
@@ -343,6 +408,9 @@ function render(){
   renderScheduleToggle();
   renderChips();
   renderReadout();
+  renderHistoryCard();
+  renderTodayCheck();
+  renderRouteCard();
 }
 
 outletSelect.onchange = () => { state.outlet = outletSelect.value; state.fc = null; state.ph = null; render(); };
@@ -411,8 +479,443 @@ async function checkHoliday(){
   } catch(e){ /* silently skip if holidays.csv missing */ }
 }
 
+
+// ---------- Dosing route embed ----------
+const ROUTE_CSS = `
+  :root{
+    --ink:#0F2430;
+    --ink-60:#546b78;
+    --ink-30:#9aabb4;
+    --rule:#d7e0e4;
+    --paper:#ffffff;
+    --page:#e4eaed;
+    --deck:#E9B47F;
+    --deck-edge:#C88C55;
+    --water:#4BAFE0;
+    --water-edge:#2E8CBE;
+    --ledge:#2E8CBE;
+    --route:#E2382C;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; padding:28px 20px 60px;
+    background:var(--page);
+    color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    font-size:15px; line-height:1.5;
+  }
+
+  .sheet{max-width:960px;margin:0 auto}
+
+  .masthead{
+    background:var(--ink); color:#fff; border-radius:4px;
+    padding:22px 26px 20px; margin-bottom:20px;
+  }
+  .masthead h1{
+    font-family:"Barlow Condensed",Impact,sans-serif;
+    font-weight:700; font-size:44px; line-height:.95; letter-spacing:.01em;
+    text-transform:uppercase; margin:0;
+  }
+  .masthead p{margin:8px 0 0;color:#b9c9d2;font-size:14px;max-width:64ch}
+  .stamp{
+    display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;
+    letter-spacing:.14em;text-transform:uppercase;color:#7fd0ff;margin-bottom:10px;
+  }
+
+  .legend{
+    background:var(--paper);border-radius:4px;padding:18px 22px;margin-bottom:22px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px 26px;
+  }
+  .legend h2{
+    grid-column:1/-1;margin:0 0 2px;font-family:"Barlow Condensed",sans-serif;
+    font-size:20px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
+  }
+  .lg{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;line-height:1.35}
+  .lg svg{flex:0 0 auto;margin-top:1px}
+  .lg b{display:block;font-weight:600}
+  .lg span{color:var(--ink-60)}
+
+  .card{background:var(--paper);border-radius:4px;overflow:hidden;margin-bottom:22px}
+  .card-head{
+    display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+    padding:14px 22px;border-bottom:3px solid var(--ink);
+  }
+  .code{
+    font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:13px;letter-spacing:.1em;
+    background:var(--ink);color:#fff;padding:5px 10px;border-radius:3px;
+  }
+  .card-head h3{
+    margin:0;font-family:"Barlow Condensed",sans-serif;font-weight:600;
+    font-size:29px;text-transform:uppercase;letter-spacing:.02em;line-height:1;
+  }
+  .card-head .kind{
+    margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:11px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--ink-60);
+  }
+
+  .body{display:grid;grid-template-columns:1.55fr 1fr;gap:0}
+  .plan{padding:16px 10px 8px 18px}
+  .plan svg{width:100%;height:auto;display:block}
+
+  .side{border-left:1px solid var(--rule);padding:18px 22px 20px}
+  .side h4{
+    margin:0 0 10px;font-family:"Barlow Condensed",sans-serif;font-size:16px;
+    text-transform:uppercase;letter-spacing:.08em;color:var(--ink-60);font-weight:600;
+  }
+  .side h4+h4{margin-top:22px}
+  dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:7px 12px;font-size:14px}
+  dt{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+     text-transform:uppercase;color:var(--ink-30);padding-top:3px}
+  dd{margin:0;font-weight:500}
+  .note{font-size:13px;color:var(--ink-60);margin:18px 0 0;padding-top:12px;border-top:1px solid var(--rule)}
+
+
+  .footnote{max-width:960px;margin:0 auto;font-size:13px;color:var(--ink-60)}
+
+  @media (max-width:720px){
+    body{padding:12px 8px 32px}
+    .masthead{padding:18px 18px 16px}
+    .masthead h1{font-size:30px}
+    .legend{padding:14px 16px;gap:12px 18px}
+    .body{grid-template-columns:1fr}
+    .side{border-left:0;border-top:1px solid var(--rule);padding:14px 16px 18px}
+    .plan{padding:10px 2px 2px}
+    .card-head{padding:12px 16px}
+    .card-head h3{font-size:24px}
+    .card-head .kind{margin-left:0;flex-basis:100%}
+    dl{grid-template-columns:1fr;gap:0}
+    dt{padding-top:10px}
+    dd{padding-bottom:2px}
+    .tap{display:block}
+  }
+
+  .tap{display:none;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-30);text-align:center;padding:2px 0 8px}
+  .plan{cursor:zoom-in}
+
+  .viewer{position:fixed;inset:0;background:#0F2430;z-index:99;display:none;flex-direction:column}
+  .viewer.on{display:flex}
+  .viewer-bar{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#fff}
+  .viewer-title{font-family:"Barlow Condensed",sans-serif;font-size:20px;font-weight:600;
+    text-transform:uppercase;letter-spacing:.05em;margin-right:auto}
+  .viewer-bar button{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase;color:#0F2430;background:#fff;border:0;border-radius:3px;padding:8px 12px}
+  .viewer-stage{flex:1;display:flex;align-items:center;justify-content:center;padding:6px;overflow:auto}
+  .viewer-stage svg{background:#fff;border-radius:4px;width:100%;height:auto;max-height:100%}
+  .viewer.rot .viewer-stage{overflow:hidden}
+  .viewer.rot .viewer-stage svg{width:calc(100vh - 70px);max-height:none;transform:rotate(90deg)}
+
+  @media print{
+    @page{size:A4 portrait;margin:11mm}
+    body{background:#fff;padding:0}
+    .masthead,.legend{break-inside:avoid}
+    .card{break-inside:avoid;break-after:page;margin-bottom:0;border:1px solid var(--rule)}
+    .card:last-of-type{break-after:auto}
+    .footnote,.noprint,.tap,.viewer{display:none}
+  }
+`;
+const ROUTE_VIEWER_HTML = `<div class="viewer" id="viewer">
+  <div class="viewer-bar">
+    <span class="viewer-title"></span>
+    <button type="button" id="rot">Rotate</button>
+    <button type="button" id="cls">Close</button>
+  </div>
+  <div class="viewer-stage" id="stage"></div>
+</div>`;
+const ROUTE_VIEWER_JS = `
+(function(){
+  var v=document.getElementById('viewer'), stage=document.getElementById('stage'),
+      title=v.querySelector('.viewer-title');
+  var scale=1, tx=0, ty=0, startDist=0, startScale=1, panStart=null, panOrigin=null, svgEl=null, lastTap=0;
+
+  function applyTransform(){
+    if(svgEl) svgEl.style.transform='translate('+tx+'px,'+ty+'px) scale('+scale+')';
+  }
+  function resetTransform(){ scale=1; tx=0; ty=0; applyTransform(); }
+  function dist(t1,t2){ var dx=t1.clientX-t2.clientX, dy=t1.clientY-t2.clientY; return Math.sqrt(dx*dx+dy*dy); }
+
+  document.querySelectorAll('.plan').forEach(function(plan){
+    plan.addEventListener('click',function(){
+      var svg=plan.querySelector('svg'); if(!svg) return;
+      var card=plan.closest('.card');
+      title.textContent=card?card.querySelector('h3').textContent:'';
+      stage.innerHTML='';
+      svgEl=svg.cloneNode(true);
+      svgEl.style.transformOrigin='center center';
+      svgEl.style.touchAction='none';
+      svgEl.style.willChange='transform';
+      stage.appendChild(svgEl);
+      resetTransform();
+      v.classList.remove('rot'); v.classList.add('on');
+      document.body.style.overflow='hidden';
+    });
+  });
+
+  stage.addEventListener('touchstart', function(e){
+    if(e.touches.length===2){
+      e.preventDefault();
+      startDist=dist(e.touches[0], e.touches[1]);
+      startScale=scale;
+    } else if(e.touches.length===1 && scale>1){
+      panStart={x:e.touches[0].clientX, y:e.touches[0].clientY};
+      panOrigin={x:tx, y:ty};
+    }
+  }, {passive:false});
+
+  stage.addEventListener('touchmove', function(e){
+    if(e.touches.length===2 && startDist){
+      e.preventDefault();
+      var newDist=dist(e.touches[0], e.touches[1]);
+      scale=Math.min(4, Math.max(1, startScale*(newDist/startDist)));
+      applyTransform();
+    } else if(e.touches.length===1 && panStart){
+      e.preventDefault();
+      tx=panOrigin.x+(e.touches[0].clientX-panStart.x);
+      ty=panOrigin.y+(e.touches[0].clientY-panStart.y);
+      applyTransform();
+    }
+  }, {passive:false});
+
+  stage.addEventListener('touchend', function(e){
+    if(e.touches.length<2) startDist=0;
+    if(e.touches.length<1) panStart=null;
+    if(scale<=1.02) resetTransform();
+    var now=Date.now();
+    if(now-lastTap<300 && e.touches.length===0){
+      if(scale>1){ resetTransform(); } else { scale=2; applyTransform(); }
+    }
+    lastTap=now;
+  });
+
+  document.getElementById('rot').addEventListener('click',function(){v.classList.toggle('rot');});
+  document.getElementById('cls').addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+  function close(){v.classList.remove('on','rot');stage.innerHTML='';document.body.style.overflow='';resetTransform();svgEl=null;}
+})();
+`;
+const ROUTE_FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">';
+
+let routeDoc = null;
+let routeDocPromise = null;
+
+function loadRouteDoc(){
+  if (routeDocPromise) return routeDocPromise;
+  routeDocPromise = fetch('./dosing-route.html').then(res => {
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.text();
+  }).then(text => {
+    routeDoc = new DOMParser().parseFromString(text, 'text/html');
+    return routeDoc;
+  }).catch(() => { routeDoc = false; return null; });
+  return routeDocPromise;
+}
+
+function findRouteCard(outletKey){
+  if (!routeDoc) return null;
+  const cards = routeDoc.querySelectorAll('.card');
+  for (const card of cards) {
+    const codeEl = card.querySelector('.card-head .code');
+    if (codeEl && codeEl.textContent.trim().toUpperCase() === outletKey.toUpperCase()) {
+      return card.outerHTML;
+    }
+  }
+  return null;
+}
+
+async function renderRouteCard(){
+  const wrap = document.getElementById('routeCardWrap');
+  const content = document.getElementById('routeContent');
+  if (!state.outlet) { wrap.style.display = 'none'; return; }
+
+  await loadRouteDoc();
+
+  if (routeDoc === false) {
+    wrap.style.display = 'block';
+    content.innerHTML = '<div class="route-empty">Could not load dosing-route.html — make sure it\'s uploaded to the same repo.</div>';
+    return;
+  }
+
+  const cardHtml = findRouteCard(state.outlet);
+  wrap.style.display = 'block';
+
+  if (!cardHtml) {
+    content.innerHTML = `<div class="route-empty">No dosing route on file yet for ${OUTLETS[state.outlet].name}.</div>`;
+    return;
+  }
+
+  const iframe = document.createElement('iframe');
+  iframe.setAttribute('scrolling', 'no');
+  content.innerHTML = '';
+  content.appendChild(iframe);
+
+  const srcdoc = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">${ROUTE_FONTS}<style>${ROUTE_CSS}
+    body{padding:0; background:transparent;}
+    .card{margin:0;}
+    .plan{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+    .plan svg{width:170%; max-width:none;}
+  </style></head><body><div style="font-family:'IBM Plex Sans',sans-serif;font-size:10.5px;color:#9aabb4;text-align:center;padding:6px 0 0;">Swipe left/right on the diagram to see the full pool ↔</div>${cardHtml}${ROUTE_VIEWER_HTML}<script>${ROUTE_VIEWER_JS}<\/script></body></html>`;
+
+  iframe.srcdoc = srcdoc;
+  iframe.onload = () => {
+    try {
+      const doc = iframe.contentDocument;
+      const h = doc.body.scrollHeight;
+      iframe.style.height = (h + 20) + 'px';
+      const plan = doc.querySelector('.plan');
+      if (plan) {
+        plan.scrollLeft = (plan.scrollWidth - plan.clientWidth) / 2;
+      }
+    } catch(e){}
+  };
+}
+
+// ---------- Same-day water test history ----------
+const HISTORY_API_URL = 'https://script.google.com/macros/s/AKfycbwYJLfkw5lwKnjwqmEtuRiREzbahnf2l63YhmX_7jMR9uqM9MpeqoxeVTTVw5rc76eZ6g/exec';
+
+let historyData = null;
+let historyPromise = null;
+
+function loadHistoryData(){
+  if (historyPromise) return historyPromise;
+  historyPromise = fetch(HISTORY_API_URL).then(res => {
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.json();
+  }).then(json => { historyData = json; return json; })
+    .catch(() => { historyData = false; return null; });
+  return historyPromise;
+}
+
+function fmtFcHist(v){
+  if (v === null || v === undefined) return '–';
+  return String(v);
+}
+function fmtPhHist(v){
+  if (v === null || v === undefined) return '–';
+  return v.toFixed(1);
+}
+
+async function renderHistoryCard(){
+  const wrap = document.getElementById('historyCardWrap');
+  const content = document.getElementById('historyContent');
+  const label = document.getElementById('historyLabel');
+  if (!state.outlet) { wrap.style.display = 'none'; return; }
+
+  const today = new Date();
+  const weekdayName = today.toLocaleDateString('en-US', { weekday: 'long' });
+  label.textContent = `Past ${weekdayName}s`;
+  wrap.style.display = 'block';
+  content.innerHTML = '<div class="hist-empty">Loading history…</div>';
+
+  await loadHistoryData();
+
+  if (historyData === false) {
+    content.innerHTML = '<div class="hist-empty">Could not load water test history right now.</div>';
+    return;
+  }
+
+  const records = (historyData[state.outlet] || []).filter(rec => {
+    const d = new Date(rec.date + 'T00:00:00');
+    return d.getDay() === today.getDay();
+  });
+
+  if (records.length === 0) {
+    content.innerHTML = `<div class="hist-empty">No past ${weekdayName} records yet for ${OUTLETS[state.outlet].name}.</div>`;
+    return;
+  }
+
+  const rows = records.map(rec => {
+    const d = new Date(rec.date + 'T00:00:00');
+    const dLabel = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    const fcDrop = (rec.fc.night !== null && rec.fc.afternoon !== null && rec.fc.night > rec.fc.afternoon);
+    const fcNightCell = fcDrop
+      ? `<span class="hist-flag" title="Night FC is higher than afternoon — expected to decrease">${fmtFcHist(rec.fc.night)} \u26A0</span>`
+      : fmtFcHist(rec.fc.night);
+    return `
+      <tr>
+        <td class="hist-date">${dLabel}</td>
+        <td>${fmtFcHist(rec.fc.morning)}<span class="hist-session">AM</span></td>
+        <td>${fmtFcHist(rec.fc.afternoon)}<span class="hist-session">PM</span></td>
+        <td>${fcNightCell}<span class="hist-session">Night</span></td>
+        <td>${fmtPhHist(rec.ph.night)}<span class="hist-session">Night PH</span></td>
+        <td>${rec.dosing.chlorine || '–'}</td>
+        <td>${rec.dosing.acid || '–'}</td>
+        <td>${rec.attended !== null && rec.attended !== undefined ? rec.attended : '–'}</td>
+      </tr>`;
+  }).join('');
+
+  content.innerHTML = `
+    <div class="hist-scroll-hint">Swipe left/right to see all columns →</div>
+    <div class="hist-table-wrap">
+    <table class="hist-table">
+      <thead><tr>
+        <th>Date</th><th>FC AM</th><th>FC PM</th><th>FC Night</th><th>PH Night</th><th>Chlorine</th><th>Acid</th><th>Attended</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    </div>
+    <div class="hist-note">⚠ flags a night FC reading higher than the afternoon one — worth a retest before dosing off it.</div>
+  `;
+}
+
 loadData();
 checkHoliday();
+
+// ---------- Today's earlier readings ----------
+function toISODateLocal(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+function tcValBlock(fc, ph){
+  const hasFc = fc !== null && fc !== undefined;
+  const hasPh = ph !== null && ph !== undefined;
+  return `
+    <div class="tc-row"><span class="tc-key">FC</span><span class="tc-val ${hasFc ? '' : 'empty-val'}">${hasFc ? fc : 'Not logged'}</span></div>
+    <div class="tc-row"><span class="tc-key">PH</span><span class="tc-val ${hasPh ? '' : 'empty-val'}">${hasPh ? ph.toFixed(1) : 'Not logged'}</span></div>
+  `;
+}
+
+async function renderTodayCheck(){
+  const wrap = document.getElementById('todayCheckWrap');
+  const content = document.getElementById('todayCheckContent');
+  if (!state.outlet) { wrap.style.display = 'none'; return; }
+
+  wrap.style.display = 'block';
+  content.innerHTML = '<div class="tc-empty">Loading…</div>';
+
+  await loadHistoryData();
+
+  if (historyData === false) {
+    content.innerHTML = '<div class="tc-empty">Could not load today\'s readings right now.</div>';
+    return;
+  }
+
+  const todayKey = toISODateLocal(new Date());
+  const records = historyData[state.outlet] || [];
+  const rec = records.find(r => r.date === todayKey);
+
+  if (!rec) {
+    content.innerHTML = `<div class="tc-empty">No morning or afternoon reading logged yet today for ${OUTLETS[state.outlet].name}.</div>`;
+    return;
+  }
+
+  content.innerHTML = `
+    <div class="tc-grid">
+      <div class="tc-block">
+        <div class="tc-session">Morning</div>
+        ${tcValBlock(rec.fc.morning, rec.ph.morning)}
+      </div>
+      <div class="tc-block">
+        <div class="tc-session">Afternoon</div>
+        ${tcValBlock(rec.fc.afternoon, rec.ph.afternoon)}
+      </div>
+    </div>
+  `;
+}
 </script>
 </body>
 </html>
