@@ -903,6 +903,9 @@ async function renderTodayCheck(){
     return;
   }
 
+  const hasAttended = rec.attended8pm !== null && rec.attended8pm !== undefined;
+  const hasExpected = rec.expected7am !== null && rec.expected7am !== undefined;
+
   content.innerHTML = `
     <div class="tc-grid">
       <div class="tc-block">
@@ -912,6 +915,16 @@ async function renderTodayCheck(){
       <div class="tc-block">
         <div class="tc-session">Afternoon</div>
         ${tcValBlock(rec.fc.afternoon, rec.ph.afternoon)}
+      </div>
+    </div>
+    <div class="tc-grid" style="margin-top:10px;">
+      <div class="tc-block">
+        <div class="tc-session">Attended (8pm)</div>
+        <div class="tc-row"><span class="tc-key">Count</span><span class="tc-val ${hasAttended ? '' : 'empty-val'}">${hasAttended ? rec.attended8pm : 'Not logged'}</span></div>
+      </div>
+      <div class="tc-block">
+        <div class="tc-session">Expected (7am)</div>
+        <div class="tc-row"><span class="tc-key">Count</span><span class="tc-val ${hasExpected ? '' : 'empty-val'}">${hasExpected ? rec.expected7am : 'Not logged'}</span></div>
       </div>
     </div>
   `;
