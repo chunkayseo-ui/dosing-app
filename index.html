@@ -870,12 +870,14 @@ function toISODateLocal(d){
   return `${y}-${m}-${day}`;
 }
 
-function tcValBlock(fc, ph){
+function tcValBlock(fc, ph, temp){
   const hasFc = fc !== null && fc !== undefined;
   const hasPh = ph !== null && ph !== undefined;
+  const hasTemp = temp !== null && temp !== undefined;
   return `
     <div class="tc-row"><span class="tc-key">FC</span><span class="tc-val ${hasFc ? '' : 'empty-val'}">${hasFc ? fc : 'Not logged'}</span></div>
     <div class="tc-row"><span class="tc-key">PH</span><span class="tc-val ${hasPh ? '' : 'empty-val'}">${hasPh ? ph.toFixed(1) : 'Not logged'}</span></div>
+    <div class="tc-row"><span class="tc-key">Temp</span><span class="tc-val ${hasTemp ? '' : 'empty-val'}">${hasTemp ? temp + '°C' : 'Not logged'}</span></div>
   `;
 }
 
@@ -910,21 +912,21 @@ async function renderTodayCheck(){
     <div class="tc-grid">
       <div class="tc-block">
         <div class="tc-session">Morning</div>
-        ${tcValBlock(rec.fc.morning, rec.ph.morning)}
+        ${tcValBlock(rec.fc.morning, rec.ph.morning, rec.temp ? rec.temp.morning : null)}
       </div>
       <div class="tc-block">
         <div class="tc-session">Afternoon</div>
-        ${tcValBlock(rec.fc.afternoon, rec.ph.afternoon)}
+        ${tcValBlock(rec.fc.afternoon, rec.ph.afternoon, rec.temp ? rec.temp.afternoon : null)}
       </div>
     </div>
     <div class="tc-grid" style="margin-top:10px;">
       <div class="tc-block">
-        <div class="tc-session">Attended (8pm)</div>
-        <div class="tc-row"><span class="tc-key">Count</span><span class="tc-val ${hasAttended ? '' : 'empty-val'}">${hasAttended ? rec.attended8pm : 'Not logged'}</span></div>
-      </div>
-      <div class="tc-block">
         <div class="tc-session">Expected (7am)</div>
         <div class="tc-row"><span class="tc-key">Count</span><span class="tc-val ${hasExpected ? '' : 'empty-val'}">${hasExpected ? rec.expected7am : 'Not logged'}</span></div>
+      </div>
+      <div class="tc-block">
+        <div class="tc-session">Attended (8pm)</div>
+        <div class="tc-row"><span class="tc-key">Count</span><span class="tc-val ${hasAttended ? '' : 'empty-val'}">${hasAttended ? rec.attended8pm : 'Not logged'}</span></div>
       </div>
     </div>
   `;
