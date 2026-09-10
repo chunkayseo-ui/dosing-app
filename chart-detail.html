@@ -246,7 +246,9 @@ function renderChart(){
 
   if (mainChartInstance) { mainChartInstance.destroy(); mainChartInstance = null; }
 
-  let datasets, scalesExtra = {};
+  let datasets, scaleSet = {
+    y: { beginAtZero: true, ticks: { font: { size: 10 } }, grid: { color: '#E9F2F2' } }
+  };
 
   if (chartKind === 'attend') {
     const expected = asc.map(r => r.expected7am);
@@ -266,7 +268,7 @@ function renderChart(){
       { label: 'Afternoon', data: afternoon, borderColor: '#E2933B', backgroundColor: '#E2933B', tension: 0.3, spanGaps: true, pointRadius: days > 30 ? 0 : 3 },
       { label: 'Night', data: night, borderColor: '#C1543D', backgroundColor: '#C1543D', tension: 0.3, spanGaps: true, pointRadius: days > 30 ? 0 : 3 }
     ];
-    scalesExtra = { y: { ticks: { font: { size: 10 }, callback: v => v + '°C' }, grid: { color: '#E9F2F2' } } };
+    scaleSet.y = { ticks: { font: { size: 10 }, callback: v => v + '°C' }, grid: { color: '#E9F2F2' } };
   } else {
     const chlorine = asc.map(r => parseDoseAmount(r.dosing.chlorine, 'chlorine'));
     const acid = asc.map(r => parseDoseAmount(r.dosing.acid, 'acid'));
@@ -275,10 +277,9 @@ function renderChart(){
       { label: 'Chlorine (g)', data: chlorine, borderColor: '#0E7C86', backgroundColor: '#0E7C86', tension: 0.3, spanGaps: true, pointRadius: days > 30 ? 0 : 3, yAxisID: 'yChlorine' },
       { label: 'Acid (ml)', data: acid, borderColor: '#E2933B', backgroundColor: '#E2933B', tension: 0.3, spanGaps: true, pointRadius: days > 30 ? 0 : 3, yAxisID: 'yAcid' }
     ];
-    scalesExtra = {
-      yChlorine: { position: 'left', beginAtZero: true, ticks: { font: { size: 10 }, color: '#0E7C86' }, grid: { color: '#E9F2F2' }, title: { display: true, text: 'g', font: { size: 10 }, color: '#0E7C86' } },
-      yAcid: { position: 'right', beginAtZero: true, ticks: { font: { size: 10 }, color: '#E2933B' }, grid: { display: false }, title: { display: true, text: 'ml', font: { size: 10 }, color: '#E2933B' } }
-    };
+    delete scaleSet.y; // dosing uses two named axes instead of the default one
+    scaleSet.yChlorine = { position: 'left', beginAtZero: true, ticks: { font: { size: 10 }, color: '#0E7C86' }, grid: { color: '#E9F2F2' }, title: { display: true, text: 'g', font: { size: 10 }, color: '#0E7C86' } };
+    scaleSet.yAcid = { position: 'right', beginAtZero: true, ticks: { font: { size: 10 }, color: '#E2933B' }, grid: { display: false }, title: { display: true, text: 'ml', font: { size: 10 }, color: '#E2933B' } };
   }
 
   hideChartEmpty();
@@ -290,9 +291,8 @@ function renderChart(){
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: Object.assign({
-        x: { ticks: { maxTicksLimit: days, autoSkip: days > 21, font: { size: 9 } }, grid: { display: false } },
-        y: { beginAtZero: true, ticks: { font: { size: 10 } }, grid: { color: '#E9F2F2' } }
-      }, scalesExtra)
+        x: { ticks: { maxTicksLimit: days, autoSkip: days > 21, font: { size: 9 } }, grid: { display: false } }
+      }, scaleSet)
     }
   });
 }
