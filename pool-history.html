@@ -132,7 +132,7 @@
 
     <div class="card">
       <div class="label">Trend — Expected vs Attended</div>
-      <div class="chart-wrap"><canvas id="attendChart"></canvas></div>
+      <div class="chart-wrap" id="attendChartWrap"><canvas id="attendChart"></canvas></div>
       <div class="chart-legend">
         <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#0E7C86;"></span>Expected (7am)</div>
         <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#E2933B;"></span>Attended (8pm)</div>
@@ -141,7 +141,7 @@
 
     <div class="card">
       <div class="label">Trend — Pool Temperature</div>
-      <div class="chart-wrap"><canvas id="tempChart"></canvas></div>
+      <div class="chart-wrap" id="tempChartWrap"><canvas id="tempChart"></canvas></div>
       <div class="chart-legend">
         <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#7FE7C4;"></span>Morning</div>
         <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#E2933B;"></span>Afternoon</div>
@@ -342,8 +342,27 @@ function renderHistoryTable(records){
   `;
 }
 
+function last14Days(records){
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 13); // 14-day window including today
+  const cutoffKey = toISODateLocal(cutoff);
+  return records.filter(r => r.date >= cutoffKey).sort((a, b) => a.date < b.date ? -1 : 1);
+}
+
+function hasAnyValue(...arrays){
+  return arrays.some(arr => arr.some(v => v !== null && v !== undefined));
+}
+
+function showChartEmpty(wrapId){
+  document.getElementById(wrapId).innerHTML = `<div class="empty" style="padding-top:70px;">Not enough data logged in the last 14 days yet.</div>`;
+}
+
+function resetCanvas(wrapId, canvasId){
+  document.getElementById(wrapId).innerHTML = `<canvas id="${canvasId}"></canvas>`;
+}
+
 function renderAttendChart(records){
-  const asc = records.slice().sort((a, b) => a.date < b.date ? -1 : 1);
+  const asc = last14Days(records);
   const labels = asc.map(r => {
     const d = new Date(r.date + 'T00:00:00');
     return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
@@ -351,22 +370,25 @@ function renderAttendChart(records){
   const expected = asc.map(r => r.expected7am);
   const attended = asc.map(r => r.attended8pm);
 
+  if (attendChartInstance) { attendChartInstance.destroy(); attendChartInstance = null; }
+  if (!hasAnyValue(expected, attended)) { showChartEmpty('attendChartWrap'); return; }
+  resetCanvas('attendChartWrap', 'attendChart');
+
   const ctx = document.getElementById('attendChart').getContext('2d');
-  if (attendChartInstance) attendChartInstance.destroy();
   attendChartInstance = new Chart(ctx, {
     type: 'line',
     data: {
       labels,
       datasets: [
-        { label: 'Expected', data: expected, borderColor: '#0E7C86', backgroundColor: '#0E7C86', tension: 0.3, spanGaps: true, pointRadius: 2 },
-        { label: 'Attended', data: attended, borderColor: '#E2933B', backgroundColor: '#E2933B', tension: 0.3, spanGaps: true, pointRadius: 2 }
+        { label: 'Expected', data: expected, borderColor: '#0E7C86', backgroundColor: '#0E7C86', tension: 0.3, spanGaps: true, pointRadius: 3 },
+        { label: 'Attended', data: attended, borderColor: '#E2933B', backgroundColor: '#E2933B', tension: 0.3, spanGaps: true, pointRadius: 3 }
       ]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
-        x: { ticks: { maxTicksLimit: 6, font: { size: 10 } }, grid: { display: false } },
+        x: { ticks: { maxTicksLimit: 7, font: { size: 10 } }, grid: { display: false } },
         y: { beginAtZero: true, ticks: { font: { size: 10 } }, grid: { color: '#E9F2F2' } }
       }
     }
@@ -374,7 +396,7 @@ function renderAttendChart(records){
 }
 
 function renderTempChart(records){
-  const asc = records.slice().sort((a, b) => a.date < b.date ? -1 : 1);
+  const asc = last14Days(records);
   const labels = asc.map(r => {
     const d = new Date(r.date + 'T00:00:00');
     return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
@@ -383,23 +405,26 @@ function renderTempChart(records){
   const afternoon = asc.map(r => r.temp ? r.temp.afternoon : null);
   const night = asc.map(r => r.temp ? r.temp.night : null);
 
+  if (tempChartInstance) { tempChartInstance.destroy(); tempChartInstance = null; }
+  if (!hasAnyValue(morning, afternoon, night)) { showChartEmpty('tempChartWrap'); return; }
+  resetCanvas('tempChartWrap', 'tempChart');
+
   const ctx = document.getElementById('tempChart').getContext('2d');
-  if (tempChartInstance) tempChartInstance.destroy();
   tempChartInstance = new Chart(ctx, {
     type: 'line',
     data: {
       labels,
       datasets: [
-        { label: 'Morning', data: morning, borderColor: '#2FA36B', backgroundColor: '#2FA36B', tension: 0.3, spanGaps: true, pointRadius: 2 },
-        { label: 'Afternoon', data: afternoon, borderColor: '#E2933B', backgroundColor: '#E2933B', tension: 0.3, spanGaps: true, pointRadius: 2 },
-        { label: 'Night', data: night, borderColor: '#C1543D', backgroundColor: '#C1543D', tension: 0.3, spanGaps: true, pointRadius: 2 }
+        { label: 'Morning', data: morning, borderColor: '#2FA36B', backgroundColor: '#2FA36B', tension: 0.3, spanGaps: true, pointRadius: 3 },
+        { label: 'Afternoon', data: afternoon, borderColor: '#E2933B', backgroundColor: '#E2933B', tension: 0.3, spanGaps: true, pointRadius: 3 },
+        { label: 'Night', data: night, borderColor: '#C1543D', backgroundColor: '#C1543D', tension: 0.3, spanGaps: true, pointRadius: 3 }
       ]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
-        x: { ticks: { maxTicksLimit: 6, font: { size: 10 } }, grid: { display: false } },
+        x: { ticks: { maxTicksLimit: 7, font: { size: 10 } }, grid: { display: false } },
         y: { ticks: { font: { size: 10 }, callback: v => v + '°C' }, grid: { color: '#E9F2F2' } }
       }
     }
