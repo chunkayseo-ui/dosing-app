@@ -151,6 +151,15 @@
     </div>
 
     <div class="card">
+      <div class="label">Trend — Dosing Amount</div>
+      <div class="chart-wrap" id="dosingChartWrap"><canvas id="dosingChart"></canvas><div class="empty chart-empty-msg" id="dosingChartEmpty" style="display:none;"></div></div>
+      <div class="chart-legend">
+        <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#7FE7C4;"></span>Chlorine (g)</div>
+        <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#FFC97A;"></span>Acid (ml)</div>
+      </div>
+    </div>
+
+    <div class="card">
       <div class="label">Full History</div>
       <div id="historyContent"></div>
     </div>
@@ -174,6 +183,7 @@ let historyData = null;
 let state = { outlet: null };
 let attendChartInstance = null;
 let tempChartInstance = null;
+let dosingChartInstance = null;
 
 const outletSelect = document.getElementById('outletSelect');
 const outletName = document.getElementById('outletName');
@@ -248,6 +258,7 @@ function renderAll(){
   renderHistoryTable(records);
   try { renderAttendChart(records); } catch(e) { showChartEmpty('attendChartWrap', true); }
   try { renderTempChart(records); } catch(e) { showChartEmpty('tempChartWrap', true); }
+  try { renderDosingChart(records); } catch(e) { showChartEmpty('dosingChartWrap', true); }
 }
 
 function renderToday(records){
@@ -375,7 +386,7 @@ function renderAttendChart(records){
   const asc = last14Days(records);
   const labels = asc.map(r => {
     const d = new Date(r.date + 'T00:00:00');
-    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
   });
   const expected = asc.map(r => r.expected7am);
   const attended = asc.map(r => r.attended8pm);
@@ -409,7 +420,7 @@ function renderTempChart(records){
   const asc = last14Days(records);
   const labels = asc.map(r => {
     const d = new Date(r.date + 'T00:00:00');
-    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
   });
   const morning = asc.map(r => r.temp ? r.temp.morning : null);
   const afternoon = asc.map(r => r.temp ? r.temp.afternoon : null);
@@ -436,6 +447,58 @@ function renderTempChart(records){
       scales: {
         x: { ticks: { maxTicksLimit: 7, font: { size: 10 } }, grid: { display: false } },
         y: { ticks: { font: { size: 10 }, callback: v => v + '°C' }, grid: { color: '#E9F2F2' } }
+      }
+    }
+  });
+}
+
+// Parses strings like "2.3kg", "400g", "1L", "300ml" into a normalized number.
+// Chlorine values normalize to grams; Acid values normalize to millilitres.
+function parseDoseAmount(str, kind){
+  if (!str) return null;
+  const m = String(str).trim().match(/^([\d.]+)\s*([a-zA-Z]*)$/);
+  if (!m) return null;
+  const val = parseFloat(m[1]);
+  const unit = (m[2] || '').toLowerCase();
+  if (kind === 'chlorine') {
+    if (unit === 'kg') return val * 1000;
+    return val; // g or unitless
+  } else {
+    if (unit === 'l') return val * 1000;
+    return val; // ml or unitless
+  }
+}
+
+function renderDosingChart(records){
+  const asc = last14Days(records);
+  const labels = asc.map(r => {
+    const d = new Date(r.date + 'T00:00:00');
+    return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+  });
+  const chlorine = asc.map(r => parseDoseAmount(r.dosing.chlorine, 'chlorine'));
+  const acid = asc.map(r => parseDoseAmount(r.dosing.acid, 'acid'));
+
+  if (dosingChartInstance) { dosingChartInstance.destroy(); dosingChartInstance = null; }
+  if (!hasAnyValue(chlorine, acid)) { showChartEmpty('dosingChartWrap'); return; }
+  hideChartEmpty('dosingChartWrap');
+
+  const ctx = document.getElementById('dosingChart').getContext('2d');
+  dosingChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Chlorine (g)', data: chlorine, borderColor: '#0E7C86', backgroundColor: '#0E7C86', tension: 0.3, spanGaps: true, pointRadius: 3, yAxisID: 'yChlorine' },
+        { label: 'Acid (ml)', data: acid, borderColor: '#E2933B', backgroundColor: '#E2933B', tension: 0.3, spanGaps: true, pointRadius: 3, yAxisID: 'yAcid' }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { maxTicksLimit: 7, font: { size: 10 } }, grid: { display: false } },
+        yChlorine: { position: 'left', beginAtZero: true, ticks: { font: { size: 10 }, color: '#0E7C86' }, grid: { color: '#E9F2F2' }, title: { display: true, text: 'g', font: { size: 10 }, color: '#0E7C86' } },
+        yAcid: { position: 'right', beginAtZero: true, ticks: { font: { size: 10 }, color: '#E2933B' }, grid: { display: false }, title: { display: true, text: 'ml', font: { size: 10 }, color: '#E2933B' } }
       }
     }
   });
