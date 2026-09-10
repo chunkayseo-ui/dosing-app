@@ -85,7 +85,8 @@
   .hist-empty{font-size:13px; color:var(--ink-soft); padding:8px 2px;}
   .hist-note{font-size:11px; color:var(--ink-soft); margin-top:10px; line-height:1.4;}
 
-  .chart-wrap{position:relative; height:220px; margin-top:4px;}
+  .chart-wrap{position:relative; height:220px; margin-top:4px; cursor:pointer;}
+  .chart-tap-hint{font-size:10.5px; color:var(--ink-soft); margin-top:8px; text-align:center;}
   .chart-empty-msg{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; padding:0 20px;}
   .chart-legend{display:flex; gap:14px; margin-top:10px; flex-wrap:wrap;}
   .chart-legend-item{display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-soft);}
@@ -133,30 +134,33 @@
 
     <div class="card">
       <div class="label">Trend — Expected vs Attended</div>
-      <div class="chart-wrap" id="attendChartWrap"><canvas id="attendChart"></canvas><div class="empty chart-empty-msg" id="attendChartEmpty" style="display:none;"></div></div>
+      <div class="chart-wrap" id="attendChartWrap" onclick="goToChartDetail('attend')"><canvas id="attendChart"></canvas><div class="empty chart-empty-msg" id="attendChartEmpty" style="display:none;"></div></div>
       <div class="chart-legend">
         <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#0E7C86;"></span>Expected (7am)</div>
         <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#E2933B;"></span>Attended (8pm)</div>
       </div>
+      <div class="chart-tap-hint">Tap the chart to see more days →</div>
     </div>
 
     <div class="card">
       <div class="label">Trend — Pool Temperature</div>
-      <div class="chart-wrap" id="tempChartWrap"><canvas id="tempChart"></canvas><div class="empty chart-empty-msg" id="tempChartEmpty" style="display:none;"></div></div>
+      <div class="chart-wrap" id="tempChartWrap" onclick="goToChartDetail('temp')"><canvas id="tempChart"></canvas><div class="empty chart-empty-msg" id="tempChartEmpty" style="display:none;"></div></div>
       <div class="chart-legend">
         <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#7FE7C4;"></span>Morning</div>
         <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#E2933B;"></span>Afternoon</div>
         <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#C1543D;"></span>Night</div>
       </div>
+      <div class="chart-tap-hint">Tap the chart to see more days →</div>
     </div>
 
     <div class="card">
       <div class="label">Trend — Dosing Amount</div>
-      <div class="chart-wrap" id="dosingChartWrap"><canvas id="dosingChart"></canvas><div class="empty chart-empty-msg" id="dosingChartEmpty" style="display:none;"></div></div>
+      <div class="chart-wrap" id="dosingChartWrap" onclick="goToChartDetail('dosing')"><canvas id="dosingChart"></canvas><div class="empty chart-empty-msg" id="dosingChartEmpty" style="display:none;"></div></div>
       <div class="chart-legend">
         <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#7FE7C4;"></span>Chlorine (g)</div>
         <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#FFC97A;"></span>Acid (ml)</div>
       </div>
+      <div class="chart-tap-hint">Tap the chart to see more days →</div>
     </div>
 
     <div class="card">
@@ -214,12 +218,26 @@ const placeholder = document.createElement('option');
 placeholder.value = ''; placeholder.textContent = 'Select a pool…'; placeholder.disabled = true; placeholder.selected = true;
 outletSelect.insertBefore(placeholder, outletSelect.firstChild);
 
+// Restore the pool selection if returning from the chart detail page
+const urlParams = new URLSearchParams(window.location.search);
+const paramPool = urlParams.get('pool');
+if (paramPool && OUTLET_NAMES[paramPool]) {
+  outletSelect.value = paramPool;
+  state.outlet = paramPool;
+}
+
 outletSelect.onchange = () => {
   state.outlet = outletSelect.value;
   if (tg) tg.HapticFeedback.impactOccurred('light');
   renderAll();
 };
 document.getElementById('refreshBtn').onclick = () => loadHistoryData(true);
+
+function goToChartDetail(kind){
+  if (!state.outlet) return;
+  if (tg) tg.HapticFeedback.impactOccurred('light');
+  window.location.href = `chart-detail.html?pool=${state.outlet}&chart=${kind}`;
+}
 
 function fmtVal(v, decimals){
   if (v === null || v === undefined) return null;
@@ -386,7 +404,9 @@ function renderAttendChart(records){
   const asc = last14Days(records);
   const labels = asc.map(r => {
     const d = new Date(r.date + 'T00:00:00');
-    return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+    const day = d.toLocaleDateString('en-GB', { weekday: 'short' });
+    const date = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    return [day, date];
   });
   const expected = asc.map(r => r.expected7am);
   const attended = asc.map(r => r.attended8pm);
@@ -409,7 +429,7 @@ function renderAttendChart(records){
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
-        x: { ticks: { maxTicksLimit: 7, font: { size: 10 } }, grid: { display: false } },
+        x: { ticks: { maxTicksLimit: 14, autoSkip: false, font: { size: 9 } }, grid: { display: false } },
         y: { beginAtZero: true, ticks: { font: { size: 10 } }, grid: { color: '#E9F2F2' } }
       }
     }
@@ -420,7 +440,9 @@ function renderTempChart(records){
   const asc = last14Days(records);
   const labels = asc.map(r => {
     const d = new Date(r.date + 'T00:00:00');
-    return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+    const day = d.toLocaleDateString('en-GB', { weekday: 'short' });
+    const date = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    return [day, date];
   });
   const morning = asc.map(r => r.temp ? r.temp.morning : null);
   const afternoon = asc.map(r => r.temp ? r.temp.afternoon : null);
@@ -445,7 +467,7 @@ function renderTempChart(records){
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
-        x: { ticks: { maxTicksLimit: 7, font: { size: 10 } }, grid: { display: false } },
+        x: { ticks: { maxTicksLimit: 14, autoSkip: false, font: { size: 9 } }, grid: { display: false } },
         y: { ticks: { font: { size: 10 }, callback: v => v + '°C' }, grid: { color: '#E9F2F2' } }
       }
     }
@@ -473,7 +495,9 @@ function renderDosingChart(records){
   const asc = last14Days(records);
   const labels = asc.map(r => {
     const d = new Date(r.date + 'T00:00:00');
-    return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+    const day = d.toLocaleDateString('en-GB', { weekday: 'short' });
+    const date = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    return [day, date];
   });
   const chlorine = asc.map(r => parseDoseAmount(r.dosing.chlorine, 'chlorine'));
   const acid = asc.map(r => parseDoseAmount(r.dosing.acid, 'acid'));
@@ -496,7 +520,7 @@ function renderDosingChart(records){
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
-        x: { ticks: { maxTicksLimit: 7, font: { size: 10 } }, grid: { display: false } },
+        x: { ticks: { maxTicksLimit: 14, autoSkip: false, font: { size: 9 } }, grid: { display: false } },
         yChlorine: { position: 'left', beginAtZero: true, ticks: { font: { size: 10 }, color: '#0E7C86' }, grid: { color: '#E9F2F2' }, title: { display: true, text: 'g', font: { size: 10 }, color: '#0E7C86' } },
         yAcid: { position: 'right', beginAtZero: true, ticks: { font: { size: 10 }, color: '#E2933B' }, grid: { display: false }, title: { display: true, text: 'ml', font: { size: 10 }, color: '#E2933B' } }
       }

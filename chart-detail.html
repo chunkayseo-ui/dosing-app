@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>Chart Detail</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" onerror="var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js';document.head.appendChild(s);"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: var(--tg-theme-bg-color, #F1F7F7);
+    --surface: var(--tg-theme-secondary-bg-color, #FFFFFF);
+    --ink: var(--tg-theme-text-color, #0C2B30);
+    --ink-soft: #4C6B70;
+    --teal: #0E7C86;
+    --teal-deep: #0A5259;
+    --amber: #E2933B;
+    --border: #D9EAEA;
+    --ok: #2FA36B;
+    --warn: #C1543D;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0;}
+  body{
+    background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif;
+    min-height:100vh; padding:16px 16px 40px;
+  }
+  .wrap{max-width:480px; margin:0 auto;}
+
+  .back-link{
+    display:inline-flex; align-items:center; gap:6px; margin-bottom:14px;
+    color:var(--teal); font-weight:600; font-size:13.5px; text-decoration:none;
+  }
+
+  .top{margin-bottom:8px; padding:0 2px;}
+  .eyebrow{font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); font-weight:600;}
+  h1{font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700; margin:2px 0 0; letter-spacing:-.01em;}
+
+  .sync-row{display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-soft); margin-bottom:16px; padding:0 2px;}
+  .sync-dot{width:7px; height:7px; border-radius:50%; background:var(--ink-soft); flex:none;}
+  .sync-dot.ok{background:var(--ok);}
+  .sync-dot.warn{background:var(--warn);}
+  .sync-dot.loading{background:var(--amber); animation:pulse 1s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+  .card{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:16px; margin-bottom:14px;}
+  .label{font-size:12px; font-weight:600; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px;}
+
+  .range-chips{display:flex; flex-wrap:wrap; gap:6px;}
+  .range-chip{
+    border:1.5px solid var(--border); background:var(--bg); color:var(--ink);
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:13px;
+    padding:8px 14px; border-radius:10px; cursor:pointer;
+  }
+  .range-chip.active{background:var(--teal-deep); border-color:var(--teal-deep); color:#fff;}
+
+  .chart-wrap{position:relative; height:320px; margin-top:4px;}
+  .chart-empty-msg{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; padding:0 20px;}
+  .chart-legend{display:flex; gap:14px; margin-top:12px; flex-wrap:wrap;}
+  .chart-legend-item{display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-soft);}
+  .chart-legend-dot{width:9px; height:9px; border-radius:50%; flex:none;}
+
+  .empty{text-align:center; color:var(--ink-soft); font-size:13.5px; padding:18px 8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" id="backLink" href="pool-history.html">&larr; Back to history</a>
+
+  <div class="top">
+    <div class="eyebrow" id="chartEyebrow">Chart Detail</div>
+    <h1 id="poolName">—</h1>
+  </div>
+
+  <div class="sync-row">
+    <span class="sync-dot loading" id="syncDot"></span>
+    <span id="syncText">Loading data… (can take up to 20s)</span>
+  </div>
+
+  <div class="card">
+    <div class="label">Days to Show</div>
+    <div class="range-chips" id="rangeChips">
+      <button class="range-chip" data-days="7">7</button>
+      <button class="range-chip" data-days="14">14</button>
+      <button class="range-chip" data-days="30">30</button>
+      <button class="range-chip" data-days="60">60</button>
+      <button class="range-chip" data-days="90">90</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="label" id="chartLabel">Trend</div>
+    <div class="chart-wrap" id="mainChartWrap"><canvas id="mainChart"></canvas><div class="empty chart-empty-msg" id="mainChartEmpty" style="display:none;"></div></div>
+    <div class="chart-legend" id="mainChartLegend"></div>
+  </div>
+
+</div>
+
+<script>
+const HISTORY_API_URL = 'https://script.google.com/macros/s/AKfycbwYJLfkw5lwKnjwqmEtuRiREzbahnf2l63YhmX_7jMR9uqM9MpeqoxeVTTVw5rc76eZ6g/exec';
+
+const OUTLET_NAMES = {
+  WWW:'WWW', JEIP1:'JEIP 1', JEIP2:'JEIP 2', JEOP1:'JEOP 1', JEOP2:'JEOP 2',
+  Tengah:'Tengah', HS:'HS', TPY:'TPY', DR:'DR', Lentor:'Lentor', BK:'BK', HB:'HB', CC:'CC'
+};
+
+const CHART_CONFIG = {
+  attend: {
+    title: 'Expected vs Attended',
+    eyebrow: 'Attendance Trend',
+    legend: [
+      { label: 'Expected (7am)', color: '#0E7C86' },
+      { label: 'Attended (8pm)', color: '#E2933B' }
+    ]
+  },
+  temp: {
+    title: 'Pool Temperature',
+    eyebrow: 'Temperature Trend',
+    legend: [
+      { label: 'Morning', color: '#7FE7C4' },
+      { label: 'Afternoon', color: '#E2933B' },
+      { label: 'Night', color: '#C1543D' }
+    ]
+  },
+  dosing: {
+    title: 'Dosing Amount',
+    eyebrow: 'Dosing Trend',
+    legend: [
+      { label: 'Chlorine (g)', color: '#7FE7C4' },
+      { label: 'Acid (ml)', color: '#FFC97A' }
+    ]
+  }
+};
+
+const tg = window.Telegram ? window.Telegram.WebApp : null;
+if (tg) { tg.ready(); tg.expand(); }
+
+const params = new URLSearchParams(window.location.search);
+const outlet = params.get('pool');
+const chartKind = params.get('chart') || 'attend';
+let days = 14;
+let historyData = null;
+let mainChartInstance = null;
+
+document.getElementById('backLink').href = 'pool-history.html' + (outlet ? ('?pool=' + outlet) : '');
+
+function setSyncStatus(kind, text){
+  document.getElementById('syncDot').className = 'sync-dot ' + kind;
+  document.getElementById('syncText').textContent = text;
+}
+
+function toISODateLocal(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+function hasAnyValue(...arrays){
+  return arrays.some(arr => arr.some(v => v !== null && v !== undefined));
+}
+
+function parseDoseAmount(str, kind){
+  if (!str) return null;
+  const m = String(str).trim().match(/^([\d.]+)\s*([a-zA-Z]*)$/);
+  if (!m) return null;
+  const val = parseFloat(m[1]);
+  const unit = (m[2] || '').toLowerCase();
+  if (kind === 'chlorine') { if (unit === 'kg') return val * 1000; return val; }
+  else { if (unit === 'l') return val * 1000; return val; }
+}
+
+// ---------- Setup ----------
+if (!outlet || !OUTLET_NAMES[outlet]) {
+  document.getElementById('poolName').textContent = 'No pool specified';
+  setSyncStatus('warn', 'Open this page from a chart in the history page.');
+} else {
+  document.getElementById('poolName').textContent = OUTLET_NAMES[outlet];
+}
+
+const cfg = CHART_CONFIG[chartKind] || CHART_CONFIG.attend;
+document.getElementById('chartEyebrow').textContent = cfg.eyebrow;
+document.getElementById('chartLabel').textContent = 'Trend — ' + cfg.title;
+document.getElementById('mainChartLegend').innerHTML = cfg.legend.map(l =>
+  `<div class="chart-legend-item"><span class="chart-legend-dot" style="background:${l.color};"></span>${l.label}</div>`
+).join('');
+
+document.querySelectorAll('.range-chip').forEach(chip => {
+  if (parseInt(chip.dataset.days, 10) === days) chip.classList.add('active');
+  chip.onclick = () => {
+    days = parseInt(chip.dataset.days, 10);
+    document.querySelectorAll('.range-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    if (tg) tg.HapticFeedback.impactOccurred('light');
+    renderChart();
+  };
+});
+
+async function loadData(){
+  if (!outlet || !OUTLET_NAMES[outlet]) return;
+  setSyncStatus('loading', 'Loading data… (can take up to 20s)');
+  try {
+    const res = await fetch(HISTORY_API_URL + '?_=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    historyData = await res.json();
+    setSyncStatus('ok', 'Data loaded');
+    renderChart();
+  } catch (e) {
+    setSyncStatus('warn', 'Could not load water test data');
+  }
+}
+
+function filterDays(records, n){
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - (n - 1));
+  const cutoffKey = toISODateLocal(cutoff);
+  return records.filter(r => r.date >= cutoffKey).sort((a, b) => a.date < b.date ? -1 : 1);
+}
+
+function dayDateLabels(asc){
+  return asc.map(r => {
+    const d = new Date(r.date + 'T00:00:00');
+    return [d.toLocaleDateString('en-GB', { weekday: 'short' }), d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })];
+  });
+}
+
+function showChartEmpty(msg){
+  document.getElementById('mainChart').style.visibility = 'hidden';
+  const el = document.getElementById('mainChartEmpty');
+  el.textContent = msg;
+  el.style.display = 'flex';
+}
+function hideChartEmpty(){
+  document.getElementById('mainChart').style.visibility = 'visible';
+  document.getElementById('mainChartEmpty').style.display = 'none';
+}
+
+function renderChart(){
+  if (!historyData || !outlet) return;
+  const records = (historyData[outlet] || []);
+  const asc = filterDays(records, days);
+  const labels = dayDateLabels(asc);
+
+  if (mainChartInstance) { mainChartInstance.destroy(); mainChartInstance = null; }
+
+  let datasets, scalesExtra = {};
+
+  if (chartKind === 'attend') {
+    const expected = asc.map(r => r.expected7am);
+    const attended = asc.map(r => r.attended8pm);
+    if (!hasAnyValue(expected, attended)) { showChartEmpty(`Not enough data in the last ${days} days.`); return; }
+    datasets = [
+      { label: 'Expected', data: expected, borderColor: '#0E7C86', backgroundColor: '#0E7C86', tension: 0.3, spanGaps: true, pointRadius: days > 30 ? 0 : 3 },
+      { label: 'Attended', data: attended, borderColor: '#E2933B', backgroundColor: '#E2933B', tension: 0.3, spanGaps: true, pointRadius: days > 30 ? 0 : 3 }
+    ];
+  } else if (chartKind === 'temp') {
+    const morning = asc.map(r => r.temp ? r.temp.morning : null);
+    const afternoon = asc.map(r => r.temp ? r.temp.afternoon : null);
+    const night = asc.map(r => r.temp ? r.temp.night : null);
+    if (!hasAnyValue(morning, afternoon, night)) { showChartEmpty(`Not enough data in the last ${days} days.`); return; }
+    datasets = [
+      { label: 'Morning', data: morning, borderColor: '#2FA36B', backgroundColor: '#2FA36B', tension: 0.3, spanGaps: true, pointRadius: days > 30 ? 0 : 3 },
+      { label: 'Afternoon', data: afternoon, borderColor: '#E2933B', backgroundColor: '#E2933B', tension: 0.3, spanGaps: true, pointRadius: days > 30 ? 0 : 3 },
+      { label: 'Night', data: night, borderColor: '#C1543D', backgroundColor: '#C1543D', tension: 0.3, spanGaps: true, pointRadius: days > 30 ? 0 : 3 }
+    ];
+    scalesExtra = { y: { ticks: { font: { size: 10 }, callback: v => v + '°C' }, grid: { color: '#E9F2F2' } } };
+  } else {
+    const chlorine = asc.map(r => parseDoseAmount(r.dosing.chlorine, 'chlorine'));
+    const acid = asc.map(r => parseDoseAmount(r.dosing.acid, 'acid'));
+    if (!hasAnyValue(chlorine, acid)) { showChartEmpty(`Not enough data in the last ${days} days.`); return; }
+    datasets = [
+      { label: 'Chlorine (g)', data: chlorine, borderColor: '#0E7C86', backgroundColor: '#0E7C86', tension: 0.3, spanGaps: true, pointRadius: days > 30 ? 0 : 3, yAxisID: 'yChlorine' },
+      { label: 'Acid (ml)', data: acid, borderColor: '#E2933B', backgroundColor: '#E2933B', tension: 0.3, spanGaps: true, pointRadius: days > 30 ? 0 : 3, yAxisID: 'yAcid' }
+    ];
+    scalesExtra = {
+      yChlorine: { position: 'left', beginAtZero: true, ticks: { font: { size: 10 }, color: '#0E7C86' }, grid: { color: '#E9F2F2' }, title: { display: true, text: 'g', font: { size: 10 }, color: '#0E7C86' } },
+      yAcid: { position: 'right', beginAtZero: true, ticks: { font: { size: 10 }, color: '#E2933B' }, grid: { display: false }, title: { display: true, text: 'ml', font: { size: 10 }, color: '#E2933B' } }
+    };
+  }
+
+  hideChartEmpty();
+  const ctx = document.getElementById('mainChart').getContext('2d');
+  mainChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: Object.assign({
+        x: { ticks: { maxTicksLimit: days, autoSkip: days > 21, font: { size: 9 } }, grid: { display: false } },
+        y: { beginAtZero: true, ticks: { font: { size: 10 } }, grid: { color: '#E9F2F2' } }
+      }, scalesExtra)
+    }
+  });
+}
+
+loadData();
+</script>
+</body>
+</html>
