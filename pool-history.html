@@ -86,6 +86,7 @@
   .hist-note{font-size:11px; color:var(--ink-soft); margin-top:10px; line-height:1.4;}
 
   .chart-wrap{position:relative; height:220px; margin-top:4px;}
+  .chart-empty-msg{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; padding:0 20px;}
   .chart-legend{display:flex; gap:14px; margin-top:10px; flex-wrap:wrap;}
   .chart-legend-item{display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-soft);}
   .chart-legend-dot{width:9px; height:9px; border-radius:50%; flex:none;}
@@ -132,7 +133,7 @@
 
     <div class="card">
       <div class="label">Trend — Expected vs Attended</div>
-      <div class="chart-wrap" id="attendChartWrap"><canvas id="attendChart"></canvas></div>
+      <div class="chart-wrap" id="attendChartWrap"><canvas id="attendChart"></canvas><div class="empty chart-empty-msg" id="attendChartEmpty" style="display:none;"></div></div>
       <div class="chart-legend">
         <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#0E7C86;"></span>Expected (7am)</div>
         <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#E2933B;"></span>Attended (8pm)</div>
@@ -141,7 +142,7 @@
 
     <div class="card">
       <div class="label">Trend — Pool Temperature</div>
-      <div class="chart-wrap" id="tempChartWrap"><canvas id="tempChart"></canvas></div>
+      <div class="chart-wrap" id="tempChartWrap"><canvas id="tempChart"></canvas><div class="empty chart-empty-msg" id="tempChartEmpty" style="display:none;"></div></div>
       <div class="chart-legend">
         <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#7FE7C4;"></span>Morning</div>
         <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#E2933B;"></span>Afternoon</div>
@@ -245,8 +246,8 @@ function renderAll(){
   renderToday(records);
   renderExpectedAttended(records);
   renderHistoryTable(records);
-  renderAttendChart(records);
-  renderTempChart(records);
+  try { renderAttendChart(records); } catch(e) { showChartEmpty('attendChartWrap', true); }
+  try { renderTempChart(records); } catch(e) { showChartEmpty('tempChartWrap', true); }
 }
 
 function renderToday(records){
@@ -353,8 +354,11 @@ function hasAnyValue(...arrays){
   return arrays.some(arr => arr.some(v => v !== null && v !== undefined));
 }
 
-function showChartEmpty(wrapId){
-  document.getElementById(wrapId).innerHTML = `<div class="empty" style="padding-top:70px;">Not enough data logged in the last 14 days yet.</div>`;
+function showChartEmpty(wrapId, loadFailed){
+  const msg = loadFailed
+    ? 'Chart could not load. Try refreshing the page.'
+    : 'Not enough data logged in the last 14 days yet.';
+  document.getElementById(wrapId).innerHTML = `<div class="empty" style="padding-top:70px;">${msg}</div>`;
 }
 
 function resetCanvas(wrapId, canvasId){
