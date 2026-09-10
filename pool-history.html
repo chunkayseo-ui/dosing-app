@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 <title>Water Test History</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" onerror="var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js';document.head.appendChild(s);"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -222,7 +222,7 @@ function tcRow(key, val, unit){
 }
 
 async function loadHistoryData(isRefresh){
-  setSyncStatus('loading', isRefresh ? 'Refreshing…' : 'Loading data…');
+  setSyncStatus('loading', isRefresh ? 'Refreshing…' : 'Loading data… (can take up to 20s)');
   try {
     const res = await fetch(HISTORY_API_URL + '?_=' + Date.now());
     if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -358,11 +358,17 @@ function showChartEmpty(wrapId, loadFailed){
   const msg = loadFailed
     ? 'Chart could not load. Try refreshing the page.'
     : 'Not enough data logged in the last 14 days yet.';
-  document.getElementById(wrapId).innerHTML = `<div class="empty" style="padding-top:70px;">${msg}</div>`;
+  const prefix = wrapId.replace('Wrap', '');
+  document.getElementById(prefix).style.visibility = 'hidden';
+  const emptyEl = document.getElementById(prefix + 'Empty');
+  emptyEl.textContent = msg;
+  emptyEl.style.display = 'flex';
 }
 
-function resetCanvas(wrapId, canvasId){
-  document.getElementById(wrapId).innerHTML = `<canvas id="${canvasId}"></canvas>`;
+function hideChartEmpty(wrapId){
+  const prefix = wrapId.replace('Wrap', '');
+  document.getElementById(prefix).style.visibility = 'visible';
+  document.getElementById(prefix + 'Empty').style.display = 'none';
 }
 
 function renderAttendChart(records){
@@ -376,7 +382,7 @@ function renderAttendChart(records){
 
   if (attendChartInstance) { attendChartInstance.destroy(); attendChartInstance = null; }
   if (!hasAnyValue(expected, attended)) { showChartEmpty('attendChartWrap'); return; }
-  resetCanvas('attendChartWrap', 'attendChart');
+  hideChartEmpty('attendChartWrap');
 
   const ctx = document.getElementById('attendChart').getContext('2d');
   attendChartInstance = new Chart(ctx, {
@@ -411,7 +417,7 @@ function renderTempChart(records){
 
   if (tempChartInstance) { tempChartInstance.destroy(); tempChartInstance = null; }
   if (!hasAnyValue(morning, afternoon, night)) { showChartEmpty('tempChartWrap'); return; }
-  resetCanvas('tempChartWrap', 'tempChart');
+  hideChartEmpty('tempChartWrap');
 
   const ctx = document.getElementById('tempChart').getContext('2d');
   tempChartInstance = new Chart(ctx, {
