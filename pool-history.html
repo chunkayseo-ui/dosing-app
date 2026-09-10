@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>Water Test History</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: var(--tg-theme-bg-color, #F1F7F7);
+    --surface: var(--tg-theme-secondary-bg-color, #FFFFFF);
+    --ink: var(--tg-theme-text-color, #0C2B30);
+    --ink-soft: #4C6B70;
+    --teal: #0E7C86;
+    --teal-deep: #0A5259;
+    --amber: #E2933B;
+    --border: #D9EAEA;
+    --readout-bg: #0C2B30;
+    --readout-cl: #7FE7C4;
+    --readout-acid: #FFC97A;
+    --ok: #2FA36B;
+    --warn: #C1543D;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0;}
+  body{
+    background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif;
+    min-height:100vh; padding:16px 16px 40px;
+  }
+  .wrap{max-width:480px; margin:0 auto;}
+
+  .top{display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:8px; padding:0 2px; gap:12px;}
+  .eyebrow{font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); font-weight:600;}
+  h1{font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700; margin:2px 0 0; letter-spacing:-.01em;}
+  .date-badge{text-align:right; flex:none;}
+  .date-day{font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:700; color:var(--teal-deep);}
+  .date-full{font-size:11px; color:var(--ink-soft); margin-top:1px;}
+
+  .sync-row{display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-soft); margin-bottom:16px; padding:0 2px;}
+  .sync-dot{width:7px; height:7px; border-radius:50%; background:var(--ink-soft); flex:none;}
+  .sync-dot.ok{background:var(--ok);}
+  .sync-dot.warn{background:var(--warn);}
+  .sync-dot.loading{background:var(--amber); animation:pulse 1s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+  .refresh-btn{margin-left:auto; border:none; background:none; color:var(--teal); font-weight:600; font-size:11.5px; cursor:pointer; padding:2px 4px;}
+
+  .card{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:16px; margin-bottom:14px;}
+  .label{font-size:12px; font-weight:600; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px;}
+
+  select{
+    width:100%; appearance:none; -webkit-appearance:none;
+    background:var(--surface) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9"><path d="M1 1L7 7L13 1" stroke="%230A5259" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat right 14px center;
+    border:1.5px solid var(--border); border-radius:12px; padding:14px 40px 14px 14px;
+    font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:600; color:var(--ink);
+  }
+
+  .tc-grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;}
+  .tc-grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .tc-block{background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:11px;}
+  .tc-session{font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; margin-bottom:7px;}
+  .tc-row{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:4px;}
+  .tc-row:last-child{margin-bottom:0;}
+  .tc-key{font-size:11px; color:var(--ink-soft);}
+  .tc-val{font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:14px; color:var(--ink);}
+  .tc-val.big{font-size:22px;}
+  .tc-val.empty-val{color:var(--ink-soft); font-weight:500; font-size:12px;}
+
+  .hist-table-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:0 -16px; padding:0 16px;}
+  .hist-scroll-hint{font-size:10.5px; color:var(--ink-soft); margin-bottom:6px;}
+  .hist-table{width:100%; min-width:760px; border-collapse:collapse; font-size:12px;}
+  .hist-table th{
+    text-align:center; font-size:10px; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--ink-soft); font-weight:600; padding:0 5px 8px; border-bottom:1.5px solid var(--border);
+  }
+  .hist-table td{
+    text-align:center; padding:8px 5px; border-bottom:1px solid var(--border);
+    font-family:'IBM Plex Mono',monospace; font-weight:500; white-space:nowrap;
+  }
+  .hist-table tr:last-child td{border-bottom:none;}
+  .hist-date{font-family:'Inter',sans-serif !important; font-weight:600 !important; color:var(--ink);}
+  .hist-flag{color:var(--warn); font-weight:700;}
+  .hist-empty{font-size:13px; color:var(--ink-soft); padding:8px 2px;}
+  .hist-note{font-size:11px; color:var(--ink-soft); margin-top:10px; line-height:1.4;}
+
+  .chart-wrap{position:relative; height:220px; margin-top:4px;}
+  .chart-legend{display:flex; gap:14px; margin-top:10px; flex-wrap:wrap;}
+  .chart-legend-item{display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-soft);}
+  .chart-legend-dot{width:9px; height:9px; border-radius:50%; flex:none;}
+
+  .empty{text-align:center; color:var(--ink-soft); font-size:13.5px; padding:18px 8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div>
+      <div class="eyebrow">Water Test History</div>
+      <h1 id="outletName">Select a pool</h1>
+    </div>
+    <div class="date-badge">
+      <div class="date-day" id="dateDay">—</div>
+      <div class="date-full" id="dateFull">—</div>
+    </div>
+  </div>
+
+  <div class="sync-row">
+    <span class="sync-dot loading" id="syncDot"></span>
+    <span id="syncText">Loading data…</span>
+    <button class="refresh-btn" id="refreshBtn">Refresh</button>
+  </div>
+
+  <div class="card">
+    <div class="label">Swimming Pool</div>
+    <select id="outletSelect"></select>
+  </div>
+
+  <div id="mainContent" style="display:none;">
+
+    <div class="card">
+      <div class="label">Today's Water Test</div>
+      <div id="todayContent"></div>
+    </div>
+
+    <div class="card">
+      <div class="label">Expected &amp; Attended</div>
+      <div id="expectedAttendedContent"></div>
+    </div>
+
+    <div class="card">
+      <div class="label">Trend — Expected vs Attended</div>
+      <div class="chart-wrap"><canvas id="attendChart"></canvas></div>
+      <div class="chart-legend">
+        <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#0E7C86;"></span>Expected (7am)</div>
+        <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#E2933B;"></span>Attended (8pm)</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="label">Trend — Pool Temperature</div>
+      <div class="chart-wrap"><canvas id="tempChart"></canvas></div>
+      <div class="chart-legend">
+        <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#7FE7C4;"></span>Morning</div>
+        <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#E2933B;"></span>Afternoon</div>
+        <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#C1543D;"></span>Night</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="label">Full History</div>
+      <div id="historyContent"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+const HISTORY_API_URL = 'https://script.google.com/macros/s/AKfycbwYJLfkw5lwKnjwqmEtuRiREzbahnf2l63YhmX_7jMR9uqM9MpeqoxeVTTVw5rc76eZ6g/exec';
+
+const OUTLET_NAMES = {
+  WWW:'WWW', JEIP1:'JEIP 1', JEIP2:'JEIP 2', JEOP1:'JEOP 1', JEOP2:'JEOP 2',
+  Tengah:'Tengah', HS:'HS', TPY:'TPY', DR:'DR', Lentor:'Lentor', BK:'BK', HB:'HB', CC:'CC'
+};
+
+const tg = window.Telegram ? window.Telegram.WebApp : null;
+if (tg) { tg.ready(); tg.expand(); }
+
+let historyData = null;
+let state = { outlet: null };
+let attendChartInstance = null;
+let tempChartInstance = null;
+
+const outletSelect = document.getElementById('outletSelect');
+const outletName = document.getElementById('outletName');
+
+function toISODateLocal(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+const today = new Date();
+document.getElementById('dateDay').textContent = today.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+document.getElementById('dateFull').textContent = today.toLocaleDateString('en-US', { weekday: 'long' }) + ', ' + today.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+
+function setSyncStatus(kind, text){
+  document.getElementById('syncDot').className = 'sync-dot ' + kind;
+  document.getElementById('syncText').textContent = text;
+}
+
+Object.keys(OUTLET_NAMES).forEach(key => {
+  const opt = document.createElement('option');
+  opt.value = key; opt.textContent = OUTLET_NAMES[key];
+  outletSelect.appendChild(opt);
+});
+outletSelect.value = '';
+const placeholder = document.createElement('option');
+placeholder.value = ''; placeholder.textContent = 'Select a pool…'; placeholder.disabled = true; placeholder.selected = true;
+outletSelect.insertBefore(placeholder, outletSelect.firstChild);
+
+outletSelect.onchange = () => {
+  state.outlet = outletSelect.value;
+  if (tg) tg.HapticFeedback.impactOccurred('light');
+  renderAll();
+};
+document.getElementById('refreshBtn').onclick = () => loadHistoryData(true);
+
+function fmtVal(v, decimals){
+  if (v === null || v === undefined) return null;
+  return (decimals !== undefined) ? v.toFixed(decimals) : v;
+}
+
+function tcRow(key, val, unit){
+  const has = val !== null && val !== undefined;
+  return `<div class="tc-row"><span class="tc-key">${key}</span><span class="tc-val ${has ? '' : 'empty-val'}">${has ? val + (unit || '') : '—'}</span></div>`;
+}
+
+async function loadHistoryData(isRefresh){
+  setSyncStatus('loading', isRefresh ? 'Refreshing…' : 'Loading data…');
+  try {
+    const res = await fetch(HISTORY_API_URL + '?_=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    historyData = await res.json();
+    setSyncStatus('ok', 'Data loaded');
+    renderAll();
+  } catch (e) {
+    setSyncStatus('warn', 'Could not load water test data');
+  }
+}
+
+function renderAll(){
+  const mainContent = document.getElementById('mainContent');
+  if (!state.outlet || !historyData) { mainContent.style.display = 'none'; return; }
+  mainContent.style.display = 'block';
+  outletName.textContent = OUTLET_NAMES[state.outlet];
+
+  const records = (historyData[state.outlet] || []).slice();
+  records.sort((a, b) => a.date < b.date ? 1 : -1); // most recent first
+
+  renderToday(records);
+  renderExpectedAttended(records);
+  renderHistoryTable(records);
+  renderAttendChart(records);
+  renderTempChart(records);
+}
+
+function renderToday(records){
+  const content = document.getElementById('todayContent');
+  const todayKey = toISODateLocal(today);
+  const rec = records.find(r => r.date === todayKey);
+  if (!rec) {
+    content.innerHTML = `<div class="empty">No water test logged yet today for ${OUTLET_NAMES[state.outlet]}.</div>`;
+    return;
+  }
+  const sessions = [
+    { key: 'morning', label: 'Morning' },
+    { key: 'afternoon', label: 'Afternoon' },
+    { key: 'night', label: 'Night' }
+  ];
+  content.innerHTML = `
+    <div class="tc-grid3">
+      ${sessions.map(s => `
+        <div class="tc-block">
+          <div class="tc-session">${s.label}</div>
+          ${tcRow('FC', fmtVal(rec.fc[s.key]))}
+          ${tcRow('PH', fmtVal(rec.ph[s.key], 1))}
+          ${tcRow('Temp', fmtVal(rec.temp ? rec.temp[s.key] : null), '°C')}
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderExpectedAttended(records){
+  const content = document.getElementById('expectedAttendedContent');
+  const todayKey = toISODateLocal(today);
+  const rec = records.find(r => r.date === todayKey);
+  const expected = rec ? rec.expected7am : null;
+  const attended = rec ? rec.attended8pm : null;
+  content.innerHTML = `
+    <div class="tc-grid2">
+      <div class="tc-block">
+        <div class="tc-session">Expected (7am)</div>
+        <div class="tc-val big ${expected === null || expected === undefined ? 'empty-val' : ''}">${expected !== null && expected !== undefined ? expected : 'Not logged'}</div>
+      </div>
+      <div class="tc-block">
+        <div class="tc-session">Attended (8pm)</div>
+        <div class="tc-val big ${attended === null || attended === undefined ? 'empty-val' : ''}">${attended !== null && attended !== undefined ? attended : 'Not logged'}</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderHistoryTable(records){
+  const content = document.getElementById('historyContent');
+  if (records.length === 0) {
+    content.innerHTML = `<div class="hist-empty">No history on file yet for ${OUTLET_NAMES[state.outlet]}.</div>`;
+    return;
+  }
+  const rows = records.map(rec => {
+    const d = new Date(rec.date + 'T00:00:00');
+    const dLabel = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    const fcDrop = (rec.fc.night !== null && rec.fc.afternoon !== null && rec.fc.night > rec.fc.afternoon);
+    const fcNightCell = fcDrop
+      ? `<span class="hist-flag">${fmtVal(rec.fc.night) ?? '–'} \u26A0</span>`
+      : (fmtVal(rec.fc.night) ?? '–');
+    const temp = rec.temp || {};
+    return `
+      <tr>
+        <td class="hist-date">${dLabel}</td>
+        <td>${fmtVal(rec.fc.morning) ?? '–'}</td>
+        <td>${fmtVal(rec.fc.afternoon) ?? '–'}</td>
+        <td>${fcNightCell}</td>
+        <td>${fmtVal(rec.ph.night, 1) ?? '–'}</td>
+        <td>${fmtVal(temp.morning) ?? '–'}</td>
+        <td>${fmtVal(temp.afternoon) ?? '–'}</td>
+        <td>${fmtVal(temp.night) ?? '–'}</td>
+        <td>${rec.dosing.chlorine || '–'}</td>
+        <td>${rec.dosing.acid || '–'}</td>
+        <td>${fmtVal(rec.attended8pm) ?? '–'}</td>
+        <td>${fmtVal(rec.expected7am) ?? '–'}</td>
+      </tr>`;
+  }).join('');
+
+  content.innerHTML = `
+    <div class="hist-scroll-hint">Swipe left/right to see all columns →</div>
+    <div class="hist-table-wrap">
+    <table class="hist-table">
+      <thead><tr>
+        <th>Date</th><th>FC AM</th><th>FC PM</th><th>FC Nt</th><th>PH Nt</th>
+        <th>T AM</th><th>T PM</th><th>T Nt</th><th>Chlorine</th><th>Acid</th><th>Att.</th><th>Exp.</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    </div>
+    <div class="hist-note">⚠ flags a night FC reading higher than the afternoon one.</div>
+  `;
+}
+
+function renderAttendChart(records){
+  const asc = records.slice().sort((a, b) => a.date < b.date ? -1 : 1);
+  const labels = asc.map(r => {
+    const d = new Date(r.date + 'T00:00:00');
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  });
+  const expected = asc.map(r => r.expected7am);
+  const attended = asc.map(r => r.attended8pm);
+
+  const ctx = document.getElementById('attendChart').getContext('2d');
+  if (attendChartInstance) attendChartInstance.destroy();
+  attendChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Expected', data: expected, borderColor: '#0E7C86', backgroundColor: '#0E7C86', tension: 0.3, spanGaps: true, pointRadius: 2 },
+        { label: 'Attended', data: attended, borderColor: '#E2933B', backgroundColor: '#E2933B', tension: 0.3, spanGaps: true, pointRadius: 2 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { maxTicksLimit: 6, font: { size: 10 } }, grid: { display: false } },
+        y: { beginAtZero: true, ticks: { font: { size: 10 } }, grid: { color: '#E9F2F2' } }
+      }
+    }
+  });
+}
+
+function renderTempChart(records){
+  const asc = records.slice().sort((a, b) => a.date < b.date ? -1 : 1);
+  const labels = asc.map(r => {
+    const d = new Date(r.date + 'T00:00:00');
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  });
+  const morning = asc.map(r => r.temp ? r.temp.morning : null);
+  const afternoon = asc.map(r => r.temp ? r.temp.afternoon : null);
+  const night = asc.map(r => r.temp ? r.temp.night : null);
+
+  const ctx = document.getElementById('tempChart').getContext('2d');
+  if (tempChartInstance) tempChartInstance.destroy();
+  tempChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Morning', data: morning, borderColor: '#2FA36B', backgroundColor: '#2FA36B', tension: 0.3, spanGaps: true, pointRadius: 2 },
+        { label: 'Afternoon', data: afternoon, borderColor: '#E2933B', backgroundColor: '#E2933B', tension: 0.3, spanGaps: true, pointRadius: 2 },
+        { label: 'Night', data: night, borderColor: '#C1543D', backgroundColor: '#C1543D', tension: 0.3, spanGaps: true, pointRadius: 2 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { maxTicksLimit: 6, font: { size: 10 } }, grid: { display: false } },
+        y: { ticks: { font: { size: 10 }, callback: v => v + '°C' }, grid: { color: '#E9F2F2' } }
+      }
+    }
+  });
+}
+
+loadHistoryData();
+</script>
+</body>
+</html>
