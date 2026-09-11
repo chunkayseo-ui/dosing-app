@@ -61,6 +61,7 @@
   .day-row{
     display:flex; align-items:center; justify-content:space-between;
     padding:14px 4px; border-bottom:1px solid var(--border);
+    cursor:pointer;
   }
   .day-row:last-child{border-bottom:none;}
   .day-row.today{background:#EFFAF6; margin:0 -16px; padding-left:16px; padding-right:16px; border-radius:10px; border-bottom:1px solid transparent;}
@@ -74,6 +75,23 @@
   .day-time-value.first{color:var(--teal-deep);}
   .day-time-value.last{color:var(--amber);}
   .day-closed{font-size:13px; color:var(--ink-soft);}
+
+  .day-wrap{border-bottom:1px solid var(--border);}
+  .day-wrap:last-child{border-bottom:none;}
+  .day-wrap .day-row{border-bottom:none;}
+  .day-chevron{font-size:11px; color:var(--ink-soft); margin-left:8px; transition:transform .15s;}
+  .day-wrap.expanded .day-chevron{transform:rotate(90deg);}
+  .day-detail{display:none; padding:0 4px 16px 44px;}
+  .day-wrap.expanded .day-detail{display:block;}
+  .block-row{display:flex; align-items:center; gap:10px; margin-bottom:8px;}
+  .block-row:last-child{margin-bottom:0;}
+  .block-dot{width:7px; height:7px; border-radius:50%; background:var(--teal); flex:none;}
+  .block-time{font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; color:var(--ink);}
+  .gap-row{
+    display:flex; align-items:center; gap:10px; margin:2px 0 10px;
+    font-size:11.5px; color:var(--warn); font-weight:600;
+  }
+  .gap-line{width:7px; border-top:2px dashed var(--warn); flex:none;}
 
   .legend{display:flex; gap:14px; margin-top:14px; flex-wrap:wrap;}
   .legend-item{display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-soft);}
@@ -214,6 +232,19 @@ function fmtTime12(hhmm){
   return h12 + ':' + String(m).padStart(2, '0') + period;
 }
 
+function toMinutes(hhmm){
+  const [h, m] = hhmm.split(':').map(Number);
+  return h * 60 + m;
+}
+
+function fmtGap(mins){
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  if (h === 0) return m + 'm gap';
+  if (m === 0) return h + 'h gap';
+  return h + 'h ' + m + 'm gap';
+}
+
 function renderCalendar(data){
   calGrid.innerHTML = '';
   const dowLabels = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
@@ -225,6 +256,9 @@ function renderCalendar(data){
     const info = data[dateKey];
     const dow = new Date(state.year, state.month - 1, day).getDay();
     const isToday = dateKey === todayKey;
+
+    const wrap = document.createElement('div');
+    wrap.className = 'day-wrap';
 
     const row = document.createElement('div');
     row.className = 'day-row' + (isToday ? ' today' : '');
@@ -241,6 +275,7 @@ function renderCalendar(data){
             <div class="day-time-label">Ends</div>
             <div class="day-time-value last">${fmtTime12(info.last)}</div>
           </div>
+          <div class="day-chevron">\u25B8</div>
         </div>`;
     } else {
       timesHtml = `<div class="day-closed">Closed</div>`;
@@ -253,7 +288,31 @@ function renderCalendar(data){
       </div>
       ${timesHtml}
     `;
-    calGrid.appendChild(row);
+    wrap.appendChild(row);
+
+    if (info && info.blocks && info.blocks.length) {
+      const detail = document.createElement('div');
+      detail.className = 'day-detail';
+      let detailHtml = '';
+      const GAP_THRESHOLD_MIN = 45; // gaps shorter than this are just normal changeover time
+      info.blocks.forEach((block, i) => {
+        if (i > 0) {
+          const gapMins = toMinutes(block.start) - toMinutes(info.blocks[i - 1].end);
+          if (gapMins >= GAP_THRESHOLD_MIN) {
+            detailHtml += `<div class="gap-row"><span class="gap-line"></span>${fmtGap(gapMins)} \u2014 free for maintenance</div>`;
+          }
+        }
+        detailHtml += `<div class="block-row"><span class="block-dot"></span><span class="block-time">${fmtTime12(block.start)} \u2013 ${fmtTime12(block.end)}</span></div>`;
+      });
+      detail.innerHTML = detailHtml;
+      wrap.appendChild(detail);
+
+      row.onclick = () => {
+        wrap.classList.toggle('expanded');
+      };
+    }
+
+    calGrid.appendChild(wrap);
   }
 }
 </script>
