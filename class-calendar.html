@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>Class Calendar</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: var(--tg-theme-bg-color, #F1F7F7);
+    --surface: var(--tg-theme-secondary-bg-color, #FFFFFF);
+    --ink: var(--tg-theme-text-color, #0C2B30);
+    --ink-soft: #4C6B70;
+    --teal: #0E7C86;
+    --teal-deep: #0A5259;
+    --amber: #E2933B;
+    --border: #D9EAEA;
+    --ok: #2FA36B;
+    --warn: #C1543D;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0;}
+  body{
+    background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif;
+    min-height:100vh; padding:16px 16px 40px;
+  }
+  .wrap{max-width:480px; margin:0 auto;}
+
+  .top{margin-bottom:8px; padding:0 2px;}
+  .eyebrow{font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); font-weight:600;}
+  h1{font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700; margin:2px 0 0; letter-spacing:-.01em;}
+
+  .sync-row{display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-soft); margin-bottom:16px; padding:0 2px;}
+  .sync-dot{width:7px; height:7px; border-radius:50%; background:var(--ink-soft); flex:none;}
+  .sync-dot.ok{background:var(--ok);}
+  .sync-dot.warn{background:var(--warn);}
+  .sync-dot.loading{background:var(--amber); animation:pulse 1s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+  .card{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:16px; margin-bottom:14px;}
+  .label{font-size:12px; font-weight:600; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px;}
+
+  select{
+    width:100%; appearance:none; -webkit-appearance:none;
+    background:var(--surface) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9"><path d="M1 1L7 7L13 1" stroke="%230A5259" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat right 14px center;
+    border:1.5px solid var(--border); border-radius:12px; padding:14px 40px 14px 14px;
+    font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:600; color:var(--ink);
+  }
+
+  .month-nav{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .month-nav-btn{
+    width:36px; height:36px; border-radius:10px; border:1.5px solid var(--border);
+    background:var(--bg); color:var(--teal-deep); font-size:16px; font-weight:700;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+  }
+  .month-nav-label{font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:700;}
+
+  .cal-grid{display:grid; grid-template-columns:repeat(7, 1fr); gap:5px;}
+  .cal-dow{
+    text-align:center; font-size:10px; font-weight:700; color:var(--ink-soft);
+    text-transform:uppercase; padding-bottom:6px;
+  }
+  .cal-cell{
+    aspect-ratio:1/1.05; border-radius:10px; border:1px solid var(--border);
+    background:var(--bg); padding:5px 3px; display:flex; flex-direction:column;
+    align-items:center; justify-content:flex-start; position:relative;
+  }
+  .cal-cell.empty{visibility:hidden;}
+  .cal-cell.has-classes{background:#EFFAF6; border-color:#BFE8D8;}
+  .cal-cell.today{border-color:var(--teal); border-width:2px;}
+  .cal-cell.closed{background:var(--bg);}
+  .cal-date{font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; color:var(--ink);}
+  .cal-times{
+    font-family:'IBM Plex Mono',monospace; font-size:8.5px; line-height:1.35; margin-top:3px;
+    text-align:center; width:100%;
+  }
+  .cal-time-first{color:var(--teal-deep); font-weight:700;}
+  .cal-time-last{color:var(--amber); font-weight:700;}
+  .cal-closed-label{font-size:8px; color:var(--ink-soft); margin-top:4px;}
+
+  .legend{display:flex; gap:14px; margin-top:14px; flex-wrap:wrap;}
+  .legend-item{display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-soft);}
+  .legend-dot{width:9px; height:9px; border-radius:3px; flex:none;}
+
+  .empty-state{text-align:center; color:var(--ink-soft); font-size:13.5px; padding:30px 8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="eyebrow">Class Calendar</div>
+    <h1 id="outletTitle">Select a pool</h1>
+  </div>
+
+  <div class="sync-row">
+    <span class="sync-dot loading" id="syncDot"></span>
+    <span id="syncText">Select a pool to begin</span>
+  </div>
+
+  <div class="card">
+    <div class="label">Swimming Pool</div>
+    <select id="outletSelect"></select>
+  </div>
+
+  <div class="card" id="calCard" style="display:none;">
+    <div class="month-nav">
+      <button class="month-nav-btn" id="prevMonthBtn">‹</button>
+      <div class="month-nav-label" id="monthLabel">—</div>
+      <button class="month-nav-btn" id="nextMonthBtn">›</button>
+    </div>
+    <div class="cal-grid" id="calGrid"></div>
+    <div class="legend">
+      <div class="legend-item"><span class="legend-dot" style="background:#0E7C86;"></span>First class starts</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#E2933B;"></span>Last class ends</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const HISTORY_API_URL = 'https://script.google.com/macros/s/AKfycbwYJLfkw5lwKnjwqmEtuRiREzbahnf2l63YhmX_7jMR9uqM9MpeqoxeVTTVw5rc76eZ6g/exec';
+
+const OUTLET_NAMES = {
+  WWW:'WWW', JEIP1:'JEIP 1', JEIP2:'JEIP 2', JEOP1:'JEOP 1', JEOP2:'JEOP 2',
+  Tengah:'Tengah', HS:'HS', TPY:'TPY', DR:'DR', Lentor:'Lentor', BK:'BK', HB:'HB', CC:'CC'
+};
+
+const tg = window.Telegram ? window.Telegram.WebApp : null;
+if (tg) { tg.ready(); tg.expand(); }
+
+const outletSelect = document.getElementById('outletSelect');
+const outletTitle = document.getElementById('outletTitle');
+const calCard = document.getElementById('calCard');
+const calGrid = document.getElementById('calGrid');
+const monthLabel = document.getElementById('monthLabel');
+
+let calCache = {}; // { "WWW_2026-09": dataObject }
+let state = { outlet: null, year: null, month: null }; // month is 1-12
+
+function setSyncStatus(kind, text){
+  document.getElementById('syncDot').className = 'sync-dot ' + kind;
+  document.getElementById('syncText').textContent = text;
+}
+
+Object.keys(OUTLET_NAMES).forEach(key => {
+  const opt = document.createElement('option');
+  opt.value = key; opt.textContent = OUTLET_NAMES[key];
+  outletSelect.appendChild(opt);
+});
+outletSelect.value = '';
+const placeholder = document.createElement('option');
+placeholder.value = ''; placeholder.textContent = 'Select a pool…'; placeholder.disabled = true; placeholder.selected = true;
+outletSelect.insertBefore(placeholder, outletSelect.firstChild);
+
+const today = new Date();
+state.year = today.getFullYear();
+state.month = today.getMonth() + 1;
+
+outletSelect.onchange = () => {
+  state.outlet = outletSelect.value;
+  if (tg) tg.HapticFeedback.impactOccurred('light');
+  outletTitle.textContent = OUTLET_NAMES[state.outlet];
+  calCard.style.display = 'block';
+  loadMonth();
+};
+
+document.getElementById('prevMonthBtn').onclick = () => {
+  if (tg) tg.HapticFeedback.impactOccurred('light');
+  state.month--;
+  if (state.month < 1) { state.month = 12; state.year--; }
+  loadMonth();
+};
+document.getElementById('nextMonthBtn').onclick = () => {
+  if (tg) tg.HapticFeedback.impactOccurred('light');
+  state.month++;
+  if (state.month > 12) { state.month = 1; state.year++; }
+  loadMonth();
+};
+
+function monthKey(){
+  return state.year + '-' + String(state.month).padStart(2, '0');
+}
+
+async function loadMonth(){
+  if (!state.outlet) return;
+  const key = state.outlet + '_' + monthKey();
+  monthLabel.textContent = new Date(state.year, state.month - 1, 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+  if (calCache[key]) {
+    setSyncStatus('ok', 'Data loaded');
+    renderCalendar(calCache[key]);
+    return;
+  }
+
+  setSyncStatus('loading', 'Loading month…');
+  calGrid.innerHTML = '';
+  try {
+    const url = HISTORY_API_URL + '?classes=1&outlet=' + encodeURIComponent(state.outlet) + '&month=' + monthKey() + '&_=' + Date.now();
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    calCache[key] = data;
+    setSyncStatus('ok', 'Data loaded');
+    renderCalendar(data);
+  } catch (e) {
+    setSyncStatus('warn', 'Could not load class schedule');
+    calGrid.innerHTML = '<div class="empty-state">Could not load this month\u2019s classes. Try again shortly.</div>';
+  }
+}
+
+function fmtTime12(hhmm){
+  const [h, m] = hhmm.split(':').map(Number);
+  const period = h >= 12 ? 'PM' : 'AM';
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  return h12 + ':' + String(m).padStart(2, '0') + period;
+}
+
+function renderCalendar(data){
+  calGrid.innerHTML = '';
+  const dowLabels = ['S','M','T','W','T','F','S'];
+  dowLabels.forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'cal-dow';
+    el.textContent = d;
+    calGrid.appendChild(el);
+  });
+
+  const firstOfMonth = new Date(state.year, state.month - 1, 1);
+  const startDow = firstOfMonth.getDay(); // 0 = Sunday
+  const daysInMonth = new Date(state.year, state.month, 0).getDate();
+  const todayKey = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+
+  for (let i = 0; i < startDow; i++) {
+    const el = document.createElement('div');
+    el.className = 'cal-cell empty';
+    calGrid.appendChild(el);
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dateKey = state.year + '-' + String(state.month).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+    const info = data[dateKey];
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell' + (info ? ' has-classes' : ' closed') + (dateKey === todayKey ? ' today' : '');
+
+    let inner = `<div class="cal-date">${day}</div>`;
+    if (info) {
+      inner += `<div class="cal-times"><span class="cal-time-first">${fmtTime12(info.first)}</span><br><span class="cal-time-last">${fmtTime12(info.last)}</span></div>`;
+    } else {
+      inner += `<div class="cal-closed-label">—</div>`;
+    }
+    cell.innerHTML = inner;
+    calGrid.appendChild(cell);
+  }
+}
+</script>
+</body>
+</html>
