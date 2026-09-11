@@ -57,28 +57,23 @@
   }
   .month-nav-label{font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:700;}
 
-  .cal-grid{display:grid; grid-template-columns:repeat(7, 1fr); gap:5px;}
-  .cal-dow{
-    text-align:center; font-size:10px; font-weight:700; color:var(--ink-soft);
-    text-transform:uppercase; padding-bottom:6px;
+  .day-list{display:flex; flex-direction:column;}
+  .day-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 4px; border-bottom:1px solid var(--border);
   }
-  .cal-cell{
-    aspect-ratio:1/1.05; border-radius:10px; border:1px solid var(--border);
-    background:var(--bg); padding:5px 3px; display:flex; flex-direction:column;
-    align-items:center; justify-content:flex-start; position:relative;
-  }
-  .cal-cell.empty{visibility:hidden;}
-  .cal-cell.has-classes{background:#EFFAF6; border-color:#BFE8D8;}
-  .cal-cell.today{border-color:var(--teal); border-width:2px;}
-  .cal-cell.closed{background:var(--bg);}
-  .cal-date{font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; color:var(--ink);}
-  .cal-times{
-    font-family:'IBM Plex Mono',monospace; font-size:8.5px; line-height:1.35; margin-top:3px;
-    text-align:center; width:100%;
-  }
-  .cal-time-first{color:var(--teal-deep); font-weight:700;}
-  .cal-time-last{color:var(--amber); font-weight:700;}
-  .cal-closed-label{font-size:8px; color:var(--ink-soft); margin-top:4px;}
+  .day-row:last-child{border-bottom:none;}
+  .day-row.today{background:#EFFAF6; margin:0 -16px; padding-left:16px; padding-right:16px; border-radius:10px; border-bottom:1px solid transparent;}
+  .day-left{display:flex; align-items:baseline; gap:8px;}
+  .day-dow{font-size:11.5px; font-weight:700; color:var(--ink-soft); text-transform:uppercase; width:32px;}
+  .day-date{font-family:'Space Grotesk',sans-serif; font-size:17px; font-weight:700; color:var(--ink);}
+  .day-times{display:flex; align-items:center; gap:14px;}
+  .day-time-block{text-align:right;}
+  .day-time-label{font-size:9px; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-soft);}
+  .day-time-value{font-family:'IBM Plex Mono',monospace; font-size:15px; font-weight:700;}
+  .day-time-value.first{color:var(--teal-deep);}
+  .day-time-value.last{color:var(--amber);}
+  .day-closed{font-size:13px; color:var(--ink-soft);}
 
   .legend{display:flex; gap:14px; margin-top:14px; flex-wrap:wrap;}
   .legend-item{display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-soft);}
@@ -111,7 +106,7 @@
       <div class="month-nav-label" id="monthLabel">—</div>
       <button class="month-nav-btn" id="nextMonthBtn">›</button>
     </div>
-    <div class="cal-grid" id="calGrid"></div>
+    <div class="day-list" id="calGrid"></div>
     <div class="legend">
       <div class="legend-item"><span class="legend-dot" style="background:#0E7C86;"></span>First class starts</div>
       <div class="legend-item"><span class="legend-dot" style="background:#E2933B;"></span>Last class ends</div>
@@ -221,39 +216,44 @@ function fmtTime12(hhmm){
 
 function renderCalendar(data){
   calGrid.innerHTML = '';
-  const dowLabels = ['S','M','T','W','T','F','S'];
-  dowLabels.forEach(d => {
-    const el = document.createElement('div');
-    el.className = 'cal-dow';
-    el.textContent = d;
-    calGrid.appendChild(el);
-  });
-
-  const firstOfMonth = new Date(state.year, state.month - 1, 1);
-  const startDow = firstOfMonth.getDay(); // 0 = Sunday
+  const dowLabels = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
   const daysInMonth = new Date(state.year, state.month, 0).getDate();
   const todayKey = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
-
-  for (let i = 0; i < startDow; i++) {
-    const el = document.createElement('div');
-    el.className = 'cal-cell empty';
-    calGrid.appendChild(el);
-  }
 
   for (let day = 1; day <= daysInMonth; day++) {
     const dateKey = state.year + '-' + String(state.month).padStart(2, '0') + '-' + String(day).padStart(2, '0');
     const info = data[dateKey];
-    const cell = document.createElement('div');
-    cell.className = 'cal-cell' + (info ? ' has-classes' : ' closed') + (dateKey === todayKey ? ' today' : '');
+    const dow = new Date(state.year, state.month - 1, day).getDay();
+    const isToday = dateKey === todayKey;
 
-    let inner = `<div class="cal-date">${day}</div>`;
+    const row = document.createElement('div');
+    row.className = 'day-row' + (isToday ? ' today' : '');
+
+    let timesHtml;
     if (info) {
-      inner += `<div class="cal-times"><span class="cal-time-first">${fmtTime12(info.first)}</span><br><span class="cal-time-last">${fmtTime12(info.last)}</span></div>`;
+      timesHtml = `
+        <div class="day-times">
+          <div class="day-time-block">
+            <div class="day-time-label">First</div>
+            <div class="day-time-value first">${fmtTime12(info.first)}</div>
+          </div>
+          <div class="day-time-block">
+            <div class="day-time-label">Last</div>
+            <div class="day-time-value last">${fmtTime12(info.last)}</div>
+          </div>
+        </div>`;
     } else {
-      inner += `<div class="cal-closed-label">—</div>`;
+      timesHtml = `<div class="day-closed">Closed</div>`;
     }
-    cell.innerHTML = inner;
-    calGrid.appendChild(cell);
+
+    row.innerHTML = `
+      <div class="day-left">
+        <div class="day-dow">${dowLabels[dow]}</div>
+        <div class="day-date">${day}</div>
+      </div>
+      ${timesHtml}
+    `;
+    calGrid.appendChild(row);
   }
 }
 </script>
