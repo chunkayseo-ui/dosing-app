@@ -203,7 +203,7 @@ async function loadData(){
   if (!outlet || !OUTLET_NAMES[outlet]) return;
   setSyncStatus('loading', 'Loading data… (can take up to 20s)');
   try {
-    const res = await fetch(HISTORY_API_URL + '?_=' + Date.now());
+    const res = await fetch(HISTORY_API_URL + '?pool=' + encodeURIComponent(outlet) + '&_=' + Date.now());
     if (!res.ok) throw new Error('HTTP ' + res.status);
     historyData = await res.json();
     setSyncStatus('ok', 'Data loaded');

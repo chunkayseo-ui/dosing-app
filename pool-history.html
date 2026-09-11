@@ -183,7 +183,7 @@ const OUTLET_NAMES = {
 const tg = window.Telegram ? window.Telegram.WebApp : null;
 if (tg) { tg.ready(); tg.expand(); }
 
-let historyData = null;
+let historyCache = {}; // { [outletKey]: recordsArray }
 let state = { outlet: null };
 let attendChartInstance = null;
 let tempChartInstance = null;
@@ -229,9 +229,11 @@ if (paramPool && OUTLET_NAMES[paramPool]) {
 outletSelect.onchange = () => {
   state.outlet = outletSelect.value;
   if (tg) tg.HapticFeedback.impactOccurred('light');
-  renderAll();
+  loadForOutlet(state.outlet, false);
 };
-document.getElementById('refreshBtn').onclick = () => loadHistoryData(true);
+document.getElementById('refreshBtn').onclick = () => {
+  if (state.outlet) loadForOutlet(state.outlet, true);
+};
 
 function goToChartDetail(kind){
   if (!state.outlet) return;
@@ -249,12 +251,21 @@ function tcRow(key, val, unit){
   return `<div class="tc-row"><span class="tc-key">${key}</span><span class="tc-val ${has ? '' : 'empty-val'}">${has ? val + (unit || '') : '—'}</span></div>`;
 }
 
-async function loadHistoryData(isRefresh){
-  setSyncStatus('loading', isRefresh ? 'Refreshing…' : 'Loading data… (can take up to 20s)');
+// Fetches just one pool's data (fast — the backend only scans that one sheet),
+// and caches it so switching back to an already-viewed pool is instant.
+async function loadForOutlet(outletKey, forceRefresh){
+  if (!outletKey) return;
+  if (!forceRefresh && historyCache[outletKey]) {
+    setSyncStatus('ok', 'Data loaded');
+    renderAll();
+    return;
+  }
+  setSyncStatus('loading', forceRefresh ? 'Refreshing…' : 'Loading data…');
   try {
-    const res = await fetch(HISTORY_API_URL + '?_=' + Date.now());
+    const res = await fetch(HISTORY_API_URL + '?pool=' + encodeURIComponent(outletKey) + '&_=' + Date.now());
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    historyData = await res.json();
+    const json = await res.json();
+    historyCache[outletKey] = json[outletKey] || [];
     setSyncStatus('ok', 'Data loaded');
     renderAll();
   } catch (e) {
@@ -264,11 +275,11 @@ async function loadHistoryData(isRefresh){
 
 function renderAll(){
   const mainContent = document.getElementById('mainContent');
-  if (!state.outlet || !historyData) { mainContent.style.display = 'none'; return; }
+  if (!state.outlet || !historyCache[state.outlet]) { mainContent.style.display = 'none'; return; }
   mainContent.style.display = 'block';
   outletName.textContent = OUTLET_NAMES[state.outlet];
 
-  const records = (historyData[state.outlet] || []).slice();
+  const records = (historyCache[state.outlet] || []).slice();
   records.sort((a, b) => a.date < b.date ? 1 : -1); // most recent first
 
   renderToday(records);
@@ -528,7 +539,11 @@ function renderDosingChart(records){
   });
 }
 
-loadHistoryData();
+if (state.outlet) {
+  loadForOutlet(state.outlet, false);
+} else {
+  setSyncStatus('ok', 'Select a pool to begin');
+}
 </script>
 </body>
 </html>
