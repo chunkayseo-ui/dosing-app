@@ -6,6 +6,7 @@
 <title>Class Calendar</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://script.google.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -49,6 +50,34 @@
     font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:600; color:var(--ink);
   }
 
+  /* ---- Today card: the answer this page is usually opened for, so it sits
+         first, opens expanded, and never waits for a fresh network reply if a
+         saved copy is on the phone. ---- */
+  .today-card{
+    background:linear-gradient(180deg,#EFFAF8 0%, var(--surface) 62%);
+    border-color:#B9E2DC;
+  }
+  .today-head{display:flex; align-items:flex-start; justify-content:space-between; gap:12px;}
+  .today-label{font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); font-weight:700;}
+  .today-date{font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:700; margin-top:2px;}
+  .today-times{display:flex; gap:16px; flex:none;}
+  .today-time-block{text-align:right;}
+  .today-time-label{font-size:9px; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-soft);}
+  .today-time-value{font-family:'IBM Plex Mono',monospace; font-size:20px; font-weight:700; line-height:1.15;}
+  .today-time-value.first{color:var(--teal-deep);}
+  .today-time-value.last{color:var(--amber);}
+  .today-closed{font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:700; color:var(--ink-soft);}
+  .today-blocks{margin-top:14px; padding-top:12px; border-top:1px solid var(--border);}
+  .today-blocks:empty{display:none;}
+  .today-count{font-size:11.5px; color:var(--ink-soft); margin-bottom:9px;}
+
+  /* skeleton, shown only on a genuinely first-ever load for a pool */
+  .skel{background:linear-gradient(90deg,#E6F1F1 25%,#F2F8F8 50%,#E6F1F1 75%); background-size:200% 100%;
+    animation:shimmer 1.1s infinite; border-radius:7px; height:13px;}
+  .skel.big{height:22px; width:108px;}
+  .skel.line{margin-top:9px; width:70%;}
+  @keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+
   .month-nav{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
   .month-nav-btn{
     width:36px; height:36px; border-radius:10px; border:1.5px solid var(--border);
@@ -75,6 +104,7 @@
   .day-time-value.first{color:var(--teal-deep);}
   .day-time-value.last{color:var(--amber);}
   .day-closed{font-size:13px; color:var(--ink-soft);}
+  .day-past{opacity:.55;}
 
   .day-wrap{border-bottom:1px solid var(--border);}
   .day-wrap:last-child{border-bottom:none;}
@@ -87,6 +117,8 @@
   .block-row:last-child{margin-bottom:0;}
   .block-dot{width:7px; height:7px; border-radius:50%; background:var(--teal); flex:none;}
   .block-time{font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; color:var(--ink);}
+  .block-row.past .block-dot{background:var(--border);}
+  .block-row.past .block-time{color:var(--ink-soft);}
   .gap-row{
     display:flex; align-items:center; gap:10px; margin:2px 0 10px;
     font-size:11.5px; color:var(--warn); font-weight:600;
@@ -98,6 +130,7 @@
   .legend-dot{width:9px; height:9px; border-radius:3px; flex:none;}
 
   .empty-state{text-align:center; color:var(--ink-soft); font-size:13.5px; padding:30px 8px;}
+
 </style>
 </head>
 <body>
@@ -118,11 +151,22 @@
     <select id="outletSelect"></select>
   </div>
 
+  <div class="card today-card" id="todayCard" style="display:none;">
+    <div class="today-head">
+      <div>
+        <div class="today-label">Today</div>
+        <div class="today-date" id="todayDate">—</div>
+      </div>
+      <div id="todayTimes"></div>
+    </div>
+    <div class="today-blocks" id="todayBlocks"></div>
+  </div>
+
   <div class="card" id="calCard" style="display:none;">
     <div class="month-nav">
-      <button class="month-nav-btn" id="prevMonthBtn">‹</button>
+      <button class="month-nav-btn" id="prevMonthBtn">&lsaquo;</button>
       <div class="month-nav-label" id="monthLabel">—</div>
-      <button class="month-nav-btn" id="nextMonthBtn">›</button>
+      <button class="month-nav-btn" id="nextMonthBtn">&rsaquo;</button>
     </div>
     <div class="day-list" id="calGrid"></div>
     <div class="legend">
@@ -141,180 +185,324 @@ const OUTLET_NAMES = {
   Tengah:'Tengah', HS:'HS', TPY:'TPY', DR:'DR', Lentor:'Lentor', BK:'BK', HB:'HB', CC:'CC'
 };
 
+/* The class schedule for a month is about 20 KB and the whole wait is the
+   Apps Script round trip (2-6 s), so the fix is not to fetch less but to stop
+   waiting for it: keep the last answer on the phone, draw from it at once,
+   then quietly check for a newer one. */
+const LS_OUTLET = 'cal.outlet';
+const LS_PREFIX = 'cal.month.';
+const LS_KEEP   = 24;   // saved months to keep before pruning the oldest
+const LS_MAXAGE = 90;   // days
+
 const tg = window.Telegram ? window.Telegram.WebApp : null;
 if (tg) { tg.ready(); tg.expand(); }
 
 const outletSelect = document.getElementById('outletSelect');
-const outletTitle = document.getElementById('outletTitle');
-const calCard = document.getElementById('calCard');
-const calGrid = document.getElementById('calGrid');
-const monthLabel = document.getElementById('monthLabel');
+const outletTitle  = document.getElementById('outletTitle');
+const calCard      = document.getElementById('calCard');
+const calGrid      = document.getElementById('calGrid');
+const monthLabel   = document.getElementById('monthLabel');
+const todayCard    = document.getElementById('todayCard');
 
-let calCache = {}; // { "WWW_2026-09": dataObject }
-let state = { outlet: null, year: null, month: null }; // month is 1-12
+let calCache = {};                                    // { "WWW_2026-09": data }
+let state = { outlet:null, year:null, month:null };   // month is 1-12
+
+const today = new Date();
+state.year  = today.getFullYear();
+state.month = today.getMonth() + 1;
+const TODAY_KEY = ymd(today);
+const CUR_MONTH = TODAY_KEY.slice(0, 7);
+
+function pad(n){ return String(n).padStart(2, '0'); }
+function ymd(d){ return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
 
 function setSyncStatus(kind, text){
   document.getElementById('syncDot').className = 'sync-dot ' + kind;
   document.getElementById('syncText').textContent = text;
 }
 
+/* ---------- saved copies on the phone ---------- */
+function lsGet(key){
+  try {
+    const raw = localStorage.getItem(LS_PREFIX + key);
+    if (!raw) return null;
+    const box = JSON.parse(raw);
+    if (!box || !box.data) return null;
+    return box;
+  } catch(e){ return null; }
+}
+function lsPut(key, data){
+  try {
+    localStorage.setItem(LS_PREFIX + key, JSON.stringify({ savedAt: Date.now(), data: data }));
+    prune();
+  } catch(e){
+    // out of room (or private mode): drop what we have and try once more
+    try { prune(true); localStorage.setItem(LS_PREFIX + key, JSON.stringify({ savedAt: Date.now(), data: data })); } catch(e2){}
+  }
+}
+function prune(hard){
+  try {
+    const rows = [];
+    for (let i = 0; i < localStorage.length; i++){
+      const k = localStorage.key(i);
+      if (k && k.indexOf(LS_PREFIX) === 0){
+        let at = 0;
+        try { at = (JSON.parse(localStorage.getItem(k)) || {}).savedAt || 0; } catch(e){}
+        rows.push({ k:k, at:at });
+      }
+    }
+    const cutoff = Date.now() - LS_MAXAGE * 86400000;
+    rows.sort((a,b) => b.at - a.at);
+    rows.forEach((r, i) => {
+      if (hard ? i >= 4 : (i >= LS_KEEP || r.at < cutoff)) localStorage.removeItem(r.k);
+    });
+  } catch(e){}
+}
+
+/* ---------- pool picker ---------- */
 Object.keys(OUTLET_NAMES).forEach(key => {
   const opt = document.createElement('option');
   opt.value = key; opt.textContent = OUTLET_NAMES[key];
   outletSelect.appendChild(opt);
 });
-outletSelect.value = '';
 const placeholder = document.createElement('option');
 placeholder.value = ''; placeholder.textContent = 'Select a pool…'; placeholder.disabled = true; placeholder.selected = true;
 outletSelect.insertBefore(placeholder, outletSelect.firstChild);
-
-const today = new Date();
-state.year = today.getFullYear();
-state.month = today.getMonth() + 1;
+outletSelect.value = '';
 
 outletSelect.onchange = () => {
-  state.outlet = outletSelect.value;
   if (tg) tg.HapticFeedback.impactOccurred('light');
-  outletTitle.textContent = OUTLET_NAMES[state.outlet];
-  calCard.style.display = 'block';
-  loadMonth();
+  pickOutlet(outletSelect.value);
 };
+
+function pickOutlet(code){
+  if (!code || !OUTLET_NAMES[code]) return;
+  state.outlet = code;
+  state.year  = today.getFullYear();
+  state.month = today.getMonth() + 1;
+  outletSelect.value = code;
+  outletTitle.textContent = OUTLET_NAMES[code];
+  todayCard.style.display = 'block';
+  calCard.style.display = 'block';
+  try { localStorage.setItem(LS_OUTLET, code); } catch(e){}
+  loadMonth();
+}
 
 document.getElementById('prevMonthBtn').onclick = () => {
   if (tg) tg.HapticFeedback.impactOccurred('light');
   state.month--;
-  if (state.month < 1) { state.month = 12; state.year--; }
+  if (state.month < 1){ state.month = 12; state.year--; }
   loadMonth();
 };
 document.getElementById('nextMonthBtn').onclick = () => {
   if (tg) tg.HapticFeedback.impactOccurred('light');
   state.month++;
-  if (state.month > 12) { state.month = 1; state.year++; }
+  if (state.month > 12){ state.month = 1; state.year++; }
   loadMonth();
 };
 
-function monthKey(){
-  return state.year + '-' + String(state.month).padStart(2, '0');
-}
+function monthKey(){ return state.year + '-' + pad(state.month); }
 
+/* ---------- loading ---------- */
+/* Draw whatever is already on the phone straight away, then check the server
+   in the background and redraw only if the answer actually changed. */
 async function loadMonth(){
   if (!state.outlet) return;
-  const key = state.outlet + '_' + monthKey();
-  monthLabel.textContent = new Date(state.year, state.month - 1, 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  const mk  = monthKey();
+  const key = state.outlet + '_' + mk;
+  monthLabel.textContent = new Date(state.year, state.month - 1, 1)
+    .toLocaleDateString('en-US', { month:'long', year:'numeric' });
 
-  if (calCache[key]) {
-    setSyncStatus('ok', 'Data loaded');
-    renderCalendar(calCache[key]);
-    return;
+  let shown = false;
+  if (calCache[key]){
+    draw(calCache[key], mk);
+    shown = true;
+  } else {
+    const box = lsGet(key);
+    if (box){
+      calCache[key] = box.data;
+      draw(box.data, mk);
+      shown = true;
+      setSyncStatus('ok', 'Saved copy · checking for changes…');
+    }
+  }
+  if (!shown){
+    drawSkeleton(mk);
+    setSyncStatus('loading', 'Loading…');
   }
 
-  setSyncStatus('loading', 'Loading month…');
-  calGrid.innerHTML = '';
   try {
-    const url = HISTORY_API_URL + '?classes=1&outlet=' + encodeURIComponent(state.outlet) + '&month=' + monthKey() + '&_=' + Date.now();
+    const url = HISTORY_API_URL + '?classes=1&outlet=' + encodeURIComponent(state.outlet) +
+                '&month=' + mk + '&_=' + Date.now();
     const res = await fetch(url);
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     if (data.error) throw new Error(data.error);
+    if (state.outlet + '_' + monthKey() !== key) return;   // they moved on while we waited
+
+    const changed = JSON.stringify(calCache[key]) !== JSON.stringify(data);
     calCache[key] = data;
-    setSyncStatus('ok', 'Data loaded');
-    renderCalendar(data);
-  } catch (e) {
-    setSyncStatus('warn', 'Could not load class schedule');
-    calGrid.innerHTML = '<div class="empty-state">Could not load this month\u2019s classes. Try again shortly.</div>';
+    lsPut(key, data);
+    if (changed || !shown) draw(data, mk);
+    setSyncStatus('ok', shown && !changed ? 'Up to date' : 'Updated just now');
+  } catch(e){
+    if (shown) setSyncStatus('warn', 'Showing saved copy — could not reach the server');
+    else {
+      setSyncStatus('warn', 'Could not load class schedule');
+      todayBlank('Could not load today’s classes. Try again shortly.');
+      calGrid.innerHTML = '<div class="empty-state">Could not load this month’s classes. Try again shortly.</div>';
+    }
   }
 }
 
+function draw(data, mk){
+  if (mk === CUR_MONTH) renderToday(data);
+  renderCalendar(data);
+}
+
+/* ---------- formatting ---------- */
 function fmtTime12(hhmm){
-  const [h, m] = hhmm.split(':').map(Number);
+  const parts = String(hhmm).split(':').map(Number);
+  const h = parts[0], m = parts[1] || 0;
   const period = h >= 12 ? 'PM' : 'AM';
   const h12 = h % 12 === 0 ? 12 : h % 12;
-  return h12 + ':' + String(m).padStart(2, '0') + period;
+  return h12 + ':' + pad(m) + period;
 }
-
 function toMinutes(hhmm){
-  const [h, m] = hhmm.split(':').map(Number);
-  return h * 60 + m;
+  const parts = String(hhmm).split(':').map(Number);
+  return parts[0] * 60 + (parts[1] || 0);
 }
-
 function fmtGap(mins){
-  const h = Math.floor(mins / 60);
-  const m = mins % 60;
+  const h = Math.floor(mins / 60), m = mins % 60;
   if (h === 0) return m + 'm gap';
   if (m === 0) return h + 'h gap';
   return h + 'h ' + m + 'm gap';
+}
+const GAP_THRESHOLD_MIN = 45;   // shorter than this is just changeover time
+
+function blocksHtml(blocks, markPast){
+  const nowMin = today.getHours() * 60 + today.getMinutes();
+  let html = '';
+  blocks.forEach((block, i) => {
+    if (i > 0){
+      const gap = toMinutes(block.start) - toMinutes(blocks[i-1].end);
+      if (gap >= GAP_THRESHOLD_MIN){
+        html += '<div class="gap-row"><span class="gap-line"></span>' + fmtGap(gap) + ' — free for maintenance</div>';
+      }
+    }
+    const past = markPast && toMinutes(block.end) <= nowMin;
+    html += '<div class="block-row' + (past ? ' past' : '') + '"><span class="block-dot"></span>' +
+            '<span class="block-time">' + fmtTime12(block.start) + ' – ' + fmtTime12(block.end) + '</span></div>';
+  });
+  return html;
+}
+
+/* ---------- today ---------- */
+function todayDateText(){
+  return today.toLocaleDateString('en-US', { weekday:'short', day:'numeric', month:'short' });
+}
+function drawSkeletonToday(){
+  document.getElementById('todayDate').textContent = todayDateText();
+  document.getElementById('todayTimes').innerHTML = '<div class="skel big"></div>';
+  document.getElementById('todayBlocks').innerHTML = '<div class="skel line"></div><div class="skel line"></div>';
+}
+function todayBlank(msg){
+  document.getElementById('todayDate').textContent = todayDateText();
+  document.getElementById('todayTimes').innerHTML = '';
+  document.getElementById('todayBlocks').innerHTML = '<div class="today-count">' + msg + '</div>';
+}
+function renderToday(data){
+  const info = data[TODAY_KEY];
+  document.getElementById('todayDate').textContent = todayDateText();
+
+  if (!info){
+    document.getElementById('todayTimes').innerHTML = '<div class="today-closed">Closed</div>';
+    document.getElementById('todayBlocks').innerHTML = '';
+    return;
+  }
+  document.getElementById('todayTimes').innerHTML =
+    '<div class="today-times">' +
+      '<div class="today-time-block"><div class="today-time-label">Starts</div>' +
+        '<div class="today-time-value first">' + fmtTime12(info.first) + '</div></div>' +
+      '<div class="today-time-block"><div class="today-time-label">Ends</div>' +
+        '<div class="today-time-value last">' + fmtTime12(info.last) + '</div></div>' +
+    '</div>';
+
+  const blocks = info.blocks || [];
+  document.getElementById('todayBlocks').innerHTML = blocks.length
+    ? '<div class="today-count">' + (info.count || blocks.length) + ' class' +
+      ((info.count || blocks.length) === 1 ? '' : 'es') + ' today</div>' + blocksHtml(blocks, true)
+    : '';
+}
+
+/* ---------- month list ---------- */
+function drawSkeleton(mk){
+  if (mk === CUR_MONTH) drawSkeletonToday();
+  let html = '';
+  for (let i = 0; i < 6; i++){
+    html += '<div class="day-row"><div class="day-left"><div class="skel" style="width:28px"></div>' +
+            '<div class="skel" style="width:20px"></div></div><div class="skel" style="width:96px"></div></div>';
+  }
+  calGrid.innerHTML = html;
 }
 
 function renderCalendar(data){
   calGrid.innerHTML = '';
   const dowLabels = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
   const daysInMonth = new Date(state.year, state.month, 0).getDate();
-  const todayKey = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
 
-  for (let day = 1; day <= daysInMonth; day++) {
-    const dateKey = state.year + '-' + String(state.month).padStart(2, '0') + '-' + String(day).padStart(2, '0');
-    const info = data[dateKey];
-    const dow = new Date(state.year, state.month - 1, day).getDay();
-    const isToday = dateKey === todayKey;
+  for (let day = 1; day <= daysInMonth; day++){
+    const dateKey = state.year + '-' + pad(state.month) + '-' + pad(day);
+    const info    = data[dateKey];
+    const dow     = new Date(state.year, state.month - 1, day).getDay();
+    const isToday = dateKey === TODAY_KEY;
+    const isPast  = dateKey < TODAY_KEY;
 
     const wrap = document.createElement('div');
     wrap.className = 'day-wrap';
 
     const row = document.createElement('div');
-    row.className = 'day-row' + (isToday ? ' today' : '');
+    row.className = 'day-row' + (isToday ? ' today' : '') + (isPast ? ' day-past' : '');
 
     let timesHtml;
-    if (info) {
-      timesHtml = `
-        <div class="day-times">
-          <div class="day-time-block">
-            <div class="day-time-label">Starts</div>
-            <div class="day-time-value first">${fmtTime12(info.first)}</div>
-          </div>
-          <div class="day-time-block">
-            <div class="day-time-label">Ends</div>
-            <div class="day-time-value last">${fmtTime12(info.last)}</div>
-          </div>
-          <div class="day-chevron">\u25B8</div>
-        </div>`;
+    if (info){
+      timesHtml =
+        '<div class="day-times">' +
+          '<div class="day-time-block"><div class="day-time-label">Starts</div>' +
+            '<div class="day-time-value first">' + fmtTime12(info.first) + '</div></div>' +
+          '<div class="day-time-block"><div class="day-time-label">Ends</div>' +
+            '<div class="day-time-value last">' + fmtTime12(info.last) + '</div></div>' +
+          '<div class="day-chevron">▸</div>' +
+        '</div>';
     } else {
-      timesHtml = `<div class="day-closed">Closed</div>`;
+      timesHtml = '<div class="day-closed">Closed</div>';
     }
 
-    row.innerHTML = `
-      <div class="day-left">
-        <div class="day-dow">${dowLabels[dow]}</div>
-        <div class="day-date">${day}</div>
-      </div>
-      ${timesHtml}
-    `;
+    row.innerHTML =
+      '<div class="day-left">' +
+        '<div class="day-dow">' + dowLabels[dow] + '</div>' +
+        '<div class="day-date">' + day + '</div>' +
+      '</div>' + timesHtml;
     wrap.appendChild(row);
 
-    if (info && info.blocks && info.blocks.length) {
+    if (info && info.blocks && info.blocks.length){
       const detail = document.createElement('div');
       detail.className = 'day-detail';
-      let detailHtml = '';
-      const GAP_THRESHOLD_MIN = 45; // gaps shorter than this are just normal changeover time
-      info.blocks.forEach((block, i) => {
-        if (i > 0) {
-          const gapMins = toMinutes(block.start) - toMinutes(info.blocks[i - 1].end);
-          if (gapMins >= GAP_THRESHOLD_MIN) {
-            detailHtml += `<div class="gap-row"><span class="gap-line"></span>${fmtGap(gapMins)} \u2014 free for maintenance</div>`;
-          }
-        }
-        detailHtml += `<div class="block-row"><span class="block-dot"></span><span class="block-time">${fmtTime12(block.start)} \u2013 ${fmtTime12(block.end)}</span></div>`;
-      });
-      detail.innerHTML = detailHtml;
+      detail.innerHTML = blocksHtml(info.blocks, false);
       wrap.appendChild(detail);
-
-      row.onclick = () => {
-        wrap.classList.toggle('expanded');
-      };
+      row.onclick = () => { wrap.classList.toggle('expanded'); };
     }
 
     calGrid.appendChild(wrap);
   }
 }
+
+/* ---------- open straight into the pool used last time ---------- */
+(function start(){
+  let last = null;
+  try { last = localStorage.getItem(LS_OUTLET); } catch(e){}
+  if (last && OUTLET_NAMES[last]) pickOutlet(last);
+})();
 </script>
 </body>
 </html>
