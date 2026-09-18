@@ -69,7 +69,18 @@
   .today-closed{font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:700; color:var(--ink-soft);}
   .today-blocks{margin-top:14px; padding-top:12px; border-top:1px solid var(--border);}
   .today-blocks:empty{display:none;}
-  .today-count{font-size:11.5px; color:var(--ink-soft); margin-bottom:9px;}
+  /* a busy Saturday runs to 50+ classes, so the list stays folded behind its
+     own summary -- the start and end times are what the page is opened for */
+  .today-count{
+    display:flex; align-items:center; gap:7px; cursor:pointer;
+    font-size:12px; font-weight:600; color:var(--teal-deep);
+  }
+  .today-count .chev{font-size:10px; color:var(--ink-soft); transition:transform .15s;}
+  .today-count.open .chev{transform:rotate(90deg);}
+  .today-count .gaps{color:var(--warn); font-weight:600;}
+  .today-list{display:none; margin-top:11px;}
+  .today-list.open{display:block;}
+  .today-note{font-size:11.5px; color:var(--ink-soft);}
 
   /* skeleton, shown only on a genuinely first-ever load for a pool */
   .skel{background:linear-gradient(90deg,#E6F1F1 25%,#F2F8F8 50%,#E6F1F1 75%); background-size:200% 100%;
@@ -206,6 +217,7 @@ const todayCard    = document.getElementById('todayCard');
 
 let calCache = {};                                    // { "WWW_2026-09": data }
 let state = { outlet:null, year:null, month:null };   // month is 1-12
+let todayListOpen = false;                            // survives a background redraw
 
 const today = new Date();
 state.year  = today.getFullYear();
@@ -409,7 +421,14 @@ function drawSkeletonToday(){
 function todayBlank(msg){
   document.getElementById('todayDate').textContent = todayDateText();
   document.getElementById('todayTimes').innerHTML = '';
-  document.getElementById('todayBlocks').innerHTML = '<div class="today-count">' + msg + '</div>';
+  document.getElementById('todayBlocks').innerHTML = '<div class="today-note">' + msg + '</div>';
+}
+function countGaps(blocks){
+  let n = 0;
+  for (let i = 1; i < blocks.length; i++){
+    if (toMinutes(blocks[i].start) - toMinutes(blocks[i-1].end) >= GAP_THRESHOLD_MIN) n++;
+  }
+  return n;
 }
 function renderToday(data){
   const info = data[TODAY_KEY];
@@ -429,10 +448,27 @@ function renderToday(data){
     '</div>';
 
   const blocks = info.blocks || [];
-  document.getElementById('todayBlocks').innerHTML = blocks.length
-    ? '<div class="today-count">' + (info.count || blocks.length) + ' class' +
-      ((info.count || blocks.length) === 1 ? '' : 'es') + ' today</div>' + blocksHtml(blocks, true)
-    : '';
+  const box = document.getElementById('todayBlocks');
+  if (!blocks.length){ box.innerHTML = ''; return; }
+
+  const n    = info.count || blocks.length;
+  const gaps = countGaps(blocks);
+  box.innerHTML =
+    '<div class="today-count" id="todayCount"><span class="chev">▸</span>' +
+      '<span>' + n + ' class' + (n === 1 ? '' : 'es') + ' today</span>' +
+      (gaps ? '<span class="gaps">· ' + gaps + ' maintenance gap' + (gaps === 1 ? '' : 's') + '</span>' : '') +
+    '</div>' +
+    '<div class="today-list" id="todayList">' + blocksHtml(blocks, true) + '</div>';
+
+  const head = document.getElementById('todayCount');
+  const list = document.getElementById('todayList');
+  if (todayListOpen){ head.classList.add('open'); list.classList.add('open'); }
+  head.onclick = () => {
+    todayListOpen = !todayListOpen;
+    head.classList.toggle('open', todayListOpen);
+    list.classList.toggle('open', todayListOpen);
+    if (tg) tg.HapticFeedback.impactOccurred('light');
+  };
 }
 
 /* ---------- month list ---------- */
