@@ -131,13 +131,53 @@
   .viewer.rot .viewer-stage{overflow:hidden}
   .viewer.rot .viewer-stage svg{width:calc(100vh - 70px);max-height:none;transform:rotate(90deg)}
 
+
+  /* ---------- pool tabs ---------- */
+  .poolnav{position:sticky;top:0;z-index:20;background:var(--page);padding:10px 0 12px;margin:0 0 14px}
+  .poolnav-label{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-60);margin:0 0 7px 2px}
+  .tabs{display:flex;flex-wrap:wrap;gap:6px}
+  .tab{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;letter-spacing:.06em;
+    color:var(--ink);background:var(--paper);border:1.5px solid var(--rule);border-radius:4px;
+    padding:9px 12px;cursor:pointer;line-height:1}
+  .tab:hover{border-color:var(--ink-30)}
+  .tab[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .tab:focus-visible{outline:3px solid #7fd0ff;outline-offset:2px}
+
+  .pager{display:flex;gap:10px;justify-content:space-between;margin:-8px 0 22px}
+  .pager button{flex:1 1 0;font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:var(--paper);
+    border:1.5px solid var(--rule);border-radius:4px;padding:14px 12px;cursor:pointer}
+  .pager button:disabled{opacity:.35;cursor:default}
+  .pager .nx{text-align:right}
+
+  details.legend-wrap{margin-bottom:22px}
+  details.legend-wrap summary{cursor:pointer;list-style:none;background:var(--paper);border-radius:4px;
+    padding:14px 22px;font-family:"Barlow Condensed",sans-serif;font-size:20px;font-weight:600;
+    text-transform:uppercase;letter-spacing:.06em}
+  details.legend-wrap summary::-webkit-details-marker{display:none}
+  details.legend-wrap summary::after{content:"Show";float:right;font-family:"IBM Plex Mono",monospace;
+    font-size:11px;letter-spacing:.12em;color:var(--ink-60);padding-top:6px}
+  details.legend-wrap[open] summary::after{content:"Hide"}
+  details.legend-wrap[open] summary{border-radius:4px 4px 0 0}
+  details.legend-wrap .legend{border-radius:0 0 4px 4px;margin-bottom:0;padding-top:4px}
+
+  @media (max-width:720px){
+    .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:none}
+    .tabs::-webkit-scrollbar{display:none}
+    .tab{flex:0 0 auto;padding:11px 13px}
+    details.legend-wrap summary{padding:13px 16px}
+  }
+
   @media print{
     @page{size:A4 portrait;margin:11mm}
     body{background:#fff;padding:0}
     .masthead,.legend{break-inside:avoid}
     .card{break-inside:avoid;break-after:page;margin-bottom:0;border:1px solid var(--rule)}
     .card:last-of-type{break-after:auto}
-    .footnote,.noprint,.tap,.viewer{display:none}
+    .footnote,.noprint,.tap,.viewer,.poolnav,.pager{display:none}
+    .card[hidden]{display:block!important}
+    details.legend-wrap summary{display:none}
   }
 </style>
 
@@ -149,8 +189,14 @@
     <p>One card per pool, one lap per pool. Stand at the red START marker, face the direction of the first arrow, and keep a steady pace so the dose spreads evenly. Stop at the END flag.</p>
   </div>
 
+  <nav class="poolnav" aria-label="Choose a pool">
+    <p class="poolnav-label">Choose a pool</p>
+    <div class="tabs" role="tablist"></div>
+  </nav>
+
+  <details class="legend-wrap">
+    <summary>How to read the card</summary>
   <div class="legend">
-    <h2>How to read the card</h2>
 
     <div class="lg">
       <svg width="30" height="26" aria-hidden="true"><circle cx="15" cy="13" r="9" fill="#E2382C"/><circle cx="15" cy="13" r="3.4" fill="#fff"/></svg>
@@ -217,6 +263,7 @@
       <div><b>Dashed grey</b><span>Walking only &mdash; stairs, or between pools. No dosing.</span></div>
     </div>
   </div>
+  </details>
 
 
   <!-- ================= JEIP1 ================= -->
@@ -1591,6 +1638,10 @@
     </div>
   </div>
 
+  <div class="pager">
+    <button type="button" class="pv">&lsaquo; Previous</button>
+    <button type="button" class="nx">Next &rsaquo;</button>
+  </div>
 </div>
 
 
@@ -1622,6 +1673,57 @@
   document.getElementById('cls').addEventListener('click',close);
   document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
   function close(){v.classList.remove('on','rot');stage.innerHTML='';document.body.style.overflow='';}
+})();
+</script>
+
+
+<script>
+(function(){
+  var cards=[].slice.call(document.querySelectorAll('.card'));
+  var tabs=document.querySelector('.tabs');
+  var pager=document.querySelector('.pager');
+  var pv=pager.querySelector('.pv'), nx=pager.querySelector('.nx');
+  var btns=[];
+  cards.forEach(function(card,i){
+    var code=card.querySelector('.code').textContent.trim();
+    var name=card.querySelector('h3').textContent.trim();
+    card.id='pool-'+code; card.dataset.code=code;
+    card.setAttribute('role','tabpanel');
+    var b=document.createElement('button');
+    b.type='button'; b.className='tab'; b.textContent=code; b.title=name;
+    b.setAttribute('role','tab'); b.setAttribute('aria-controls',card.id);
+    b.addEventListener('click',function(){show(i,true);});
+    tabs.appendChild(b); btns.push(b);
+  });
+  // keep the pager right after the cards
+  cards[cards.length-1].after(pager);
+
+  var cur=0;
+  function show(i,scroll){
+    cur=i;
+    cards.forEach(function(c,k){c.hidden=(k!==i);});
+    btns.forEach(function(b,k){b.setAttribute('aria-selected',k===i?'true':'false');b.tabIndex=k===i?0:-1;});
+    btns[i].scrollIntoView({block:'nearest',inline:'center'});
+    pv.disabled=(i===0); nx.disabled=(i===cards.length-1);
+    pv.innerHTML=i>0?'&lsaquo; '+cards[i-1].dataset.code:'&lsaquo; Previous';
+    nx.innerHTML=i<cards.length-1?cards[i+1].dataset.code+' &rsaquo;':'Next &rsaquo;';
+    try{history.replaceState(null,'','#'+cards[i].dataset.code);}catch(e){}
+    if(scroll){
+      var navH=document.querySelector('.poolnav').offsetHeight;
+      var r=cards[i].getBoundingClientRect();
+      if(r.top<navH) window.scrollTo({top:r.top+window.scrollY-navH-6});
+    }
+  }
+  pv.addEventListener('click',function(){if(cur>0)show(cur-1,true);});
+  nx.addEventListener('click',function(){if(cur<cards.length-1)show(cur+1,true);});
+  tabs.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'&&cur<cards.length-1){show(cur+1);btns[cur].focus();}
+    if(e.key==='ArrowLeft'&&cur>0){show(cur-1);btns[cur].focus();}
+  });
+
+  var h=(location.hash||'').replace('#','').toUpperCase();
+  var start=0; cards.forEach(function(c,k){if(c.dataset.code===h)start=k;});
+  show(start,false);
 })();
 </script>
 
