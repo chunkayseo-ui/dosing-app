@@ -179,13 +179,20 @@
   .side ol.photos b{font-weight:600}
   .side ol.photos span.h{display:block;color:var(--ink-60);font-size:13px}
 
+
+  /* photo points: hidden until asked for, so the vacuum pattern stays readable */
+  svg:not(.photos-on) .photo-layer{display:none}
+  .photo-toggle{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;letter-spacing:.06em;
+    color:var(--ink);background:var(--paper);border:1.5px solid var(--rule);border-radius:4px;padding:6px 10px;cursor:pointer}
+  .photo-toggle[aria-pressed="true"]{background:#0B6E61;border-color:#0B6E61;color:#fff}
+
   @media print{
     @page{size:A4 portrait;margin:11mm}
     body{background:#fff;padding:0}
     .masthead,.legend{break-inside:avoid}
     .card{break-inside:avoid;break-after:page;margin-bottom:0;border:1px solid var(--rule)}
     .card:last-of-type{break-after:auto}
-    .footnote,.noprint,.tap,.viewer,.poolnav,.pager{display:none}
+    .footnote,.noprint,.tap,.viewer,.poolnav,.pager,.photo-toggle{display:none}
     .card[hidden]{display:block!important}
     details.legend-wrap summary{display:none}
   }
@@ -265,7 +272,7 @@
 
     <div class="lg">
       <svg width="30" height="26" aria-hidden="true"><path d="M8 20 L24 6" stroke="#16A34A" stroke-width="9" stroke-linecap="round" opacity=".35"/><rect x="1" y="14" width="18" height="11" rx="5.5" fill="#16A34A"/><text x="10" y="22.5" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" font-weight="700" fill="#fff">P</text></svg>
-      <div><b>Photo point</b><span>Stand at the badge and point the camera along its band. The time must show on every photo.</span></div>
+      <div><b>Photo point</b><span>Stand at the badge and point the camera the way its arrow goes, along the coloured band. The time must show on every photo.</span></div>
     </div>
 
     <div class="lg">
@@ -297,6 +304,7 @@
       <span class="code">JEIP1</span>
       <h3>JE &mdash; Indoor Pool 1</h3>
       <span class="kind">1 lap &middot; clockwise</span>
+      <button type="button" class="photo-toggle" aria-pressed="false" data-photos>&#128247; Show photo points</button>
     </div>
     <div class="body">
       <div class="plan">
@@ -327,22 +335,19 @@
           <line x1="222" y1="222" x2="418" y2="222" stroke="#0F2430" stroke-width="5" stroke-linecap="round"/>
           <line x1="222" y1="289" x2="418" y2="289" stroke="#0F2430" stroke-width="5" stroke-linecap="round"/>
           <g class="vac-pattern" fill="none" stroke="#FFD23F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M236 332 L310 332 C317.8 332.0 317.8 319.0 310 319 L236 319 C228.2 319.0 228.2 306.0 236 306 L310 306 C316.6 306.0 316.6 295.0 310 295 L236 295 C226.4 295.0 226.4 279.0 236 279 L310 279 C317.8 279.0 317.8 266.0 310 266 L236 266 C227.6 266.0 227.6 252.0 236 252 L310 252 C317.8 252.0 317.8 239.0 310 239 L236 239 C229.4 239.0 229.4 228.0 236 228 L310 228 C319.0 228.0 319.0 213.0 310 213 L236 213 C228.2 213.0 228.2 200.0 236 200 L310 200 C318.4 200.0 318.4 186.0 310 186 L236 186 C228.2 186.0 228.2 173.0 236 173 L310 173 C317.8 173.0 317.8 160.0 310 160 L236 160 C227.6 160.0 227.6 146.0 236 146 L310 146 C317.8 146.0 317.8 133.0 310 133 L236 133 C228.2 133.0 228.2 120.0 236 120 L310 120" marker-end="url(#vz-arrow-jeip1)"/>
+            <path d="M236 399 L310 399 C317.8 399.0 317.8 386.0 310 386 L236 386 C227.6 386.0 227.6 372.0 236 372 L310 372 C317.8 372.0 317.8 359.0 310 359 L236 359 C228.2 359.0 228.2 346.0 236 346 L310 346 C317.8 346.0 317.8 333.0 310 333 L236 333 C227.6 333.0 227.6 319.0 236 319 L310 319 C317.8 319.0 317.8 306.0 310 306 L236 306 C229.4 306.0 229.4 295.0 236 295 L310 295 C319.6 295.0 319.6 279.0 310 279 L236 279 C228.2 279.0 228.2 266.0 236 266 L310 266 C317.8 266.0 317.8 253.0 310 253 L236 253 C228.2 253.0 228.2 240.0 236 240 L310 240 C317.2 240.0 317.2 228.0 310 228 L236 228 C227.0 228.0 227.0 213.0 236 213 L310 213 C317.8 213.0 317.8 200.0 310 200 L236 200 C227.6 200.0 227.6 186.0 236 186 L310 186 C317.8 186.0 317.8 173.0 310 173 L236 173 C228.2 173.0 228.2 160.0 236 160 L310 160 C317.8 160.0 317.8 147.0 310 147 L236 147 C227.6 147.0 227.6 133.0 236 133 L310 133 C317.8 133.0 317.8 120.0 310 120 L236 120" marker-end="url(#vz-arrow-jeip1)"/>
             <path d="M234 91 L406 91" marker-end="url(#vz-arrow-jeip1)"/>
             <path d="M404 126 L330 126 C322.2 126.0 322.2 139.0 330 139 L404 139 C411.8 139.0 411.8 152.0 404 152 L330 152 C322.2 152.0 322.2 165.0 330 165 L404 165 C411.8 165.0 411.8 178.0 404 178 L330 178 C322.2 178.0 322.2 191.0 330 191 L404 191 C411.8 191.0 411.8 204.0 404 204 L330 204 C322.2 204.0 322.2 217.0 330 217 L404 217 C411.8 217.0 411.8 230.0 404 230 L330 230 C322.2 230.0 322.2 243.0 330 243 L404 243 C411.8 243.0 411.8 256.0 404 256 L330 256 C321.6 256.0 321.6 270.0 330 270 L404 270 C411.8 270.0 411.8 283.0 404 283 L330 283 C322.2 283.0 322.2 296.0 330 296 L404 296 C411.8 296.0 411.8 309.0 404 309 L330 309 C322.2 309.0 322.2 322.0 330 322 L404 322 C411.8 322.0 411.8 335.0 404 335 L330 335 C322.2 335.0 322.2 348.0 330 348 L404 348 C411.8 348.0 411.8 361.0 404 361 L330 361 C322.2 361.0 322.2 374.0 330 374 L404 374 C411.8 374.0 411.8 387.0 404 387 L330 387 C322.2 387.0 322.2 400.0 330 400 L404 400" marker-end="url(#vz-arrow-jeip1)"/>
             <path d="M406 430 L234 430" marker-end="url(#vz-arrow-jeip1)"/>
-            <path d="M236 399 L310 399 C317.8 399.0 317.8 386.0 310 386 L236 386 C227.6 386.0 227.6 372.0 236 372 L310 372 C317.8 372.0 317.8 359.0 310 359 L236 359 C228.2 359.0 228.2 346.0 236 346 L310 346" marker-end="url(#vz-arrow-jeip1)"/>
           </g>
-          <circle cx="226" cy="332" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
-          <text x="226" y="336" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">1</text>
+          <circle cx="226" cy="399" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
+          <text x="226" y="403" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">1</text>
           <circle cx="224" cy="91" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
           <text x="224" y="95" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">2</text>
           <circle cx="414" cy="126" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
           <text x="414" y="130" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">3</text>
           <circle cx="416" cy="430" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
           <text x="416" y="434" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">4</text>
-          <circle cx="226" cy="399" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
-          <text x="226" y="403" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">5</text>
           <rect x="269" y="100" width="102" height="15" rx="3" fill="#B9DFF2" opacity=".92"/>
           <text x="320" y="109" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600" letter-spacing="1" fill="#1d6b96">SHALLOW LEDGE</text>
           <rect x="269" y="409" width="102" height="15" rx="3" fill="#B9DFF2" opacity=".92"/>
@@ -354,8 +359,6 @@
           <line x1="230" y1="245" x2="230" y2="259" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="239" y1="245" x2="239" y2="259" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="248" y1="245" x2="248" y2="259" stroke="#0F2430" stroke-width="2.5"/>
-          <rect x="258" y="245" width="59" height="18" rx="3" fill="#0F2430" opacity=".8"/>
-          <text x="262" y="257" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600" letter-spacing=".5" fill="#fff">LADDER</text>
 
 
           <path d="M202 326 L202 70 Q202 62 210 62 L430 62 Q438 62 438 70 L438 450 Q438 458 430 458 L210 458 Q202 458 202 450 L202 356"
@@ -394,6 +397,23 @@
           <text x="240" y="345" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="700" fill="#0B6E61">SP</text>
           <rect x="258" y="336" width="81" height="14" rx="3" fill="#0F2430" opacity=".8"/>
           <text x="262" y="344" text-anchor="start" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">SKIMMER PORT</text>
+        
+          <g class="photo-layer">
+            <path d="M210.9 305.5 L223.6 318.9" stroke="#0B6E61" stroke-width="12" stroke-linecap="round" opacity=".45"/>
+            <polygon points="236.0,332.0 214.2,327.8 233.1,310.0" fill="#0B6E61" opacity=".85"/>
+            <path d="M290.0 75.0 L290.0 374.0" stroke="#F59E0B" stroke-width="12" stroke-linecap="round" opacity=".45"/>
+            <polygon points="290.0,392.0 277.0,374.0 303.0,374.0" fill="#F59E0B" opacity=".85"/>
+            <path d="M372.0 445.0 L372.0 122.0" stroke="#DC2626" stroke-width="12" stroke-linecap="round" opacity=".45"/>
+            <polygon points="372.0,104.0 385.0,122.0 359.0,122.0" fill="#DC2626" opacity=".85"/>
+            <rect x="189" y="287" width="26" height="18" rx="9" fill="#0B6E61" stroke="#fff" stroke-width="1.5"/>
+            <text x="202" y="300" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">P1</text>
+            <rect x="277" y="53" width="26" height="18" rx="9" fill="#F59E0B" stroke="#fff" stroke-width="1.5"/>
+            <text x="290" y="66" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">P2</text>
+            <rect x="359" y="449" width="26" height="18" rx="9" fill="#DC2626" stroke="#fff" stroke-width="1.5"/>
+            <text x="372" y="462" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">P3</text>
+            <rect x="136" y="383" width="44" height="18" rx="9" fill="#0F2430" stroke="#fff" stroke-width="1.5"/>
+            <text x="158" y="396" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">E1&ndash;3</text>
+          </g>
         </svg>
         <p class="tap">Tap to enlarge</p>
       </div>
@@ -406,11 +426,24 @@
           <dt>Direction</dt><dd>Up the long side, clockwise</dd>
           <dt>Laps</dt><dd>1 &mdash; full loop</dd>
           <dt>End</dt><dd>Back at the skimmer port</dd>
-          <dt>Vacuum pattern</dt><dd>Follow the yellow strokes 1&ndash;5. Left half from the port up, top ledge, right half on the way down, bottom ledge, then the lower left back up to the port</dd>
+          <dt>Vacuum pattern</dt><dd>Follow the yellow strokes 1&ndash;4. Start at the bottom left, next to the skimmer port, and work the left half all the way up; then the top ledge, the right half on the way down, and the bottom ledge back to the port</dd>
           <dt>Watch for</dt><dd>Ladder at the start, 2 dividers, ledge at each end</dd>
           <dt>Skimmer port</dt><dd>Lower section, on the left wall &mdash; connect the hose here</dd>
         </dl>
 
+                <h4>Photo proof &mdash; the time must show on every photo</h4>
+        <p class="photo-when">At the start</p>
+        <ol class="photos">
+          <li><span class="pb" style="background:#0B6E61">P1</span><div><b>Set-up</b><span class="h">Hose, vacuum head and telescopic pole connected at the skimmer port, left side</span></div></li>
+          <li><span class="pb" style="background:#F59E0B">P2</span><div><b>Corner 1 &mdash; top end</b><span class="h">Stand on the top deck. Look down the left half of the pool</span></div></li>
+          <li><span class="pb" style="background:#DC2626">P3</span><div><b>Corner 2 &mdash; bottom end</b><span class="h">Stand on the bottom deck. Look up the right half of the pool</span></div></li>
+        </ol>
+        <p class="photo-when">At the end</p>
+        <ol class="photos">
+          <li><span class="pb" style="background:#0F2430">E1</span><div><b>Tools packed away</b></div></li>
+          <li><span class="pb" style="background:#0F2430">E2</span><div><b>Skimmer port closed</b></div></li>
+          <li><span class="pb" style="background:#0F2430">E3</span><div><b>Vacuum valve closed</b></div></li>
+        </ol>
         <p class="note">Work the head carefully around the ladder feet &mdash; debris collects there. Vacuum the two ledge ends as well &mdash; they collect the most debris.</p>
       </div>
     </div>
@@ -466,8 +499,6 @@
           <line x1="232" y1="246" x2="232" y2="260" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="240" y1="246" x2="240" y2="260" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="248" y1="246" x2="248" y2="260" stroke="#0F2430" stroke-width="2.5"/>
-          <rect x="260" y="246" width="59" height="18" rx="3" fill="#0F2430" opacity=".8"/>
-          <text x="264" y="258" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600" letter-spacing=".5" fill="#fff">LADDER</text>
 
           <path d="M202 240 L202 70 Q202 62 210 62 L430 62 Q438 62 438 70 L438 450 Q438 458 430 458 L210 458 Q202 458 202 450 L202 268"
                 fill="none" stroke="#E2382C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -567,8 +598,6 @@
           <text x="420" y="94" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">2</text>
           <circle cx="220" cy="430" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
           <text x="220" y="434" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">3</text>
-          <text x="291" y="76" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" letter-spacing="1" fill="#0F2430">DIVIDER</text>
-          <text x="359" y="76" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" letter-spacing="1" fill="#0F2430">DIVIDER</text>
 
 
           <path d="M202 196 L202 70 Q202 62 210 62 L430 62 Q438 62 438 70 L438 450 Q438 458 430 458 L210 458 Q202 458 202 450 L202 226"
@@ -674,8 +703,6 @@
           <text x="420" y="94" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">2</text>
           <circle cx="220" cy="430" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
           <text x="220" y="434" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">3</text>
-          <text x="281" y="76" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" letter-spacing="1" fill="#0F2430">DIVIDER</text>
-          <text x="358" y="76" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" letter-spacing="1" fill="#0F2430">DIVIDER</text>
 
           <rect x="124" y="46" width="56" height="30" rx="2" fill="#F2D8BB" stroke="#C88C55" stroke-width="2"/>
           <line x1="139" y1="48" x2="139" y2="74" stroke="#C88C55" stroke-width="2"/>
@@ -839,7 +866,6 @@
           <line x1="208" y1="276" x2="226" y2="276" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="208" y1="284" x2="226" y2="284" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="208" y1="292" x2="226" y2="292" stroke="#0F2430" stroke-width="2.5"/>
-          <text x="217" y="261" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" letter-spacing=".5" fill="#0F2430">LADDER</text>
 
           <rect x="428" y="184" width="32" height="26" rx="3" fill="#fff" opacity=".93"/>
           <line x1="432" y1="189" x2="457" y2="189" stroke="#0F2430" stroke-width="3" stroke-linecap="round"/>
@@ -847,8 +873,6 @@
           <line x1="438" y1="189" x2="438" y2="205" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="445" y1="189" x2="445" y2="205" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="452" y1="189" x2="452" y2="205" stroke="#0F2430" stroke-width="2.5"/>
-          <rect x="462" y="192" width="52" height="16" rx="3" fill="#0F2430" opacity=".8"/>
-          <text x="466" y="202" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" letter-spacing=".5" fill="#fff">LADDER</text>
 
           <text x="40" y="222" text-anchor="start" font-family="Barlow Condensed,sans-serif" font-size="19" font-weight="600" letter-spacing="1.5" fill="#546b78">POOL 1 &mdash; DO THIS FIRST</text>
           <text x="526" y="380" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="22" font-weight="600" letter-spacing="1.5" fill="#546b78">POOL 2 &mdash; SECOND</text>
@@ -934,7 +958,7 @@
     </div>
     <div class="body">
       <div class="plan">
-        <svg viewBox="0 -28 640 573" role="img" aria-label="Vacuum route for WWW: one full anticlockwise lap around the pool, reached by the stairs at the bottom left">
+        <svg viewBox="0 -28 640 573" role="img" aria-label="Vacuum route for WWW: starts and ends at the vacuum port on the left, one full anticlockwise lap around the pool">
           <defs>
             <pattern id="hatch-d" width="10" height="10" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
               <line x1="0" y1="0" x2="0" y2="10" stroke="#C88C55" stroke-width="1" opacity=".45"/>
@@ -980,23 +1004,27 @@
           <line x1="222" y1="300" x2="368" y2="300" stroke="#0F2430" stroke-width="5" stroke-linecap="round"/>
           <line x1="222" y1="383" x2="368" y2="383" stroke="#0F2430" stroke-width="5" stroke-linecap="round"/>
           <g class="vac-pattern" fill="none" stroke="#FFD23F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M229 440 L309 440 C316.8 440.0 316.8 427.0 309 427 L229 427 C221.2 427.0 221.2 414.0 229 414 L309 414 C316.8 414.0 316.8 401.0 309 401 L229 401 C221.8 401.0 221.8 389.0 229 389 L309 389 C316.8 389.0 316.8 376.0 309 376 L229 376 C221.2 376.0 221.2 363.0 229 363 L309 363 C316.8 363.0 316.8 350.0 309 350 L229 350 C221.2 350.0 221.2 337.0 229 337 L309 337 C316.8 337.0 316.8 324.0 309 324 L229 324 C221.2 324.0 221.2 311.0 229 311 L309 311 C319.2 311.0 319.2 294.0 309 294 L229 294 C224.2 294.0 224.2 286.0 229 286 L309 286 C316.8 286.0 316.8 273.0 309 273 L229 273 C221.2 273.0 221.2 260.0 229 260 L309 260 C316.8 260.0 316.8 247.0 309 247 L229 247 C221.2 247.0 221.2 234.0 229 234 L309 234 C316.8 234.0 316.8 221.0 309 221 L229 221 C221.8 221.0 221.8 209.0 229 209 L309 209 C316.8 209.0 316.8 196.0 309 196 L229 196 C221.2 196.0 221.2 183.0 229 183 L309 183 C316.8 183.0 316.8 170.0 309 170 L229 170 C221.2 170.0 221.2 157.0 229 157 L309 157 C316.8 157.0 316.8 144.0 309 144 L229 144 C221.2 144.0 221.2 131.0 229 131 L309 131 C316.2 131.0 316.2 119.0 309 119 L229 119 C221.2 119.0 221.2 106.0 229 106 L309 106 C316.8 106.0 316.8 93.0 309 93 L229 93 C221.2 93.0 221.2 80.0 229 80 L309 80" marker-end="url(#vz-arrow-www)"/>
-            <path d="M411 80 L331 80 C323.2 80.0 323.2 93.0 331 93 L411 93 C418.8 93.0 418.8 106.0 411 106 L331 106 C323.2 106.0 323.2 119.0 331 119 L411 119 C418.2 119.0 418.2 131.0 411 131 L331 131 C323.2 131.0 323.2 144.0 331 144 L411 144 C418.8 144.0 418.8 157.0 411 157 L331 157 C323.2 157.0 323.2 170.0 331 170 L411 170 C418.8 170.0 418.8 183.0 411 183 L331 183 C323.2 183.0 323.2 196.0 331 196 L411 196 C418.8 196.0 418.8 209.0 411 209 L331 209 C323.8 209.0 323.8 221.0 331 221 L411 221 C418.8 221.0 418.8 234.0 411 234 L331 234 C323.2 234.0 323.2 247.0 331 247 L411 247 C418.8 247.0 418.8 260.0 411 260 L331 260 C323.2 260.0 323.2 273.0 331 273 L411 273 C418.8 273.0 418.8 286.0 411 286 L331 286 C326.2 286.0 326.2 294.0 331 294 L411 294 C421.2 294.0 421.2 311.0 411 311 L331 311 C323.2 311.0 323.2 324.0 331 324 L411 324 C418.8 324.0 418.8 337.0 411 337 L331 337 C323.2 337.0 323.2 350.0 331 350 L411 350 C418.8 350.0 418.8 363.0 411 363 L331 363 C323.2 363.0 323.2 376.0 331 376 L411 376 C418.8 376.0 418.8 389.0 411 389 L331 389 C323.8 389.0 323.8 401.0 331 401 L411 401 C418.8 401.0 418.8 414.0 411 414 L331 414 C323.2 414.0 323.2 427.0 331 427 L411 427 C418.8 427.0 418.8 440.0 411 440 L331 440" marker-end="url(#vz-arrow-www)"/>
+            <path d="M229 372 L360 372 C370.2 372.0 370.2 389.0 360 389 L229 389 C223.0 389.0 223.0 399.0 229 399 L360 399 C368.4 399.0 368.4 413.0 360 413 L229 413 C221.2 413.0 221.2 426.0 229 426 L360 426 C368.4 426.0 368.4 440.0 360 440 L229 440" marker-end="url(#vz-arrow-www)"/>
+            <path d="M411 440 L374 440 C366.2 440.0 366.2 427.0 374 427 L411 427 C418.8 427.0 418.8 414.0 411 414 L374 414 C366.2 414.0 366.2 401.0 374 401 L411 401 C418.2 401.0 418.2 389.0 411 389 L374 389 C366.2 389.0 366.2 376.0 374 376 L411 376 C418.8 376.0 418.8 363.0 411 363 L374 363 C366.2 363.0 366.2 350.0 374 350 L411 350 C418.8 350.0 418.8 337.0 411 337 L374 337 C366.2 337.0 366.2 324.0 374 324 L411 324 C418.8 324.0 418.8 311.0 411 311 L374 311 C366.8 311.0 366.8 299.0 374 299 L411 299 C418.8 299.0 418.8 286.0 411 286 L374 286 C366.2 286.0 366.2 273.0 374 273 L411 273 C418.8 273.0 418.8 260.0 411 260 L374 260 C366.2 260.0 366.2 247.0 374 247 L411 247 C418.8 247.0 418.8 234.0 411 234 L374 234 C366.2 234.0 366.2 221.0 374 221 L411 221 C418.2 221.0 418.2 209.0 411 209 L374 209 C366.2 209.0 366.2 196.0 374 196 L411 196 C418.8 196.0 418.8 183.0 411 183 L374 183 C366.2 183.0 366.2 170.0 374 170 L411 170 C418.8 170.0 418.8 157.0 411 157 L374 157 C366.2 157.0 366.2 144.0 374 144 L411 144 C418.8 144.0 418.8 131.0 411 131 L374 131 C366.8 131.0 366.8 119.0 374 119 L411 119 C418.8 119.0 418.8 106.0 411 106 L374 106 C366.2 106.0 366.2 93.0 374 93 L411 93 C418.8 93.0 418.8 80.0 411 80 L374 80" marker-end="url(#vz-arrow-www)"/>
+            <path d="M229 80 L360 80 C367.8 80.0 367.8 93.0 360 93 L229 93 C221.2 93.0 221.2 106.0 229 106 L360 106 C367.8 106.0 367.8 119.0 360 119 L229 119 C220.6 119.0 220.6 133.0 229 133 L360 133 C367.8 133.0 367.8 146.0 360 146 L229 146 C221.2 146.0 221.2 159.0 229 159 L360 159 C367.8 159.0 367.8 172.0 360 172 L229 172 C221.2 172.0 221.2 185.0 229 185 L360 185 C367.8 185.0 367.8 198.0 360 198 L229 198 C222.4 198.0 222.4 209.0 229 209 L360 209 C369.6 209.0 369.6 225.0 360 225 L229 225 C221.2 225.0 221.2 238.0 229 238 L360 238 C367.8 238.0 367.8 251.0 360 251 L229 251 C221.2 251.0 221.2 264.0 229 264 L360 264 C367.8 264.0 367.8 277.0 360 277 L229 277 C221.2 277.0 221.2 290.0 229 290 L360 290 C369.6 290.0 369.6 306.0 360 306 L229 306 C222.4 306.0 222.4 317.0 229 317 L360 317 C367.8 317.0 367.8 330.0 360 330 L229 330 C221.2 330.0 221.2 343.0 229 343 L360 343 C367.8 343.0 367.8 356.0 360 356 L229 356" marker-end="url(#vz-arrow-www)"/>
           </g>
-          <circle cx="219" cy="440" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
-          <text x="219" y="444" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">1</text>
-          <circle cx="421" cy="80" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
-          <text x="421" y="84" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">2</text>
+          <circle cx="219" cy="372" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
+          <text x="219" y="376" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">1</text>
+          <circle cx="421" cy="440" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
+          <text x="421" y="444" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">2</text>
+          <circle cx="219" cy="80" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
+          <text x="219" y="84" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">3</text>
           <rect x="181" y="135" width="118" height="17" rx="3" fill="#B9DFF2" opacity=".92" transform="rotate(-90 240 146)"/>
           <text x="240" y="146" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" letter-spacing="1" fill="#1d6b96" transform="rotate(-90 240 146)">SHALLOW LEDGE</text>
 
-          <path d="M408 470 L204 470 Q196 470 196 462 L196 54 Q196 46 204 46 L436 46 Q444 46 444 54 L444 462 Q444 470 436 470"
+          <path d="M196 380 L196 462 Q196 470 204 470 L436 470 Q444 470 444 462 L444 54 Q444 46 436 46 L204 46 Q196 46 196 54 L196 346"
                 fill="none" stroke="#E2382C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <use href="#ch-d" transform="translate(310,470) rotate(-90)"/>
-          <use href="#ch-d" transform="translate(196,380)"/>
-          <use href="#ch-d" transform="translate(196,150)"/>
-          <use href="#ch-d" transform="translate(320,46) rotate(90)"/>
-          <use href="#ch-d" transform="translate(444,270) rotate(180)"/>
+          <use href="#ch-d" transform="translate(196,428) rotate(180)"/>
+          <use href="#ch-d" transform="translate(320,470) rotate(90)"/>
+          <use href="#ch-d" transform="translate(444,270)"/>
+          <use href="#ch-d" transform="translate(320,46) rotate(-90)"/>
+          <use href="#ch-d" transform="translate(196,150) rotate(180)"/>
+          <use href="#ch-d" transform="translate(196,262) rotate(180)"/>
 
                     <rect x="196" y="485" width="104" height="30" rx="2" fill="#F2D8BB" stroke="#C88C55" stroke-width="2"/>
           <line x1="211" y1="487" x2="211" y2="513" stroke="#C88C55" stroke-width="2"/>
@@ -1005,18 +1033,23 @@
           <line x1="256" y1="487" x2="256" y2="513" stroke="#C88C55" stroke-width="2"/>
           <line x1="271" y1="487" x2="271" y2="513" stroke="#C88C55" stroke-width="2"/>
           <line x1="286" y1="487" x2="286" y2="513" stroke="#C88C55" stroke-width="2"/>
-          <path d="M170 500 L400 500 L400 482" fill="none" stroke="#546b78" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M394 482 L406 482 L400 471 Z" fill="#546b78"/>
-          <text x="310" y="510" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600" letter-spacing=".5" fill="#0F2430">STAIRS UP TO DECK</text>
+          <path d="M170 500 L316 500 L316 484 L186 484 L186 404" fill="none" stroke="#546b78" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M180 404 L192 404 L186 393 Z" fill="#546b78"/>
+          <text x="322" y="510" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600" letter-spacing=".5" fill="#0F2430">STAIRS UP TO DECK</text>
 
-          <circle cx="408" cy="470" r="13" fill="#E2382C"/>
-          <circle cx="408" cy="470" r="4.6" fill="#fff"/>
-          <text x="392" y="458" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="15" font-weight="600" fill="#E2382C">START</text>
+          <rect x="260" y="352" width="28" height="28" rx="4" fill="#ffffff" stroke="#0B6E61" stroke-width="2.5"/>
+          <text x="274" y="371" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="700" fill="#0B6E61">VP</text>
+          <rect x="290" y="362" width="75" height="14" rx="3" fill="#0F2430" opacity=".8"/>
+          <text x="294" y="370" text-anchor="start" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">VACUUM PORT</text>
 
-          <g transform="translate(436,470)">
+          <circle cx="196" cy="380" r="13" fill="#E2382C"/>
+          <circle cx="196" cy="380" r="4.6" fill="#fff"/>
+          <text x="174" y="386" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="15" font-weight="600" fill="#E2382C">START</text>
+
+          <g transform="translate(196,346)">
             <path d="M0 6 L0 -10 L18 -10 L18 -1 L0 -1" fill="#0F2430" stroke="#0F2430" stroke-width="3" stroke-linejoin="round"/>
           </g>
-          <text x="470" y="476" font-family="IBM Plex Mono,monospace" font-size="15" font-weight="600" fill="#0F2430">END</text>
+          <text x="174" y="346" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="15" font-weight="600" fill="#0F2430">END</text>
         </svg>
         <p class="tap">Tap to enlarge</p>
       </div>
@@ -1025,12 +1058,13 @@
         <h4>Route</h4>
         <dl>
           <dt>Access</dt><dd>Stairs at the bottom left, climbed left to right</dd>
+          <dt>Vacuum port</dt><dd>Left wall, next to the shallow ledge, between the 2nd and 3rd dividers</dd>
           <dt>Also</dt><dd>Second staircase and decking along the top</dd>
-          <dt>Start</dt><dd>Bottom edge, near the right corner</dd>
-          <dt>Direction</dt><dd>Along the bottom edge, walking left</dd>
+          <dt>Start</dt><dd>Left side, beside the vacuum port. Walk up the left deck from the stairs</dd>
+          <dt>Direction</dt><dd>Down the left side, then right along the bottom, up the right, back along the top and down the left</dd>
           <dt>Laps</dt><dd>1 &mdash; full loop, all four sides</dd>
-          <dt>End</dt><dd>Right beside the start</dd>
-          <dt>Vacuum pattern</dt><dd>Follow the yellow strokes 1&ndash;2. Left half including the ledge on the way up, right half on the way down</dd>
+          <dt>End</dt><dd>Back at the vacuum port, just above the start</dd>
+          <dt>Vacuum pattern</dt><dd>Follow the yellow strokes 1&ndash;3. Start at the port: 1 the left section below the port on the way down, 2 the right lane (past the long divider) from the right deck on the way up, 3 the left section from the top back down to the port. The left section includes the ledge</dd>
           <dt>Watch for</dt><dd>Shallow ledge on the left, 4 pool dividers</dd>
         </dl>
 
@@ -1097,8 +1131,6 @@
           <line x1="410" y1="117" x2="410" y2="133" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="417" y1="117" x2="417" y2="133" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="424" y1="117" x2="424" y2="133" stroke="#0F2430" stroke-width="2.5"/>
-          <rect x="342" y="121" width="56" height="17" rx="3" fill="#0F2430" opacity=".8"/>
-          <text x="394" y="132" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" letter-spacing=".5" fill="#fff">LADDER</text>
 
           <rect x="350" y="54" width="80" height="30" rx="2" fill="#F2D8BB" stroke="#C88C55" stroke-width="2"/>
           <line x1="365" y1="56" x2="365" y2="82" stroke="#C88C55" stroke-width="2"/>
@@ -1233,8 +1265,6 @@
           <line x1="171" y1="160" x2="193" y2="160" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="171" y1="168" x2="193" y2="168" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="171" y1="176" x2="193" y2="176" stroke="#0F2430" stroke-width="2.5"/>
-          <rect x="200" y="161" width="56" height="17" rx="3" fill="#0F2430" opacity=".8"/>
-          <text x="204" y="172" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" letter-spacing=".5" fill="#fff">LADDER</text>
 
           <rect x="150" y="120" width="64" height="30" rx="2" fill="#E9B47F"/>
           <rect x="150" y="120" width="64" height="30" rx="2" fill="url(#hatch-g)"/>
@@ -1303,6 +1333,7 @@
       <span class="code">TENGAH</span>
       <h3>Tengah &mdash; Main pool</h3>
       <span class="kind">L-shaped &middot; 1 lap</span>
+      <button type="button" class="photo-toggle" aria-pressed="false" data-photos>&#128247; Show photo points</button>
     </div>
     <div class="body">
       <div class="plan">
@@ -1345,21 +1376,12 @@
           <circle cx="285" cy="212" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
           <text x="285" y="216" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">4</text>
 
-          <g class="photo-bands" stroke-linecap="round" fill="none" opacity=".32">
-            <path d="M176 126 L432 126" stroke="#F59E0B" stroke-width="34"/>
-            <path d="M262 394 L170 222" stroke="#DC2626" stroke-width="28"/>
-            <path d="M262 224 L170 394" stroke="#16A34A" stroke-width="28"/>
-            <path d="M456 184 L292 184" stroke="#4F46E5" stroke-width="28"/>
-          </g>
-
           <rect x="311" y="176" width="30" height="33" rx="3" fill="#fff" opacity=".93"/>
           <line x1="316" y1="180" x2="316" y2="206" stroke="#0F2430" stroke-width="3" stroke-linecap="round"/>
           <line x1="336" y1="180" x2="336" y2="206" stroke="#0F2430" stroke-width="3" stroke-linecap="round"/>
           <line x1="316" y1="186" x2="336" y2="186" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="316" y1="194" x2="336" y2="194" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="316" y1="202" x2="336" y2="202" stroke="#0F2430" stroke-width="2.5"/>
-          <rect x="348" y="185" width="56" height="17" rx="3" fill="#0F2430" opacity=".8"/>
-          <text x="352" y="196" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" letter-spacing=".5" fill="#fff">LADDER</text>
 
           <rect x="246" y="223" width="32" height="26" rx="3" fill="#fff" opacity=".93"/>
           <line x1="250" y1="228" x2="275" y2="228" stroke="#0F2430" stroke-width="3" stroke-linecap="round"/>
@@ -1367,8 +1389,6 @@
           <line x1="256" y1="228" x2="256" y2="244" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="263" y1="228" x2="263" y2="244" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="270" y1="228" x2="270" y2="244" stroke="#0F2430" stroke-width="2.5"/>
-          <rect x="188" y="229" width="56" height="17" rx="3" fill="#0F2430" opacity=".8"/>
-          <text x="240" y="240" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" letter-spacing=".5" fill="#fff">LADDER</text>
 
           <rect x="318" y="249" width="30" height="77" rx="2" fill="#F2D8BB" stroke="#C88C55" stroke-width="2"/>
           <line x1="320" y1="264" x2="346" y2="264" stroke="#C88C55" stroke-width="2"/>
@@ -1405,18 +1425,30 @@
           <rect x="361" y="118" width="75" height="14" rx="3" fill="#0F2430" opacity=".8"/>
           <text x="432" y="126" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">VACUUM PORT</text>
         
-          <rect x="439" y="59" width="26" height="18" rx="9" fill="#0B6E61" stroke="#fff" stroke-width="1.5"/>
-          <text x="452" y="72" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">P1</text>
-          <rect x="117" y="118" width="26" height="18" rx="9" fill="#F59E0B" stroke="#fff" stroke-width="1.5"/>
-          <text x="130" y="131" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">P2</text>
-          <rect x="293" y="428" width="26" height="18" rx="9" fill="#DC2626" stroke="#fff" stroke-width="1.5"/>
-          <text x="306" y="441" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">P3</text>
-          <rect x="297" y="232" width="26" height="18" rx="9" fill="#16A34A" stroke="#fff" stroke-width="1.5"/>
-          <text x="310" y="245" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">P4</text>
-          <rect x="487" y="177" width="26" height="18" rx="9" fill="#4F46E5" stroke="#fff" stroke-width="1.5"/>
-          <text x="500" y="190" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">P5</text>
-          <rect x="518" y="134" width="44" height="18" rx="9" fill="#0F2430" stroke="#fff" stroke-width="1.5"/>
-          <text x="540" y="147" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">E1&ndash;3</text>
+          <g class="photo-layer">
+            <path d="M452.0 81.0 L452.0 88.0" stroke="#0B6E61" stroke-width="12" stroke-linecap="round" opacity=".45"/>
+            <polygon points="452.0,106.0 439.0,88.0 465.0,88.0" fill="#0B6E61" opacity=".85"/>
+            <path d="M143.0 127.0 L422.0 127.0" stroke="#F59E0B" stroke-width="12" stroke-linecap="round" opacity=".45"/>
+            <polygon points="440.0,127.0 422.0,140.0 422.0,114.0" fill="#F59E0B" opacity=".85"/>
+            <path d="M299.1 426.0 L181.6 239.2" stroke="#DC2626" stroke-width="12" stroke-linecap="round" opacity=".45"/>
+            <polygon points="172.0,224.0 192.6,232.3 170.6,246.2" fill="#DC2626" opacity=".85"/>
+            <path d="M301.2 250.6 L184.1 378.7" stroke="#16A34A" stroke-width="12" stroke-linecap="round" opacity=".45"/>
+            <polygon points="172.0,392.0 174.5,369.9 193.7,387.5" fill="#16A34A" opacity=".85"/>
+            <path d="M487.0 186.0 L310.0 186.0" stroke="#4F46E5" stroke-width="12" stroke-linecap="round" opacity=".45"/>
+            <polygon points="292.0,186.0 310.0,173.0 310.0,199.0" fill="#4F46E5" opacity=".85"/>
+            <rect x="439" y="59" width="26" height="18" rx="9" fill="#0B6E61" stroke="#fff" stroke-width="1.5"/>
+            <text x="452" y="72" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">P1</text>
+            <rect x="117" y="118" width="26" height="18" rx="9" fill="#F59E0B" stroke="#fff" stroke-width="1.5"/>
+            <text x="130" y="131" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">P2</text>
+            <rect x="293" y="428" width="26" height="18" rx="9" fill="#DC2626" stroke="#fff" stroke-width="1.5"/>
+            <text x="306" y="441" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">P3</text>
+            <rect x="297" y="232" width="26" height="18" rx="9" fill="#16A34A" stroke="#fff" stroke-width="1.5"/>
+            <text x="310" y="245" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">P4</text>
+            <rect x="487" y="177" width="26" height="18" rx="9" fill="#4F46E5" stroke="#fff" stroke-width="1.5"/>
+            <text x="500" y="190" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">P5</text>
+            <rect x="518" y="134" width="44" height="18" rx="9" fill="#0F2430" stroke="#fff" stroke-width="1.5"/>
+            <text x="540" y="147" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">E1&ndash;3</text>
+          </g>
         </svg>
         <p class="tap">Tap to enlarge</p>
       </div>
@@ -1510,8 +1542,6 @@
           <line x1="210" y1="286" x2="210" y2="302" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="217" y1="286" x2="217" y2="302" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="224" y1="286" x2="224" y2="302" stroke="#0F2430" stroke-width="2.5"/>
-          <rect x="236" y="289" width="56" height="17" rx="3" fill="#0F2430" opacity=".8"/>
-          <text x="240" y="300" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" letter-spacing=".5" fill="#fff">LADDER</text>
 
           <rect x="200" y="40" width="59" height="60" rx="2" fill="#F2D8BB" stroke="#C88C55" stroke-width="2"/>
           <line x1="215" y1="42" x2="215" y2="98" stroke="#C88C55" stroke-width="2"/>
@@ -1578,7 +1608,7 @@
     </div>
     <div class="body">
       <div class="plan">
-        <svg viewBox="0 20 640 640" role="img" aria-label="Vacuum route for Bedok Chai Chee: one full lap around the pool starting at the bottom staircase">
+        <svg viewBox="0 20 640 640" role="img" aria-label="Vacuum route for Bedok Chai Chee: start on the shallow ledge at the vacuum port, loop the left side, then loop the right side, back to the port">
           <defs>
             <pattern id="hatch-k" width="10" height="10" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
               <line x1="0" y1="0" x2="0" y2="10" stroke="#C88C55" stroke-width="1" opacity=".45"/>
@@ -1609,16 +1639,22 @@
           <line x1="364" y1="343" x2="498" y2="343" stroke="#0F2430" stroke-width="5" stroke-linecap="round"/>
           <line x1="364" y1="456" x2="498" y2="456" stroke="#0F2430" stroke-width="5" stroke-linecap="round"/>
           <g class="vac-pattern" fill="none" stroke="#FFD23F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M491 543 L324 543 C316.2 543.0 316.2 530.0 324 530 L491 530 C498.8 530.0 498.8 517.0 491 517 L324 517 C316.2 517.0 316.2 504.0 324 504 L491 504 C498.8 504.0 498.8 491.0 491 491 L324 491 C316.2 491.0 316.2 478.0 324 478 L491 478 C498.8 478.0 498.8 465.0 491 465 L324 465 C315.0 465.0 315.0 450.0 324 450 L491 450 C497.6 450.0 497.6 439.0 491 439 L324 439 C316.2 439.0 316.2 426.0 324 426 L491 426 C498.8 426.0 498.8 413.0 491 413 L324 413 C316.2 413.0 316.2 400.0 324 400 L491 400 C498.8 400.0 498.8 387.0 491 387 L324 387 C316.2 387.0 316.2 374.0 324 374 L491 374 C498.8 374.0 498.8 361.0 491 361 L324 361 C316.2 361.0 316.2 348.0 324 348 L491 348 C498.8 348.0 498.8 335.0 491 335 L324 335 C316.2 335.0 316.2 322.0 324 322 L491 322 C498.8 322.0 498.8 309.0 491 309 L324 309 C316.2 309.0 316.2 296.0 324 296 L491 296 C498.8 296.0 498.8 283.0 491 283 L324 283 C316.2 283.0 316.2 270.0 324 270 L491 270 C498.8 270.0 498.8 257.0 491 257 L324 257 C316.2 257.0 316.2 244.0 324 244 L491 244 C498.8 244.0 498.8 231.0 491 231 L324 231" marker-end="url(#vz-arrow-cc)"/>
-            <path d="M324 216 L248 216 C239.6 216.0 239.6 202.0 248 202 L324 202 C331.8 202.0 331.8 189.0 324 189 L248 189 C239.6 189.0 239.6 175.0 248 175 L324 175 C332.4 175.0 332.4 161.0 324 161 L248 161 C240.2 161.0 240.2 148.0 248 148 L324 148 C332.4 148.0 332.4 134.0 324 134 L248 134 C239.6 134.0 239.6 120.0 248 120 L324 120 C331.8 120.0 331.8 107.0 324 107 L248 107 C239.6 107.0 239.6 93.0 248 93 L324 93" marker-end="url(#vz-arrow-cc)"/>
-            <path d="M171 93 L232 93 C239.8 93.0 239.8 106.0 232 106 L171 106 C163.2 106.0 163.2 119.0 171 119 L232 119 C239.8 119.0 239.8 132.0 232 132 L171 132 C163.8 132.0 163.8 144.0 171 144 L232 144 C239.8 144.0 239.8 157.0 232 157 L171 157 C163.2 157.0 163.2 170.0 171 170 L232 170 C239.8 170.0 239.8 183.0 232 183 L171 183 C163.2 183.0 163.2 196.0 171 196 L232 196 C239.8 196.0 239.8 209.0 232 209 L171 209 C165.6 209.0 165.6 218.0 171 218 L310 218 C319.6 218.0 319.6 234.0 310 234 L171 234 C163.2 234.0 163.2 247.0 171 247 L310 247 C317.8 247.0 317.8 260.0 310 260 L171 260 C163.2 260.0 163.2 273.0 171 273 L310 273 C317.8 273.0 317.8 286.0 310 286 L171 286 C163.2 286.0 163.2 299.0 171 299 L310 299 C317.8 299.0 317.8 312.0 310 312 L171 312 C163.8 312.0 163.8 324.0 171 324 L310 324 C317.8 324.0 317.8 337.0 310 337 L171 337 C163.2 337.0 163.2 350.0 171 350 L310 350 C317.8 350.0 317.8 363.0 310 363 L171 363 C163.2 363.0 163.2 376.0 171 376 L310 376 C317.8 376.0 317.8 389.0 310 389 L171 389 C163.2 389.0 163.2 402.0 171 402 L310 402 C317.2 402.0 317.2 414.0 310 414 L171 414 C163.2 414.0 163.2 427.0 171 427 L310 427 C317.8 427.0 317.8 440.0 310 440 L171 440 C165.0 440.0 165.0 450.0 171 450 L310 450 C319.6 450.0 319.6 466.0 310 466 L171 466 C163.2 466.0 163.2 479.0 171 479 L310 479 C317.8 479.0 317.8 492.0 310 492 L171 492 C163.8 492.0 163.8 504.0 171 504 L310 504 C317.8 504.0 317.8 517.0 310 517 L171 517 C163.2 517.0 163.2 530.0 171 530 L310 530 C317.8 530.0 317.8 543.0 310 543 L171 543" marker-end="url(#vz-arrow-cc)"/>
+            <path d="M310 322 L248 322 C240.2 322.0 240.2 335.0 248 335 L310 335 C317.8 335.0 317.8 348.0 310 348 L248 348 C240.2 348.0 240.2 361.0 248 361 L310 361 C317.8 361.0 317.8 374.0 310 374 L248 374 C240.2 374.0 240.2 387.0 248 387 L310 387 C317.8 387.0 317.8 400.0 310 400 L248 400 C240.2 400.0 240.2 413.0 248 413 L310 413 C317.8 413.0 317.8 426.0 310 426 L248 426 C240.2 426.0 240.2 439.0 248 439 L310 439 C316.6 439.0 316.6 450.0 310 450 L248 450 C239.0 450.0 239.0 465.0 248 465 L310 465 C317.8 465.0 317.8 478.0 310 478 L248 478 C240.2 478.0 240.2 491.0 248 491 L310 491 C317.8 491.0 317.8 504.0 310 504 L248 504 C240.2 504.0 240.2 517.0 248 517 L310 517 C317.8 517.0 317.8 530.0 310 530 L248 530 C240.2 530.0 240.2 543.0 248 543 L310 543" marker-end="url(#vz-arrow-cc)"/>
+            <path d="M171 543 L232 543 C239.8 543.0 239.8 530.0 232 530 L171 530 C163.2 530.0 163.2 517.0 171 517 L232 517 C239.8 517.0 239.8 504.0 232 504 L171 504 C163.8 504.0 163.8 492.0 171 492 L232 492 C239.8 492.0 239.8 479.0 232 479 L171 479 C163.2 479.0 163.2 466.0 171 466 L232 466 C241.6 466.0 241.6 450.0 232 450 L171 450 C165.0 450.0 165.0 440.0 171 440 L232 440 C239.8 440.0 239.8 427.0 232 427 L171 427 C163.2 427.0 163.2 414.0 171 414 L232 414 C239.2 414.0 239.2 402.0 232 402 L171 402 C163.2 402.0 163.2 389.0 171 389 L232 389 C239.8 389.0 239.8 376.0 232 376 L171 376 C163.2 376.0 163.2 363.0 171 363 L232 363 C239.8 363.0 239.8 350.0 232 350 L171 350 C163.2 350.0 163.2 337.0 171 337 L232 337 C239.8 337.0 239.8 324.0 232 324 L171 324 C163.8 324.0 163.8 312.0 171 312 L232 312 C239.8 312.0 239.8 299.0 232 299 L171 299 C163.2 299.0 163.2 286.0 171 286 L232 286 C239.8 286.0 239.8 273.0 232 273 L171 273 C163.2 273.0 163.2 260.0 171 260 L232 260 C239.8 260.0 239.8 247.0 232 247 L171 247 C163.2 247.0 163.2 234.0 171 234 L232 234 C241.6 234.0 241.6 218.0 232 218 L171 218 C165.6 218.0 165.6 209.0 171 209 L232 209 C239.8 209.0 239.8 196.0 232 196 L171 196 C163.2 196.0 163.2 183.0 171 183 L232 183 C239.8 183.0 239.8 170.0 232 170 L171 170 C163.2 170.0 163.2 157.0 171 157 L232 157 C239.8 157.0 239.8 144.0 232 144 L171 144 C163.8 144.0 163.8 132.0 171 132 L232 132 C239.8 132.0 239.8 119.0 232 119 L171 119 C163.2 119.0 163.2 106.0 171 106 L232 106 C239.8 106.0 239.8 93.0 232 93 L171 93" marker-end="url(#vz-arrow-cc)"/>
+            <path d="M324 93 L248 93 C240.2 93.0 240.2 106.0 248 106 L324 106 C331.8 106.0 331.8 119.0 324 119 L248 119 C240.2 119.0 240.2 132.0 248 132 L324 132 C331.8 132.0 331.8 145.0 324 145 L248 145 C240.8 145.0 240.8 157.0 248 157 L324 157 C331.8 157.0 331.8 170.0 324 170 L248 170 C240.2 170.0 240.2 183.0 248 183 L324 183 C331.8 183.0 331.8 196.0 324 196 L248 196 C240.2 196.0 240.2 209.0 248 209 L324 209 C329.4 209.0 329.4 218.0 324 218 L248 218 C237.8 218.0 237.8 235.0 248 235 L310 235 C317.8 235.0 317.8 248.0 310 248 L248 248 C240.8 248.0 240.8 260.0 248 260 L310 260 C317.8 260.0 317.8 273.0 310 273 L248 273 C240.2 273.0 240.2 286.0 248 286 L310 286 C317.8 286.0 317.8 299.0 310 299 L248 299 C240.2 299.0 240.2 312.0 248 312 L310 312" marker-end="url(#vz-arrow-cc)"/>
+            <path d="M324 231 L425 231 C432.8 231.0 432.8 244.0 425 244 L324 244 C316.2 244.0 316.2 257.0 324 257 L425 257 C432.8 257.0 432.8 270.0 425 270 L324 270 C316.2 270.0 316.2 283.0 324 283 L425 283 C432.8 283.0 432.8 296.0 425 296 L324 296 C316.2 296.0 316.2 309.0 324 309 L425 309 C432.8 309.0 432.8 322.0 425 322 L324 322 C316.2 322.0 316.2 335.0 324 335 L425 335 C432.8 335.0 432.8 348.0 425 348 L324 348 C316.2 348.0 316.2 361.0 324 361 L425 361 C432.8 361.0 432.8 374.0 425 374 L324 374 C316.2 374.0 316.2 387.0 324 387 L425 387 C432.8 387.0 432.8 400.0 425 400 L324 400 C316.2 400.0 316.2 413.0 324 413 L425 413 C432.8 413.0 432.8 426.0 425 426 L324 426 C316.2 426.0 316.2 439.0 324 439 L425 439 C431.6 439.0 431.6 450.0 425 450 L324 450 C315.0 450.0 315.0 465.0 324 465 L425 465 C432.8 465.0 432.8 478.0 425 478 L324 478 C316.2 478.0 316.2 491.0 324 491 L425 491 C432.8 491.0 432.8 504.0 425 504 L324 504 C316.2 504.0 316.2 517.0 324 517 L425 517 C432.8 517.0 432.8 530.0 425 530 L324 530 C316.2 530.0 316.2 543.0 324 543 L425 543" marker-end="url(#vz-arrow-cc)"/>
+            <path d="M491 543 L437 543 C429.2 543.0 429.2 530.0 437 530 L491 530 C498.8 530.0 498.8 517.0 491 517 L437 517 C429.2 517.0 429.2 504.0 437 504 L491 504 C498.8 504.0 498.8 491.0 491 491 L437 491 C429.2 491.0 429.2 478.0 437 478 L491 478 C498.8 478.0 498.8 465.0 491 465 L437 465 C428.0 465.0 428.0 450.0 437 450 L491 450 C497.6 450.0 497.6 439.0 491 439 L437 439 C429.2 439.0 429.2 426.0 437 426 L491 426 C498.8 426.0 498.8 413.0 491 413 L437 413 C429.2 413.0 429.2 400.0 437 400 L491 400 C498.8 400.0 498.8 387.0 491 387 L437 387 C429.2 387.0 429.2 374.0 437 374 L491 374 C498.8 374.0 498.8 361.0 491 361 L437 361 C429.2 361.0 429.2 348.0 437 348 L491 348 C498.8 348.0 498.8 335.0 491 335 L437 335 C429.2 335.0 429.2 322.0 437 322 L491 322 C498.8 322.0 498.8 309.0 491 309 L437 309 C429.2 309.0 429.2 296.0 437 296 L491 296 C498.8 296.0 498.8 283.0 491 283 L437 283 C429.2 283.0 429.2 270.0 437 270 L491 270 C498.8 270.0 498.8 257.0 491 257 L437 257 C429.2 257.0 429.2 244.0 437 244 L491 244 C498.8 244.0 498.8 231.0 491 231 L437 231" marker-end="url(#vz-arrow-cc)"/>
           </g>
+          <circle cx="320" cy="322" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
+          <text x="320" y="326" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">1</text>
+          <circle cx="161" cy="543" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
+          <text x="161" y="547" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">2</text>
+          <circle cx="334" cy="93" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
+          <text x="334" y="97" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">3</text>
+          <circle cx="314" cy="231" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
+          <text x="314" y="235" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">4</text>
           <circle cx="501" cy="543" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
-          <text x="501" y="547" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">1</text>
-          <circle cx="334" cy="216" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
-          <text x="334" y="220" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">2</text>
-          <circle cx="161" cy="93" r="9" fill="#0F2430" stroke="#FFD23F" stroke-width="2"/>
-          <text x="161" y="97" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">3</text>
+          <text x="501" y="547" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#FFD23F">5</text>
           <rect x="261" y="389" width="160" height="17" rx="3" fill="#B9DFF2" opacity=".92" transform="rotate(-90 341 400)"/>
           <text x="341" y="400" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" letter-spacing="1" fill="#1d6b96" transform="rotate(-90 341 400)">WIDE SHALLOW LEDGE</text>
           <rect x="281" y="147" width="87" height="14" rx="3" fill="#B9DFF2" opacity=".92" transform="rotate(-90 324 155)"/>
@@ -1642,30 +1678,48 @@
           <line x1="490" y1="592" x2="490" y2="618" stroke="#C88C55" stroke-width="2"/>
           <text x="518" y="609" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600" letter-spacing=".5" fill="#0F2430">STAIRS IN</text>
 
-          <path d="M408 605 L508 605 L508 540" fill="none" stroke="#546b78" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M502 540 L514 540 L508 529 Z" fill="#546b78"/>
+          <path d="M408 605 L408 582 L348 582 L348 318" fill="none" stroke="#546b78" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M342 320 L354 320 L348 309 Z" fill="#546b78"/>
 
-          <path d="M518 520 L518 212 Q518 204 510 204 L347 204 Q339 204 339 196 L339 74 Q339 66 331 66 L152 66 Q144 66 144 74 L144 562 Q144 570 152 570 L510 570 Q518 570 518 562 L518 545"
-                fill="none" stroke="#E2382C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <use href="#ch-k" transform="translate(518,400)"/>
+          <path d="M338 308 L338 562 Q338 570 330 570 L152 570 Q144 570 144 562 L144 74 Q144 66 152 66 L331 66 Q339 66 339 74 L339 276" fill="none" stroke="#E2382C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M358 300 L358 562 Q358 570 366 570 L510 570 Q518 570 518 562 L518 212 Q518 204 510 204 L366 204 Q358 204 358 212 L358 270" stroke-dasharray="1 0" fill="none" stroke="#E2382C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+
+          <use href="#ch-k" transform="translate(338,440) rotate(180)"/>
+          <use href="#ch-k" transform="translate(240,570) rotate(-90)"/>
+          <use href="#ch-k" transform="translate(144,420)"/>
+          <use href="#ch-k" transform="translate(144,200)"/>
+          <use href="#ch-k" transform="translate(240,66) rotate(90)"/>
+          <use href="#ch-k" transform="translate(339,150) rotate(180)"/>
+          <use href="#ch-k" transform="translate(358,470) rotate(180)"/>
+          <use href="#ch-k" transform="translate(440,570) rotate(90)"/>
+          <use href="#ch-k" transform="translate(518,440)"/>
           <use href="#ch-k" transform="translate(518,300)"/>
-          <use href="#ch-k" transform="translate(460,570) rotate(90)"/>
           <use href="#ch-k" transform="translate(440,204) rotate(-90)"/>
-          <use href="#ch-k" transform="translate(339,140)"/>
-          <use href="#ch-k" transform="translate(260,66) rotate(-90)"/>
-          <use href="#ch-k" transform="translate(144,220) rotate(180)"/>
-          <use href="#ch-k" transform="translate(144,430) rotate(180)"/>
-          <use href="#ch-k" transform="translate(240,570) rotate(90)"/>
-          <use href="#ch-k" transform="translate(370,570) rotate(90)"/>
+          <circle cx="338" cy="292" r="13" fill="#E2382C"/>
+          <circle cx="338" cy="292" r="4.6" fill="#fff"/>
+          <text x="372" y="318" font-family="IBM Plex Mono,monospace" font-size="14" font-weight="600" fill="#E2382C">START</text>
 
-          <circle cx="518" cy="520" r="13" fill="#E2382C"/>
-          <circle cx="518" cy="520" r="4.6" fill="#fff"/>
-          <text x="546" y="525" font-family="IBM Plex Mono,monospace" font-size="14" font-weight="600" fill="#E2382C">START</text>
-
-          <g transform="translate(518,545)">
+          <g transform="translate(358,272)">
             <path d="M0 6 L0 -10 L18 -10 L18 -1 L0 -1" fill="#0F2430" stroke="#0F2430" stroke-width="3" stroke-linejoin="round"/>
           </g>
-          <text x="546" y="562" font-family="IBM Plex Mono,monospace" font-size="14" font-weight="600" fill="#0F2430">END</text>
+          <text x="382" y="276" font-family="IBM Plex Mono,monospace" font-size="14" font-weight="600" fill="#0F2430">END</text>
+        
+          <text x="240" y="40" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" letter-spacing=".5" fill="#0F2430">LOOP A &mdash; LEFT SIDE FIRST</text>
+          <text x="486" y="176" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" letter-spacing=".5" fill="#0F2430">LOOP B &mdash; RIGHT SIDE</text>
+          <rect x="286" y="280" width="28" height="28" rx="4" fill="#ffffff" stroke="#0B6E61" stroke-width="2.5"/>
+          <text x="300" y="299" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="700" fill="#0B6E61">VP</text>
+          <rect x="209" y="290" width="75" height="14" rx="3" fill="#0F2430" opacity=".8"/>
+          <text x="280" y="298" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600" letter-spacing=".5" fill="#fff">VACUUM PORT</text>
         </svg>
         <p class="tap">Tap to enlarge</p>
       </div>
@@ -1673,13 +1727,14 @@
       <div class="side">
         <h4>Route</h4>
         <dl>
-          <dt>Access</dt><dd>Stairs at the bottom right &mdash; walk up first</dd>
-          <dt>Start</dt><dd>Right side, at the top of those stairs</dd>
-          <dt>Direction</dt><dd>Up the right side, then round the whole pool</dd>
-          <dt>Laps</dt><dd>1 &mdash; full loop</dd>
-          <dt>End</dt><dd>Beside the start</dd>
-          <dt>Vacuum pattern</dt><dd>Follow the yellow strokes 1&ndash;3. Right side and wide ledge from the right deck, top arm from the narrow strip, then the left side on the way down</dd>
+          <dt>Access</dt><dd>Stairs at the bottom right &mdash; along the bottom deck, then up the shallow ledge to the port</dd>
+          <dt>Start</dt><dd>On the wide shallow ledge, beside the vacuum port &mdash; set up the hose, head and pole here</dd>
+          <dt>Direction</dt><dd>Loop A, left side first: down the ledge, left along the bottom, up the left side, across the top and down the narrow strip back to the port. Loop B, right side: down the ledge, right along the bottom, up the right side and back across to the port</dd>
+          <dt>Laps</dt><dd>2 loops, both from the port</dd>
+          <dt>End</dt><dd>Back at the vacuum port</dd>
+          <dt>Vacuum pattern</dt><dd>Follow the yellow strokes 1&ndash;5. Loop A, left side first: 1 lower half from the ledge on the way down, 2 left half from the left deck on the way up, 3 top arm and upper half from the narrow strip on the way back to the port. Loop B, right side: 4 the wide ledge and the near half from the ledge, 5 the far half from the right deck on the way up</dd>
           <dt>Watch for</dt><dd>Ledge down the middle &mdash; narrow in the top arm, wide below. 5 dividers</dd>
+          <dt>Vacuum port</dt><dd>Left side of the pool, next to the wide ledge</dd>
         </dl>
 
         <p class="note">The route steps in where the pool narrows &mdash; follow the line round rather than cutting across. The ledge runs down the middle &mdash; vacuum it as you pass.</p>
@@ -1851,8 +1906,6 @@
           <line x1="227" y1="260" x2="245" y2="260" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="227" y1="266" x2="245" y2="266" stroke="#0F2430" stroke-width="2.5"/>
           <line x1="227" y1="272" x2="245" y2="272" stroke="#0F2430" stroke-width="2.5"/>
-          <rect x="212" y="237" width="48" height="15" rx="3" fill="#0F2430" opacity=".8"/>
-          <text x="236" y="246" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600" letter-spacing=".5" fill="#fff">LADDER</text>
 
           <rect x="425" y="298" width="112" height="28" rx="2" fill="#F2D8BB" stroke="#C88C55" stroke-width="2"/>
           <line x1="440" y1="300" x2="440" y2="324" stroke="#C88C55" stroke-width="2"/>
@@ -2003,6 +2056,18 @@
   var start=0; cards.forEach(function(c,k){if(c.dataset.code===h)start=k;});
   show(start,false);
 })();
+</script>
+
+<script>
+document.querySelectorAll('[data-photos]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var svg = btn.closest('.card').querySelector('.plan svg');
+    var on = !svg.classList.contains('photos-on');
+    svg.classList.toggle('photos-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.innerHTML = on ? '&#128247; Hide photo points' : '&#128247; Show photo points';
+  });
+});
 </script>
 
 <p class="footnote noprint">Print at A4 portrait &mdash; each pool lands on its own page. Laminate one card per pool and keep it with the vacuum gear.</p>
