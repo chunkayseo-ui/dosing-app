@@ -1,0 +1,54 @@
+{
+  "pool": "TENGAH",
+  "task": "Manual vacuum",
+  "photos": [
+    {
+      "id": "P1",
+      "when": "start",
+      "label": "Set-up at the vacuum port",
+      "hint": "Hose, vacuum head and telescopic pole connected at the vacuum port (top right corner)"
+    },
+    {
+      "id": "P2",
+      "when": "start",
+      "label": "Corner 1 - left side",
+      "hint": "Stand on the left deck level with the top half of the arm. Look right along it towards the port"
+    },
+    {
+      "id": "P3",
+      "when": "start",
+      "label": "Corner 2 - bottom of the leg",
+      "hint": "Stand at the bottom right of the leg. Look diagonally up across the leg"
+    },
+    {
+      "id": "P4",
+      "when": "start",
+      "label": "Corner 3 - inner corner",
+      "hint": "Stand at the inner corner by the stairs. Look diagonally down across the leg"
+    },
+    {
+      "id": "P5",
+      "when": "start",
+      "label": "Corner 4 - right side",
+      "hint": "Stand on the right side below the port. Look left along the lower half of the arm"
+    },
+    {
+      "id": "E1",
+      "when": "end",
+      "label": "Tools packed away",
+      "hint": "Hose, head and pole stored"
+    },
+    {
+      "id": "E2",
+      "when": "end",
+      "label": "Vacuum port closed",
+      "hint": "Close-up of the port with the cover on"
+    },
+    {
+      "id": "E3",
+      "when": "end",
+      "label": "Vacuum valve closed",
+      "hint": "Close-up of the valve handle in the closed position"
+    }
+  ]
+}

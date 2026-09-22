@@ -1,0 +1,62 @@
+{
+  "pool": "CC",
+  "task": "Manual vacuum",
+  "card": "CC",
+  "normalMin": null,
+  "photos": [
+    {
+      "id": "P1",
+      "when": "start",
+      "label": "Set-up",
+      "hint": "Hose, vacuum head and telescopic pole connected at the vacuum port, on the wide ledge"
+    },
+    {
+      "id": "P2",
+      "when": "start",
+      "label": "Corner 1 - Loop A, bottom",
+      "hint": "Stand on the bottom deck below the port. Look up the right half of the left pool"
+    },
+    {
+      "id": "P3",
+      "when": "start",
+      "label": "Corner 2 - Loop A, top left",
+      "hint": "Stand on the top deck at the left. Look down the left half of the left pool"
+    },
+    {
+      "id": "P4",
+      "when": "start",
+      "label": "Corner 3 - top arm",
+      "hint": "Stand at the top of the wide ledge. Look up the top arm"
+    },
+    {
+      "id": "P5",
+      "when": "start",
+      "label": "Corner 4 - Loop B, bottom",
+      "hint": "Stand on the bottom deck near the stairs. Look up the left half of the right pool"
+    },
+    {
+      "id": "P6",
+      "when": "start",
+      "label": "Corner 5 - Loop B, top right",
+      "hint": "Stand on the top deck at the right. Look down the right half of the right pool"
+    },
+    {
+      "id": "E1",
+      "when": "end",
+      "label": "Tools packed away",
+      "hint": "Hose, head and pole stored"
+    },
+    {
+      "id": "E2",
+      "when": "end",
+      "label": "Vacuum port closed",
+      "hint": "Close-up of the port with the cover on"
+    },
+    {
+      "id": "E3",
+      "when": "end",
+      "label": "Vacuum valve closed",
+      "hint": "Close-up of the valve handle in the closed position"
+    }
+  ]
+}

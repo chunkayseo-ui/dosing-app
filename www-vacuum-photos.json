@@ -1,0 +1,50 @@
+{
+  "pool": "WWW",
+  "task": "Manual vacuum",
+  "card": "WWW",
+  "normalMin": null,
+  "photos": [
+    {
+      "id": "P1",
+      "when": "start",
+      "label": "Set-up",
+      "hint": "Hose, vacuum head and telescopic pole connected at the vacuum port, left side"
+    },
+    {
+      "id": "P2",
+      "when": "start",
+      "label": "Corner 1 - bottom",
+      "hint": "Stand on the bottom deck. Look up the left half towards the port"
+    },
+    {
+      "id": "P3",
+      "when": "start",
+      "label": "Corner 2 - top right",
+      "hint": "Stand on the top deck at the right. Look down the right half of the pool"
+    },
+    {
+      "id": "P4",
+      "when": "start",
+      "label": "Corner 3 - left side",
+      "hint": "Stand on the left deck just above the port. Look diagonally up across the left half and the ledge"
+    },
+    {
+      "id": "E1",
+      "when": "end",
+      "label": "Tools packed away",
+      "hint": "Hose, head and pole stored"
+    },
+    {
+      "id": "E2",
+      "when": "end",
+      "label": "Vacuum port closed",
+      "hint": "Close-up of the port with the cover on"
+    },
+    {
+      "id": "E3",
+      "when": "end",
+      "label": "Vacuum valve closed",
+      "hint": "Close-up of the valve handle in the closed position"
+    }
+  ]
+}
