@@ -180,6 +180,10 @@
   .side ol.photos span.h{display:block;color:var(--ink-60);font-size:13px}
 
 
+  /* photo proof list: shown at the top of the panel while photo points are on */
+  .card:not(.photos-on) .photo-proof{display:none}
+  .photo-proof{border:1.5px solid #0B6E61;border-radius:6px;padding:12px 14px;margin-bottom:18px;background:#F3FAF8}
+  .photo-proof h4{margin-top:0}
   /* photo points: hidden until asked for, so the vacuum pattern stays readable */
   svg:not(.photos-on) .photo-layer{display:none}
   .photo-toggle{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;letter-spacing:.06em;
@@ -194,6 +198,7 @@
     .card:last-of-type{break-after:auto}
     .footnote,.noprint,.tap,.viewer,.poolnav,.pager,.photo-toggle{display:none}
     .card[hidden]{display:block!important}
+    .card .photo-proof{display:block!important}
     details.legend-wrap summary{display:none}
   }
 </style>
@@ -419,6 +424,22 @@
       </div>
 
       <div class="side">
+        <div class="photo-proof">
+        <h4>Photo proof &mdash; the time must show on every photo</h4>
+        <p class="photo-when">At the start</p>
+        <ol class="photos">
+          <li><span class="pb" style="background:#0B6E61">P1</span><div><b>Set-up</b><span class="h">Hose, vacuum head and telescopic pole connected at the skimmer port, left side</span></div></li>
+          <li><span class="pb" style="background:#F59E0B">P2</span><div><b>Corner 1 &mdash; top end</b><span class="h">Stand on the top deck. Look down the left half of the pool</span></div></li>
+          <li><span class="pb" style="background:#DC2626">P3</span><div><b>Corner 2 &mdash; bottom end</b><span class="h">Stand on the bottom deck. Look up the right half of the pool</span></div></li>
+        </ol>
+        <p class="photo-when">At the end</p>
+        <ol class="photos">
+          <li><span class="pb" style="background:#0F2430">E1</span><div><b>Vacuum head, pipe and telescopic pole kept</b></div></li>
+          <li><span class="pb" style="background:#0F2430">E2</span><div><b>Skimmer port closed</b></div></li>
+          <li><span class="pb" style="background:#0F2430">E3</span><div><b>Vacuum valve closed</b></div></li>
+        </ol>
+        </div>
+
         <h4>Route</h4>
         <dl>
           <dt>Access</dt><dd>Stairs at bottom left &mdash; deck is above ground</dd>
@@ -431,19 +452,6 @@
           <dt>Skimmer port</dt><dd>Lower section, on the left wall &mdash; connect the hose here</dd>
         </dl>
 
-                <h4>Photo proof &mdash; the time must show on every photo</h4>
-        <p class="photo-when">At the start</p>
-        <ol class="photos">
-          <li><span class="pb" style="background:#0B6E61">P1</span><div><b>Set-up</b><span class="h">Hose, vacuum head and telescopic pole connected at the skimmer port, left side</span></div></li>
-          <li><span class="pb" style="background:#F59E0B">P2</span><div><b>Corner 1 &mdash; top end</b><span class="h">Stand on the top deck. Look down the left half of the pool</span></div></li>
-          <li><span class="pb" style="background:#DC2626">P3</span><div><b>Corner 2 &mdash; bottom end</b><span class="h">Stand on the bottom deck. Look up the right half of the pool</span></div></li>
-        </ol>
-        <p class="photo-when">At the end</p>
-        <ol class="photos">
-          <li><span class="pb" style="background:#0F2430">E1</span><div><b>Tools packed away</b></div></li>
-          <li><span class="pb" style="background:#0F2430">E2</span><div><b>Skimmer port closed</b></div></li>
-          <li><span class="pb" style="background:#0F2430">E3</span><div><b>Vacuum valve closed</b></div></li>
-        </ol>
         <p class="note">Work the head carefully around the ladder feet &mdash; debris collects there. Vacuum the two ledge ends as well &mdash; they collect the most debris.</p>
       </div>
     </div>
@@ -1076,6 +1084,23 @@
       </div>
 
       <div class="side">
+        <div class="photo-proof">
+        <h4>Photo proof &mdash; the time must show on every photo</h4>
+        <p class="photo-when">At the start</p>
+        <ol class="photos">
+          <li><span class="pb" style="background:#0B6E61">P1</span><div><b>Set-up</b><span class="h">Hose, vacuum head and telescopic pole connected at the vacuum port, left side</span></div></li>
+          <li><span class="pb" style="background:#F59E0B">P2</span><div><b>Corner 1 &mdash; bottom</b><span class="h">Stand on the bottom deck. Look up the left half towards the port</span></div></li>
+          <li><span class="pb" style="background:#DC2626">P3</span><div><b>Corner 2 &mdash; top right</b><span class="h">Stand on the top deck at the right. Look down the right half of the pool</span></div></li>
+          <li><span class="pb" style="background:#16A34A">P4</span><div><b>Corner 3 &mdash; left side</b><span class="h">Stand on the left deck just above the port. Look diagonally up across the left half and the ledge</span></div></li>
+        </ol>
+        <p class="photo-when">At the end</p>
+        <ol class="photos">
+          <li><span class="pb" style="background:#0F2430">E1</span><div><b>Vacuum head, pipe and telescopic pole kept</b></div></li>
+          <li><span class="pb" style="background:#0F2430">E2</span><div><b>Vacuum port closed</b></div></li>
+          <li><span class="pb" style="background:#0F2430">E3</span><div><b>Vacuum valve closed</b></div></li>
+        </ol>
+        </div>
+
         <h4>Route</h4>
         <dl>
           <dt>Access</dt><dd>Stairs at the bottom left, climbed left to right</dd>
@@ -1088,21 +1113,6 @@
           <dt>Vacuum pattern</dt><dd>Follow the yellow strokes 1&ndash;3. The pole only reaches halfway, so the pool is split down the middle: 1 left half below the port on the way down, 2 right half from the right deck on the way up, 3 left half (with the ledge) from the top back down to the port</dd>
           <dt>Watch for</dt><dd>Shallow ledge on the left, 4 pool dividers</dd>
         </dl>
-
-        <h4>Photo proof &mdash; the time must show on every photo</h4>
-        <p class="photo-when">At the start</p>
-        <ol class="photos">
-          <li><span class="pb" style="background:#0B6E61">P1</span><div><b>Set-up</b><span class="h">Hose, vacuum head and telescopic pole connected at the vacuum port, left side</span></div></li>
-          <li><span class="pb" style="background:#F59E0B">P2</span><div><b>Corner 1 &mdash; bottom</b><span class="h">Stand on the bottom deck. Look up the left half towards the port</span></div></li>
-          <li><span class="pb" style="background:#DC2626">P3</span><div><b>Corner 2 &mdash; top right</b><span class="h">Stand on the top deck at the right. Look down the right half of the pool</span></div></li>
-          <li><span class="pb" style="background:#16A34A">P4</span><div><b>Corner 3 &mdash; left side</b><span class="h">Stand on the left deck just above the port. Look diagonally up across the left half and the ledge</span></div></li>
-        </ol>
-        <p class="photo-when">At the end</p>
-        <ol class="photos">
-          <li><span class="pb" style="background:#0F2430">E1</span><div><b>Tools packed away</b></div></li>
-          <li><span class="pb" style="background:#0F2430">E2</span><div><b>Vacuum port closed</b></div></li>
-          <li><span class="pb" style="background:#0F2430">E3</span><div><b>Vacuum valve closed</b></div></li>
-        </ol>
 
         <p class="note">The ledge side is shallow &mdash; vacuum it as well, it collects the most debris.</p>
       </div>
@@ -1490,6 +1500,24 @@
       </div>
 
       <div class="side">
+        <div class="photo-proof">
+        <h4>Photo proof &mdash; the time must show on every photo</h4>
+        <p class="photo-when">At the start</p>
+        <ol class="photos">
+          <li><span class="pb" style="background:#0B6E61">P1</span><div><b>Set-up</b><span class="h">Hose, vacuum head and telescopic pole connected at the vacuum port</span></div></li>
+          <li><span class="pb" style="background:#F59E0B">P2</span><div><b>Corner 1 &mdash; left side</b><span class="h">Stand on the left deck level with the top half of the arm. Look right along it towards the port</span></div></li>
+          <li><span class="pb" style="background:#DC2626">P3</span><div><b>Corner 2 &mdash; bottom of the leg</b><span class="h">Look diagonally up across the leg</span></div></li>
+          <li><span class="pb" style="background:#16A34A">P4</span><div><b>Corner 3 &mdash; inner corner</b><span class="h">Look diagonally down across the leg</span></div></li>
+          <li><span class="pb" style="background:#4F46E5">P5</span><div><b>Corner 4 &mdash; right side</b><span class="h">Look left along the lower half of the arm</span></div></li>
+        </ol>
+        <p class="photo-when">At the end</p>
+        <ol class="photos">
+          <li><span class="pb" style="background:#0F2430">E1</span><div><b>Vacuum head, pipe and telescopic pole kept</b></div></li>
+          <li><span class="pb" style="background:#0F2430">E2</span><div><b>Vacuum port closed</b></div></li>
+          <li><span class="pb" style="background:#0F2430">E3</span><div><b>Vacuum valve closed</b></div></li>
+        </ol>
+        </div>
+
         <h4>Route</h4>
         <dl>
           <dt>Shape</dt><dd>L-shaped pool</dd>
@@ -1502,22 +1530,6 @@
           <dt>Watch for</dt><dd>Two ladders, 4 pool dividers</dd>
           <dt>Vacuum port</dt><dd>Top right corner of the top arm</dd>
         </dl>
-
-                <h4>Photo proof &mdash; the time must show on every photo</h4>
-        <p class="photo-when">At the start</p>
-        <ol class="photos">
-          <li><span class="pb" style="background:#0B6E61">P1</span><div><b>Set-up</b><span class="h">Hose, vacuum head and telescopic pole connected at the vacuum port</span></div></li>
-          <li><span class="pb" style="background:#F59E0B">P2</span><div><b>Corner 1 &mdash; left side</b><span class="h">Stand on the left deck level with the top half of the arm. Look right along it towards the port</span></div></li>
-          <li><span class="pb" style="background:#DC2626">P3</span><div><b>Corner 2 &mdash; bottom of the leg</b><span class="h">Look diagonally up across the leg</span></div></li>
-          <li><span class="pb" style="background:#16A34A">P4</span><div><b>Corner 3 &mdash; inner corner</b><span class="h">Look diagonally down across the leg</span></div></li>
-          <li><span class="pb" style="background:#4F46E5">P5</span><div><b>Corner 4 &mdash; right side</b><span class="h">Look left along the lower half of the arm</span></div></li>
-        </ol>
-        <p class="photo-when">At the end</p>
-        <ol class="photos">
-          <li><span class="pb" style="background:#0F2430">E1</span><div><b>Tools packed away</b></div></li>
-          <li><span class="pb" style="background:#0F2430">E2</span><div><b>Vacuum port closed</b></div></li>
-          <li><span class="pb" style="background:#0F2430">E3</span><div><b>Vacuum valve closed</b></div></li>
-        </ol>
 
         <p class="note">The route turns at the inner corner &mdash; follow the line round rather than cutting across. Work the head carefully around each ladder foot &mdash; debris collects there.</p>
       </div>
@@ -1782,25 +1794,14 @@
             <rect x="461" y="205" width="26" height="18" rx="9" fill="#DB2777" stroke="#fff" stroke-width="1.5"/>
             <text x="474" y="218" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">P6</text>
             <rect x="382" y="283" width="44" height="18" rx="9" fill="#0F2430" stroke="#fff" stroke-width="1.5"/>
-            <text x="404" y="296" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">E1&ndash;3</text>
+            <text x="404" y="296" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">E1&ndash;4</text>
           </g>
         </svg>
         <p class="tap">Tap to enlarge</p>
       </div>
 
       <div class="side">
-        <h4>Route</h4>
-        <dl>
-          <dt>Access</dt><dd>Stairs at the bottom right &mdash; along the bottom deck, then up the shallow ledge to the port</dd>
-          <dt>Start</dt><dd>On the wide shallow ledge, beside the vacuum port &mdash; set up the hose, head and pole here</dd>
-          <dt>Direction</dt><dd>Loop A, left side first: down the ledge, left along the bottom, up the left side, across the top and down the narrow strip back to the port. Loop B, right side: down the ledge, right along the bottom, up the right side and back across to the port</dd>
-          <dt>Laps</dt><dd>2 loops, both from the port</dd>
-          <dt>End</dt><dd>Back at the vacuum port</dd>
-          <dt>Vacuum pattern</dt><dd>Follow the yellow strokes 1&ndash;5. Loop A, left side first: 1 lower half from the ledge on the way down, 2 left half from the left deck on the way up, 3 top arm and upper half from the narrow strip on the way back to the port. Loop B, right side: 4 the wide ledge and the near half from the ledge, 5 the far half from the right deck on the way up</dd>
-          <dt>Watch for</dt><dd>Ledge down the middle &mdash; narrow in the top arm, wide below. 5 dividers</dd>
-          <dt>Vacuum port</dt><dd>Left side of the pool, next to the wide ledge</dd>
-        </dl>
-
+        <div class="photo-proof">
         <h4>Photo proof &mdash; the time must show on every photo</h4>
         <p class="photo-when">At the start</p>
         <ol class="photos">
@@ -1813,10 +1814,24 @@
         </ol>
         <p class="photo-when">At the end</p>
         <ol class="photos">
-          <li><span class="pb" style="background:#0F2430">E1</span><div><b>Tools packed away</b></div></li>
+          <li><span class="pb" style="background:#0F2430">E1</span><div><b>Vacuum head, pipe and telescopic pole kept</b></div></li>
           <li><span class="pb" style="background:#0F2430">E2</span><div><b>Vacuum port closed</b></div></li>
           <li><span class="pb" style="background:#0F2430">E3</span><div><b>Vacuum valve closed</b></div></li>
+          <li><span class="pb" style="background:#0F2430">E4</span><div><b>Skimmer control valve opened</b></div></li>
         </ol>
+        </div>
+
+        <h4>Route</h4>
+        <dl>
+          <dt>Access</dt><dd>Stairs at the bottom right &mdash; along the bottom deck, then up the shallow ledge to the port</dd>
+          <dt>Start</dt><dd>On the wide shallow ledge, beside the vacuum port &mdash; set up the hose, head and pole here</dd>
+          <dt>Direction</dt><dd>Loop A, left side first: down the ledge, left along the bottom, up the left side, across the top and down the narrow strip back to the port. Loop B, right side: down the ledge, right along the bottom, up the right side and back across to the port</dd>
+          <dt>Laps</dt><dd>2 loops, both from the port</dd>
+          <dt>End</dt><dd>Back at the vacuum port</dd>
+          <dt>Vacuum pattern</dt><dd>Follow the yellow strokes 1&ndash;5. Loop A, left side first: 1 lower half from the ledge on the way down, 2 left half from the left deck on the way up, 3 top arm and upper half from the narrow strip on the way back to the port. Loop B, right side: 4 the wide ledge and the near half from the ledge, 5 the far half from the right deck on the way up</dd>
+          <dt>Watch for</dt><dd>Ledge down the middle &mdash; narrow in the top arm, wide below. 5 dividers</dd>
+          <dt>Vacuum port</dt><dd>Left side of the pool, next to the wide ledge</dd>
+        </dl>
 
         <p class="note">The route steps in where the pool narrows &mdash; follow the line round rather than cutting across. The ledge runs down the middle &mdash; vacuum it as you pass.</p>
       </div>
@@ -2145,6 +2160,7 @@ document.querySelectorAll('[data-photos]').forEach(function(btn){
     var svg = btn.closest('.card').querySelector('.plan svg');
     var on = !svg.classList.contains('photos-on');
     svg.classList.toggle('photos-on', on);
+    var cd=btn.closest('.card'); if(cd) cd.classList.toggle('photos-on', on);
     btn.setAttribute('aria-pressed', on ? 'true' : 'false');
     btn.innerHTML = on ? '&#128247; Hide photo points' : '&#128247; Show photo points';
   });

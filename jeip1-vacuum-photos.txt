@@ -1,0 +1,11 @@
+JEIP1 photo list for the Dosing Round Tracker.
+Paste this into the other chat and ask it to add JEIP1 to VAC_PHOTOS, next to Tengah:
+
+  JEIP1: {card:"JEIP1", normalMin:null, list:[
+    {id:"P1", when:"start", label:"Set-up at the skimmer port", hint:"Hose, vacuum head and telescopic pole connected at the skimmer port, left side."},
+    {id:"P2", when:"start", label:"Corner 1 – top end", hint:"Stand on the top deck. Look down the left half of the pool."},
+    {id:"P3", when:"start", label:"Corner 2 – bottom end", hint:"Stand on the bottom deck. Look up the right half of the pool."},
+    {id:"E1", when:"end", label:"Vacuum head, pipe and telescopic pole kept", hint:"Hose, vacuum head and pole stored."},
+    {id:"E2", when:"end", label:"Skimmer port closed", hint:"The port with its cover on."},
+    {id:"E3", when:"end", label:"Vacuum valve closed", hint:"The valve handle in the closed position."}
+  ]},

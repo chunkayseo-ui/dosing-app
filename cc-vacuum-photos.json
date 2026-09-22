@@ -43,8 +43,8 @@
     {
       "id": "E1",
       "when": "end",
-      "label": "Tools packed away",
-      "hint": "Hose, head and pole stored"
+      "label": "Vacuum head, pipe and telescopic pole kept",
+      "hint": "Vacuum head, pipe and telescopic pole put back in storage"
     },
     {
       "id": "E2",
@@ -57,6 +57,12 @@
       "when": "end",
       "label": "Vacuum valve closed",
       "hint": "Close-up of the valve handle in the closed position"
+    },
+    {
+      "id": "E4",
+      "when": "end",
+      "label": "Skimmer control valve opened",
+      "hint": "Close-up of the skimmer control valve handle in the open position"
     }
   ]
 }
