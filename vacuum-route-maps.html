@@ -189,6 +189,7 @@
   .photo-toggle{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;letter-spacing:.06em;
     color:var(--ink);background:var(--paper);border:1.5px solid var(--rule);border-radius:4px;padding:6px 10px;cursor:pointer}
   .photo-toggle[aria-pressed="true"]{background:#0B6E61;border-color:#0B6E61;color:#fff}
+  .play-toggle{background:#FFD23F;border-color:#E0B51F;color:#0F2430}
 
   @media print{
     @page{size:A4 portrait;margin:11mm}
@@ -196,7 +197,7 @@
     .masthead,.legend{break-inside:avoid}
     .card{break-inside:avoid;break-after:page;margin-bottom:0;border:1px solid var(--rule)}
     .card:last-of-type{break-after:auto}
-    .footnote,.noprint,.tap,.viewer,.poolnav,.pager,.photo-toggle{display:none}
+    .footnote,.noprint,.tap,.viewer,.poolnav,.pager,.photo-toggle,.play-toggle{display:none}
     .card[hidden]{display:block!important}
     .card .photo-proof{display:block!important}
     details.legend-wrap summary{display:none}
@@ -2029,10 +2030,11 @@
       <h3>HOME@Bedok &mdash; Main pool</h3>
       <span class="kind">L-shaped &middot; 2 routes &middot; 2 vacuum ports</span>
       <button type="button" class="photo-toggle" aria-pressed="false" data-photos>&#128247; Show photo points</button>
+      <button type="button" class="photo-toggle play-toggle" data-play>&#9654; Play steps</button>
     </div>
     <div class="body">
       <div class="plan">
-        <svg viewBox="0 20 640 430" role="img" aria-label="Vacuum routes for HOME@Bedok: green route A from vacuum port 1 covers the right and the top; blue route B from vacuum port 2 covers the left leg and the top left">
+        <svg viewBox="0 20 640 430" data-steps="[{&quot;t&quot;:&quot;Before you start — preparation&quot;,&quot;d&quot;:&quot;Open vacuum port 2 and the vacuum valve, set the balancing tank control valve to half open, then check the pump cover shows no bubbles.&quot;,&quot;photos&quot;:[&quot;S1&quot;,&quot;S2&quot;,&quot;S3&quot;,&quot;S4&quot;],&quot;hl&quot;:[&quot;.vp2&quot;]},{&quot;t&quot;:&quot;Route B — set up at vacuum port 2&quot;,&quot;d&quot;:&quot;Connect the hose, vacuum head and telescopic pole at vacuum port 2. Follow the blue line.&quot;,&quot;photos&quot;:[&quot;P1&quot;],&quot;at&quot;:[219,214],&quot;atCol&quot;:&quot;#1D4ED8&quot;,&quot;hl&quot;:[&quot;.vp2&quot;]},{&quot;t&quot;:&quot;1 · Shallow ledge, left half&quot;,&quot;sec&quot;:1,&quot;walk&quot;:{&quot;r&quot;:&quot;B&quot;,&quot;to&quot;:[290,92]},&quot;d&quot;:&quot;Walk in the shallow ledge. Vacuum from the top left corner, left to right, up to the middle line.&quot;,&quot;photos&quot;:[&quot;P2&quot;]},{&quot;t&quot;:&quot;2 · Deep strip + outer half of the left leg&quot;,&quot;sec&quot;:2,&quot;walk&quot;:{&quot;r&quot;:&quot;B&quot;,&quot;to&quot;:[76,406]},&quot;d&quot;:&quot;From the middle, vacuum the deep strip at the top of the left leg right to left, then carry on down the outer half of the leg.&quot;,&quot;photos&quot;:[&quot;P3&quot;,&quot;P4&quot;]},{&quot;t&quot;:&quot;3 · Inner half of the left leg&quot;,&quot;sec&quot;:3,&quot;walk&quot;:{&quot;r&quot;:&quot;B&quot;},&quot;d&quot;:&quot;Vacuum the inner half, bottom to top, back up to vacuum port 2. Push the dirt out of the red zone beside the pillar.&quot;,&quot;photos&quot;:[&quot;P5&quot;],&quot;hl&quot;:[&quot;.no-reach&quot;]},{&quot;t&quot;:&quot;Route A — move the hose to vacuum port 1&quot;,&quot;d&quot;:&quot;Connect the hose at vacuum port 1, to the right of the stairs. Follow the green line.&quot;,&quot;photos&quot;:[&quot;P6&quot;],&quot;at&quot;:[327,236],&quot;atCol&quot;:&quot;#16A34A&quot;,&quot;hl&quot;:[&quot;.vp1&quot;]},{&quot;t&quot;:&quot;4 · Far side of the deep part&quot;,&quot;sec&quot;:4,&quot;walk&quot;:{&quot;r&quot;:&quot;A&quot;,&quot;to&quot;:[511,230]},&quot;d&quot;:&quot;From the bottom deck, vacuum the far side of the deep part, left to right towards vacuum port 1.&quot;,&quot;photos&quot;:[&quot;P7&quot;]},{&quot;t&quot;:&quot;5 · Near side of the deep part&quot;,&quot;sec&quot;:5,&quot;walk&quot;:{&quot;r&quot;:&quot;A&quot;,&quot;to&quot;:[302,106]},&quot;d&quot;:&quot;Step into the shallow ledge. Vacuum the near side of the deep part, right to left, back to the middle line.&quot;,&quot;photos&quot;:[&quot;P8&quot;]},{&quot;t&quot;:&quot;6 · Shallow ledge, right half&quot;,&quot;sec&quot;:6,&quot;walk&quot;:{&quot;r&quot;:&quot;A&quot;},&quot;d&quot;:&quot;Vacuum the right half of the shallow ledge, from the middle to the right end.&quot;,&quot;photos&quot;:[&quot;P9&quot;]},{&quot;t&quot;:&quot;After vacuuming&quot;,&quot;d&quot;:&quot;Put away the vacuum head, pipe and pole. Open the balancing tank control valve, close the vacuum valve, then close vacuum ports 1 and 2.&quot;,&quot;photos&quot;:[&quot;E1&quot;,&quot;E2&quot;,&quot;E3&quot;,&quot;E4&quot;,&quot;E5&quot;]}]" role="img" aria-label="Vacuum routes for HOME@Bedok: green route A from vacuum port 1 covers the right and the top; blue route B from vacuum port 2 covers the left leg and the top left">
           <defs>
             <pattern id="hatch-l" width="10" height="10" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
               <line x1="0" y1="0" x2="0" y2="10" stroke="#C88C55" stroke-width="1" opacity=".45"/>
@@ -2058,12 +2060,12 @@
           <rect x="92" y="84" width="390" height="56" fill="#B9DFF2"/>
           <line x1="92" y1="140" x2="482" y2="140" stroke="#2E8CBE" stroke-width="2" stroke-dasharray="6 4"/>
           <g class="vac-sections" stroke="none">
-            <rect x="92" y="84" width="208" height="56" fill="#A855F7" opacity=".22"/>
-            <path d="M92 140 L300 140 L300 200 L211 200 L211 204 L154 204 L154 409 L92 409 Z" fill="#A3E635" opacity=".24"/>
-            <rect x="154" y="204" width="57" height="205" fill="#FACC15" opacity=".30"/>
-            <rect x="300" y="186" width="182" height="43" fill="#BE185D" opacity=".24"/>
-            <rect x="300" y="140" width="182" height="46" fill="#F472B6" opacity=".26"/>
-            <rect x="300" y="84" width="182" height="56" fill="#F59E0B" opacity=".26"/>
+            <rect x="92" y="84" width="208" height="56" data-sec="1" fill="#A855F7" opacity=".22"/>
+            <path d="M92 140 L300 140 L300 200 L211 200 L211 204 L154 204 L154 409 L92 409 Z" data-sec="2" fill="#A3E635" opacity=".24"/>
+            <rect x="154" y="204" width="57" height="205" data-sec="3" fill="#FACC15" opacity=".30"/>
+            <rect x="300" y="186" width="182" height="43" data-sec="4" fill="#BE185D" opacity=".24"/>
+            <rect x="300" y="140" width="182" height="46" data-sec="5" fill="#F472B6" opacity=".26"/>
+            <rect x="300" y="84" width="182" height="56" data-sec="6" fill="#F59E0B" opacity=".26"/>
             <line x1="300" y1="84" x2="300" y2="200" stroke="#0F2430" stroke-width="1.5" stroke-dasharray="4 3" opacity=".6"/>
             <line x1="300" y1="186" x2="482" y2="186" stroke="#0F2430" stroke-width="1.5" stroke-dasharray="4 3" opacity=".55"/>
           </g>
@@ -2075,18 +2077,18 @@
             <path d="M474 150 L474 182 C474 189.8 461.2 189.8 461.2 182 L461.2 150 C461.2 142.2 448.5 142.2 448.5 150 L448.5 182 C448.5 189.8 435.7 189.8 435.7 182 L435.7 150 C435.7 142.2 422.9 142.2 422.9 150 L422.9 182 C422.9 189.8 410.2 189.8 410.2 182 L410.2 150 C410.2 142.2 397.4 142.2 397.4 150 L397.4 182 C397.4 189.8 384.6 189.8 384.6 182 L384.6 150 C384.6 142.2 371.8 142.2 371.8 150 L371.8 182 C371.8 189.8 359.1 189.8 359.1 182 L359.1 150 C359.1 142.2 346.3 142.2 346.3 150 L346.3 182 C346.3 189.8 333.5 189.8 333.5 182 L333.5 150 C333.5 142.2 320.8 142.2 320.8 150 L320.8 182 C320.8 189.8 308 189.8 308 182 L308 150" stroke="#F472B6" marker-end="url(#vz-arrow-hb-5)"/>
             <path d="M308 91 L308 133 C308 140.8 320.8 140.8 320.8 133 L320.8 91 C320.8 83.2 333.5 83.2 333.5 91 L333.5 133 C333.5 140.8 346.3 140.8 346.3 133 L346.3 91 C346.3 83.2 359.1 83.2 359.1 91 L359.1 133 C359.1 140.8 371.8 140.8 371.8 133 L371.8 91 C371.8 83.2 384.6 83.2 384.6 91 L384.6 133 C384.6 140.8 397.4 140.8 397.4 133 L397.4 91 C397.4 83.2 410.2 83.2 410.2 91 L410.2 133 C410.2 140.8 422.9 140.8 422.9 133 L422.9 91 C422.9 83.2 435.7 83.2 435.7 91 L435.7 133 C435.7 140.8 448.5 140.8 448.5 133 L448.5 91 C448.5 83.2 461.2 83.2 461.2 91 L461.2 133 C461.2 140.8 474 140.8 474 133 L474 91" stroke="#F59E0B" marker-end="url(#vz-arrow-hb-6)"/>
           </g>
-          <circle cx="99" cy="79" r="9" fill="#A855F7" stroke="#ffffff" stroke-width="2"/>
-          <text x="99" y="83" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">1</text>
-          <circle cx="282" cy="150" r="9" fill="#A3E635" stroke="#ffffff" stroke-width="2"/>
-          <text x="282" y="154" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#0F2430">2</text>
-          <circle cx="158" cy="396" r="9" fill="#FACC15" stroke="#ffffff" stroke-width="2"/>
-          <text x="158" y="400" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#0F2430">3</text>
-          <circle cx="306" cy="238" r="9" fill="#BE185D" stroke="#ffffff" stroke-width="2"/>
-          <text x="306" y="242" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">4</text>
-          <circle cx="474" cy="145" r="9" fill="#F472B6" stroke="#ffffff" stroke-width="2"/>
-          <text x="474" y="149" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#0F2430">5</text>
-          <circle cx="316" cy="79" r="9" fill="#F59E0B" stroke="#ffffff" stroke-width="2"/>
-          <text x="316" y="83" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#0F2430">6</text>
+          <circle class="secn" data-sec="1" cx="99" cy="79" r="9" fill="#A855F7" stroke="#ffffff" stroke-width="2"/>
+          <text class="secn" data-sec="1" x="99" y="83" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">1</text>
+          <circle class="secn" data-sec="2" cx="282" cy="150" r="9" fill="#A3E635" stroke="#ffffff" stroke-width="2"/>
+          <text class="secn" data-sec="2" x="282" y="154" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#0F2430">2</text>
+          <circle class="secn" data-sec="3" cx="158" cy="396" r="9" fill="#FACC15" stroke="#ffffff" stroke-width="2"/>
+          <text class="secn" data-sec="3" x="158" y="400" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#0F2430">3</text>
+          <circle class="secn" data-sec="4" cx="306" cy="238" r="9" fill="#BE185D" stroke="#ffffff" stroke-width="2"/>
+          <text class="secn" data-sec="4" x="306" y="242" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">4</text>
+          <circle class="secn" data-sec="5" cx="474" cy="145" r="9" fill="#F472B6" stroke="#ffffff" stroke-width="2"/>
+          <text class="secn" data-sec="5" x="474" y="149" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#0F2430">5</text>
+          <circle class="secn" data-sec="6" cx="316" cy="79" r="9" fill="#F59E0B" stroke="#ffffff" stroke-width="2"/>
+          <text class="secn" data-sec="6" x="316" y="83" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#0F2430">6</text>
           <rect x="185" y="108" width="110" height="16" rx="3" fill="#B9DFF2" opacity=".92"/>
           <text x="240" y="118" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" letter-spacing="1" fill="#1d6b96">SHALLOW LEDGE</text>
 
@@ -2111,29 +2113,29 @@
 
           <!-- Route B (blue, hose on VP2): walk in the shallow ledge -- along the top to the middle (1), back along it (2),
                down the outer deck, along the bottom and up the inner deck back to VP2 (3) -->
-          <path d="M86 92 L290 92 Q300 92 300 102 L300 118 Q300 128 290 128 L84 128 Q76 128 76 136 L76 406 Q76 414 84 414 L215 414 Q223 414 223 406 L223 226"
+          <path class="rt-b" d="M86 92 L290 92 Q300 92 300 102 L300 118 Q300 128 290 128 L84 128 Q76 128 76 136 L76 406 Q76 414 84 414 L215 414 Q223 414 223 406 L223 226"
                 fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(190,92) rotate(90)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(190,128) rotate(-90)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(76,230) rotate(180)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(76,330) rotate(180)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(150,414) rotate(90)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(223,330) rotate(0)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-9 -9 L0 0 L-9 9" transform="translate(223,226) rotate(-90)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="chev" d="M-8 6 L0 -6 L8 6" transform="translate(190,92) rotate(90)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="chev" d="M-8 6 L0 -6 L8 6" transform="translate(190,128) rotate(-90)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="chev" d="M-8 6 L0 -6 L8 6" transform="translate(76,230) rotate(180)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="chev" d="M-8 6 L0 -6 L8 6" transform="translate(76,330) rotate(180)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="chev" d="M-8 6 L0 -6 L8 6" transform="translate(150,414) rotate(90)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="chev" d="M-8 6 L0 -6 L8 6" transform="translate(223,330) rotate(0)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="chev" d="M-9 -9 L0 0 L-9 9" transform="translate(223,226) rotate(-90)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
           <!-- Route A (green, hose on VP1): along the bottom deck (4), up the right side, then in the shallow ledge --
                left to the middle (5) and back along the top edge to the right end (6) -->
-          <path d="M327 236 L503 236 Q511 236 511 228 L511 126 Q511 118 503 118 L312 118 Q302 118 302 108 L302 96 Q302 86 312 86 L490 86"
+          <path class="rt-a" d="M327 236 L503 236 Q511 236 511 228 L511 126 Q511 118 503 118 L312 118 Q302 118 302 108 L302 96 Q302 86 312 86 L490 86"
                 fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(420,236) rotate(90)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(511,180) rotate(0)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(400,118) rotate(-90)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(400,86) rotate(90)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-9 -9 L0 0 L-9 9" transform="translate(490,86) rotate(0)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="chev" d="M-8 6 L0 -6 L8 6" transform="translate(420,236) rotate(90)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="chev" d="M-8 6 L0 -6 L8 6" transform="translate(511,180) rotate(0)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="chev" d="M-8 6 L0 -6 L8 6" transform="translate(400,118) rotate(-90)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="chev" d="M-8 6 L0 -6 L8 6" transform="translate(400,86) rotate(90)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="chev" d="M-9 -9 L0 0 L-9 9" transform="translate(490,86) rotate(0)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
 
-          <rect x="401" y="203" width="26" height="26" rx="4" fill="#ffffff" stroke="#0B6E61" stroke-width="2.5"/>
+          <rect class="vp1" x="401" y="203" width="26" height="26" rx="4" fill="#ffffff" stroke="#0B6E61" stroke-width="2.5"/>
           <text x="414" y="216" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700" fill="#0B6E61">VP</text>
           <text x="414" y="225" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" font-weight="700" fill="#0B6E61">1</text>
-          <rect x="185" y="205" width="26" height="26" rx="4" fill="#ffffff" stroke="#0B6E61" stroke-width="2.5"/>
+          <rect class="vp2" x="185" y="205" width="26" height="26" rx="4" fill="#ffffff" stroke="#0B6E61" stroke-width="2.5"/>
           <text x="198" y="218" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700" fill="#0B6E61">VP</text>
           <text x="198" y="227" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" font-weight="700" fill="#0B6E61">2</text>
 
@@ -2490,6 +2492,312 @@ document.querySelectorAll('[data-photos]').forEach(function(btn){
     btn.setAttribute('aria-pressed', on ? 'true' : 'false');
     btn.innerHTML = on ? '&#128247; Hide photo points' : '&#128247; Show photo points';
   });
+});
+</script>
+
+<script>
+/* VacPlay -- plays a route card's vacuum steps one at a time: the walking
+ * route and the vacuum strokes draw themselves, a dot walks the technician's
+ * line, and the photos for that step pop up once it is done. Steps come from
+ * the card's own <svg data-steps="[...]">, so only cards that carry them
+ * (HB for now) get a Play button. Shared by the route card page and the
+ * tracker; keep the two copies identical. */
+(function(){
+  if(window.VacPlay) return;
+  var NS = "http://www.w3.org/2000/svg";
+  var CSS = ".vplay{position:fixed;inset:0;z-index:9999;background:#0F2430;display:flex;flex-direction:column;color:#fff;font:15px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}"
+    + ".vplay-bar{display:flex;align-items:center;gap:10px;padding:10px 12px 6px}"
+    + ".vplay-bar b{font-size:16px}.vplay-count{color:#9FB6C3;font-size:13px;margin-left:auto}"
+    + ".vplay-x{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:999px;width:36px;height:36px;font-size:17px;cursor:pointer}"
+    + ".vplay-stage{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:4px 8px;background:#fff;margin:0 8px;border-radius:10px}"
+    + ".vplay-stage svg{display:block;width:100%;height:100%;max-height:100%}"
+    + ".vplay-cap{padding:10px 14px 4px;min-height:118px}"
+    + ".vplay-dots{display:flex;gap:5px;margin-bottom:8px}.vplay-dots i{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.18)}.vplay-dots i.on{background:#FFD23F}.vplay-dots i.done{background:rgba(255,210,63,.5)}"
+    + ".vplay-cap h4{margin:0 0 4px;font-size:17px;display:flex;align-items:center;gap:8px}.vplay-cap h4 .sw{width:14px;height:14px;border-radius:4px;flex:0 0 auto;border:1.5px solid #fff}"
+    + ".vplay-cap p{margin:0;color:#D5E2E9}"
+    + ".vplay-photos{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;font-size:12.5px;color:#9FB6C3;align-items:center}"
+    + ".vplay-photos span{font:700 12px/1 ui-monospace,Menlo,monospace;color:#fff;border-radius:9px;padding:4px 7px;border:1.5px solid #fff}"
+    + ".vplay-ctl{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:8px;padding:8px 12px calc(12px + env(safe-area-inset-bottom))}"
+    + ".vplay-ctl button{font-family:inherit;font-size:15px;font-weight:600;line-height:1;padding:13px 6px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;cursor:pointer}"
+    + ".vplay-ctl button.pri{background:#FFD23F;border-color:#FFD23F;color:#0F2430}"
+    + ".vplay-ctl button:disabled{opacity:.35}"
+    + "@keyframes vplay-pulse{0%{stroke-opacity:1;stroke-width:3}70%{stroke-opacity:.15;stroke-width:9}100%{stroke-opacity:1;stroke-width:3}}"
+    + ".vplay-ring{animation:vplay-pulse 1.3s ease-in-out infinite}"
+    + "@keyframes vplay-walk{0%,100%{r:10}50%{r:13}}.vplay-walker circle.o{animation:vplay-walk 1s ease-in-out infinite}";
+
+  function expandIds(label){
+    var m = String(label || "").replace(/\s/g, "").match(/^([PES])([\d,–-]+)$/);
+    if(!m) return [label];
+    var ids = [];
+    m[2].split(",").forEach(function(part){
+      var r = part.match(/^(\d+)(?:[–-](\d+))?$/); if(!r) return;
+      for(var i = +r[1]; i <= (r[2] ? +r[2] : +r[1]); i++) ids.push(m[1] + i);
+    });
+    return ids.length ? ids : [label];
+  }
+  function el(tag, attrs){ var e = document.createElementNS(NS, tag); for(var k in attrs) e.setAttribute(k, attrs[k]); return e; }
+  function nearestLen(path, len, pt){
+    var best = 0, bd = 1e9, N = 600;
+    for(var i = 0; i <= N; i++){
+      var l = len * i / N, p = path.getPointAtLength(l), d = (p.x - pt[0]) * (p.x - pt[0]) + (p.y - pt[1]) * (p.y - pt[1]);
+      if(d < bd){ bd = d; best = l; }
+    }
+    return best;
+  }
+  function boxOf(e){
+    var t = e.tagName.toLowerCase(), n;
+    if(t === "rect" && e.getAttribute("width")) return [+e.getAttribute("x"), +e.getAttribute("y"), +e.getAttribute("width"), +e.getAttribute("height")];
+    if((t === "path" && !e.getAttribute("transform")) || t === "polygon"){
+      n = (e.getAttribute(t === "path" ? "d" : "points") || "").match(/-?\d+(\.\d+)?/g);
+      if(n && n.length >= 2){ var xs = [], ys = []; for(var k = 0; k + 1 < n.length; k += 2){ xs.push(+n[k]); ys.push(+n[k + 1]); }
+        var x0 = Math.min.apply(null, xs), y0 = Math.min.apply(null, ys); return [x0, y0, Math.max.apply(null, xs) - x0, Math.max.apply(null, ys) - y0]; }
+    }
+    try{ var b = e.getBBox(); if(b.width || b.height) return [b.x, b.y, b.width, b.height]; }catch(x){}
+    return null;
+  }
+  function union(a, b){ if(!a) return b; if(!b) return a; var x = Math.min(a[0], b[0]), y = Math.min(a[1], b[1]); return [x, y, Math.max(a[0] + a[2], b[0] + b[2]) - x, Math.max(a[1] + a[3], b[1] + b[3]) - y]; }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); }
+
+  function has(svg){ try{ return !!(svg && JSON.parse(svg.getAttribute("data-steps") || "[]").length); }catch(e){ return false; } }
+
+  function open(srcSvg, title){
+    if(!has(srcSvg)) return;
+    var steps = JSON.parse(srcSvg.getAttribute("data-steps"));
+    if(!document.getElementById("vplay-css")){ var st = document.createElement("style"); st.id = "vplay-css"; st.textContent = CSS; document.head.appendChild(st); }
+    var ov = document.createElement("div");
+    ov.className = "vplay"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-label", "Vacuum steps");
+    ov.innerHTML = '<div class="vplay-bar"><b>' + esc(title || "Vacuum steps") + '</b><span class="vplay-count"></span><button type="button" class="vplay-x" aria-label="Close">✕</button></div>'
+      + '<div class="vplay-stage"></div>'
+      + '<div class="vplay-cap"><div class="vplay-dots">' + steps.map(function(){ return "<i></i>"; }).join("") + '</div><h4></h4><p></p><div class="vplay-photos"></div></div>'
+      + '<div class="vplay-ctl"><button type="button" data-a="prev">⏮ Back</button><button type="button" data-a="play" class="pri">⏸ Pause</button><button type="button" data-a="next">Next ⏭</button></div>';
+    var svg = srcSvg.cloneNode(true);
+    svg.removeAttribute("width"); svg.removeAttribute("height"); svg.classList.add("photos-on");
+    svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+    ov.querySelector(".vplay-stage").appendChild(svg);
+    document.body.appendChild(ov);
+    var prevOverflow = document.body.style.overflow; document.body.style.overflow = "hidden";
+
+    // ---- pieces of the drawing ----
+    var strokes = Array.prototype.map.call(svg.querySelectorAll(".vac-pattern > path"), function(p){
+      return {p:p, len:p.getTotalLength(), marker:p.getAttribute("marker-end")};
+    });
+    var tints = {}; Array.prototype.forEach.call(svg.querySelectorAll(".vac-sections [data-sec]"), function(t){ tints[t.getAttribute("data-sec")] = {e:t, o:parseFloat(t.getAttribute("opacity") || "1")}; });
+    var secn = Array.prototype.slice.call(svg.querySelectorAll(".secn"));
+    var chev = Array.prototype.slice.call(svg.querySelectorAll(".chev"));
+    var routes = {};
+    ["a", "b"].forEach(function(r){
+      var base = svg.querySelector(".rt-" + r); if(!base) return;
+      var over = base.cloneNode(false); over.removeAttribute("class");
+      over.setAttribute("stroke-width", "7"); base.after(over);
+      var len = base.getTotalLength();
+      over.setAttribute("stroke-dasharray", len + " " + len);
+      routes[r.toUpperCase()] = {base:base, over:over, len:len, col:base.getAttribute("stroke")};
+    });
+    var layer = svg.querySelector(".photo-layer");
+    var badges = [];
+    if(layer){
+      layer.style.display = "inline";
+      Array.prototype.forEach.call(layer.querySelectorAll("text"), function(t){
+        var rect = t.previousElementSibling;
+        badges.push({ids:expandIds(t.textContent), els:[rect, t], col:((rect && rect.getAttribute("fill")) || "").toLowerCase(), rect:rect});
+      });
+      Array.prototype.forEach.call(layer.children, function(c){
+        if(c.tagName.toLowerCase() === "text" || badges.some(function(b){ return b.rect === c; })) return;
+        var k = ((c.getAttribute("fill") || "") + "|" + (c.getAttribute("stroke") || "")).toLowerCase();
+        var b = badges.filter(function(x){ return x.col && k.indexOf(x.col) >= 0; })[0];
+        if(b) b.els.push(c); else c.style.display = "none";
+      });
+    }
+    var fx = el("g", {"class":"vplay-fx"}); svg.appendChild(fx);
+    var head = el("circle", {r:"5.5", fill:"#fff", stroke:"#0F2430", "stroke-width":"2.5"}); fx.appendChild(head); head.style.display = "none";
+    var walker = el("g", {"class":"vplay-walker"}); walker.style.display = "none";
+    var wo = el("circle", {r:"11", fill:"#fff", "stroke-width":"4", "class":"o"}), wi = el("circle", {r:"4.5"});
+    walker.appendChild(wo); walker.appendChild(wi);
+    if(layer) layer.parentNode.insertBefore(walker, layer); else fx.appendChild(walker);   // photo badges stay on top of the walking dot
+    var rings = el("g", {}); fx.appendChild(rings);
+
+    // where each step leaves the walking lines
+    var revealAfter = [], cur = {A:0, B:0};
+    steps.forEach(function(s){
+      var from = {A:cur.A, B:cur.B};
+      if(s.walk && routes[s.walk.r]){
+        var R = routes[s.walk.r];
+        cur[s.walk.r] = s.walk.to ? Math.max(from[s.walk.r], nearestLen(R.base, R.len, s.walk.to)) : R.len;
+      }
+      revealAfter.push({from:from, to:{A:cur.A, B:cur.B}});
+    });
+
+    // The camera: the whole pool trimmed to what is drawn, and for each step a
+    // close-up on the part being worked, so the section fills a phone screen.
+    var full = null;
+    try{ var fb = svg.getBBox(); full = [fb.x - 8, fb.y - 8, fb.width + 16, fb.height + 16]; }catch(e){}
+    if(!full || full[2] < 50){ full = (svg.getAttribute("viewBox") || "0 0 640 430").split(/[\s,]+/).map(Number); }
+    function focusOf(k){
+      var s = steps[k], b = null;
+      if(!s.sec && !s.at) return full.slice();   // preparation / finishing: the whole pool
+      if(s.sec && strokes[s.sec - 1]) b = union(b, boxOf(strokes[s.sec - 1].p));
+      if(s.walk && routes[s.walk.r]){
+        var R = routes[s.walk.r], ra = revealAfter[k];
+        for(var q = 0; q <= 20; q++){ var pt = R.base.getPointAtLength(ra.from[s.walk.r] + (ra.to[s.walk.r] - ra.from[s.walk.r]) * q / 20); b = union(b, [pt.x - 12, pt.y - 12, 24, 24]); }
+      }
+      if(s.at) b = union(b, [s.at[0] - 14, s.at[1] - 14, 28, 28]);
+      badges.forEach(function(x){ if(x.ids.some(function(id){ return (s.photos || []).indexOf(id) >= 0; })) x.els.forEach(function(e){ b = union(b, boxOf(e)); }); });
+      (s.hl || []).forEach(function(sel){ Array.prototype.forEach.call(svg.querySelectorAll(sel), function(e){ b = union(b, boxOf(e)); }); });
+      if(!b) return full.slice();
+      var pad = 22; b = [b[0] - pad, b[1] - pad, b[2] + 2 * pad, b[3] + 2 * pad];
+      // never zoom in further than ~2.6x, and match the stage's shape
+      var minW = full[2] / 2.2; if(b[2] < minW){ b[0] -= (minW - b[2]) / 2; b[2] = minW; }
+      var st = ov.querySelector(".vplay-stage"), ar = Math.max(.3, (st.clientWidth - 16) / Math.max(1, st.clientHeight - 8));
+      if(b[2] / b[3] < ar){ var w = b[3] * ar; b[0] -= (w - b[2]) / 2; b[2] = w; } else { var h = b[2] / ar; b[1] -= (h - b[3]) / 2; b[3] = h; }
+      if(b[2] >= full[2] && b[3] >= full[3]) return full.slice();
+      // keep the close-up over the pool rather than the empty margin round it
+      [0, 1].forEach(function(a){
+        if(b[a + 2] <= full[a + 2]) b[a] = Math.max(full[a], Math.min(full[a] + full[a + 2] - b[a + 2], b[a]));
+        else b[a] = full[a] - (b[a + 2] - full[a + 2]) / 2;
+      });
+      return b;
+    }
+    var vb = full.slice(), vbFrom = full.slice(), vbTo = full.slice(), vbT = 0, ZOOM = 700;
+    svg.setAttribute("viewBox", vb.join(" "));
+    function camera(now){
+      var k = Math.min(1, (now - vbT) / ZOOM), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      vb = vbFrom.map(function(v, j){ return v + (vbTo[j] - v) * e; });
+      svg.setAttribute("viewBox", vb.map(function(v){ return Math.round(v * 10) / 10; }).join(" "));
+      return k < 1;
+    }
+    function aim(now){ vbFrom = vb.slice(); vbTo = focusOf(i); vbT = now; }
+
+    var i = 0, t0 = 0, playing = true, pausedAt = 0, raf = 0, lastKey = "";
+    var DRAW = 5200, HOLD = 2600, STILL = 4200;
+    function durs(s){ return s.sec ? [DRAW, HOLD] : [0, STILL]; }
+
+    function setRings(s){
+      while(rings.firstChild) rings.removeChild(rings.firstChild);
+      var targets = [];
+      (s.hl || []).forEach(function(sel){ Array.prototype.forEach.call(svg.querySelectorAll(sel), function(e){ targets.push(e); }); });
+      badges.forEach(function(b){ if(b.ids.some(function(id){ return (s.photos || []).indexOf(id) >= 0; }) && b.rect) targets.push(b.rect); });
+      targets.forEach(function(e){
+        var bb = boxOf(e); if(!bb) return;
+        rings.appendChild(el("rect", {x:bb[0] - 5, y:bb[1] - 5, width:bb[2] + 10, height:bb[3] + 10, rx:Math.min(14, (bb[3] + 10) / 2),
+          fill:"none", stroke:"#FFD23F", "stroke-width":"3", "class":"vplay-ring"}));
+      });
+    }
+    function caption(s){
+      var cap = ov.querySelector(".vplay-cap");
+      var sw = s.sec && tints[s.sec] ? '<span class="sw" style="background:' + tints[s.sec].e.getAttribute("fill") + '"></span>' : "";
+      cap.querySelector("h4").innerHTML = sw + esc(s.t);
+      cap.querySelector("p").textContent = s.d || "";
+      var ph = s.photos || [];
+      cap.querySelector(".vplay-photos").innerHTML = ph.length ? "Photos: " + ph.map(function(id){
+        var b = badges.filter(function(x){ return x.ids.indexOf(id) >= 0; })[0];
+        return '<span style="background:' + (b ? b.rect.getAttribute("fill") : "#0F2430") + '">' + esc(id) + "</span>";
+      }).join("") : "";
+      Array.prototype.forEach.call(cap.querySelectorAll(".vplay-dots i"), function(d, k){ d.className = k === i ? "on" : (k < i ? "done" : ""); });
+      ov.querySelector(".vplay-count").textContent = "Step " + (i + 1) + " of " + steps.length;
+      ov.querySelector('[data-a="prev"]').disabled = i === 0;
+      ov.querySelector('[data-a="next"]').disabled = i === steps.length - 1;
+    }
+    function draw(p){
+      var s = steps[i], d = durs(s), k = d[0] ? Math.min(1, p / d[0]) : 1;
+      if(lastKey !== String(i)){ lastKey = String(i); caption(s); setRings(s); aim(performance.now()); }
+      var doneSec = {}; for(var j = 0; j < i; j++) if(steps[j].sec) doneSec[steps[j].sec] = 1;
+      strokes.forEach(function(o, j){
+        var n = j + 1, e = o.p;
+        if(n === s.sec){
+          e.style.opacity = "1"; e.setAttribute("stroke-dasharray", o.len + " " + o.len); e.setAttribute("stroke-dashoffset", String(o.len * (1 - k)));
+          if(k < 1) e.removeAttribute("marker-end"); else if(o.marker) e.setAttribute("marker-end", o.marker);
+          e.setAttribute("stroke-width", "3.2");
+        } else {
+          e.removeAttribute("stroke-dasharray"); e.removeAttribute("stroke-dashoffset"); e.removeAttribute("stroke-width");
+          if(o.marker) e.setAttribute("marker-end", o.marker);
+          e.style.opacity = doneSec[n] ? ".5" : ".12";
+        }
+      });
+      Object.keys(tints).forEach(function(n){ var t = tints[n]; t.e.setAttribute("opacity", String(+n === s.sec ? Math.min(.6, t.o * 2) : (doneSec[n] ? t.o : t.o * .45))); });
+      secn.forEach(function(e){ e.style.opacity = +e.getAttribute("data-sec") === s.sec ? "1" : ".3"; });
+      chev.forEach(function(e){ e.style.opacity = ".15"; });
+      var ra = revealAfter[i], wpt = null, wcol = null;
+      Object.keys(routes).forEach(function(r){
+        var R = routes[r], a = ra.from[r], b = ra.to[r], L = a + (b - a) * k;
+        R.base.style.opacity = ".22";
+        R.over.setAttribute("stroke-dashoffset", String(R.len - L));
+        R.over.style.opacity = s.walk && s.walk.r === r ? "1" : ".45";
+        if(s.walk && s.walk.r === r){ var q = R.base.getPointAtLength(Math.max(0, Math.min(R.len, L))); wpt = [q.x, q.y]; wcol = R.col; }
+      });
+      if(!wpt && s.at){ wpt = s.at; wcol = s.atCol || "#0F2430"; }
+      if(wpt){ walker.style.display = ""; walker.setAttribute("transform", "translate(" + wpt[0] + "," + wpt[1] + ")"); wo.setAttribute("stroke", wcol); wi.setAttribute("fill", wcol); }
+      else walker.style.display = "none";
+      var so = s.sec && strokes[s.sec - 1];
+      if(so && k < 1){ var hp = so.p.getPointAtLength(so.len * k); head.style.display = ""; head.setAttribute("cx", hp.x); head.setAttribute("cy", hp.y); }
+      else head.style.display = "none";
+      var show = k >= 1 ? (s.photos || []) : [];
+      badges.forEach(function(b){
+        var on = b.ids.some(function(id){ return show.indexOf(id) >= 0; });
+        b.els.forEach(function(e){ e.style.display = on ? "" : "none"; });
+      });
+      rings.style.display = k >= 1 ? "" : "none";
+    }
+    function tick(now){
+      raf = 0;
+      if(!ov.isConnected) return;
+      var s = steps[i], d = durs(s), p = playing ? now - t0 : pausedAt;
+      if(playing && p >= d[0] + d[1]){
+        if(i < steps.length - 1){ i++; t0 = now; p = 0; }
+        else { playing = false; pausedAt = d[0] + d[1]; setBtn(); p = pausedAt; }
+      }
+      draw(p);
+      var moving = camera(now);
+      if(playing || moving) raf = requestAnimationFrame(tick);
+    }
+    function setBtn(){
+      var b = ov.querySelector('[data-a="play"]');
+      var atEnd = !playing && i === steps.length - 1 && pausedAt >= durs(steps[i])[0] + durs(steps[i])[1];
+      b.textContent = playing ? "⏸ Pause" : (atEnd ? "↻ Replay" : "▶ Play");
+    }
+    function go(n){
+      i = Math.max(0, Math.min(steps.length - 1, n));
+      t0 = performance.now();
+      if(!playing) pausedAt = durs(steps[i])[0];   // paused: show the step finished
+      if(!raf) raf = requestAnimationFrame(tick);
+      setBtn();
+    }
+    function toggle(){
+      var now = performance.now();
+      if(playing){ playing = false; pausedAt = now - t0; }
+      else {
+        var d = durs(steps[i]);
+        if(i === steps.length - 1 && pausedAt >= d[0] + d[1]){ i = 0; pausedAt = 0; lastKey = ""; }
+        playing = true; t0 = now - pausedAt;
+      }
+      setBtn(); if(!raf) raf = requestAnimationFrame(tick);
+    }
+    function close(){
+      if(raf) cancelAnimationFrame(raf); raf = 0;
+      document.removeEventListener("keydown", onKey);
+      ov.remove(); document.body.style.overflow = prevOverflow;
+    }
+    function onKey(e){
+      if(e.key === "Escape") close();
+      else if(e.key === "ArrowRight") go(i + 1);
+      else if(e.key === "ArrowLeft") go(i - 1);
+      else if(e.key === " "){ e.preventDefault(); toggle(); }
+    }
+    ov.querySelector(".vplay-x").addEventListener("click", close);
+    ov.querySelector('[data-a="prev"]').addEventListener("click", function(){ go(i - 1); });
+    ov.querySelector('[data-a="next"]').addEventListener("click", function(){ go(i + 1); });
+    ov.querySelector('[data-a="play"]').addEventListener("click", toggle);
+    ov.querySelector(".vplay-stage").addEventListener("click", toggle);
+    document.addEventListener("keydown", onKey);
+    t0 = performance.now(); raf = requestAnimationFrame(tick);
+    return {close:close, go:go, toggle:toggle, state:function(){ return {i:i, playing:playing}; }};
+  }
+  window.VacPlay = {open:open, has:has};
+})();
+
+document.querySelectorAll('[data-play]').forEach(function(btn){
+  var card = btn.closest('.card'), svg = card && card.querySelector('.plan svg');
+  if(!window.VacPlay.has(svg)){ btn.remove(); return; }
+  btn.addEventListener('click', function(){ window.VacPlay.open(svg, card.querySelector('.code').textContent.trim() + ' \u00b7 vacuum steps'); });
 });
 </script>
 
