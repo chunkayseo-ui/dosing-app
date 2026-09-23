@@ -2845,12 +2845,12 @@ document.querySelectorAll('[data-photos]').forEach(function(btn){
       var so = s.sec && strokes[s.sec - 1];
       if(so && k < 1 && p >= pre){ var hp = so.p.getPointAtLength(so.len * k); head.style.display = ""; head.setAttribute("cx", hp.x); head.setAttribute("cy", hp.y); }
       else head.style.display = "none";
-      var show = s.photos || [];   // photo points stay on the map for the whole step
+      var show = k >= 1 ? (s.photos || []) : [];   // photo point + arrow only once the section is finished
       badges.forEach(function(b){
         var on = b.ids.some(function(id){ return show.indexOf(id) >= 0; });
         b.els.forEach(function(e){ e.style.display = on ? "" : "none"; });
       });
-      rings.style.display = "";
+      rings.style.display = k >= 1 ? "" : "none";
     }
     function tick(now){
       raf = 0;
@@ -2858,7 +2858,7 @@ document.querySelectorAll('[data-photos]').forEach(function(btn){
       var s = steps[i], d = durs(s), p = playing ? now - t0 : pausedAt;
       if(busy()) quietAt = now;
       // let the voice finish, then give s.gap ms to do the job before moving on
-      var waiting = (busy() || now - quietAt < (s.gap || 0)) && p < d[0] + d[1] + 25000;
+      var waiting = (busy() || now - quietAt < (s.gap || (s.sec ? 3000 : 0))) && p < d[0] + d[1] + 25000;
       if(playing && p >= d[0] + d[1] && waiting){ /* wait */ }
       else if(playing && p >= d[0] + d[1]){
         if(i < steps.length - 1){ i++; t0 = now; p = 0; }
