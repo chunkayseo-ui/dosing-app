@@ -2607,14 +2607,31 @@ document.querySelectorAll('[data-photos]').forEach(function(btn){
         var b = badges.filter(function(x){ return x.col && k.indexOf(x.col) >= 0; })[0];
         if(b) b.els.push(c); else c.style.display = "none";
       });
+      // The card draws the photo arrows see-through so they don't hide the
+      // vacuum strokes; in the player they must stand out, so make them solid
+      // with a white edge that shows up on the blue water.
+      badges.forEach(function(b){
+        b.els.slice().forEach(function(c){
+          var t = c.tagName.toLowerCase(); if(t !== "path" && t !== "polygon") return;
+          var halo = c.cloneNode(false);
+          if(t === "path"){ halo.setAttribute("stroke", "#fff"); halo.setAttribute("stroke-width", "16"); halo.setAttribute("opacity", "1"); c.setAttribute("opacity", "1"); }
+          else { halo.setAttribute("fill", "#fff"); halo.setAttribute("stroke", "#fff"); halo.setAttribute("stroke-width", "5"); halo.setAttribute("stroke-linejoin", "round"); halo.setAttribute("opacity", "1"); c.setAttribute("opacity", "1"); }
+          c.parentNode.insertBefore(halo, c); b.els.push(halo);
+        });
+      });
     }
+    // vacuum strokes on top of the (now solid) photo arrows, so both stay visible
+    var pat = svg.querySelector(".vac-pattern"); if(pat && layer) layer.parentNode.insertBefore(pat, layer.nextSibling);
     var fx = el("g", {"class":"vplay-fx"}); svg.appendChild(fx);
     var head = el("circle", {r:"5.5", fill:"#fff", stroke:"#0F2430", "stroke-width":"2.5"}); fx.appendChild(head); head.style.display = "none";
     var walker = el("g", {"class":"vplay-walker"}); walker.style.display = "none";
     var wo = el("circle", {r:"11", fill:"#fff", "stroke-width":"4", "class":"o"}), wi = el("circle", {r:"4.5"});
     walker.appendChild(wo); walker.appendChild(wi);
-    if(layer) layer.parentNode.insertBefore(walker, layer); else fx.appendChild(walker);   // photo badges stay on top of the walking dot
+    fx.appendChild(walker);
     var rings = el("g", {}); fx.appendChild(rings);
+    // badge labels on the very top (arrows stay under the strokes)
+    var tags = el("g", {}); fx.appendChild(tags);
+    badges.forEach(function(b){ if(b.rect) tags.appendChild(b.rect); tags.appendChild(b.els[1]); });
 
     // where each step leaves the walking lines
     var revealAfter = [], cur = {A:0, B:0};
@@ -2808,7 +2825,7 @@ document.querySelectorAll('[data-photos]').forEach(function(btn){
         } else {
           e.removeAttribute("stroke-dasharray"); e.removeAttribute("stroke-dashoffset"); e.removeAttribute("stroke-width");
           if(o.marker) e.setAttribute("marker-end", o.marker);
-          e.style.opacity = doneSec[n] ? ".5" : ".12";
+          e.style.opacity = doneSec[n] ? ".65" : ".25";
         }
       });
       Object.keys(tints).forEach(function(n){ var t = tints[n]; t.e.setAttribute("opacity", String(+n === s.sec ? Math.min(.6, t.o * 2) : (doneSec[n] ? t.o : t.o * .45))); });
@@ -2828,12 +2845,12 @@ document.querySelectorAll('[data-photos]').forEach(function(btn){
       var so = s.sec && strokes[s.sec - 1];
       if(so && k < 1 && p >= pre){ var hp = so.p.getPointAtLength(so.len * k); head.style.display = ""; head.setAttribute("cx", hp.x); head.setAttribute("cy", hp.y); }
       else head.style.display = "none";
-      var show = k >= 1 ? (s.photos || []) : [];
+      var show = s.photos || [];   // photo points stay on the map for the whole step
       badges.forEach(function(b){
         var on = b.ids.some(function(id){ return show.indexOf(id) >= 0; });
         b.els.forEach(function(e){ e.style.display = on ? "" : "none"; });
       });
-      rings.style.display = k >= 1 ? "" : "none";
+      rings.style.display = "";
     }
     function tick(now){
       raf = 0;
