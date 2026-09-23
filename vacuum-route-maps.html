@@ -2111,20 +2111,26 @@
           <line x1="294" y1="231" x2="294" y2="263" stroke="#C88C55" stroke-width="2"/>
           <text x="306" y="262" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" letter-spacing=".5" fill="#0F2430">STAIRS IN</text>
 
-          <path d="M327 236 L503 236 Q511 236 511 228 L511 70 Q511 62 503 62 L312 62"
+          <!-- Route B (blue, hose on VP2): walk in the shallow ledge -- along the top to the middle (1), back along it (2),
+               down the outer deck, along the bottom and up the inner deck back to VP2 (3) -->
+          <path d="M86 92 L290 92 Q300 92 300 102 L300 118 Q300 128 290 128 L84 128 Q76 128 76 136 L76 406 Q76 414 84 414 L215 414 Q223 414 223 406 L223 226"
+                fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M-8 6 L0 -6 L8 6" transform="translate(190,92) rotate(90)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M-8 6 L0 -6 L8 6" transform="translate(190,128) rotate(-90)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M-8 6 L0 -6 L8 6" transform="translate(76,230) rotate(180)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M-8 6 L0 -6 L8 6" transform="translate(76,330) rotate(180)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M-8 6 L0 -6 L8 6" transform="translate(150,414) rotate(90)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M-8 6 L0 -6 L8 6" transform="translate(223,330) rotate(0)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M-9 -9 L0 0 L-9 9" transform="translate(223,226) rotate(-90)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Route A (green, hose on VP1): along the bottom deck (4), up the right side, then in the shallow ledge --
+               left to the middle (5) and back along the top edge to the right end (6) -->
+          <path d="M327 236 L503 236 Q511 236 511 228 L511 126 Q511 118 503 118 L312 118 Q302 118 302 108 L302 96 Q302 86 312 86 L490 86"
                 fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M-8 6 L0 -6 L8 6" transform="translate(420,236) rotate(90)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(511,150) rotate(0)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(400,62) rotate(-90)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-9 -9 L0 0 L-9 9" transform="translate(312,62) rotate(180)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M219 214 L219 406 Q219 414 211 414 L89 414 Q81 414 81 406 L81 70 Q81 62 89 62 L286 62"
-                fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(219,300) rotate(180)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(219,370) rotate(180)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(150,414) rotate(-90)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(81,320) rotate(0)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-8 6 L0 -6 L8 6" transform="translate(81,150) rotate(0)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M-9 -9 L0 0 L-9 9" transform="translate(286,62) rotate(0)" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M-8 6 L0 -6 L8 6" transform="translate(511,180) rotate(0)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M-8 6 L0 -6 L8 6" transform="translate(400,118) rotate(-90)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M-8 6 L0 -6 L8 6" transform="translate(400,86) rotate(90)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M-9 -9 L0 0 L-9 9" transform="translate(490,86) rotate(0)" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
 
           <rect x="455" y="203" width="26" height="26" rx="4" fill="#ffffff" stroke="#0B6E61" stroke-width="2.5"/>
           <text x="468" y="216" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700" fill="#0B6E61">VP</text>
@@ -2209,9 +2215,9 @@
         <h4>Route</h4>
         <dl>
           <dt>Shape</dt><dd>L-shaped pool, 2 vacuum ports</dd>
-          <dt>Route A</dt><dd><b style="color:#16A34A">Green</b> &mdash; start by the stairs, hose on vacuum port 1 (bottom right). Right along the bottom deck, up the right side, then left along the top deck &mdash; sections 4&ndash;6</dd>
-          <dt>Route B</dt><dd><b style="color:#1D4ED8">Blue</b> &mdash; hose on vacuum port 2 (top of the left leg). Down the inner side, left along the bottom, up the outer side, then right along the top deck to the middle &mdash; sections 1&ndash;3</dd>
-          <dt>Vacuum pattern</dt><dd>Six sections, each in its own colour &mdash; follow the strokes 1&ndash;6 in order. The dashed line down the middle is as far as each hose reaches. 1 left half of the shallow ledge, left to right up to the middle. 2 from the middle, the deep strip at the top of the left leg, right to left, then down the outer half of the leg. 3 inner half of the left leg, bottom to top. 4 far side of the deep part by the high wall, left to right towards vacuum port 1 &mdash; stand in the shallow ledge, it can&rsquo;t be reached from the deck. 5 near side of the deep part, right to left back to the middle. 6 right half of the shallow ledge, from the middle to the right end</dd>
+          <dt>Route A</dt><dd><b style="color:#16A34A">Green</b> &mdash; hose on vacuum port 1 (bottom right), start by the stairs. Right along the bottom deck (4), up the right side, then step into the shallow ledge: left to the middle (5) and back along the top edge to the right end (6) &mdash; sections 4&ndash;6</dd>
+          <dt>Route B</dt><dd><b style="color:#1D4ED8">Blue</b> &mdash; hose on vacuum port 2 (top of the left leg). Step into the shallow ledge at the top left corner: along the top to the middle (1), back along the ledge (2), then down the outer deck, along the bottom and up the inner deck back to port 2 (3) &mdash; sections 1&ndash;3</dd>
+          <dt>Vacuum pattern</dt><dd>Six sections, each in its own colour &mdash; follow the strokes 1&ndash;6 in order, walking the blue and green lines. The dashed line down the middle is as far as each hose reaches. 1 left half of the shallow ledge, left to right up to the middle (walk in the ledge). 2 from the middle, the deep strip at the top of the left leg, right to left, then down the outer half of the leg. 3 inner half of the left leg, bottom to top. 4 far side of the deep part by the high wall, from the bottom deck, left to right towards vacuum port 1. 5 near side of the deep part, walking in the shallow ledge, right to left back to the middle. 6 right half of the shallow ledge, from the middle to the right end</dd>
           <dt>Watch for</dt><dd>Two deep areas (right side and left leg) &mdash; that is why the pool is done in two halves, the far end is too hard to reach. Shallow ledge across the top, 4 pillars, high wall at the inner corner. <b style="color:#E2382C">Red zone</b> beside the pillar in the left leg: the vacuum can&rsquo;t reach it &mdash; when scrubbing, push the dirt out of it onto the open floor so it gets vacuumed</dd>
         </dl>
 
