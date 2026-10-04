@@ -224,26 +224,26 @@ JEIP1,JEIP 1,weekend,4.0,7.4,0.0,g,0.0,ml
 JEIP1,JEIP 1,weekend,4.0,7.6,0.0,g,200.0,ml
 JEIP1,JEIP 1,weekend,4.0,7.8,0.0,g,500.0,ml
 JEIP1,JEIP 1,weekend,4.0,8.0,0.0,g,500.0,ml
-JEIP2,JEIP 2,weekday,-2.0,7.2,450.0,g,0.0,ml
-JEIP2,JEIP 2,weekday,-2.0,7.4,450.0,g,0.0,ml
-JEIP2,JEIP 2,weekday,-2.0,7.6,450.0,g,350.0,ml
-JEIP2,JEIP 2,weekday,-2.0,7.8,450.0,g,350.0,ml
-JEIP2,JEIP 2,weekday,-2.0,8.0,450.0,g,350.0,ml
-JEIP2,JEIP 2,weekday,-1.5,7.2,450.0,g,0.0,ml
-JEIP2,JEIP 2,weekday,-1.5,7.4,450.0,g,0.0,ml
-JEIP2,JEIP 2,weekday,-1.5,7.6,450.0,g,350.0,ml
-JEIP2,JEIP 2,weekday,-1.5,7.8,450.0,g,350.0,ml
-JEIP2,JEIP 2,weekday,-1.5,8.0,450.0,g,350.0,ml
-JEIP2,JEIP 2,weekday,-1.0,7.2,450.0,g,0.0,ml
-JEIP2,JEIP 2,weekday,-1.0,7.4,450.0,g,0.0,ml
-JEIP2,JEIP 2,weekday,-1.0,7.6,450.0,g,350.0,ml
-JEIP2,JEIP 2,weekday,-1.0,7.8,450.0,g,350.0,ml
-JEIP2,JEIP 2,weekday,-1.0,8.0,450.0,g,350.0,ml
-JEIP2,JEIP 2,weekday,-0.5,7.2,400.0,g,0.0,ml
-JEIP2,JEIP 2,weekday,-0.5,7.4,400.0,g,0.0,ml
-JEIP2,JEIP 2,weekday,-0.5,7.6,400.0,g,200.0,ml
-JEIP2,JEIP 2,weekday,-0.5,7.8,400.0,g,300.0,ml
-JEIP2,JEIP 2,weekday,-0.5,8.0,400.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-2.0,7.2,650.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,-2.0,7.4,650.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,-2.0,7.6,650.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-2.0,7.8,650.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-2.0,8.0,650.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-1.5,7.2,650.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,-1.5,7.4,650.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,-1.5,7.6,650.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-1.5,7.8,650.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-1.5,8.0,650.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-1.0,7.2,650.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,-1.0,7.4,650.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,-1.0,7.6,650.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-1.0,7.8,650.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-1.0,8.0,650.0,g,350.0,ml
+JEIP2,JEIP 2,weekday,-0.5,7.2,600.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,-0.5,7.4,600.0,g,0.0,ml
+JEIP2,JEIP 2,weekday,-0.5,7.6,600.0,g,200.0,ml
+JEIP2,JEIP 2,weekday,-0.5,7.8,600.0,g,300.0,ml
+JEIP2,JEIP 2,weekday,-0.5,8.0,600.0,g,350.0,ml
 JEIP2,JEIP 2,weekday,0.0,7.2,500.0,g,0.0,ml
 JEIP2,JEIP 2,weekday,0.0,7.4,500.0,g,0.0,ml
 JEIP2,JEIP 2,weekday,0.0,7.6,500.0,g,200.0,ml
@@ -279,26 +279,26 @@ JEIP2,JEIP 2,weekday,3.0,7.4,0.0,g,0.0,ml
 JEIP2,JEIP 2,weekday,3.0,7.6,0.0,g,0.0,ml
 JEIP2,JEIP 2,weekday,3.0,7.8,0.0,g,0.0,ml
 JEIP2,JEIP 2,weekday,3.0,8.0,0.0,g,0.0,ml
-JEIP2,JEIP 2,weekend,-2.0,7.2,550.0,g,0.0,ml
-JEIP2,JEIP 2,weekend,-2.0,7.4,550.0,g,0.0,ml
-JEIP2,JEIP 2,weekend,-2.0,7.6,550.0,g,200.0,ml
-JEIP2,JEIP 2,weekend,-2.0,7.8,550.0,g,350.0,ml
-JEIP2,JEIP 2,weekend,-2.0,8.0,550.0,g,350.0,ml
-JEIP2,JEIP 2,weekend,-1.5,7.2,550.0,g,0.0,ml
-JEIP2,JEIP 2,weekend,-1.5,7.4,550.0,g,0.0,ml
-JEIP2,JEIP 2,weekend,-1.5,7.6,550.0,g,200.0,ml
-JEIP2,JEIP 2,weekend,-1.5,7.8,550.0,g,350.0,ml
-JEIP2,JEIP 2,weekend,-1.5,8.0,550.0,g,350.0,ml
-JEIP2,JEIP 2,weekend,-1.0,7.2,550.0,g,0.0,ml
-JEIP2,JEIP 2,weekend,-1.0,7.4,550.0,g,0.0,ml
-JEIP2,JEIP 2,weekend,-1.0,7.6,550.0,g,200.0,ml
-JEIP2,JEIP 2,weekend,-1.0,7.8,550.0,g,350.0,ml
-JEIP2,JEIP 2,weekend,-1.0,8.0,550.0,g,350.0,ml
-JEIP2,JEIP 2,weekend,-0.5,7.2,500.0,g,0.0,ml
-JEIP2,JEIP 2,weekend,-0.5,7.4,500.0,g,0.0,ml
-JEIP2,JEIP 2,weekend,-0.5,7.6,500.0,g,200.0,ml
-JEIP2,JEIP 2,weekend,-0.5,7.8,500.0,g,300.0,ml
-JEIP2,JEIP 2,weekend,-0.5,8.0,500.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,-2.0,7.2,750.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-2.0,7.4,750.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-2.0,7.6,750.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,-2.0,7.8,750.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,-2.0,8.0,750.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,-1.5,7.2,750.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-1.5,7.4,750.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-1.5,7.6,750.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,-1.5,7.8,750.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,-1.5,8.0,750.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,-1.0,7.2,750.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-1.0,7.4,750.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-1.0,7.6,750.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,-1.0,7.8,750.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,-1.0,8.0,750.0,g,350.0,ml
+JEIP2,JEIP 2,weekend,-0.5,7.2,700.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-0.5,7.4,700.0,g,0.0,ml
+JEIP2,JEIP 2,weekend,-0.5,7.6,700.0,g,200.0,ml
+JEIP2,JEIP 2,weekend,-0.5,7.8,700.0,g,300.0,ml
+JEIP2,JEIP 2,weekend,-0.5,8.0,700.0,g,350.0,ml
 JEIP2,JEIP 2,weekend,0.0,7.2,700.0,g,0.0,ml
 JEIP2,JEIP 2,weekend,0.0,7.4,700.0,g,0.0,ml
 JEIP2,JEIP 2,weekend,0.0,7.6,700.0,g,200.0,ml
@@ -824,10 +824,10 @@ HS,HS,weekend,4.0,7.4,0.0,g,500.0,ml
 HS,HS,weekend,4.0,7.6,0.0,g,1.5,l
 HS,HS,weekend,4.0,7.8,0.0,g,2.0,l
 HS,HS,weekend,4.0,8.0,0.0,g,3.0,l
-TPY,TPY,weekday,-2.0,7.2,200.0,g,0.0,ml
-TPY,TPY,weekday,-2.0,7.4,200.0,g,0.0,ml
-TPY,TPY,weekday,-2.0,7.6,200.0,g,0.0,ml
-TPY,TPY,weekday,-2.0,7.8,200.0,g,300.0,ml
+TPY,TPY,weekday,-2.0,7.2,400.0,g,0.0,ml
+TPY,TPY,weekday,-2.0,7.4,400.0,g,0.0,ml
+TPY,TPY,weekday,-2.0,7.6,400.0,g,0.0,ml
+TPY,TPY,weekday,-2.0,7.8,400.0,g,300.0,ml
 TPY,TPY,weekday,-2.0,8.0,400.0,g,300.0,ml
 TPY,TPY,weekday,-1.5,7.2,400.0,g,0.0,ml
 TPY,TPY,weekday,-1.5,7.4,400.0,g,0.0,ml
@@ -1224,26 +1224,26 @@ BK,BK,weekday,3.0,7.4,0.0,g,0.0,ml
 BK,BK,weekday,3.0,7.6,0.0,g,0.0,ml
 BK,BK,weekday,3.0,7.8,0.0,g,0.0,ml
 BK,BK,weekday,3.0,8.0,0.0,g,1.0,l
-BK,BK,weekend,-2.0,7.2,1.2,kg,250.0,ml
-BK,BK,weekend,-2.0,7.4,1.2,kg,250.0,ml
-BK,BK,weekend,-2.0,7.6,1.2,kg,500.0,ml
-BK,BK,weekend,-2.0,7.8,1.2,kg,500.0,ml
-BK,BK,weekend,-2.0,8.0,1.2,kg,1.0,l
-BK,BK,weekend,-1.5,7.2,1.2,kg,250.0,ml
-BK,BK,weekend,-1.5,7.4,1.2,kg,250.0,ml
-BK,BK,weekend,-1.5,7.6,1.2,kg,500.0,ml
-BK,BK,weekend,-1.5,7.8,1.2,kg,500.0,ml
-BK,BK,weekend,-1.5,8.0,1.2,kg,1.0,l
-BK,BK,weekend,-1.0,7.2,1.2,kg,250.0,ml
-BK,BK,weekend,-1.0,7.4,1.2,kg,250.0,ml
-BK,BK,weekend,-1.0,7.6,1.2,kg,500.0,ml
-BK,BK,weekend,-1.0,7.8,1.2,kg,500.0,ml
-BK,BK,weekend,-1.0,8.0,1.2,kg,1.0,l
-BK,BK,weekend,-0.5,7.2,1.2,kg,250.0,ml
-BK,BK,weekend,-0.5,7.4,1.2,kg,250.0,ml
-BK,BK,weekend,-0.5,7.6,1.2,kg,500.0,ml
-BK,BK,weekend,-0.5,7.8,1.2,kg,500.0,ml
-BK,BK,weekend,-0.5,8.0,1.2,kg,1.0,l
+BK,BK,weekend,-2.0,7.2,1.4,kg,250.0,ml
+BK,BK,weekend,-2.0,7.4,1.4,kg,250.0,ml
+BK,BK,weekend,-2.0,7.6,1.4,kg,500.0,ml
+BK,BK,weekend,-2.0,7.8,1.4,kg,500.0,ml
+BK,BK,weekend,-2.0,8.0,1.4,kg,1.0,l
+BK,BK,weekend,-1.5,7.2,1.4,kg,250.0,ml
+BK,BK,weekend,-1.5,7.4,1.4,kg,250.0,ml
+BK,BK,weekend,-1.5,7.6,1.4,kg,500.0,ml
+BK,BK,weekend,-1.5,7.8,1.4,kg,500.0,ml
+BK,BK,weekend,-1.5,8.0,1.4,kg,1.0,l
+BK,BK,weekend,-1.0,7.2,1.4,kg,250.0,ml
+BK,BK,weekend,-1.0,7.4,1.4,kg,250.0,ml
+BK,BK,weekend,-1.0,7.6,1.4,kg,500.0,ml
+BK,BK,weekend,-1.0,7.8,1.4,kg,500.0,ml
+BK,BK,weekend,-1.0,8.0,1.4,kg,1.0,l
+BK,BK,weekend,-0.5,7.2,1.4,kg,250.0,ml
+BK,BK,weekend,-0.5,7.4,1.4,kg,250.0,ml
+BK,BK,weekend,-0.5,7.6,1.4,kg,500.0,ml
+BK,BK,weekend,-0.5,7.8,1.4,kg,500.0,ml
+BK,BK,weekend,-0.5,8.0,1.4,kg,1.0,l
 BK,BK,weekend,0.0,7.2,1.4,kg,250.0,ml
 BK,BK,weekend,0.0,7.4,1.4,kg,250.0,ml
 BK,BK,weekend,0.0,7.6,1.4,kg,500.0,ml
