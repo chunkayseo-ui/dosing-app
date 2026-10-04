@@ -716,7 +716,7 @@ let routeDocPromise = null;
 
 function loadRouteDoc(){
   if (routeDocPromise) return routeDocPromise;
-  routeDocPromise = fetch('./dosing-route.html').then(res => {
+  routeDocPromise = fetch('./dosing-route-maps.html').then(res => {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     return res.text();
   }).then(text => {
@@ -747,7 +747,7 @@ async function renderRouteCard(){
 
   if (routeDoc === false) {
     wrap.style.display = 'block';
-    content.innerHTML = '<div class="route-empty">Could not load dosing-route.html — make sure it\'s uploaded to the same repo.</div>';
+    content.innerHTML = '<div class="route-empty">Could not load dosing-route-maps.html — make sure it\'s uploaded to the same repo.</div>';
     return;
   }
 
