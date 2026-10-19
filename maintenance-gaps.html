@@ -43,6 +43,7 @@
   .day.wkend .dw{color:#B4691A;}
   .day.on{background:var(--teal-deep); border-color:var(--teal-deep); color:#fff;}
   .day.on .dw{color:#BFE6E3;}
+  .day .mk{display:block; height:16px; margin-top:2px; font-size:14px; line-height:16px; letter-spacing:1px;}   /* 📅 event / 🏊 coach training that day */
 
   .opts{display:flex; gap:10px; margin-top:12px;}
   .opts label{flex:1; font-size:11px; font-weight:600; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.05em;}
@@ -118,6 +119,7 @@
     <span><i style="background:var(--ok-soft)"></i>Free (short)</span>
     <span><i style="background:var(--busy)"></i>Classes</span>
     <span><i style="background:#7A5CB8"></i>Coach training / branch event</span>
+    <span>📅 event · 🏊 coach training on that day</span>
     <span><i style="background:var(--warn);width:3px"></i>Now</span>
   </div>
   <p class="note">From the same class schedule as the Class Calendar. Overlapping classes are merged, so a gap only shows when the pool is really empty. Times end at 9pm. Stevens (HS) also counts the coaches' own training (hfpools.com/stevens), and HB / CC their special events (hfpools.com/events).</p>
@@ -216,11 +218,25 @@ for(let i = 0; i < 14; i++){
   const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i), key = ymd(d), dow = d.getDay();
   const b = document.createElement('button');
   b.type = 'button'; b.className = 'day' + (dow === 0 || dow === 6 ? ' wkend' : ''); b.dataset.day = key;
-  b.innerHTML = '<div class="dw">' + (i === 0 ? 'Today' : d.toLocaleDateString('en-US', {weekday:'short'})) + '</div><div class="dd">' + d.getDate() + '</div>';
+  b.innerHTML = '<div class="dw">' + (i === 0 ? 'Today' : d.toLocaleDateString('en-US', {weekday:'short'})) + '</div><div class="dd">' + d.getDate() + '</div><div class="mk"></div>';
   b.onclick = () => { state.day = key; markDay(); load(); };
   daysBox.appendChild(b);
 }
-function markDay(){ daysBox.querySelectorAll('.day').forEach(b => b.classList.toggle('on', b.dataset.day === state.day)); }
+function markDay(){ daysBox.querySelectorAll('.day').forEach(b => b.classList.toggle('on', b.dataset.day === state.day)); markEvents(); }
+// 📅 / 🏊 on a day button when any pool has a branch event / coach training that day (Kay, 19 Oct 2026).
+function dayExtras(key){
+  const out = [];
+  Object.keys(POOLS).forEach(p => coachBlocks(p, key).forEach(c => out.push({p:p, c:c})));
+  return out.sort((a, b) => a.c.start.localeCompare(b.c.start));
+}
+const extraTxt = x => (x.c.kind === 'event' ? '📅 ' + POOLS[x.p] + ' ' + (x.c.title || 'Event') : '🏊 ' + POOLS[x.p] + ' coach training (' + x.c.who + ')') + ' ' + t12(toMin(x.c.start)) + '–' + t12(toMin(x.c.end));
+function markEvents(){
+  daysBox.querySelectorAll('.day').forEach(b => {
+    const xs = dayExtras(b.dataset.day), mk = b.querySelector('.mk'); if(!mk) return;
+    mk.textContent = (xs.some(x => x.c.kind === 'event') ? '📅' : '') + (xs.some(x => x.c.kind !== 'event') ? '🏊' : '');
+    b.title = xs.map(extraTxt).join('\n');
+  });
+}
 const fromSel = document.getElementById('fromSel');
 for(let m = 6 * 60; m <= 20 * 60; m += 30){ const o = document.createElement('option'); o.value = m; o.textContent = t12(m); fromSel.appendChild(o); }
 fromSel.value = state.from;
@@ -356,6 +372,8 @@ function render(){
     if(closed.length) s += (withGap.length ? '; ' : '') + closed.join(', ') + ' free all day';
     s += '.';
   }
+  const xs = dayExtras(state.day);
+  if(xs.length) s += '<br>' + xs.map(x => esc(extraTxt(x))).join(' · ');
   document.getElementById('summary').innerHTML = s;
 }
 
