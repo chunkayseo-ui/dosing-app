@@ -108,6 +108,7 @@
   .day-left{display:flex; align-items:baseline; gap:8px;}
   .day-dow{font-size:11.5px; font-weight:700; color:var(--ink-soft); text-transform:uppercase; width:32px;}
   .day-date{font-family:'Space Grotesk',sans-serif; font-size:17px; font-weight:700; color:var(--ink);}
+  .day-mk{font-size:15px; line-height:1; letter-spacing:1px;}   /* 📅 branch event / 🏊 coach training that day */
   .day-times{display:flex; align-items:center; gap:14px;}
   .day-time-block{text-align:right;}
   .day-time-label{font-size:9px; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-soft);}
@@ -187,6 +188,7 @@
       <div class="legend-item"><span class="legend-dot" style="background:#0E7C86;"></span>First class starts</div>
       <div class="legend-item"><span class="legend-dot" style="background:#E2933B;"></span>Last class ends</div>
       <div class="legend-item"><span class="legend-dot" style="background:#7A5CB8;"></span>Coach training / branch event</div>
+      <div class="legend-item">📅 event · 🏊 coach training that day</div>
     </div>
   </div>
 
@@ -498,6 +500,11 @@ function countGaps(blocks){
   }
   return n;
 }
+function dayMarks(info){
+  const bl = (info && info.blocks) || [];
+  const m = (bl.some(b => b.coach && b.kind === 'event') ? '📅' : '') + (bl.some(b => b.coach && b.kind !== 'event') ? '🏊' : '');
+  return m ? '<span class="day-mk" title="' + escH(bl.filter(b => b.coach).map(b => (b.kind === 'event' ? '📅 ' + (b.title || 'Event') : '🏊 Coach training · ' + b.who) + ' ' + fmtTime12(b.start) + '–' + fmtTime12(b.end)).join('\n')) + '">' + m + '</span>' : '';
+}
 function escH(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function renderToday(data){
   const info = data[TODAY_KEY];
@@ -587,7 +594,7 @@ function renderCalendar(data){
     row.innerHTML =
       '<div class="day-left">' +
         '<div class="day-dow">' + dowLabels[dow] + '</div>' +
-        '<div class="day-date">' + day + '</div>' +
+        '<div class="day-date">' + day + '</div>' + dayMarks(info) +
       '</div>' + timesHtml;
     wrap.appendChild(row);
 
