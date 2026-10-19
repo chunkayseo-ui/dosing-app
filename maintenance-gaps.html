@@ -65,6 +65,7 @@
   .bar{position:relative; height:14px; border-radius:7px; background:var(--ok-soft); margin:9px 0 3px; overflow:hidden;}
   .bar .b{position:absolute; top:0; bottom:0; background:var(--busy);}
   .bar .g{position:absolute; top:0; bottom:0; background:var(--ok);}
+  .bar .c{position:absolute; top:0; bottom:0; background:#7A5CB8;}
   .bar .now{position:absolute; top:-2px; bottom:-2px; width:2px; background:var(--warn);}
   .ticks{position:relative; height:12px; font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--ink-soft);}
   .ticks span{position:absolute; transform:translateX(-50%); white-space:nowrap;}
@@ -76,6 +77,7 @@
   .chip.past{opacity:.45; text-decoration:line-through;}
   .chip.nowc{background:var(--ok); color:#fff;}
   .chip.closed{background:var(--ok); color:#fff;}
+  .chip.coach{background:#ECE6F6; color:#5A3F94;}
 
   .legend{display:flex; gap:14px; flex-wrap:wrap; font-size:11.5px; color:var(--ink-soft); margin:12px 2px 0;}
   .legend i{display:inline-block; width:12px; height:9px; border-radius:3px; vertical-align:-1px; margin-right:5px;}
@@ -115,16 +117,17 @@
     <span><i style="background:var(--ok)"></i>Free (long enough)</span>
     <span><i style="background:var(--ok-soft)"></i>Free (short)</span>
     <span><i style="background:var(--busy)"></i>Classes</span>
+    <span><i style="background:#7A5CB8"></i>Coach training (Stevens)</span>
     <span><i style="background:var(--warn);width:3px"></i>Now</span>
   </div>
-  <p class="note">From the same class schedule as the Class Calendar. Overlapping classes are merged, so a gap only shows when the pool is really empty. Times end at 9pm.</p>
+  <p class="note">From the same class schedule as the Class Calendar. Overlapping classes are merged, so a gap only shows when the pool is really empty. Times end at 9pm. Stevens (HS) also counts the coaches' own training from hfpools.com/stevens.</p>
 </div>
 
 <script>
 const API = 'https://script.google.com/macros/s/AKfycbwYJLfkw5lwKnjwqmEtuRiREzbahnf2l63YhmX_7jMR9uqM9MpeqoxeVTTVw5rc76eZ6g/exec';
 const POOLS = {
   WWW:'WWW', JEIP1:'JEIP 1', JEIP2:'JEIP 2', JEOP1:'JEOP 1', JEOP2:'JEOP 2',
-  Tengah:'Tengah', HS:'HS', TPY:'TPY', DR:'DR', Lentor:'Lentor', BK:'BK', HB:'HB', CC:'CC'
+  Tengah:'Tengah', HS:'HS (Stevens)', TPY:'TPY', DR:'DR', Lentor:'Lentor', BK:'BK', HB:'HB', CC:'CC'
 };
 const DAY_END = 21 * 60;           // timeline stops at 9pm
 const LS_PREFIX = 'gaps.month.';   // saved class schedules (one per pool per month)
@@ -137,6 +140,51 @@ function t12(m){ const h = Math.floor(m / 60), mm = m % 60, h12 = h % 12 === 0 ?
   return h12 + (mm ? ':' + pad(mm) : '') + (h >= 12 ? 'pm' : 'am'); }
 function dur(m){ const h = Math.floor(m / 60), mm = m % 60; return h ? h + 'h' + (mm ? ' ' + mm + 'm' : '') : mm + 'm'; }
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- coach training (Kay, 19 Oct 2026) ----------
+   Coaches keep their own training at Stevens (HS) on hfpools.com/stevens (Firestore coach_sessions). Those
+   sessions are busy pool time too, so they are added here as extra blocks marked coach:true. */
+const COACH_URL = 'https://firestore.googleapis.com/v1/projects/maintenance-board-f931a/databases/(default)/documents/coach_sessions?pageSize=300&key=AIzaSyANFCZbvRGO9aMRtG9MF_qONO3FL85CzSo';
+const COACH_LS = 'coach.sessions';
+let coachSessions = (() => { try { const b = JSON.parse(localStorage.getItem(COACH_LS)); return b && Array.isArray(b.list) ? b.list : []; } catch(e){ return []; } })();
+function coachFsVal(v){
+  if (!v) return null;
+  if ('stringValue' in v) return v.stringValue;
+  if ('integerValue' in v) return Number(v.integerValue);
+  if ('doubleValue' in v) return v.doubleValue;
+  if ('booleanValue' in v) return v.booleanValue;
+  if ('nullValue' in v) return null;
+  return null;
+}
+function coachLoad(){
+  return fetch(COACH_URL).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).then(j => {
+    const list = (j.documents || []).map(d => {
+      const o = { id: d.name.split('/').pop() }, f = d.fields || {};
+      Object.keys(f).forEach(k => { o[k] = coachFsVal(f[k]); });
+      return o;
+    });
+    const changed = JSON.stringify(list) !== JSON.stringify(coachSessions);
+    coachSessions = list;
+    try { localStorage.setItem(COACH_LS, JSON.stringify({ savedAt: Date.now(), list: list })); } catch(e){}
+    return changed;
+  }).catch(() => false);
+}
+function coachDow(key){ return new Date(key + 'T00:00:00').getDay(); }
+// The coach sessions at one pool on one date (cancelled weekly dates left out).
+function coachBlocks(pool, key){
+  const dow = coachDow(key), out = [];
+  coachSessions.forEach(s => {
+    if (s.pool !== pool || !s.start || !s.end) return;
+    if (s.type === 'weekly' && s.dow === dow && s.from <= key && (!s.until || key <= s.until)) {
+      if (coachSessions.some(c => c.type === 'cancel' && c.weeklyId === s.id && c.date === key)) return;
+      out.push({ start: s.start, end: s.end, coach: true, who: s.name || 'Coach', note: s.note || '' });
+    } else if (s.type === 'once' && s.date === key) {
+      out.push({ start: s.start, end: s.end, coach: true, who: s.name || 'Coach', note: s.note || '' });
+    }
+  });
+  return out.sort((a, b) => a.start.localeCompare(b.start));
+}
+
 
 function lsGet(k){ try{ const b = JSON.parse(localStorage.getItem(LS_PREFIX + k)); return b && b.data ? b : null; }catch(e){ return null; } }
 function lsPut(k, data){
@@ -188,6 +236,7 @@ function sync(kind, text){ document.getElementById('syncDot').className = 'sync-
 let loadGen = 0;
 function load(){
   const mk = state.day.slice(0, 7), gen = ++loadGen;
+  coachLoad().then(changed => { if(changed) render(); });
   Object.keys(POOLS).forEach(p => {
     const k = p + '_' + mk;
     if(!cache[k]){ const box = lsGet(k); if(box){ cache[k] = box.data; status[k] = 'saved'; } }
@@ -240,13 +289,15 @@ function render(){
   Object.keys(POOLS).forEach(p => {
     const k = p + '_' + mk, data = cache[k];
     if(!data){ rows.push({p:p, wait:status[k] !== 'err', err:status[k] === 'err', best:-1}); return; }
-    const info = data[state.day];
+    const cb = coachBlocks(p, state.day);
+    let info = data[state.day];
+    if(cb.length) info = Object.assign({}, info || {}, {blocks: ((info && info.blocks) || []).concat(cb)});
     if(!info || !(info.blocks || []).length){ rows.push({p:p, closed:true, best:9999}); return; }
     const f = freeTime(info, from);
     const good = f.gaps.filter(g => g[1] - g[0] >= min);
     const live = good.filter(g => !isToday || g[1] > nowMin);
     const clear = !f.gaps.length && f.after && f.after[0] === from;   // no classes left after `from`
-    rows.push({p:p, f:f, good:good, clear:clear, best: clear ? DAY_END - from : live.length ? Math.max.apply(null, live.map(g => g[1] - g[0])) : 0});
+    rows.push({p:p, f:f, good:good, clear:clear, coach:cb, best: clear ? DAY_END - from : live.length ? Math.max.apply(null, live.map(g => g[1] - g[0])) : 0});
   });
   rows.sort((a, b) => b.best - a.best || (a.f && b.f ? a.f.lastEnd - b.f.lastEnd : 0));
 
@@ -273,6 +324,7 @@ function render(){
     f.busy.forEach(([s, e]) => { if(e > from && s < DAY_END) bar += '<div class="b" style="left:' + pct(s) + ';width:calc(' + pct(e) + ' - ' + pct(s) + ')"></div>'; });
     r.good.forEach(([s, e]) => { bar += '<div class="g" style="left:' + pct(s) + ';width:calc(' + pct(e) + ' - ' + pct(s) + ')"></div>'; });
     if(f.after) bar += '<div class="g" style="left:' + pct(f.after[0]) + ';right:0"></div>';
+    (r.coach || []).forEach(c => { const s = toMin(c.start), e = toMin(c.end); if(e > from && s < DAY_END) bar += '<div class="c" style="left:' + pct(s) + ';width:calc(' + pct(Math.min(e, DAY_END)) + ' - ' + pct(Math.max(s, from)) + ')"></div>'; });
     if(isToday && nowMin > from && nowMin < DAY_END) bar += '<div class="now" style="left:' + pct(nowMin) + '"></div>';
     bar += '</div>';
     let chips = r.good.map(([s, e]) => {
@@ -280,6 +332,7 @@ function render(){
       return '<span class="chip' + (past ? ' past' : live ? ' nowc' : '') + '">' +
         (live ? 'Free now until ' + t12(e) + ' · ' + dur(e - nowMin) + ' left' : t12(s) + '–' + t12(e) + ' · ' + dur(e - s)) + '</span>';
     }).join('');
+    chips += (r.coach || []).map(c => '<span class="chip coach">🏊 Coach training ' + t12(toMin(c.start)) + '–' + t12(toMin(c.end)) + ' · ' + esc(c.who) + '</span>').join('');
     if(r.clear) chips += '<span class="chip closed">Free from ' + t12(from) + ' (last class ends ' + t12(f.lastEnd) + ')</span>';
     else if(f.after) chips += '<span class="chip after">Free after ' + t12(f.after[0]) + '</span>';
     const best = r.clear ? '<div class="pbest">No classes after ' + t12(from) + '</div>' : r.best > 0 ? '<div class="pbest">' + dur(r.best) + ' gap</div>'

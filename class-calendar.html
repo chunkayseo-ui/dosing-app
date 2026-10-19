@@ -130,6 +130,9 @@
   .block-time{font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; color:var(--ink);}
   .block-row.past .block-dot{background:var(--border);}
   .block-row.past .block-time{color:var(--ink-soft);}
+  .block-row.coach .block-dot{background:#7A5CB8;}
+  .block-who{font-size:12.5px; font-weight:600; color:#5A3F94;}
+  .block-row.past .block-who{color:var(--ink-soft);}
   .gap-row{
     display:flex; align-items:center; gap:10px; margin:2px 0 10px;
     font-size:11.5px; color:var(--warn); font-weight:600;
@@ -183,6 +186,7 @@
     <div class="legend">
       <div class="legend-item"><span class="legend-dot" style="background:#0E7C86;"></span>First class starts</div>
       <div class="legend-item"><span class="legend-dot" style="background:#E2933B;"></span>Last class ends</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#7A5CB8;"></span>Coach training (Stevens)</div>
     </div>
   </div>
 
@@ -193,13 +197,57 @@ const HISTORY_API_URL = 'https://script.google.com/macros/s/AKfycbwYJLfkw5lwKnjw
 
 const OUTLET_NAMES = {
   WWW:'WWW', JEIP1:'JEIP 1', JEIP2:'JEIP 2', JEOP1:'JEOP 1', JEOP2:'JEOP 2',
-  Tengah:'Tengah', HS:'HS', TPY:'TPY', DR:'DR', Lentor:'Lentor', BK:'BK', HB:'HB', CC:'CC'
+  Tengah:'Tengah', HS:'HS (Stevens)', TPY:'TPY', DR:'DR', Lentor:'Lentor', BK:'BK', HB:'HB', CC:'CC'
 };
 
 /* The class schedule for a month is about 20 KB and the whole wait is the
    Apps Script round trip (2-6 s), so the fix is not to fetch less but to stop
    waiting for it: keep the last answer on the phone, draw from it at once,
    then quietly check for a newer one. */
+/* ---------- coach training (Kay, 19 Oct 2026) ----------
+   Coaches keep their own training at Stevens (HS) on hfpools.com/stevens (Firestore coach_sessions). Those
+   sessions are busy pool time too, so they are added here as extra blocks marked coach:true. */
+const COACH_URL = 'https://firestore.googleapis.com/v1/projects/maintenance-board-f931a/databases/(default)/documents/coach_sessions?pageSize=300&key=AIzaSyANFCZbvRGO9aMRtG9MF_qONO3FL85CzSo';
+const COACH_LS = 'coach.sessions';
+let coachSessions = (() => { try { const b = JSON.parse(localStorage.getItem(COACH_LS)); return b && Array.isArray(b.list) ? b.list : []; } catch(e){ return []; } })();
+function coachFsVal(v){
+  if (!v) return null;
+  if ('stringValue' in v) return v.stringValue;
+  if ('integerValue' in v) return Number(v.integerValue);
+  if ('doubleValue' in v) return v.doubleValue;
+  if ('booleanValue' in v) return v.booleanValue;
+  if ('nullValue' in v) return null;
+  return null;
+}
+function coachLoad(){
+  return fetch(COACH_URL).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).then(j => {
+    const list = (j.documents || []).map(d => {
+      const o = { id: d.name.split('/').pop() }, f = d.fields || {};
+      Object.keys(f).forEach(k => { o[k] = coachFsVal(f[k]); });
+      return o;
+    });
+    const changed = JSON.stringify(list) !== JSON.stringify(coachSessions);
+    coachSessions = list;
+    try { localStorage.setItem(COACH_LS, JSON.stringify({ savedAt: Date.now(), list: list })); } catch(e){}
+    return changed;
+  }).catch(() => false);
+}
+function coachDow(key){ return new Date(key + 'T00:00:00').getDay(); }
+// The coach sessions at one pool on one date (cancelled weekly dates left out).
+function coachBlocks(pool, key){
+  const dow = coachDow(key), out = [];
+  coachSessions.forEach(s => {
+    if (s.pool !== pool || !s.start || !s.end) return;
+    if (s.type === 'weekly' && s.dow === dow && s.from <= key && (!s.until || key <= s.until)) {
+      if (coachSessions.some(c => c.type === 'cancel' && c.weeklyId === s.id && c.date === key)) return;
+      out.push({ start: s.start, end: s.end, coach: true, who: s.name || 'Coach', note: s.note || '' });
+    } else if (s.type === 'once' && s.date === key) {
+      out.push({ start: s.start, end: s.end, coach: true, who: s.name || 'Coach', note: s.note || '' });
+    }
+  });
+  return out.sort((a, b) => a.start.localeCompare(b.start));
+}
+
 const LS_OUTLET = 'cal.outlet';
 const LS_PREFIX = 'cal.month.';
 const LS_KEEP   = 24;   // saved months to keep before pruning the oldest
@@ -343,6 +391,7 @@ async function loadMonth(){
     setSyncStatus('loading', 'Loading…');
   }
 
+  if (state.outlet === 'HS') coachLoad().then(changed => { if (changed && calCache[key] && state.outlet + '_' + monthKey() === key) draw(calCache[key], mk); });
   try {
     const url = HISTORY_API_URL + '?classes=1&outlet=' + encodeURIComponent(state.outlet) +
                 '&month=' + mk + '&_=' + Date.now();
@@ -367,7 +416,22 @@ async function loadMonth(){
   }
 }
 
+function withCoach(data, mk){
+  const out = Object.assign({}, data), y = +mk.slice(0, 4), m = +mk.slice(5, 7), n = new Date(y, m, 0).getDate();
+  for (let d = 1; d <= n; d++){
+    const key = mk + '-' + pad(d), cb = coachBlocks(state.outlet, key);
+    if (!cb.length) continue;
+    const info = data[key], classes = (info && info.blocks) || [];
+    const blocks = classes.concat(cb).sort((a, b) => toMinutes(a.start) - toMinutes(b.start));
+    out[key] = Object.assign({}, info || {}, {
+      blocks: blocks, coachCount: cb.length, count: info ? (info.count || classes.length) : 0,
+      first: blocks[0].start, last: blocks.reduce((x, b) => toMinutes(b.end) > toMinutes(x) ? b.end : x, blocks[0].end)
+    });
+  }
+  return out;
+}
 function draw(data, mk){
+  data = withCoach(data, mk);
   if (mk === CUR_MONTH) renderToday(data);
   renderCalendar(data);
 }
@@ -395,16 +459,19 @@ const GAP_THRESHOLD_MIN = 45;   // shorter than this is just changeover time
 function blocksHtml(blocks, markPast){
   const nowMin = today.getHours() * 60 + today.getMinutes();
   let html = '';
+  let maxEnd = null;
   blocks.forEach((block, i) => {
     if (i > 0){
-      const gap = toMinutes(block.start) - toMinutes(blocks[i-1].end);
+      const gap = toMinutes(block.start) - maxEnd;
       if (gap >= GAP_THRESHOLD_MIN){
         html += '<div class="gap-row"><span class="gap-line"></span>' + fmtGap(gap) + ' — free for maintenance</div>';
       }
     }
+    maxEnd = Math.max(maxEnd === null ? 0 : maxEnd, toMinutes(block.end));
     const past = markPast && toMinutes(block.end) <= nowMin;
-    html += '<div class="block-row' + (past ? ' past' : '') + '"><span class="block-dot"></span>' +
-            '<span class="block-time">' + fmtTime12(block.start) + ' – ' + fmtTime12(block.end) + '</span></div>';
+    html += '<div class="block-row' + (past ? ' past' : '') + (block.coach ? ' coach' : '') + '"><span class="block-dot"></span>' +
+            '<span class="block-time">' + fmtTime12(block.start) + ' – ' + fmtTime12(block.end) + '</span>' +
+            (block.coach ? '<span class="block-who">Coach training · ' + escH(block.who) + (block.note ? ' — ' + escH(block.note) : '') + '</span>' : '') + '</div>';
   });
   return html;
 }
@@ -424,12 +491,14 @@ function todayBlank(msg){
   document.getElementById('todayBlocks').innerHTML = '<div class="today-note">' + msg + '</div>';
 }
 function countGaps(blocks){
-  let n = 0;
+  let n = 0, maxEnd = blocks.length ? toMinutes(blocks[0].end) : 0;
   for (let i = 1; i < blocks.length; i++){
-    if (toMinutes(blocks[i].start) - toMinutes(blocks[i-1].end) >= GAP_THRESHOLD_MIN) n++;
+    if (toMinutes(blocks[i].start) - maxEnd >= GAP_THRESHOLD_MIN) n++;
+    maxEnd = Math.max(maxEnd, toMinutes(blocks[i].end));
   }
   return n;
 }
+function escH(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function renderToday(data){
   const info = data[TODAY_KEY];
   document.getElementById('todayDate').textContent = todayDateText();
@@ -451,11 +520,12 @@ function renderToday(data){
   const box = document.getElementById('todayBlocks');
   if (!blocks.length){ box.innerHTML = ''; return; }
 
-  const n    = info.count || blocks.length;
+  const n    = info.coachCount ? info.count : (info.count || blocks.length);
   const gaps = countGaps(blocks);
   box.innerHTML =
     '<div class="today-count" id="todayCount"><span class="chev">▸</span>' +
-      '<span>' + n + ' class' + (n === 1 ? '' : 'es') + ' today</span>' +
+      '<span>' + (n ? n + ' class' + (n === 1 ? '' : 'es') + ' today' : 'No classes today') + '</span>' +
+      (info.coachCount ? '<span class="gaps">· coach training</span>' : '') +
       (gaps ? '<span class="gaps">· ' + gaps + ' maintenance gap' + (gaps === 1 ? '' : 's') + '</span>' : '') +
     '</div>' +
     '<div class="today-list" id="todayList">' + blocksHtml(blocks, true) + '</div>';
