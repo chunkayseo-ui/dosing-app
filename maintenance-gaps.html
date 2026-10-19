@@ -117,10 +117,10 @@
     <span><i style="background:var(--ok)"></i>Free (long enough)</span>
     <span><i style="background:var(--ok-soft)"></i>Free (short)</span>
     <span><i style="background:var(--busy)"></i>Classes</span>
-    <span><i style="background:#7A5CB8"></i>Coach training (Stevens)</span>
+    <span><i style="background:#7A5CB8"></i>Coach training / branch event</span>
     <span><i style="background:var(--warn);width:3px"></i>Now</span>
   </div>
-  <p class="note">From the same class schedule as the Class Calendar. Overlapping classes are merged, so a gap only shows when the pool is really empty. Times end at 9pm. Stevens (HS) also counts the coaches' own training from hfpools.com/stevens.</p>
+  <p class="note">From the same class schedule as the Class Calendar. Overlapping classes are merged, so a gap only shows when the pool is really empty. Times end at 9pm. Stevens (HS) also counts the coaches' own training (hfpools.com/stevens), and HB / CC their special events (hfpools.com/events).</p>
 </div>
 
 <script>
@@ -142,8 +142,8 @@ function dur(m){ const h = Math.floor(m / 60), mm = m % 60; return h ? h + 'h' +
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 /* ---------- coach training (Kay, 19 Oct 2026) ----------
-   Coaches keep their own training at Stevens (HS) on hfpools.com/stevens (Firestore coach_sessions). Those
-   sessions are busy pool time too, so they are added here as extra blocks marked coach:true. */
+   Coaches keep their own training at Stevens (HS) on hfpools.com/stevens, and the HB / CC branch teams block time for
+   special events on hfpools.com/events (kind "event"), both in Firestore coach_sessions. Those are busy pool time too, so they are added here as extra blocks marked coach:true. */
 const COACH_URL = 'https://firestore.googleapis.com/v1/projects/maintenance-board-f931a/databases/(default)/documents/coach_sessions?pageSize=300&key=AIzaSyANFCZbvRGO9aMRtG9MF_qONO3FL85CzSo';
 const COACH_LS = 'coach.sessions';
 let coachSessions = (() => { try { const b = JSON.parse(localStorage.getItem(COACH_LS)); return b && Array.isArray(b.list) ? b.list : []; } catch(e){ return []; } })();
@@ -177,9 +177,9 @@ function coachBlocks(pool, key){
     if (s.pool !== pool || !s.start || !s.end) return;
     if (s.type === 'weekly' && s.dow === dow && s.from <= key && (!s.until || key <= s.until)) {
       if (coachSessions.some(c => c.type === 'cancel' && c.weeklyId === s.id && c.date === key)) return;
-      out.push({ start: s.start, end: s.end, coach: true, who: s.name || 'Coach', note: s.note || '' });
+      out.push({ start: s.start, end: s.end, coach: true, kind: s.kind || 'coach', title: s.title || '', who: s.name || 'Coach', note: s.note || '' });
     } else if (s.type === 'once' && s.date === key) {
-      out.push({ start: s.start, end: s.end, coach: true, who: s.name || 'Coach', note: s.note || '' });
+      out.push({ start: s.start, end: s.end, coach: true, kind: s.kind || 'coach', title: s.title || '', who: s.name || 'Coach', note: s.note || '' });
     }
   });
   return out.sort((a, b) => a.start.localeCompare(b.start));
@@ -332,7 +332,8 @@ function render(){
       return '<span class="chip' + (past ? ' past' : live ? ' nowc' : '') + '">' +
         (live ? 'Free now until ' + t12(e) + ' · ' + dur(e - nowMin) + ' left' : t12(s) + '–' + t12(e) + ' · ' + dur(e - s)) + '</span>';
     }).join('');
-    chips += (r.coach || []).map(c => '<span class="chip coach">🏊 Coach training ' + t12(toMin(c.start)) + '–' + t12(toMin(c.end)) + ' · ' + esc(c.who) + '</span>').join('');
+    chips += (r.coach || []).map(c => '<span class="chip coach">' + (c.kind === 'event' ? '📅 ' + esc(c.title || 'Event') + ' ' + t12(toMin(c.start)) + '–' + t12(toMin(c.end))
+      : '🏊 Coach training ' + t12(toMin(c.start)) + '–' + t12(toMin(c.end)) + ' · ' + esc(c.who)) + '</span>').join('');
     if(r.clear) chips += '<span class="chip closed">Free from ' + t12(from) + ' (last class ends ' + t12(f.lastEnd) + ')</span>';
     else if(f.after) chips += '<span class="chip after">Free after ' + t12(f.after[0]) + '</span>';
     const best = r.clear ? '<div class="pbest">No classes after ' + t12(from) + '</div>' : r.best > 0 ? '<div class="pbest">' + dur(r.best) + ' gap</div>'
